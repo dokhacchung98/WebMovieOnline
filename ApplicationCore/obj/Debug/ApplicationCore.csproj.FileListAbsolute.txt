@@ -1,0 +1,2 @@
+C:\Users\Admin\Desktop\WebMovieOnline\ApplicationCore\obj\Debug\ApplicationCore.csprojAssemblyReference.cache
+C:\Users\Admin\Desktop\WebMovieOnline\ApplicationCore\obj\Debug\ApplicationCore.csproj.CoreCompileInputs.cache
