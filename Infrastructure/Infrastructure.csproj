@@ -49,8 +49,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Entities\Category.cs" />
+    <Compile Include="Entities\CategoryMovie.cs" />
+    <Compile Include="Entities\Movie.cs" />
     <Compile Include="Enums\StatusFilmEnum.cs" />
     <Compile Include="Enums\StatusUserEnum.cs" />
+    <Compile Include="Migrations\201902211548332_add-migration MyMigration.cs" />
+    <Compile Include="Migrations\201902211548332_add-migration MyMigration.Designer.cs">
+      <DependentUpon>201902211548332_add-migration MyMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MovieDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -58,6 +66,10 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201902211548332_add-migration MyMigration.resx">
+      <DependentUpon>201902211548332_add-migration MyMigration.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

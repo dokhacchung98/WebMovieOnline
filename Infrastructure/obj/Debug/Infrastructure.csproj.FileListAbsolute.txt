@@ -22,3 +22,17 @@ C:\Users\Admin\Desktop\WebMovie\WebMovieOnline\Infrastructure\obj\Debug\Infrastr
 C:\Users\Admin\Desktop\WebMovie\WebMovieOnline\Infrastructure\obj\Debug\Infrastructure.csproj.CopyComplete
 C:\Users\Admin\Desktop\WebMovie\WebMovieOnline\Infrastructure\obj\Debug\Infrastructure.dll
 C:\Users\Admin\Desktop\WebMovie\WebMovieOnline\Infrastructure\obj\Debug\Infrastructure.pdb
+C:\Users\SyVN\Desktop\WebMovieOnline\Infrastructure\bin\Debug\Infrastructure.dll.config
+C:\Users\SyVN\Desktop\WebMovieOnline\Infrastructure\bin\Debug\Infrastructure.dll
+C:\Users\SyVN\Desktop\WebMovieOnline\Infrastructure\bin\Debug\Infrastructure.pdb
+C:\Users\SyVN\Desktop\WebMovieOnline\Infrastructure\bin\Debug\EntityFramework.dll
+C:\Users\SyVN\Desktop\WebMovieOnline\Infrastructure\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\SyVN\Desktop\WebMovieOnline\Infrastructure\bin\Debug\EntityFramework.xml
+C:\Users\SyVN\Desktop\WebMovieOnline\Infrastructure\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\SyVN\Desktop\WebMovieOnline\Infrastructure\obj\Debug\Infrastructure.csprojAssemblyReference.cache
+C:\Users\SyVN\Desktop\WebMovieOnline\Infrastructure\obj\Debug\Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\SyVN\Desktop\WebMovieOnline\Infrastructure\obj\Debug\Infrastructure.csproj.CopyComplete
+C:\Users\SyVN\Desktop\WebMovieOnline\Infrastructure\obj\Debug\Infrastructure.dll
+C:\Users\SyVN\Desktop\WebMovieOnline\Infrastructure\obj\Debug\Infrastructure.pdb
+C:\Users\SyVN\Desktop\WebMovieOnline\Infrastructure\obj\Debug\Infrastructure.Migrations.addmigrationMyMigration.resources
+C:\Users\SyVN\Desktop\WebMovieOnline\Infrastructure\obj\Debug\Infrastructure.csproj.GenerateResource.cache
