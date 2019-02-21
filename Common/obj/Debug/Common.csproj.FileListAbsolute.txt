@@ -1,0 +1,15 @@
+C:\Users\Admin\Desktop\WebMovie\WebMovieOnline\Common\bin\Debug\Common.dll.config
+C:\Users\Admin\Desktop\WebMovie\WebMovieOnline\Common\bin\Debug\Common.dll
+C:\Users\Admin\Desktop\WebMovie\WebMovieOnline\Common\bin\Debug\Common.pdb
+C:\Users\Admin\Desktop\WebMovie\WebMovieOnline\Common\bin\Debug\EntityFramework.dll
+C:\Users\Admin\Desktop\WebMovie\WebMovieOnline\Common\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Admin\Desktop\WebMovie\WebMovieOnline\Common\bin\Debug\Infrastructure.dll
+C:\Users\Admin\Desktop\WebMovie\WebMovieOnline\Common\bin\Debug\Infrastructure.pdb
+C:\Users\Admin\Desktop\WebMovie\WebMovieOnline\Common\bin\Debug\Infrastructure.dll.config
+C:\Users\Admin\Desktop\WebMovie\WebMovieOnline\Common\bin\Debug\EntityFramework.xml
+C:\Users\Admin\Desktop\WebMovie\WebMovieOnline\Common\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Admin\Desktop\WebMovie\WebMovieOnline\Common\obj\Debug\Common.csprojAssemblyReference.cache
+C:\Users\Admin\Desktop\WebMovie\WebMovieOnline\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Desktop\WebMovie\WebMovieOnline\Common\obj\Debug\Common.csproj.CopyComplete
+C:\Users\Admin\Desktop\WebMovie\WebMovieOnline\Common\obj\Debug\Common.dll
+C:\Users\Admin\Desktop\WebMovie\WebMovieOnline\Common\obj\Debug\Common.pdb

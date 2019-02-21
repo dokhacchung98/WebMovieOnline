@@ -22,9 +22,18 @@ namespace Website
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/jsadmin").Include(
+                    "~/Scripts/Admin/sb-admin-2.js"
+                    ));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/fontawesome/all.css"));
+            bundles.Add(new StyleBundle("~/Content/admincss").Include(
+                    "~/Content/sb-admin-2.min.css",
+                      "~/Content/fontawesome/all.css"
+                ));
         }
     }
 }

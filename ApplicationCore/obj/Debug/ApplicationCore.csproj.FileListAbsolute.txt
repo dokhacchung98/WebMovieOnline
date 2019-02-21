@@ -4,3 +4,9 @@ C:\Users\Admin\Desktop\WebMovieOnline\ApplicationCore\obj\Debug\ApplicationCore.
 C:\Users\Admin\Desktop\WebMovieOnline\ApplicationCore\obj\Debug\ApplicationCore.csproj.CoreCompileInputs.cache
 C:\Users\Admin\Desktop\WebMovieOnline\ApplicationCore\obj\Debug\ApplicationCore.dll
 C:\Users\Admin\Desktop\WebMovieOnline\ApplicationCore\obj\Debug\ApplicationCore.pdb
+C:\Users\Admin\Desktop\WebMovie\WebMovieOnline\ApplicationCore\bin\Debug\ApplicationCore.dll
+C:\Users\Admin\Desktop\WebMovie\WebMovieOnline\ApplicationCore\bin\Debug\ApplicationCore.pdb
+C:\Users\Admin\Desktop\WebMovie\WebMovieOnline\ApplicationCore\obj\Debug\ApplicationCore.csprojAssemblyReference.cache
+C:\Users\Admin\Desktop\WebMovie\WebMovieOnline\ApplicationCore\obj\Debug\ApplicationCore.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Desktop\WebMovie\WebMovieOnline\ApplicationCore\obj\Debug\ApplicationCore.dll
+C:\Users\Admin\Desktop\WebMovie\WebMovieOnline\ApplicationCore\obj\Debug\ApplicationCore.pdb
