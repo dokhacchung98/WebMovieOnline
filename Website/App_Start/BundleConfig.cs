@@ -34,6 +34,8 @@ namespace Website
                     "~/Content/sb-admin-2.min.css",
                       "~/Content/fontawesome/all.css"
                 ));
+
+            BundleTable.EnableOptimizations = true;
         }
     }
 }
