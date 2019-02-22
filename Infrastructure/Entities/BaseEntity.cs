@@ -1,10 +1,5 @@
-﻿using Infrastructure.Enum;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Entities
 {
@@ -22,7 +17,6 @@ namespace Infrastructure.Entities
         public Guid? CreatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public Guid? UpdatedBy { get; set; }
-        public StatusFilmEnum Status { get; set; }
         public bool IsDeleted { get; set; }
     }
 }
