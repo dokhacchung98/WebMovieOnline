@@ -20,10 +20,8 @@ namespace Website
             var builder = new ContainerBuilder();
 
             builder.RegisterControllers(typeof(MvcApplication).Assembly).PropertiesAutowired();
-
-            builder.RegisterModule(new RepositoryModule());
-            builder.RegisterModule(new ServiceModule());
-            builder.RegisterModule(new EFModule());
+            
+            builder.RegisterModule(new ApplicaitonModule());
 
             var container = builder.Build();
 
