@@ -1,14 +1,19 @@
 ﻿using Infrastructure.Enum;
 using Infrastructure.Enums;
+using Infrastructure.Identity;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Website.Models
+namespace Infrastructure.Entities
 {
     public class UserInformation
     {
-        [Key, ForeignKey("User")]
+        [Key]
         public string UserId { get; set; }
 
         [StringLength(255)]
@@ -32,12 +37,6 @@ namespace Website.Models
 
         public StatusUserEnum Status { get; set; }
 
-        #region Relation
-
         public string FirstName { get; set; }
-
-        public virtual ApplicationUser User { get; set; }
-
-        #endregion Relation
     }
 }

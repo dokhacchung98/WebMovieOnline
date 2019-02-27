@@ -42,6 +42,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IUserInformationRepository.cs" />
+    <Compile Include="Repositories\UserInformationRepository.cs" />
+    <Compile Include="Services\IUserInformationService.cs" />
+    <Compile Include="Services\UserInformationService.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{c6483892-931e-4053-90f1-c9051944836c}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
+      <Project>{9a3e9138-fe65-4432-bd6e-61ac289d6739}</Project>
+      <Name>Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
