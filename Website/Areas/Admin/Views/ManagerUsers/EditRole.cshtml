@@ -1,0 +1,97 @@
+﻿@model Infrastructure.Identity.ApplicationUser
+
+@{
+
+    ViewBag.Title = "Sửa quyền";
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var roles = ViewBag.RoleId;
+
+}
+
+<div class="row">
+
+    <div class="col-sm-6">
+
+        <h2>@ViewBag.Title</h2>
+
+        <hr />
+
+        <h5><strong>Các quyền hiện tại của thành viên @Model.Email:</strong> </h5>
+
+        <table class="table">
+
+            <thead>
+
+                <tr>
+
+                    <th>Quyền</th>
+
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @if (Model.Roles.Count > 0)
+
+                {
+
+                    foreach (var item in Model.Roles)
+
+                    {
+
+                        <tr>
+
+                            <td>@item.RoleId</td>
+
+                            <td>
+
+                                <form action="@Url.Action("DeleteRoleFromUser", new { UserId = item.UserId, RoleId = item.RoleId })" method="post">
+
+                                    @Html.AntiForgeryToken()
+
+                                    <button type="submit" class="btn btn-xs btn-danger">Gỡ bỏ</button>
+                                </form>
+                            </td>
+                        </tr>
+
+                    }
+
+                }
+
+                else
+
+                {
+
+                    <tr>
+
+                        <td colspan="2">
+
+                            <p>Thành viên chưa có quyền nào</p>
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+
+        <h5><strong>Thêm quyền cho thành viên này:</strong></h5>
+
+        <form action="@Url.Action("AddToRole")" method="post">
+
+            <input type="hidden" name="UserId" value="@Url.RequestContext.RouteData.Values["Id"]" />
+
+            @Html.AntiForgeryToken()
+
+            @Html.DropDownList("RoleId", (SelectList) ViewBag.Roles)
+
+            <div class="form-group">
+
+                <br />
+
+                <button type="submit" class="btn btn-primary">Thêm </button>
+            </div>
+        </form>
+    </div>
+</div>

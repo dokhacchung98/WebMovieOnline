@@ -57,7 +57,7 @@ namespace Common.Service
             return _repository.Exist(spec);
         }
 
-        public TEntity Find(Guid id)
+        public TEntity Find(object id)
         {
             return _repository.GetByID(id);
         }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Enum
 {
-    public enum StatusFilmEnum
+    public enum StatusEnum
     {
-        Complete = 1,
-        Incomplete = 0
+        Active = 1,
+        InActive = 0
     }
 }

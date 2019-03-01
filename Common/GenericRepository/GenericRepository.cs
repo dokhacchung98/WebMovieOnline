@@ -1,5 +1,4 @@
 ﻿using Infrastructure.DataContext;
-using Infrastructure.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -15,14 +14,17 @@ namespace Common.GenericRepository
 
         protected readonly MovieDbContext _dbContext;
 
+        private readonly DbSet<TEntity> _dbSet;
+
         public GenericRepository(MovieDbContext dbContext)
         {
             _dbContext = dbContext;
+            _dbSet = _dbContext.Set<TEntity>();
         }
 
         public void Delete(object id)
         {
-            TEntity entityToDelete = _dbContext.Set<TEntity>().Find(id);
+            TEntity entityToDelete = _dbSet.Find(id);
             Delete(entityToDelete);
         }
 
@@ -30,14 +32,15 @@ namespace Common.GenericRepository
         {
             if (_dbContext.Entry(entity).State == EntityState.Detached)
             {
-                _dbContext.Set<TEntity>().Attach(entity);
+                _dbSet.Attach(entity);
             }
-            _dbContext.Set<TEntity>().Remove(entity);
+            _dbSet.Remove(entity);
+            _dbContext.SaveChanges();
         }
 
         public IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "")
         {
-            IQueryable<TEntity> query = _dbContext.Set<TEntity>();
+            IQueryable<TEntity> query = _dbSet;
 
             if (filter != null)
             {
@@ -61,33 +64,38 @@ namespace Common.GenericRepository
 
         public ICollection<TEntity> GetAll()
         {
-            return _dbContext.Set<TEntity>().ToList();
+            return _dbSet.ToList();
         }
 
         public TEntity GetByID(object Id)
         {
-            return _dbContext.Set<TEntity>().Find(Id);
+            return _dbSet.Find(Id);
         }
 
         public void Insert(TEntity entity)
         {
-            _dbContext.Set<TEntity>().Add(entity);
+            _dbSet.Add(entity);
+            _dbContext.SaveChanges();
         }
 
         public void Update(TEntity entity)
         {
-            _dbContext.Set<TEntity>().Attach(entity);
+            if (entity == null)
+            {
+                throw new ArgumentNullException();
+            }
+            _dbSet.Attach(entity);
             _dbContext.Entry(entity).State = EntityState.Modified;
         }
 
         public int Count(Expression<Func<TEntity, bool>> spec = null)
         {
-            return (spec == null ? _dbContext.Set<TEntity>().Count() : _dbContext.Set<TEntity>().Count(spec));
+            return (spec == null ? _dbSet.Count() : _dbSet.Count(spec));
         }
 
         public bool Exist(Expression<Func<TEntity, bool>> spec = null)
         {
-            return (spec == null ? _dbContext.Set<TEntity>().Any() : _dbContext.Set<TEntity>().Any(spec));
+            return (spec == null ? _dbSet.Any() : _dbSet.Any(spec));
         }
 
         public void SaveChanges()

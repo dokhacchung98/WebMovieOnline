@@ -181,16 +181,19 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ManagerRolesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ManagerUsersController.cs" />
+    <Compile Include="Configuaration\CustomRoleAuthorize.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\UserInformationsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Modules\EFModule.cs" />
+    <Compile Include="Modules\ApplicaitonModule.cs" />
     <Compile Include="Modules\RepositoryModule.cs" />
     <Compile Include="Modules\ServiceModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -269,6 +272,10 @@
     <Content Include="Content\webfonts\fa-solid-900.woff2" />
     <Content Include="Areas\Admin\Views\Shared\_TopBar.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Footer.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerRoles\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerRoles\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerUsers\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerUsers\EditRole.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -322,11 +329,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\UserInformations\Create.cshtml" />
-    <Content Include="Views\UserInformations\Delete.cshtml" />
-    <Content Include="Views\UserInformations\Details.cshtml" />
-    <Content Include="Views\UserInformations\Edit.cshtml" />
-    <Content Include="Views\UserInformations\Index.cshtml" />
+    <Content Include="Views\Error\Unauthorized.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -350,6 +353,10 @@
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{c6483892-931e-4053-90f1-c9051944836c}</Project>
       <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Extension\Extension.csproj">
+      <Project>{4f1d7e30-f75a-47d9-b450-2c3aa3716bf2}</Project>
+      <Name>Extension</Name>
     </ProjectReference>
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
       <Project>{9a3e9138-fe65-4432-bd6e-61ac289d6739}</Project>

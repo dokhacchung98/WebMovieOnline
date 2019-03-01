@@ -11,7 +11,7 @@ namespace Common.Service
     {
         IEnumerable<TEntity> GetAll();
 
-        TEntity Find(Guid id);
+        TEntity Find(object id);
 
         IEnumerable<TEntity> GetAllIncluing(Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,

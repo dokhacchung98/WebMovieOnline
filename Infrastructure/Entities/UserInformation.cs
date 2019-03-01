@@ -11,11 +11,8 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Entities
 {
-    public class UserInformation
+    public class UserInformation : BaseEntity
     {
-        [Key]
-        public string UserId { get; set; }
-
         [StringLength(255)]
         public string Avatar { get; set; }
 
@@ -27,16 +24,10 @@ namespace Infrastructure.Entities
 
         public GenderEnum Gender { get; set; }
 
-        public DateTime? CreatedDate { get; set; }
+        [StringLength(100)]
+        public string Name { get; set; }
 
-        public Guid? CreatedBy { get; set; }
-
-        public DateTime? UpdatedDate { get; set; }
-
-        public Guid? UpdatedBy { get; set; }
-
-        public StatusUserEnum Status { get; set; }
-
-        public string FirstName { get; set; }
+        [StringLength(100)]
+        public string Email { get; set; }
     }
 }
