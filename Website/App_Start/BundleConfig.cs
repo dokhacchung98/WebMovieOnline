@@ -39,7 +39,6 @@ namespace Website
                     "~/Content/unauthorized/unauthorized.css"
                 ));
 
-            BundleTable.EnableOptimizations = true;
         }
     }
 }
