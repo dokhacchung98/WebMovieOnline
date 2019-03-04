@@ -7,7 +7,7 @@
     @Styles.Render("~/Content/admincss")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body  id="page-top">
+<body id="page-top">
     <div id="wrapper">
         @Html.Partial("_SideBar")
         <div id="content-wrapper" class="d-flex flex-column">
@@ -16,14 +16,15 @@
                 <div class="container-fluid">
                     @RenderBody()
                 </div>
-                @Html.Partial("_Footer")
             </div>
-            </div>
+            @Html.Partial("_Footer")
+        </div>
+        
     </div>
-
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @Scripts.Render("~/bundles/jsadmin")
-        @RenderSection("scripts", required: false)
+    
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jsadmin")
+    @RenderSection("scripts", required: false)
 </body>
 </html>
