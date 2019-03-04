@@ -15,5 +15,15 @@ namespace ApplicationCore.Repositories
         {
 
         }
+
+        public string GetRoleNameByRoleId(string id)
+        {
+            var model = _dbContext.Roles.Find(id);
+            if(model == null)
+            {
+                return null;
+            }
+            return model.Id;
+        }
     }
 }

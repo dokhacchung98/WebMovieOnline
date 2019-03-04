@@ -12,5 +12,15 @@ namespace ApplicationCore.Services
         {
             _repository = roleRepository;
         }
+
+        public string GetRoleNameByRoleId(string id)
+        {
+            var name = _repository.GetRoleNameByRoleId(id);
+            if(name == null)
+            {
+                return null;
+            }
+            return name;
+        }
     }
 }

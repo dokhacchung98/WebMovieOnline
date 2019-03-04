@@ -5,5 +5,6 @@ namespace ApplicationCore.Repositories
 {
     public interface IRoleRepository : IGenericRepository<IdentityRole>
     {
+        string GetRoleNameByRoleId(string id);
     }
 }
