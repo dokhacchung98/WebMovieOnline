@@ -10,6 +10,6 @@ namespace ApplicationCore.Services
 {
     public interface IRoleService: IEntityService<IdentityRole>
     {
-
+        string GetRoleNameByRoleId(string id);
     }
 }

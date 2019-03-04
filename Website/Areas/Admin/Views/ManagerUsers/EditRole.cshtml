@@ -1,4 +1,5 @@
-﻿@model Infrastructure.Identity.ApplicationUser
+﻿@using System.Linq;
+@model Infrastructure.Identity.ApplicationUser
 
 @{
 
@@ -44,7 +45,19 @@
 
                         <tr>
 
-                            <td>@item.RoleId</td>
+                            <td>@{
+                                var arrayRole = ViewBag.ArrayRole;
+                                var name = "";
+                                foreach(var i in arrayRole)
+                                {
+                                    if (i.Id.Equals(item.RoleId))
+                                    {
+                                        name = i.Name;
+                                        break;
+                                    }
+                                }
+                                <i>@name</i>
+                            }</td>
 
                             <td>
 

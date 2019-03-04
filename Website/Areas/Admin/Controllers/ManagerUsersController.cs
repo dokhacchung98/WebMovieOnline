@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using Website.Configuaration;
 using Website.Models;
+using System.Linq;
+
 
 namespace Website.Areas.Admin.Controllers
 {
@@ -13,10 +15,12 @@ namespace Website.Areas.Admin.Controllers
     public class ManagerUsersController : Controller
     {
         private readonly IApplicationUserService _userService;
+        private readonly IRoleService _roleService;
 
-        public ManagerUsersController(IApplicationUserService userService)
+        public ManagerUsersController(IApplicationUserService userService, IRoleService roleService)
         {
             _userService = userService;
+            _roleService = roleService;
         }
 
         // GET: Admin/ManagerUsers
@@ -48,6 +52,9 @@ namespace Website.Areas.Admin.Controllers
             var model = _userService.Find(Id);
 
             IEnumerable<IdentityRole> roles = _userService.GetRolesByUserId(Id);
+
+            IList<IdentityRole> listRole = _roleService.GetAll().ToList();
+            ViewBag.ArrayRole = listRole;
 
             ViewBag.Roles = new SelectList(roles, "Id", "Name");
 
