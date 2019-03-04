@@ -9,6 +9,7 @@ using Website.Models;
 
 namespace Website.Areas.Admin.Controllers
 {
+    [CustomRoleAuthorize(Roles = "Admin")]
     public class ManagerUsersController : Controller
     {
         private readonly IApplicationUserService _userService;
@@ -64,5 +65,16 @@ namespace Website.Areas.Admin.Controllers
 
             return RedirectToAction("Index");
         }
+        [CustomRoleAuthorize(Roles = "Admin")]
+        public ActionResult Delete(string Id)
+        {
+            var model = _userService.Find(Id);
+            if (model != null)
+            {
+                _userService.Delete(model);
+            }
+            return RedirectToAction("Index");
+        }
+        
     }
 }

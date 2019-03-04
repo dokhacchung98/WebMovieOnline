@@ -35,6 +35,10 @@ namespace Website
                     "~/Content/sb-admin-2.min.css",
                       "~/Content/fontawesome/all.css"
                 ));
+            bundles.Add(new StyleBundle("~/Content/unauthorized").Include(
+                    "~/Content/unauthorized/unauthorized.css"
+                ));
+
         }
     }
 }

@@ -2,9 +2,11 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Web.Mvc;
+using Website.Configuaration;
 
 namespace Website.Areas.Admin.Controllers
 {
+    [CustomRoleAuthorize(Roles = "Admin")]
     public class ManagerRolesController : Controller
     {
         private readonly IRoleService _roleService;

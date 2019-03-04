@@ -78,7 +78,17 @@ namespace Website.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                {
+                        var user = await UserManager.FindAsync(model.Email, model.Password);
+                        var roles = await UserManager.GetRolesAsync(user.Id);
+
+                        if (roles != null && roles.Contains("Admin"))
+                        {
+                            return RedirectToAction("Index", "Home", new { area = "Admin" });
+                        }
+                        return RedirectToAction("Index", "Home");
+                    }
+                    
 
                 case SignInStatus.LockedOut:
                     return View("Lockout");
