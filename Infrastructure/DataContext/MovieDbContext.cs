@@ -17,7 +17,5 @@ namespace Infrastructure.DataContext
         {
             return new MovieDbContext();
         }
-
-        public System.Data.Entity.DbSet<Infrastructure.Entities.UserInformation> UserInformations { get; set; }
     }
 }

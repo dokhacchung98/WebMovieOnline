@@ -59,15 +59,11 @@
     <Compile Include="Repositories\ApplicationUserRepository.cs" />
     <Compile Include="Repositories\IApplicationUserRepository.cs" />
     <Compile Include="Repositories\IRoleRepository.cs" />
-    <Compile Include="Repositories\IUserInformationRepository.cs" />
     <Compile Include="Repositories\RoleRepository.cs" />
-    <Compile Include="Repositories\UserInformationRepository.cs" />
     <Compile Include="Services\ApplicationUserService.cs" />
     <Compile Include="Services\IApplicationUserService.cs" />
     <Compile Include="Services\IRoleService.cs" />
-    <Compile Include="Services\IUserInformationService.cs" />
     <Compile Include="Services\RoleService.cs" />
-    <Compile Include="Services\UserInformationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">

@@ -74,9 +74,9 @@ namespace Common.Service
             return _repository.Get(filter, orderBy, includeProperties);
         }
 
-        public void Update(TEntity entity)
+        public void Update(TEntity entity, object id)
         {
-            _repository.Update(entity);
+            _repository.Update(entity, id);
         }
 
         #endregion method

@@ -1,9 +1,11 @@
 ﻿using ApplicationCore.Services;
+using AutoMapper;
 using Infrastructure.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Website.Configuaration;
+using Website.Models;
 
 namespace Website.Areas.Admin.Controllers
 {
@@ -26,15 +28,17 @@ namespace Website.Areas.Admin.Controllers
         public ActionResult Edit(string id)
         {
             ApplicationUser user = _userService.Find(id);
-            return View(user);
+            var viewUser = Mapper.Map<UpdateUserViewModel>(user);
+            return View(viewUser);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(ApplicationUser user)
+        public ActionResult Edit(UpdateUserViewModel viewUser)
         {
-            _userService.Update(user);
-            return RedirectToAction("Home");
+            var user = Mapper.Map<ApplicationUser>(viewUser);
+            _userService.UpdateUser(user, user.Id);
+            return RedirectToAction("Index");
         }
 
         [CustomRoleAuthorize(Roles = "Admin")]
@@ -48,7 +52,7 @@ namespace Website.Areas.Admin.Controllers
 
             return View(model);
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddToRole(string userId, string roleId)

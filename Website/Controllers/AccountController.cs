@@ -1,9 +1,4 @@
-﻿using ApplicationCore.Services;
-using Extension.Extensions;
-using Infrastructure.Entities;
-using Infrastructure.Enum;
-using Infrastructure.Enums;
-using Infrastructure.Identity;
+﻿using Infrastructure.Identity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -21,11 +16,9 @@ namespace Website.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        private readonly IUserInformationService _userInformationService;
-
-        public AccountController(IUserInformationService service)
+        public AccountController()
         {
-            _userInformationService = service;
+
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -162,24 +155,9 @@ namespace Website.Controllers
         {
             if (ModelState.IsValid)
             {
-                // save in UserInformation table
-                var userInfor = new UserInformation
-                {
-                    Name = model.FirstName + " "+ model.LastName,
-                    Phone = model.Phone,
-                    Email = model.Email,
-                    Status = StatusEnum.Active,
-                    Gender = GenderEnum.Undefined,
-                    CreatedDate = GetCurrentDateExtension.GetCurrentTime(),
-                    UpdatedDate = GetCurrentDateExtension.GetCurrentTime(),
-                    IsDeleted = false
-                };
-
-                _userInformationService.Create(userInfor);
-
                 // save in AppUsers table
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

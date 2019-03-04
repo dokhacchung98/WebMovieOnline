@@ -10,5 +10,6 @@ namespace ApplicationCore.Services
         IEnumerable<IdentityRole> GetRolesByUserId(object userId);
         bool AddRoleToUser(string userId, string roleId);
 
+        void UpdateUser(ApplicationUser user, object key);
     }
 }

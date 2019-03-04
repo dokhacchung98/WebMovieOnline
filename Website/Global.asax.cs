@@ -3,6 +3,7 @@ using Autofac.Integration.Mvc;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Website.Mapping;
 using Website.Modules;
 
 namespace Website
@@ -27,6 +28,9 @@ namespace Website
 
             // Set MVC DI resolver to use our Autofac container
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+
+            // Configuration automapper
+            AutoMapper.Mapper.Initialize(m => m.AddProfile<MappingProfile>());
         }
     }
 }

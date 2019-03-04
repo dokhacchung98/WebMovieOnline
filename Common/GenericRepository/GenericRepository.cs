@@ -78,14 +78,19 @@ namespace Common.GenericRepository
             _dbContext.SaveChanges();
         }
 
-        public void Update(TEntity entity)
+        public void Update(TEntity entity, object id)
         {
             if (entity == null)
             {
                 throw new ArgumentNullException();
             }
-            _dbSet.Attach(entity);
-            _dbContext.Entry(entity).State = EntityState.Modified;
+
+            TEntity exist = _dbSet.Find(id);
+            if (exist != null)
+            {
+                _dbContext.Entry(exist).CurrentValues.SetValues(entity);
+                _dbContext.SaveChanges();
+            }
         }
 
         public int Count(Expression<Func<TEntity, bool>> spec = null)

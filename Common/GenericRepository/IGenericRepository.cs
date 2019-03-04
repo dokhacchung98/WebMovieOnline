@@ -26,7 +26,7 @@ namespace Common.GenericRepository
 
         void Delete(TEntity entity);
 
-        void Update(TEntity entity);
+        void Update(TEntity entity, object id);
 
         void SaveChanges();
 
