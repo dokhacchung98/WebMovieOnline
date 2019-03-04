@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Enum
+namespace Infrastructure.Enums
 {
-    public enum StatusFilmEnum
+    public enum GenderEnum
     {
-        Complete = 1,
-        Incomplete = 0
+        Male = 1,
+        Female = 0,
+        Undefined = 2
     }
 }

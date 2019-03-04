@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Enum
 {
-    public enum StatusUserEnum
+    public enum StatusEnum
     {
-        Online = 1,
-        Offline = 2,
-        Block = 3
+        Active = 1,
+        InActive = 0
     }
 }

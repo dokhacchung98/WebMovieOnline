@@ -31,6 +31,7 @@ namespace Website.Models
         [Required]
         [Display(Name = "Code")]
         public string Code { get; set; }
+
         public string ReturnUrl { get; set; }
 
         [Display(Name = "Nhớ mật khẩu?")]
@@ -65,11 +66,23 @@ namespace Website.Models
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "Họ")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Tên")]
+        public string LastName { get; set; }
+
+        [Required]
+        [Display(Name = "Số điện thoại")]
+        public string Phone { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage ="Vui lòng nhập email")]
+        [Required(ErrorMessage = "Vui lòng nhập email")]
         [StringLength(100, ErrorMessage = "Mật khẩu từ {0} đến {2} ký tự.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Mật khẩu")]

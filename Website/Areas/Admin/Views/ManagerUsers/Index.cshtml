@@ -1,0 +1,45 @@
+﻿@using Infrastructure.Identity
+
+@model IEnumerable<ApplicationUser>
+
+@{
+
+    ViewBag.Title = "Quản lý thành viên";
+
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <h2>@ViewBag.Title</h2>
+        <hr />
+        <table class="table table-borderer">
+            <thead>
+                <tr>
+                    <th>Họ tên</th>
+                    <th>Email</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.UserName</td>
+                        <td>@item.Email</td>
+                        <td>
+                            @Html.ActionLink("Sửa thông tin", "Edit", new { Id = item.Id }, null) |
+
+                            @Html.ActionLink("Sửa quyền", "EditRole", new { Id = item.Id }, null) |
+
+                            @Html.ActionLink("Xóa", "Delete", new { Id = item.Id }, null) |
+                            
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

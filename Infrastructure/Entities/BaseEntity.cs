@@ -17,6 +17,7 @@ namespace Infrastructure.Entities
         public Guid? CreatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public Guid? UpdatedBy { get; set; }
+        public StatusEnum Status { get; set; }
         public bool IsDeleted { get; set; }
     }
 }

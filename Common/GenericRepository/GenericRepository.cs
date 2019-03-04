@@ -1,58 +1,138 @@
-﻿using System;
+﻿using Infrastructure.DataContext;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Infrastructure.Entities;
+using System.Linq.Expressions;
 
 namespace Common.GenericRepository
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity>
-        where TEntity : BaseEntity
+        where TEntity : class
     {
-        private DbContext dbContext;
-        private DbSet<TEntity> dbSet;
+        private const string ParamNull = "Entity input can't null";
 
-        public GenericRepository(DbContext dbContext)
+        protected readonly MovieDbContext _dbContext;
+
+        private readonly DbSet<TEntity> _dbSet;
+
+        public GenericRepository(MovieDbContext dbContext)
         {
-            this.dbContext = dbContext;
-            dbSet = dbContext.Set<TEntity>();
+            _dbContext = dbContext;
+            _dbSet = _dbContext.Set<TEntity>();
         }
 
-        public async Task Add(TEntity entity)
+        public void Delete(object id)
         {
-            dbSet.Add(entity);
-            await dbContext.SaveChangesAsync();
+            TEntity entityToDelete = _dbSet.Find(id);
+            Delete(entityToDelete);
         }
 
-        public async Task Delete(TEntity entity)
+        public void Delete(TEntity entity)
         {
-            dbSet.Remove(entity);
-            await dbContext.SaveChangesAsync();
-        }
-
-        public IEnumerable<TEntity> GetAll()
-        {
-            return dbSet.AsEnumerable();
-        }
-
-        public async Task<TEntity> GetEntityById(Guid id)
-        {
-            return await dbSet.FindAsync(id);
-        }
-
-        public async Task Update(TEntity entity)
-        {
-            if(entity != null)
+            if (_dbContext.Entry(entity).State == EntityState.Detached)
             {
-                var oldEntity = dbSet.Find(entity.Id);
-                if(oldEntity != null)
-                {
-                    dbContext.Entry(oldEntity).CurrentValues.SetValues(entity);
-                    await dbContext.SaveChangesAsync();
-                }
+                _dbSet.Attach(entity);
             }
+            _dbSet.Remove(entity);
+            _dbContext.SaveChanges();
+        }
+
+        public IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "")
+        {
+            IQueryable<TEntity> query = _dbSet;
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+            foreach (var includeProperty in includeProperties.Split
+                (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                query = query.Include(includeProperty);
+            }
+
+            if (orderBy != null)
+            {
+                return orderBy(query).ToList();
+            }
+            else
+            {
+                return query.ToList();
+            }
+        }
+
+        public ICollection<TEntity> GetAll()
+        {
+            return _dbSet.ToList();
+        }
+
+        public TEntity GetByID(object Id)
+        {
+            return _dbSet.Find(Id);
+        }
+
+        public void Insert(TEntity entity)
+        {
+            _dbSet.Add(entity);
+            _dbContext.SaveChanges();
+        }
+
+        public void Update(TEntity entity, object id)
+        {
+            if (entity == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            TEntity exist = _dbSet.Find(id);
+            if (exist != null)
+            {
+                _dbContext.Entry(exist).CurrentValues.SetValues(entity);
+                _dbContext.SaveChanges();
+            }
+        }
+
+        public int Count(Expression<Func<TEntity, bool>> spec = null)
+        {
+            return (spec == null ? _dbSet.Count() : _dbSet.Count(spec));
+        }
+
+        public bool Exist(Expression<Func<TEntity, bool>> spec = null)
+        {
+            return (spec == null ? _dbSet.Any() : _dbSet.Any(spec));
+        }
+
+        public void SaveChanges()
+        {
+            try
+            {
+                _dbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private bool disposed = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    _dbContext.Dispose();
+                }
+                this.disposed = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }
