@@ -80,21 +80,12 @@
     <Compile Include="Enums\GenderEnum.cs" />
     <Compile Include="Enums\StatusEnum.cs" />
     <Compile Include="Identity\IdentityModels.cs" />
-    <Compile Include="Migrations\201903031630044_Delete_User_Information_Entity.cs" />
-    <Compile Include="Migrations\201903031630044_Delete_User_Information_Entity.Designer.cs">
-      <DependentUpon>201903031630044_Delete_User_Information_Entity.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903031630044_Delete_User_Information_Entity.resx">
-      <DependentUpon>201903031630044_Delete_User_Information_Entity.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
