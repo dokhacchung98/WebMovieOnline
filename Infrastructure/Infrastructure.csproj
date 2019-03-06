@@ -76,7 +76,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataContext\MovieDbContext.cs" />
+    <Compile Include="Entities\Actor.cs" />
+    <Compile Include="Entities\ActorMovie.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Entities\Category.cs" />
+    <Compile Include="Entities\CategoryMovie.cs" />
+    <Compile Include="Entities\Director.cs" />
+    <Compile Include="Entities\Favorite.cs" />
+    <Compile Include="Entities\FavoriteMovie.cs" />
+    <Compile Include="Entities\Film.cs" />
+    <Compile Include="Entities\Image.cs" />
+    <Compile Include="Entities\InformationUser.cs" />
+    <Compile Include="Entities\Movie.cs" />
+    <Compile Include="Entities\News.cs" />
+    <Compile Include="Entities\Producer.cs" />
+    <Compile Include="Entities\ProducerMovie.cs" />
+    <Compile Include="Entities\Quality.cs" />
+    <Compile Include="Entities\Rating.cs" />
+    <Compile Include="Entities\Resolution.cs" />
+    <Compile Include="Entities\Tag.cs" />
+    <Compile Include="Entities\Trailer.cs" />
     <Compile Include="Enums\GenderEnum.cs" />
     <Compile Include="Enums\StatusEnum.cs" />
     <Compile Include="Identity\IdentityModels.cs" />
