@@ -39,6 +39,10 @@ namespace Website
                     "~/Content/unauthorized/unauthorized.css"
                 ));
 
+            bundles.Add(new StyleBundle("~/Content/manageuser").Include(
+                    "~/Content/manageuser/manager_user.css"
+                ));
+
         }
     }
 }

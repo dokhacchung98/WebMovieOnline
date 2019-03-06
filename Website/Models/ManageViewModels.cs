@@ -41,6 +41,12 @@ namespace Website.Models
 
         [Display(Name = "Số điện thoại")]
         public string PhoneNumber { get; set; }
+
+        public string Avatar { get; set; }
+
+        public string Wallpaper { get; set; }
+
+        public DateTime CreateDate { get; set; }
     }
 
     public class ManageLoginsViewModel

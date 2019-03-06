@@ -1,120 +1,101 @@
-﻿@model Website.Models.IndexViewModel
+﻿@model Website.Models.UpdateUserViewModel
 @{
     ViewBag.Title = "Manage";
 }
-
 <head>
-    <link type="text/css" rel="stylesheet" href="~/Content/manageuser/manager_user.css"/>
+    @Styles.Render("~/Content/manageuser")
 </head>
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+
 <div class="container mb-4 main-container">
     <div class="row">
         <div class="col-lg-4 pb-5">
             <!-- Account Sidebar-->
             <div class="author-card pb-3">
-                <div class="author-card-cover" style="background-image: url(https://demo.createx.studio/createx-html/img/widgets/author/cover.jpg);"><a class="btn btn-style-1 btn-white btn-sm" href="#" data-toggle="tooltip" title="" data-original-title="You currently have 290 Reward points to spend"><i class="fa fa-award text-md"></i>&nbsp;290 points</a></div>
+                <div class="author-card-cover" style="background-image: url();"><a class="btn btn-style-1 btn-white btn-sm" href="#" data-toggle="tooltip" title="" data-original-title="You currently have 290 Reward points to spend"><i class="fa fa-award text-md"></i>&nbsp;290 points</a></div>
                 <div class="author-card-profile">
                     <div class="author-card-avatar">
-                        <img src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="Daniel Adams">
+                        <img src="@Model.Avatar" alt="Daniel Adams">
                     </div>
                     <div class="author-card-details">
-                        <h5 class="author-card-name text-lg">Daniel Adams</h5><span class="author-card-position">Joined February 06, 2017</span>
+                        <h5 class="author-card-name text-lg">@Model.FullName</h5><span class="author-card-position">Joined @Model.CreateDate </span>
                     </div>
                 </div>
             </div>
             <div class="wizard">
-                <nav class="list-group list-group-flush">
-                    <a class="list-group-item active" href="#">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <i class="fa fa-shopping-bag mr-1 text-muted"></i>
-                                <div class="d-inline-block font-weight-medium text-uppercase">Orders List</div>
-                            </div><span class="badge badge-secondary">6</span>
-                        </div>
-                    </a><a class="list-group-item" href="#"><i class="fa fa-user text-muted"></i>Profile Settings</a><a class="list-group-item" href="#"><i class="fa fa-map-marker text-muted"></i>Addresses</a>
-                    <a class="list-group-item" href="#">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <i class="fa fa-heart mr-1 text-muted"></i>
-                                <div class="d-inline-block font-weight-medium text-uppercase">My Wishlist</div>
-                            </div><span class="badge badge-secondary">3</span>
-                        </div>
+                <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical" style="margin-top: 20px">
+                    <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                        Home
                     </a>
-                    <a class="list-group-item" href="#">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <i class="fa fa-tag mr-1 text-muted"></i>
-                                <div class="d-inline-block font-weight-medium text-uppercase">My Tickets</div>
-                            </div><span class="badge badge-secondary">4</span>
-                        </div>
+                    <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">
+                        Profile
                     </a>
-                </nav>
+                    <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+                        Messages
+                    </a>
+                    <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">
+                        Settings
+                    </a>
+                </div>
             </div>
         </div>
         <!-- Orders Table-->
-        <div class="col-lg-8 pb-5">
-            <div class="d-flex justify-content-end pb-3">
-                <div class="form-inline">
-                    <label class="text-muted mr-3" for="order-sort">Sort Orders</label>
-                    <select class="form-control" id="order-sort">
-                        <option>All</option>
-                        <option>Delivered</option>
-                        <option>In Progress</option>
-                        <option>Delayed</option>
-                        <option>Canceled</option>
-                    </select>
+        <div class="col-lg-8 pb-5 tab-content" id="v-pills-tabContent" ">
+            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Order #</th>
+                                <th>Date Purchased</th>
+                                <th>Status</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a class="navi-link" href="#order-details" data-toggle="modal">78A643CD409</a></td>
+                                <td>August 08, 2017</td>
+                                <td><span class="badge badge-danger m-0">Canceled</span></td>
+                                <td><span>$760.50</span></td>
+                            </tr>
+                            <tr>
+                                <td><a class="navi-link" href="#order-details" data-toggle="modal">34VB5540K83</a></td>
+                                <td>July 21, 2017</td>
+                                <td><span class="badge badge-info m-0">In Progress</span></td>
+                                <td>$315.20</td>
+                            </tr>
+                            <tr>
+                                <td><a class="navi-link" href="#order-details" data-toggle="modal">112P45A90V2</a></td>
+                                <td>June 15, 2017</td>
+                                <td><span class="badge badge-warning m-0">Delayed</span></td>
+                                <td>$1,264.00</td>
+                            </tr>
+                            <tr>
+                                <td><a class="navi-link" href="#order-details" data-toggle="modal">28BA67U0981</a></td>
+                                <td>May 19, 2017</td>
+                                <td><span class="badge badge-success m-0">Delivered</span></td>
+                                <td>$198.35</td>
+                            </tr>
+                            <tr>
+                                <td><a class="navi-link" href="#order-details" data-toggle="modal">502TR872W2</a></td>
+                                <td>April 04, 2017</td>
+                                <td><span class="badge badge-success m-0">Delivered</span></td>
+                                <td>$2,133.90</td>
+                            </tr>
+                            <tr>
+                                <td><a class="navi-link" href="#order-details" data-toggle="modal">47H76G09F33</a></td>
+                                <td>March 30, 2017</td>
+                                <td><span class="badge badge-success m-0">Delivered</span></td>
+                                <td>$86.40</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-            <div class="table-responsive">
-                <table class="table table-hover mb-0">
-                    <thead>
-                        <tr>
-                            <th>Order #</th>
-                            <th>Date Purchased</th>
-                            <th>Status</th>
-                            <th>Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><a class="navi-link" href="#order-details" data-toggle="modal">78A643CD409</a></td>
-                            <td>August 08, 2017</td>
-                            <td><span class="badge badge-danger m-0">Canceled</span></td>
-                            <td><span>$760.50</span></td>
-                        </tr>
-                        <tr>
-                            <td><a class="navi-link" href="#order-details" data-toggle="modal">34VB5540K83</a></td>
-                            <td>July 21, 2017</td>
-                            <td><span class="badge badge-info m-0">In Progress</span></td>
-                            <td>$315.20</td>
-                        </tr>
-                        <tr>
-                            <td><a class="navi-link" href="#order-details" data-toggle="modal">112P45A90V2</a></td>
-                            <td>June 15, 2017</td>
-                            <td><span class="badge badge-warning m-0">Delayed</span></td>
-                            <td>$1,264.00</td>
-                        </tr>
-                        <tr>
-                            <td><a class="navi-link" href="#order-details" data-toggle="modal">28BA67U0981</a></td>
-                            <td>May 19, 2017</td>
-                            <td><span class="badge badge-success m-0">Delivered</span></td>
-                            <td>$198.35</td>
-                        </tr>
-                        <tr>
-                            <td><a class="navi-link" href="#order-details" data-toggle="modal">502TR872W2</a></td>
-                            <td>April 04, 2017</td>
-                            <td><span class="badge badge-success m-0">Delivered</span></td>
-                            <td>$2,133.90</td>
-                        </tr>
-                        <tr>
-                            <td><a class="navi-link" href="#order-details" data-toggle="modal">47H76G09F33</a></td>
-                            <td>March 30, 2017</td>
-                            <td><span class="badge badge-success m-0">Delivered</span></td>
-                            <td>$86.40</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">...</div>
+            <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
+            <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
         </div>
     </div>
 </div>
