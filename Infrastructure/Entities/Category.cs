@@ -12,7 +12,7 @@ namespace Infrastructure.Entities
         public string Description { get; set; }
 
         #region Relation
-        public ICollection<CategoryMovie> CategoryMovies { get; set; }
+        public virtual ICollection<CategoryMovie> CategoryMovies { get; set; }
         #endregion
     }
 }

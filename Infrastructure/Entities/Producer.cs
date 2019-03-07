@@ -14,7 +14,7 @@ namespace Infrastructure.Entities
         public string Phone { get; set; }
 
         #region Relation
-        public ICollection<ProducerMovie> ProducerMovies { get; set; }
+        public virtual ICollection<ProducerMovie> ProducerMovies { get; set; }
         #endregion
     }
 }

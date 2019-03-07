@@ -11,7 +11,7 @@ namespace Infrastructure.Entities
         public string Description { get; set; }
 
         #region Relation
-        public ICollection<Image> Images { get; set; }
+        public virtual ICollection<Image> Images { get; set; }
         #endregion
     }
 }

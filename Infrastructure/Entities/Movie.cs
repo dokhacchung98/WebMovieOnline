@@ -22,29 +22,27 @@ namespace Infrastructure.Entities
         public int enableAge { get; set; }
 
         #region Relation
-        public ICollection<Director> Directors { get; set; }
-        public ICollection<Image> Images { get; set; }
-        public ICollection<ActorMovie> ActorMovies { get; set; }
-        public ICollection<Film> Films { get; set; }
-        public ICollection<ProducerMovie> ProducerMovies { get; set; }
-        public ICollection<CategoryMovie> CategoryMovies { get; set; }
-        public ICollection<Rating> Ratings { get; set; }
+        public virtual ICollection<Director> Directors { get; set; }
+        public virtual ICollection<Image> Images { get; set; }
+        public virtual ICollection<ActorMovie> ActorMovies { get; set; }
+        public virtual ICollection<Film> Films { get; set; }
+        public virtual ICollection<ProducerMovie> ProducerMovies { get; set; }
+        public virtual ICollection<CategoryMovie> CategoryMovies { get; set; }
+        public virtual ICollection<Rating> Ratings { get; set; }
 
         /// <summary>
         ///  Quality xem lại
         /// </summary>
-
-        //[ForeignKey("Trailer")]
-        //public Guid TrailerId { get; set; }
-        //public Trailer Trailer { get; set; }
+        
+        public virtual ICollection<Trailer> Trailers { get; set; }
 
         [ForeignKey("Tag")]
         public Guid TagId { get; set; }
-        public Tag Tag { get; set; }
+        public virtual Tag Tag { get; set; }
 
         [ForeignKey("Resolution")]
         public Guid ResolutionId { get; set; }
-        public Resolution Resolution { get; set; }
+        public virtual Resolution Resolution { get; set; }
 
         #endregion
     }

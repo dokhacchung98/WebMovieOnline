@@ -15,19 +15,19 @@ namespace Infrastructure.Entities
         #region Relation
         [ForeignKey("Director")]
         public Guid DicrectorId { get; set; }
-        public Director Director { get; set; }
+        public virtual Director Director { get; set; }
 
         [ForeignKey("Movie")]
         public Guid MovieId { get; set; }
-        public Movie Movie { get; set; }
+        public virtual Movie Movie { get; set; }
 
         [ForeignKey("Actor")]
         public Guid ActorId { get; set; }
-        public Actor Actor { get; set; }
+        public virtual Actor Actor { get; set; }
 
         [ForeignKey("News")]
         public Guid NewsId { get; set; }
-        public News News { get; set; }
+        public virtual News News { get; set; }
         #endregion
     }
 }

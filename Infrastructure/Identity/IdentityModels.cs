@@ -40,13 +40,8 @@ namespace Infrastructure.Identity
         #endregion propreties
 
         #region Relation
-        [ForeignKey("Favorite")]
-        public Guid FavoriteId { get; set; }
-        public Favorite Favorite { get; set; }
-
-        [ForeignKey("InformationUser")]
-        public Guid InformationUserId { get; set; }
-        public InformationUser InformationUser { get; set; }
+        public virtual ICollection<FavoriteMovie> FavoriteMovies { get; set; }
+        
         #endregion
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

@@ -11,7 +11,7 @@ namespace Infrastructure.Entities
         public string NameResolution { get; set; }
 
         #region Relation
-        public ICollection<Movie> Movies { get; set; }
+        public virtual ICollection<Movie> Movies { get; set; }
         #endregion
     }
 }

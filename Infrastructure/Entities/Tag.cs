@@ -12,7 +12,7 @@ namespace Infrastructure.Entities
         public int CountTag { get; set; }
 
         #region Relation
-        public ICollection<Movie> Movies { get; set; }
+        public virtual ICollection<Movie> Movies { get; set; }
         #endregion
     }
 }

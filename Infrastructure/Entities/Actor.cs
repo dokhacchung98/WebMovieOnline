@@ -15,8 +15,8 @@ namespace Infrastructure.Entities
         public int Tus { get; set; }
 
         #region Relation
-        public ICollection<ActorMovie> ActorMovies { get; set; }
-        public ICollection<Image> Images { get; set; }
+        public virtual ICollection<ActorMovie> ActorMovies { get; set; }
+        public virtual ICollection<Image> Images { get; set; }
         #endregion
     }
 }
