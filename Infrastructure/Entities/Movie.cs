@@ -18,8 +18,8 @@ namespace Infrastructure.Entities
         public string Country { get; set; }
         public int CountView { get; set; }
         public int IsHot { get; set; }
-        public string nameEn { get; set; }
-        public int enableAge { get; set; }
+        public string NameEn { get; set; }
+        public int EnableAge { get; set; }
 
         #region Relation
         public virtual ICollection<Director> Directors { get; set; }
