@@ -10,6 +10,7 @@ namespace Infrastructure.Entities
     public class Film : BaseEntity
     {
         public string NameFilm { get; set; }
+        public string Link { get; set; }
 
         #region Relation
         [ForeignKey("Movie")]
