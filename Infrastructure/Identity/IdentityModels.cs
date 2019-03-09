@@ -1,8 +1,12 @@
-﻿using Infrastructure.Enum;
+﻿using Infrastructure.Entities;
+using Infrastructure.Enum;
 using Infrastructure.Enums;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -34,6 +38,11 @@ namespace Infrastructure.Identity
         public StatusEnum Status { get; set; }
 
         #endregion propreties
+
+        #region Relation
+        public virtual ICollection<FavoriteMovie> FavoriteMovies { get; set; }
+        
+        #endregion
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
