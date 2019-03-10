@@ -1,4 +1,5 @@
-﻿using Infrastructure.Identity;
+﻿using Extension.Extensions;
+using Infrastructure.Identity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -166,7 +167,13 @@ namespace Website.Controllers
             if (ModelState.IsValid)
             {
                 // save in AppUsers table
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser {
+                    UserName = model.Email, Email = model.Email,
+                    FullName = model.FirstName + " " +model.LastName,
+                    PhoneNumber = model.Phone,
+                    Status = Infrastructure.Enum.StatusEnum.Active,
+                    CreatedDate = GetCurrentDateExtension.GetCurrentTime()
+                };
 
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

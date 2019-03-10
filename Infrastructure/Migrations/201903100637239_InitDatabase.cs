@@ -3,89 +3,20 @@ namespace Infrastructure.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class a : DbMigration
+    public partial class InitDatabase : DbMigration
     {
         public override void Up()
         {
             CreateTable(
-                "dbo.AspNetRoles",
-                c => new
-                    {
-                        Id = c.String(nullable: false, maxLength: 128),
-                        Name = c.String(nullable: false, maxLength: 256),
-                    })
-                .PrimaryKey(t => t.Id)
-                .Index(t => t.Name, unique: true, name: "RoleNameIndex");
-            
-            CreateTable(
-                "dbo.AspNetUserRoles",
-                c => new
-                    {
-                        UserId = c.String(nullable: false, maxLength: 128),
-                        RoleId = c.String(nullable: false, maxLength: 128),
-                    })
-                .PrimaryKey(t => new { t.UserId, t.RoleId })
-                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .Index(t => t.UserId)
-                .Index(t => t.RoleId);
-            
-            CreateTable(
-                "dbo.AspNetUsers",
-                c => new
-                    {
-                        Id = c.String(nullable: false, maxLength: 128),
-                        Avatar = c.String(maxLength: 255),
-                        Wallpaper = c.String(maxLength: 255),
-                        Address = c.String(maxLength: 100),
-                        Gender = c.Int(nullable: false),
-                        FullName = c.String(maxLength: 100),
-                        Status = c.Int(nullable: false),
-                        Email = c.String(maxLength: 256),
-                        EmailConfirmed = c.Boolean(nullable: false),
-                        PasswordHash = c.String(),
-                        SecurityStamp = c.String(),
-                        PhoneNumber = c.String(),
-                        PhoneNumberConfirmed = c.Boolean(nullable: false),
-                        TwoFactorEnabled = c.Boolean(nullable: false),
-                        LockoutEndDateUtc = c.DateTime(),
-                        LockoutEnabled = c.Boolean(nullable: false),
-                        AccessFailedCount = c.Int(nullable: false),
-                        UserName = c.String(nullable: false, maxLength: 256),
-                    })
-                .PrimaryKey(t => t.Id)
-                .Index(t => t.UserName, unique: true, name: "UserNameIndex");
-            
-            CreateTable(
-                "dbo.AspNetUserClaims",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        UserId = c.String(nullable: false, maxLength: 128),
-                        ClaimType = c.String(),
-                        ClaimValue = c.String(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .Index(t => t.UserId);
-            
-            CreateTable(
                 "dbo.FavoriteMovies",
                 c => new
                     {
-                        Id = c.Guid(nullable: false),
-                        UserId = c.String(maxLength: 128),
+                        UserId = c.String(nullable: false, maxLength: 128),
                         MovieId = c.Guid(nullable: false),
-                        CreatedDate = c.DateTime(),
-                        CreatedBy = c.Guid(),
-                        UpdatedDate = c.DateTime(),
-                        UpdatedBy = c.Guid(),
-                        Status = c.Int(nullable: false),
-                        IsDeleted = c.Boolean(nullable: false),
                     })
-                .PrimaryKey(t => t.Id)
+                .PrimaryKey(t => new { t.UserId, t.MovieId })
                 .ForeignKey("dbo.Movies", t => t.MovieId, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId)
                 .Index(t => t.MovieId);
             
@@ -103,8 +34,8 @@ namespace Infrastructure.Migrations
                         Country = c.String(),
                         CountView = c.Int(nullable: false),
                         IsHot = c.Int(nullable: false),
-                        nameEn = c.String(),
-                        enableAge = c.Int(nullable: false),
+                        NameEn = c.String(),
+                        EnableAge = c.Int(nullable: false),
                         TagId = c.Guid(nullable: false),
                         ResolutionId = c.Guid(nullable: false),
                         CreatedDate = c.DateTime(),
@@ -124,18 +55,11 @@ namespace Infrastructure.Migrations
                 "dbo.ActorMovies",
                 c => new
                     {
-                        Id = c.Guid(nullable: false),
-                        Role = c.String(),
                         ActorId = c.Guid(nullable: false),
                         MovieId = c.Guid(nullable: false),
-                        CreatedDate = c.DateTime(),
-                        CreatedBy = c.Guid(),
-                        UpdatedDate = c.DateTime(),
-                        UpdatedBy = c.Guid(),
-                        Status = c.Int(nullable: false),
-                        IsDeleted = c.Boolean(nullable: false),
+                        Role = c.String(),
                     })
-                .PrimaryKey(t => t.Id)
+                .PrimaryKey(t => new { t.ActorId, t.MovieId })
                 .ForeignKey("dbo.Actors", t => t.ActorId, cascadeDelete: true)
                 .ForeignKey("dbo.Movies", t => t.MovieId, cascadeDelete: true)
                 .Index(t => t.ActorId)
@@ -225,17 +149,10 @@ namespace Infrastructure.Migrations
                 "dbo.CategoryMovies",
                 c => new
                     {
-                        Id = c.Guid(nullable: false),
                         CategoryId = c.Guid(nullable: false),
                         MovieId = c.Guid(nullable: false),
-                        CreatedDate = c.DateTime(),
-                        CreatedBy = c.Guid(),
-                        UpdatedDate = c.DateTime(),
-                        UpdatedBy = c.Guid(),
-                        Status = c.Int(nullable: false),
-                        IsDeleted = c.Boolean(nullable: false),
                     })
-                .PrimaryKey(t => t.Id)
+                .PrimaryKey(t => new { t.CategoryId, t.MovieId })
                 .ForeignKey("dbo.Categories", t => t.CategoryId, cascadeDelete: true)
                 .ForeignKey("dbo.Movies", t => t.MovieId, cascadeDelete: true)
                 .Index(t => t.CategoryId)
@@ -263,6 +180,7 @@ namespace Infrastructure.Migrations
                     {
                         Id = c.Guid(nullable: false),
                         NameFilm = c.String(),
+                        Link = c.String(),
                         MovieId = c.Guid(nullable: false),
                         CreatedDate = c.DateTime(),
                         CreatedBy = c.Guid(),
@@ -279,17 +197,10 @@ namespace Infrastructure.Migrations
                 "dbo.ProducerMovies",
                 c => new
                     {
-                        Id = c.Guid(nullable: false),
                         ProducerId = c.Guid(nullable: false),
                         MovieId = c.Guid(nullable: false),
-                        CreatedDate = c.DateTime(),
-                        CreatedBy = c.Guid(),
-                        UpdatedDate = c.DateTime(),
-                        UpdatedBy = c.Guid(),
-                        Status = c.Int(nullable: false),
-                        IsDeleted = c.Boolean(nullable: false),
                     })
-                .PrimaryKey(t => t.Id)
+                .PrimaryKey(t => new { t.ProducerId, t.MovieId })
                 .ForeignKey("dbo.Movies", t => t.MovieId, cascadeDelete: true)
                 .ForeignKey("dbo.Producers", t => t.ProducerId, cascadeDelete: true)
                 .Index(t => t.ProducerId)
@@ -370,7 +281,7 @@ namespace Infrastructure.Migrations
                         Id = c.Guid(nullable: false),
                         Link = c.String(),
                         Description = c.String(),
-                        MovieId = c.Guid(nullable: false),
+                        MovieID = c.Guid(nullable: false),
                         CreatedDate = c.DateTime(),
                         CreatedBy = c.Guid(),
                         UpdatedDate = c.DateTime(),
@@ -379,20 +290,8 @@ namespace Infrastructure.Migrations
                         IsDeleted = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Movies", t => t.MovieId, cascadeDelete: true)
-                .Index(t => t.MovieId);
-            
-            CreateTable(
-                "dbo.AspNetUserLogins",
-                c => new
-                    {
-                        LoginProvider = c.String(nullable: false, maxLength: 128),
-                        ProviderKey = c.String(nullable: false, maxLength: 128),
-                        UserId = c.String(nullable: false, maxLength: 128),
-                    })
-                .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .Index(t => t.UserId);
+                .ForeignKey("dbo.Movies", t => t.MovieID, cascadeDelete: true)
+                .Index(t => t.MovieID);
             
             CreateTable(
                 "dbo.DirectorMovies",
@@ -411,11 +310,9 @@ namespace Infrastructure.Migrations
         
         public override void Down()
         {
-            DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.FavoriteMovies", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.FavoriteMovies", "MovieId", "dbo.Movies");
-            DropForeignKey("dbo.Trailers", "MovieId", "dbo.Movies");
+            DropForeignKey("dbo.Trailers", "MovieID", "dbo.Movies");
             DropForeignKey("dbo.Movies", "TagId", "dbo.Tags");
             DropForeignKey("dbo.Movies", "ResolutionId", "dbo.Resolutions");
             DropForeignKey("dbo.Ratings", "MovieId", "dbo.Movies");
@@ -432,12 +329,9 @@ namespace Infrastructure.Migrations
             DropForeignKey("dbo.DirectorMovies", "Movie_Id", "dbo.Movies");
             DropForeignKey("dbo.DirectorMovies", "Director_Id", "dbo.Directors");
             DropForeignKey("dbo.Images", "ActorId", "dbo.Actors");
-            DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropIndex("dbo.DirectorMovies", new[] { "Movie_Id" });
             DropIndex("dbo.DirectorMovies", new[] { "Director_Id" });
-            DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
-            DropIndex("dbo.Trailers", new[] { "MovieId" });
+            DropIndex("dbo.Trailers", new[] { "MovieID" });
             DropIndex("dbo.Ratings", new[] { "MovieId" });
             DropIndex("dbo.ProducerMovies", new[] { "MovieId" });
             DropIndex("dbo.ProducerMovies", new[] { "ProducerId" });
@@ -454,13 +348,7 @@ namespace Infrastructure.Migrations
             DropIndex("dbo.Movies", new[] { "TagId" });
             DropIndex("dbo.FavoriteMovies", new[] { "MovieId" });
             DropIndex("dbo.FavoriteMovies", new[] { "UserId" });
-            DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
-            DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
-            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
-            DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropTable("dbo.DirectorMovies");
-            DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.Trailers");
             DropTable("dbo.Tags");
             DropTable("dbo.Resolutions");
@@ -477,10 +365,6 @@ namespace Infrastructure.Migrations
             DropTable("dbo.ActorMovies");
             DropTable("dbo.Movies");
             DropTable("dbo.FavoriteMovies");
-            DropTable("dbo.AspNetUserClaims");
-            DropTable("dbo.AspNetUsers");
-            DropTable("dbo.AspNetUserRoles");
-            DropTable("dbo.AspNetRoles");
         }
     }
 }

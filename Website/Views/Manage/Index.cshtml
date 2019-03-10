@@ -1,24 +1,23 @@
 ﻿@model Website.Models.UpdateUserViewModel
 @{
-    ViewBag.Title = "Manage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <head>
     @Styles.Render("~/Content/manageuser")
 </head>
-
-
 <div class="container mb-4 main-container">
     <div class="row">
         <div class="col-lg-4 pb-5">
             <!-- Account Sidebar-->
             <div class="author-card pb-3">
-                <div class="author-card-cover" style="background-image: url();"><a class="btn btn-style-1 btn-white btn-sm" href="#" data-toggle="tooltip" title="" data-original-title="You currently have 290 Reward points to spend"><i class="fa fa-award text-md"></i>&nbsp;290 points</a></div>
+                <div class="author-card-cover" style="background-image: url(@Model.Wallpaper);height: 200px;"></div>
                 <div class="author-card-profile">
-                    <div class="author-card-avatar">
-                        <img src="@Model.Avatar" alt="Daniel Adams">
+                    <div class="author-card-avatar" style="width:100px; height:100px">
+                        <img src="@Model.Avatar" alt="Daniel Adams" style="width: 100%; height:100%">
                     </div>
                     <div class="author-card-details">
-                        <h5 class="author-card-name text-lg">@Model.FullName</h5><span class="author-card-position">Joined @Model.CreateDate </span>
+                        <h5 class="author-card-name text-lg">@Model.FullName</h5><span class="author-card-position">Joined @Model.CreatedDate </span>
                     </div>
                 </div>
             </div>
@@ -31,10 +30,7 @@
                         Profile
                     </a>
                     <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">
-                        Messages
-                    </a>
-                    <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">
-                        Settings
+                        Đổi mật khẩu
                     </a>
                 </div>
             </div>
@@ -59,43 +55,86 @@
                                 <td><span class="badge badge-danger m-0">Canceled</span></td>
                                 <td><span>$760.50</span></td>
                             </tr>
-                            <tr>
-                                <td><a class="navi-link" href="#order-details" data-toggle="modal">34VB5540K83</a></td>
-                                <td>July 21, 2017</td>
-                                <td><span class="badge badge-info m-0">In Progress</span></td>
-                                <td>$315.20</td>
-                            </tr>
-                            <tr>
-                                <td><a class="navi-link" href="#order-details" data-toggle="modal">112P45A90V2</a></td>
-                                <td>June 15, 2017</td>
-                                <td><span class="badge badge-warning m-0">Delayed</span></td>
-                                <td>$1,264.00</td>
-                            </tr>
-                            <tr>
-                                <td><a class="navi-link" href="#order-details" data-toggle="modal">28BA67U0981</a></td>
-                                <td>May 19, 2017</td>
-                                <td><span class="badge badge-success m-0">Delivered</span></td>
-                                <td>$198.35</td>
-                            </tr>
-                            <tr>
-                                <td><a class="navi-link" href="#order-details" data-toggle="modal">502TR872W2</a></td>
-                                <td>April 04, 2017</td>
-                                <td><span class="badge badge-success m-0">Delivered</span></td>
-                                <td>$2,133.90</td>
-                            </tr>
-                            <tr>
-                                <td><a class="navi-link" href="#order-details" data-toggle="modal">47H76G09F33</a></td>
-                                <td>March 30, 2017</td>
-                                <td><span class="badge badge-success m-0">Delivered</span></td>
-                                <td>$86.40</td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">...</div>
-            <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
-            <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
+            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                @using (Html.BeginForm("Edit", "Manage", FormMethod.Post,
+                                        new { @class = "user" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.Id)
+
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-10">
+                                    @Html.EnumDropDownListFor(model => model.Gender, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-10">
+                                    @Html.EnumDropDownListFor(model => model.Status, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <button type="submit" class="btn btn-primary btn-user btn-block col-md-3" style="text-align:center;
+                                                                                                            left: 31px;
+                                                                                                            top: 35px;">
+                                Lưu thông tin
+                            </button>
+
+                        </div>
+                    </div>
+                }
+
+            </div>
+            <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+
+            </div>
         </div>
     </div>
 </div>

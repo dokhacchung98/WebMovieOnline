@@ -1,5 +1,6 @@
 ﻿using ApplicationCore.Services;
 using AutoMapper;
+using Infrastructure.Identity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -61,13 +62,20 @@ namespace Website.Controllers
 
         //
         // GET: /Manage/Index
-        public async Task<ActionResult> Index(string id)
+        public ActionResult Index(string id)
         {
             var currentUser = _userService.Find(id);
 
             var currentUserView = Mapper.Map<UpdateUserViewModel>(currentUser);
 
             return View(currentUserView);
+        }
+
+        public ActionResult Edit(UpdateUserViewModel viewUser)
+        {
+            var user = Mapper.Map<ApplicationUser>(viewUser);
+            _userService.UpdateUser(user, user.Id);
+            return RedirectToAction("Index");
         }
 
         //
