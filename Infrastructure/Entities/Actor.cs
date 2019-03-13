@@ -13,10 +13,10 @@ namespace Infrastructure.Entities
         public int IdCountry { get; set; }
         public int Sex { get; set; }
         public int Tus { get; set; }
+        public string PathImage { get; set; }
 
         #region Relation
         public virtual ICollection<ActorMovie> ActorMovies { get; set; }
-        public virtual ICollection<Image> Images { get; set; }
         #endregion
     }
 }
