@@ -206,7 +206,6 @@
     <Compile Include="Modules\ServiceModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModel\NewsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Content\ManageUser\edit_user.css" />
@@ -439,6 +438,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\App_LocalResources\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="ViewModel\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

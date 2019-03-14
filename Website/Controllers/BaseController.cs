@@ -11,6 +11,7 @@ namespace Website.Controllers
         // GET: Base
         public ActionResult SlideBarTopView()
         {
+            
             return View();
         }
     }

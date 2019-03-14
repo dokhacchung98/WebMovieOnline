@@ -20,6 +20,8 @@ namespace Infrastructure.DataContext
             return new MovieDbContext();
         }
 
+        public System.Data.Entity.DbSet<Infrastructure.Entities.News> News { get; set; }
+
         //DbSet <Actor> Actors { get; set; }
         //DbSet <ActorMovie> ActorMovies { get; set; }
         //DbSet <Category> Categories { get; set; }
