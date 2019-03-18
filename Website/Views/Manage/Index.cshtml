@@ -5,7 +5,9 @@
 
 <head>
     @Styles.Render("~/Content/manageuser")
+    @Scripts.Render("~/bundles/jquery")
 </head>
+
 <div class="container mb-4 main-container">
     <div class="row">
         <div class="col-lg-4 pb-5">
@@ -23,118 +25,49 @@
             </div>
             <div class="wizard">
                 <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical" style="margin-top: 20px">
-                    <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                    <a class="nav-link" id="v-pills-home-tab" title="FavoriteMovie">
                         Home
                     </a>
-                    <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">
+                    <a class="nav-link" id="v-pills-profile-tab" title="InformationUser">
                         Profile
                     </a>
-                    <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+                    <a class="nav-link" id="v-pills-messages-tab" title="ChangePassword">
                         Đổi mật khẩu
                     </a>
                 </div>
             </div>
         </div>
         <!-- Orders Table-->
-        <div class="col-lg-8 pb-5 tab-content" id="v-pills-tabContent" ">
-            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                <div class="table-responsive">
-                    <table class="table table-hover mb-0">
-                        <thead>
-                            <tr>
-                                <th>Order #</th>
-                                <th>Date Purchased</th>
-                                <th>Status</th>
-                                <th>Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><a class="navi-link" href="#order-details" data-toggle="modal">78A643CD409</a></td>
-                                <td>August 08, 2017</td>
-                                <td><span class="badge badge-danger m-0">Canceled</span></td>
-                                <td><span>$760.50</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                @using (Html.BeginForm("Edit", "Manage", FormMethod.Post,
-                                        new { @class = "user" }))
-                {
-                    @Html.AntiForgeryToken()
-
-                    <div class="form-horizontal">
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        @Html.HiddenFor(model => model.Id)
-
-                        <div class="form-group row">
-                            <div class="col-md-6">
-                                @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-6" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-6" })
-                                <div class="col-md-10">
-                                    @Html.EnumDropDownListFor(model => model.Gender, htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6">
-                                @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-6" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-6" })
-                                <div class="col-md-10">
-                                    @Html.EnumDropDownListFor(model => model.Status, htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6">
-                                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-6" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-6" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <button type="submit" class="btn btn-primary btn-user btn-block col-md-3" style="text-align:center;
-                                                                                                            left: 31px;
-                                                                                                            top: 35px;">
-                                Lưu thông tin
-                            </button>
-
-                        </div>
-                    </div>
-                }
-
-            </div>
-            <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-
-            </div>
+        <div class="col-lg-8 pb-5 tab-content" id="v-pills-tabContent">
+             <div id="content"> </div>
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        // default load favorite movie page
+        $("#content").load('@Url.Action("FavoriteMovie", new { @id = @Model.Id })');
+
+        // handle event when click element
+        $(".nav-link").click(function () {
+            $("#content").empty();
+            var url = null;
+            debugger
+            var page = $(this).attr('title');
+            switch (page) {
+                case "InformationUser":
+                    url = '@Url.Action("InformationUser", new { @id = @Model.Id})';
+                    break;
+                case "FavoriteMovie":
+                    url = '@Url.Action("FavoriteMovie", new { @id = @Model.Id})';
+                    break;
+                case "ChangePassword":
+                    url = '@Url.Action("ChangePassword", new { @id = @Model.Id})';
+            }
+
+            $("#content").load(url);
+        });
+    });
+
+</script>
