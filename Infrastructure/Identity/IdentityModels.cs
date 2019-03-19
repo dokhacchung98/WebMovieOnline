@@ -41,6 +41,7 @@ namespace Infrastructure.Identity
 
         #region Relation
         public virtual ICollection<FavoriteMovie> FavoriteMovies { get; set; }
+        public virtual ICollection<Rating> Ratings { get; set; }
         
         #endregion
 

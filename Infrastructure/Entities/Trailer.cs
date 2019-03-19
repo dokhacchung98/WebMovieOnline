@@ -10,7 +10,6 @@ namespace Infrastructure.Entities
     public class Trailer : BaseEntity
     {
         public string Link { get; set; }
-        public string Description { get; set; }
 
         #region Relation
         [ForeignKey("Movie")]

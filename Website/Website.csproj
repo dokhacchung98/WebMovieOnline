@@ -187,6 +187,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ManagerNewsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManagerRolesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManagerUsersController.cs" />
     <Compile Include="Configuaration\CustomRoleAuthorize.cs" />
@@ -248,6 +249,7 @@
     <Content Include="Content\stylewebsite\single.css" />
     <Content Include="Content\stylewebsite\style.css" />
     <Content Include="Content\unauthorized\unauthorized.css" />
+    <Content Include="Images\cc.jpg" />
     <Content Include="webfonts\fa-brands-400.svg" />
     <Content Include="webfonts\fa-regular-400.svg" />
     <Content Include="webfonts\fa-solid-900.svg" />
@@ -368,6 +370,8 @@
     <Content Include="Areas\Admin\Views\ManagerUsers\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ManagerUsers\EditRole.cshtml" />
     <Content Include="Areas\Admin\Views\ManagerUsers\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerNews\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerNews\Create.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -436,7 +440,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\App_LocalResources\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="ViewModel\" />
   </ItemGroup>

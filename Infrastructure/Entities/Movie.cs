@@ -11,8 +11,6 @@ namespace Infrastructure.Entities
     {
         public string Name { get; set; }
         public DateTime DatePublish { get; set; }
-        public int IdCountry { get; set; }
-        public string Description { get; set; }
         public DateTime LengthTime { get; set; }
         public string Language { get; set; }
         public string Country { get; set; }
@@ -20,15 +18,14 @@ namespace Infrastructure.Entities
         public int IsHot { get; set; }
         public string NameEn { get; set; }
         public int EnableAge { get; set; }
-        public string PathImage { get; set; }
 
         #region Relation
         public virtual ICollection<Director> Directors { get; set; }
-        public virtual ICollection<Image> Images { get; set; }
         public virtual ICollection<ActorMovie> ActorMovies { get; set; }
         public virtual ICollection<ProducerMovie> ProducerMovies { get; set; }
         public virtual ICollection<CategoryMovie> CategoryMovies { get; set; }
         public virtual ICollection<Rating> Ratings { get; set; }
+        public virtual ICollection<News> News { get; set; }
 
         /// <summary>
         ///  Quality xem lại
