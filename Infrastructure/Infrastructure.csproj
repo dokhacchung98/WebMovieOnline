@@ -76,13 +76,29 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataContext\MovieDbContext.cs" />
+    <Compile Include="Entities\Actor.cs" />
+    <Compile Include="Entities\ActorMovie.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Entities\Category.cs" />
+    <Compile Include="Entities\CategoryMovie.cs" />
+    <Compile Include="Entities\Director.cs" />
+    <Compile Include="Entities\FavoriteMovie.cs" />
+    <Compile Include="Entities\Film.cs" />
+    <Compile Include="Entities\Movie.cs" />
+    <Compile Include="Entities\MovieResolution.cs" />
+    <Compile Include="Entities\News.cs" />
+    <Compile Include="Entities\Producer.cs" />
+    <Compile Include="Entities\ProducerMovie.cs" />
+    <Compile Include="Entities\Rating.cs" />
+    <Compile Include="Entities\Resolution.cs" />
+    <Compile Include="Entities\Tag.cs" />
+    <Compile Include="Entities\Trailer.cs" />
     <Compile Include="Enums\GenderEnum.cs" />
     <Compile Include="Enums\StatusEnum.cs" />
     <Compile Include="Identity\IdentityModels.cs" />
-    <Compile Include="Migrations\201903031630044_Delete_User_Information_Entity.cs" />
-    <Compile Include="Migrations\201903031630044_Delete_User_Information_Entity.Designer.cs">
-      <DependentUpon>201903031630044_Delete_User_Information_Entity.cs</DependentUpon>
+    <Compile Include="Migrations\201903191512371_ha.cs" />
+    <Compile Include="Migrations\201903191512371_ha.Designer.cs">
+      <DependentUpon>201903191512371_ha.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -92,8 +108,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903031630044_Delete_User_Information_Entity.resx">
-      <DependentUpon>201903031630044_Delete_User_Information_Entity.cs</DependentUpon>
+    <Folder Include="ViewModel\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201903191512371_ha.resx">
+      <DependentUpon>201903191512371_ha.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -41,6 +41,12 @@ namespace Website.Models
 
         [Display(Name = "Số điện thoại")]
         public string PhoneNumber { get; set; }
+
+        public string Avatar { get; set; }
+
+        public string Wallpaper { get; set; }
+
+        public DateTime CreatedDate { get; set; }
     }
 
     public class ManageLoginsViewModel
@@ -71,19 +77,22 @@ namespace Website.Models
     public class ChangePasswordViewModel
     {
         [Required]
+        public String Id { get; set; }
+
+        [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Current password")]
+        [Display(Name = "Mật khẩu cũ")]
         public string OldPassword { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "Mật khẩu phải chứa 6 ký tự", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "New password")]
+        [Display(Name = "Mật khẩu mới")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Display(Name = "Nhập lại mật khẩu mới")]
+        [Compare("NewPassword", ErrorMessage = "Mật khẩu không khớp")]
         public string ConfirmPassword { get; set; }
     }
 
