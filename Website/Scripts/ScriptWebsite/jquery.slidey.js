@@ -71,8 +71,8 @@
             base.layout.overlay.$progress = base.$el.find(".slidey-progress").first();
 
             // create controls
-            var controls = "<div class='slidey-controls slidey-controls-previous'><i class='fa fa-chevron-left'></i></div>";
-               controls += "<div class='slidey-controls slidey-controls-next'><i class='fa fa-chevron-right'></i></div>";
+            var controls = "<div class='slidey-controls slidey-controls-previous'><i class='fas fa-chevron-left'></i></div>";
+            controls += "<div class='slidey-controls slidey-controls-next'><i class='fas fa-chevron-right'></i></div>";
 
             base.layout.$image.append(controls);
 

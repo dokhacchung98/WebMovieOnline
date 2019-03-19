@@ -62,6 +62,7 @@ namespace Website
                     "~/Scripts/ScriptWebsite/bootstrap.min.js"
                 ));
 
+            BundleTable.EnableOptimizations = true;
         }
     }
 }
