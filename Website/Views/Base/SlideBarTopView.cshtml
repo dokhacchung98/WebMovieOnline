@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Infrastructure.Entities.News>
+
+@{
+    Layout = null;
+}
+
+<div id="slidey" style="display:none;">
+    <ul>
+        @foreach (var mv in Model)
+        {
+            <li><img src="@Url.Content(@mv.PathImage)" alt=" "><p class='title'>@mv.Title</p><p class='description'> @mv.Description</p></li>
+        }
+    </ul>
+</div>
+<script src="~/Scripts/js/jquery.slidey.js"></script>
+<script src="~/Scripts/js/jquery.dotdotdot.min.js"></script>
+<script type="text/javascript">
+        $("#slidey").slidey({
+            interval: 8000,
+            listCount: 5,
+            autoplay: false,
+            showList: true
+        });
+        $(".slidey-list-description").dotdotdot();
+</script>
+

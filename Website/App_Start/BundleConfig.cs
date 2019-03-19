@@ -39,6 +39,27 @@ namespace Website
                     "~/Content/unauthorized/unauthorized.css"
                 ));
 
+            bundles.Add(new StyleBundle("~/Content/style-bootstrap3").Include(
+                    "~/Content/stylewebsite/bootstrap.css",
+                    "~/Content/stylewebsite/style.css",
+                    "~/Content/stylewebsite/contactstyle.css",
+                    "~/Content/stylewebsite/faqstyle.css",
+                    "~/Content/stylewebsite/single.css",
+                    "~/Content/stylewebsite/medile.css",
+                    "~/Content/stylewebsite/jquery.slidey.min.css",
+                    "~/Content/stylewebsite/popuo-box.css",
+                    "~/Content/stylewebsite/owl.carousel.css",
+                    "~/Content/fontawesome/all.css"
+                ));
+
+            bundles.Add(new ScriptBundle("~/Script/script-website").Include(
+                    "~/Scripts/ScriptWebsite/jquery-2.1.4.min.js",
+                    "~/Scripts/ScriptWebsite/owl.carousel.js",
+                    "~/Scripts/ScriptWebsite/move-top.js",
+                    "~/Scripts/ScriptWebsite/easing.js",
+                    "~/Scripts/ScriptWebsite/jquery.slidey.js",
+                    "~/Scripts/ScriptWebsite/jquery.dotdotdot.min.js",
+                    "~/Scripts/ScriptWebsite/bootstrap.min.js"
             bundles.Add(new StyleBundle("~/Content/manageuser").Include(
                     "~/Content/manageuser/manager_user.css"
                 ));

@@ -96,13 +96,6 @@
     <Compile Include="Enums\GenderEnum.cs" />
     <Compile Include="Enums\StatusEnum.cs" />
     <Compile Include="Identity\IdentityModels.cs" />
-    <Compile Include="Migrations\201903100637239_InitDatabase.cs" />
-    <Compile Include="Migrations\201903100637239_InitDatabase.Designer.cs">
-      <DependentUpon>201903100637239_InitDatabase.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903100804372_UpdateDatabase.cs" />
-    <Compile Include="Migrations\201903100804372_UpdateDatabase.Designer.cs">
-      <DependentUpon>201903100804372_UpdateDatabase.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -112,11 +105,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903100637239_InitDatabase.resx">
-      <DependentUpon>201903100637239_InitDatabase.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903100804372_UpdateDatabase.resx">
-      <DependentUpon>201903100804372_UpdateDatabase.cs</DependentUpon>
+    <Folder Include="ViewModel\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201903130845594_ha.resx">
+      <DependentUpon>201903130845594_ha.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
