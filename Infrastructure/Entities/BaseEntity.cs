@@ -12,8 +12,10 @@ namespace Infrastructure.Entities
             CreatedDate = DateTime.Now;
             IsDeleted = false;
         }
+
         [Key]
         public Guid Id { get; set; }
+
         public DateTime? CreatedDate { get; set; }
         public Guid? CreatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }

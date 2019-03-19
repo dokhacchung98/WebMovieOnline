@@ -43,6 +43,7 @@ namespace ApplicationCore.Services
                 user.TwoFactorEnabled = currentUser.TwoFactorEnabled;
                 user.Wallpaper = currentUser.Wallpaper;
                 user.SecurityStamp = currentUser.SecurityStamp;
+                user.CreatedDate = currentUser.CreatedDate;
             }
 
             _repository.Update(user, key);

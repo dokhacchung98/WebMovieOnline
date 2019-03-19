@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Entities
 {
@@ -16,7 +13,12 @@ namespace Infrastructure.Entities
         public string PathImage { get; set; }
 
         #region Relation
+
         public virtual ICollection<ActorMovie> ActorMovies { get; set; }
+
         #endregion
+        public virtual ICollection<Image> Images { get; set; }
+
+        #endregion Relation
     }
 }

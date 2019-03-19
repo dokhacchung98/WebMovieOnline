@@ -6,7 +6,6 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -37,12 +36,15 @@ namespace Infrastructure.Identity
         [Display(Name = "Trạng thái")]
         public StatusEnum Status { get; set; }
 
+        public DateTime CreatedDate { get; set; }
+
         #endregion propreties
 
         #region Relation
+
         public virtual ICollection<FavoriteMovie> FavoriteMovies { get; set; }
-        
-        #endregion
+
+        #endregion Relation
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Entities
 {
@@ -23,6 +20,7 @@ namespace Infrastructure.Entities
         public string PathImage { get; set; }
 
         #region Relation
+
         public virtual ICollection<Director> Directors { get; set; }
         public virtual ICollection<Image> Images { get; set; }
         public virtual ICollection<ActorMovie> ActorMovies { get; set; }
@@ -33,17 +31,19 @@ namespace Infrastructure.Entities
         /// <summary>
         ///  Quality xem lại
         /// </summary>
-        
+
         public virtual ICollection<Trailer> Trailers { get; set; }
 
         [ForeignKey("Tag")]
         public Guid TagId { get; set; }
+
         public virtual Tag Tag { get; set; }
 
         [ForeignKey("Resolution")]
         public Guid ResolutionId { get; set; }
+
         public virtual Resolution Resolution { get; set; }
 
-        #endregion
+        #endregion Relation
     }
 }

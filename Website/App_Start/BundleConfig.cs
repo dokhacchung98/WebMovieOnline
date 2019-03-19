@@ -60,6 +60,8 @@ namespace Website
                     "~/Scripts/ScriptWebsite/jquery.slidey.js",
                     "~/Scripts/ScriptWebsite/jquery.dotdotdot.min.js",
                     "~/Scripts/ScriptWebsite/bootstrap.min.js"
+            bundles.Add(new StyleBundle("~/Content/manageuser").Include(
+                    "~/Content/manageuser/manager_user.css"
                 ));
 
         }
