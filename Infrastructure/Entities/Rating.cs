@@ -3,9 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Entities
 {
@@ -20,12 +17,12 @@ namespace Infrastructure.Entities
         [ForeignKey("Movie")]
         public Guid MovieId { get; set; }
         public Movie Movie { get; set; }
-
+        
         [Key]
         [Column(Order = 2)]
         [ForeignKey ("User")]
         public string UserId { get; set; }
         public ApplicationUser User { get; set; }
-        #endregion
+        #endregion Relation
     }
 }

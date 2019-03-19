@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Entities
 {
@@ -12,9 +8,11 @@ namespace Infrastructure.Entities
         public string Link { get; set; }
 
         #region Relation
+
         [ForeignKey("Movie")]
         public Guid MovieID { get; set; }
         public virtual Movie Movie { get; set; }
-        #endregion
+
+        #endregion Relation
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Infrastructure.Entities
 {
@@ -11,7 +7,9 @@ namespace Infrastructure.Entities
         public string NameResolution { get; set; }
 
         #region Relation
-        public virtual ICollection<Movie> Movies { get; set; }
-        #endregion
+
+        public virtual ICollection<MovieResolution> MovieResolutions { get; set; }
+
+        #endregion Relation
     }
 }
