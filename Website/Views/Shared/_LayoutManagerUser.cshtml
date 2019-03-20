@@ -4,7 +4,6 @@ author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,10 +11,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <!-- for-mobile-apps -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="One Movies Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
     @Styles.Render("~/Content/style-bootstrap3")
-    @Scripts.Render("~/Script/script-website")
 </head>
 
 <body>
@@ -34,7 +30,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="w3l_sign_in_register">
                 @if (Request.IsAuthenticated)
                 {
-                    @Html.Action("ViewProfile", "Account", new { userName = User.Identity.Name});
+                    @Html.Action("ViewProfile", "Account", new { userName = User.Identity.Name });
                 }
                 else
                 {
@@ -89,7 +85,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
         </div>
     </div>
-    <!-- //bootstrap-pop-up -->
+
     <!-- nav -->
     <div class="movies_nav">
         <div class="container">
@@ -188,17 +184,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </nav>
         </div>
     </div>
-    <!-- //nav -->
-    <!-- banner -->
-    <div class="container">
-        @Html.Action("SlideBarTopView", "Base")
-    </div>
-    <!-- //banner -->
-    <!-- banner-bottom -->
 
 
     @RenderBody()
 
+    <br />
     <!-- footer -->
     <div class="footer">
         <div class="container">
@@ -251,7 +241,5 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
     </div>
     <!-- //footer -->
-    @RenderSection("scripts", required: false)
-
 </body>
 </html>
