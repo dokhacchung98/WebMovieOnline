@@ -11,10 +11,14 @@ namespace Infrastructure.Entities
             Id = Guid.NewGuid();
             CreatedDate = DateTime.Now;
             IsDeleted = false;
+            Description = "";
+            Thumbnail = "";
         }
 
         [Key]
         public Guid Id { get; set; }
+        public string Description { get; set; }
+        public string Thumbnail { get; set; }
 
         public DateTime? CreatedDate { get; set; }
         public Guid? CreatedBy { get; set; }

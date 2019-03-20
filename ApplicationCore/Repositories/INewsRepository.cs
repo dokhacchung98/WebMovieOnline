@@ -10,6 +10,7 @@ namespace ApplicationCore.Repositories
 {
     public interface INewsRepository : IGenericRepository<News>
     {
-        IEnumerable<News> GetListNews();
+        /* Get number of items on list news for generate slidebar */
+        IEnumerable<News> GetListNews(int number);
     }
 }

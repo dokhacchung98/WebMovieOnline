@@ -1,18 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Infrastructure.Entities
 {
-    public class CategoryMovie
+    public class MovieResolution
     {
         #region Relation
 
         [Key]
         [Column(Order = 1)]
-        [ForeignKey("Category")]
-        public Guid CategoryId { get; set; }
-        public virtual Category Category { get; set; }
+        [ForeignKey("Resolution")]
+        public Guid ProducerId { get; set; }
+        public virtual Resolution Resolution { get; set; }
 
         [Key]
         [Column(Order = 2)]

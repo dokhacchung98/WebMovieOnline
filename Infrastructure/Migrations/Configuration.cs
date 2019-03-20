@@ -1,20 +1,37 @@
 namespace Infrastructure.Migrations
 {
+    using Infrastructure.DataContext;
+    using System;
+    using System.Data.Entity;
     using System.Data.Entity.Migrations;
+    using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<Infrastructure.DataContext.MovieDbContext>
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
-        protected override void Seed(Infrastructure.DataContext.MovieDbContext context)
+        protected override void Seed(MovieDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            AddRole(context);
+        }
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method
-            //  to avoid creating duplicate seed data.
+        private void AddRole(MovieDbContext context)
+        {
+            context.Roles.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = "Admin"
+            });
+            context.Roles.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = "User"
+            });
+            context.SaveChanges();
         }
     }
 }

@@ -1,17 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Infrastructure.Entities
 {
     public class News : BaseEntity
     {
         public string Title { get; set; }
-        public string Description { get; set; }
-        public string PathImage { get; set; }
+        public string ShortDescription { get; set; }
 
         #region Relation
-
-        public virtual ICollection<Image> Images { get; set; }
-
-        #endregion Relation
+        [ForeignKey("Movie")]
+        public Guid MovieId { get; set; }
+        public virtual Movie Movie { get; set; }
+        #endregion
     }
 }

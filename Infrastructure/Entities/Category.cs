@@ -5,7 +5,6 @@ namespace Infrastructure.Entities
     public class Category : BaseEntity
     {
         public string NameCategory { get; set; }
-        public string Description { get; set; }
 
         #region Relation
 

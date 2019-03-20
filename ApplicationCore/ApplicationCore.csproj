@@ -64,7 +64,9 @@
     <Compile Include="Repositories\RoleRepository.cs" />
     <Compile Include="Services\ApplicationUserService.cs" />
     <Compile Include="Services\IApplicationUserService.cs" />
+    <Compile Include="Services\INewsService.cs" />
     <Compile Include="Services\IRoleService.cs" />
+    <Compile Include="Services\NewsService.cs" />
     <Compile Include="Services\RoleService.cs" />
   </ItemGroup>
   <ItemGroup>

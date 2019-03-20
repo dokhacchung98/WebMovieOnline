@@ -8,7 +8,7 @@ namespace Infrastructure.Entities
 
         #region Relation
 
-        public virtual ICollection<Movie> Movies { get; set; }
+        public virtual ICollection<MovieResolution> MovieResolutions { get; set; }
 
         #endregion Relation
     }
