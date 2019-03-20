@@ -1,11 +1,12 @@
 ﻿@model Website.Models.UpdateUserViewModel
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutManagerUser.cshtml";
 }
 
 <head>
     @Styles.Render("~/Content/manageuser")
-    @Scripts.Render("~/bundles/jquery")
+    <!-- Latest compiled and minified CSS -->
+    <script type="text/javascript" src="~/Scripts/ScriptWebsite/jquery-2.1.4.min.js"></script>
 </head>
 
 <div class="container mb-4 main-container">
@@ -24,22 +25,22 @@
                 </div>
             </div>
             <div class="wizard">
-                <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical" style="margin-top: 20px">
-                    <a class="nav-link" id="v-pills-home-tab" title="FavoriteMovie">
-                        Home
-                    </a>
-                    <a class="nav-link" id="v-pills-profile-tab" title="InformationUser">
-                        Profile
-                    </a>
-                    <a class="nav-link" id="v-pills-messages-tab" title="ChangePassword">
-                        Đổi mật khẩu
-                    </a>
-                </div>
+                <ul class="nav nav-pills nav-stacked"  style="margin-top: 20px">
+                    <li class="nav-link"  title="FavoriteMovie">
+                        <a>Home</a>
+                    </li>
+                    <li class="nav-link" title="InformationUser">
+                        <a>Đổi thông tin</a>
+                    </li>
+                    <li class="nav-link" title="ChangePassword">
+                        <a>Đổi mật khẩu</a>
+                    </li>
+                </ul>
             </div>
         </div>
         <!-- Orders Table-->
         <div class="col-lg-8 pb-5 tab-content" id="v-pills-tabContent">
-             <div id="content"> </div>
+            <div id="content"> </div>
         </div>
     </div>
 </div>
