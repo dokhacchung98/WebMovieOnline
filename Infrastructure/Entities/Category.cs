@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Infrastructure.Entities
 {
     public class Category : BaseEntity
     {
         public string NameCategory { get; set; }
-        public string Description { get; set; }
 
         #region Relation
+
         public virtual ICollection<CategoryMovie> CategoryMovies { get; set; }
-        #endregion
+
+        #endregion Relation
     }
 }

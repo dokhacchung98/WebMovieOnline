@@ -84,8 +84,8 @@
     <Compile Include="Entities\Director.cs" />
     <Compile Include="Entities\FavoriteMovie.cs" />
     <Compile Include="Entities\Film.cs" />
-    <Compile Include="Entities\Image.cs" />
     <Compile Include="Entities\Movie.cs" />
+    <Compile Include="Entities\MovieResolution.cs" />
     <Compile Include="Entities\News.cs" />
     <Compile Include="Entities\Producer.cs" />
     <Compile Include="Entities\ProducerMovie.cs" />
@@ -96,13 +96,9 @@
     <Compile Include="Enums\GenderEnum.cs" />
     <Compile Include="Enums\StatusEnum.cs" />
     <Compile Include="Identity\IdentityModels.cs" />
-    <Compile Include="Migrations\201903070711383_a.cs" />
-    <Compile Include="Migrations\201903070711383_a.Designer.cs">
-      <DependentUpon>201903070711383_a.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903070728153_asda.cs" />
-    <Compile Include="Migrations\201903070728153_asda.Designer.cs">
-      <DependentUpon>201903070728153_asda.cs</DependentUpon>
+    <Compile Include="Migrations\201903191512371_ha.cs" />
+    <Compile Include="Migrations\201903191512371_ha.Designer.cs">
+      <DependentUpon>201903191512371_ha.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -112,11 +108,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903070711383_a.resx">
-      <DependentUpon>201903070711383_a.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903070728153_asda.resx">
-      <DependentUpon>201903070728153_asda.cs</DependentUpon>
+    <Folder Include="ViewModel\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201903191512371_ha.resx">
+      <DependentUpon>201903191512371_ha.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
