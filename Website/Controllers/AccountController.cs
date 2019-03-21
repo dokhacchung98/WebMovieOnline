@@ -89,6 +89,7 @@ namespace Website.Controllers
                     {
                         var user = await UserManager.FindAsync(model.Email, model.Password);
                         var roles = await UserManager.GetRolesAsync(user.Id);
+                        
 
                         if (roles != null && roles.Contains("Admin"))
                         {
@@ -159,13 +160,7 @@ namespace Website.Controllers
             return View(model);
         }
 
-        public ActionResult ViewProfile(string userName)
-        {
-            var user = _userService.GetUserFromUserName(userName);
-            var userProfile = Mapper.Map<ProfileUserViewModel>(user);
-
-            return View(userProfile);
-        }
+        
 
         protected override void Dispose(bool disposing)
         {

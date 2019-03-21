@@ -14,7 +14,7 @@ namespace Infrastructure.Entities
 
         #region Relation
         [ForeignKey("Movie")]
-        public Guid MovieId { get; set; }
+        public Guid? MovieId { get; set; }
         public virtual Movie Movie { get; set; }
         #endregion
     }

@@ -1,0 +1,9 @@
+﻿@model Website.ViewModel.ProfileUserViewModel
+@{
+    ViewBag.Title = "ViewProfile";
+    Layout = null;
+}
+
+<span class="mr-2 d-none d-lg-inline text-gray-600 small">@Model.FullName</span>
+<img class="img-profile rounded-circle" src="@Model.Avatar" style="width:40px; height:40px">
+

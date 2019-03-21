@@ -34,7 +34,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="w3l_sign_in_register">
                 @if (Request.IsAuthenticated)
                 {
-                    @Html.Action("ViewProfile", "Account", new { userName = User.Identity.Name});
+                    @Html.Action("ViewProfile", "Base", new { userName = User.Identity.Name});
                 }
                 else
                 {

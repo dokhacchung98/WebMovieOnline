@@ -1,0 +1,24 @@
+﻿@{
+    Layout = null;
+}
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+@using (Html.BeginForm("UploadImage", "BaseAdmin", FormMethod.Post, new {enctype= "multipart/form-data", @name="formupload" }))
+{
+    <div class="form-group">
+        @Html.Label("Upload Image", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBox("image", null, new { @class = "@*form-control*@", @type = "file", @id="imgBrowse" })
+        </div>
+    </div>
+
+    @*<div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input id="btn-upload" type="submit" value="Upload" class="btn btn-primary" />
+        </div>
+    </div>*@
+}
+@if (ViewBag.UploadSuccess==true)
+{
+    <br />
+    <p>Upload Success</p>
+}

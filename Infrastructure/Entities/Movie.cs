@@ -32,7 +32,7 @@ namespace Infrastructure.Entities
         public virtual ICollection<Trailer> Trailers { get; set; }
 
         [ForeignKey("Tag")]
-        public Guid TagId { get; set; }
+        public Guid? TagId { get; set; }
         public virtual Tag Tag { get; set; }   
         
         #endregion Relation

@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
+using Infrastructure.Entities;
 using Infrastructure.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Website.Models;
+using Website.ViewModel;
 
 namespace Website.Mapping
 {
@@ -14,6 +16,9 @@ namespace Website.Mapping
         {
             CreateMapFromEntitiesToViewModels();
             CreateMapFromViewModelsToEntites();
+
+            CreateMap<News, NewsViewModel>();
+            CreateMap<NewsViewModel, News>();
         }
 
         private void CreateMapFromViewModelsToEntites()
