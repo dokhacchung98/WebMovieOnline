@@ -11,5 +11,7 @@ namespace ApplicationCore.Services
         bool AddRoleToUser(string userId, string roleId);
 
         void UpdateUser(ApplicationUser user, object key);
+
+        ApplicationUser GetUserFromUserName(string userName);
     }
 }

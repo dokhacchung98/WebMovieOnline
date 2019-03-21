@@ -25,6 +25,11 @@ namespace ApplicationCore.Services
             return _repository.GetRolesByUserId(userId);
         }
 
+        public ApplicationUser GetUserFromUserName(string userName)
+        {
+            return _repository.GetUserFromUserName(userName);
+        }
+
         public void UpdateUser(ApplicationUser user, object key)
         {
             ApplicationUser currentUser = _repository.GetByID(key);

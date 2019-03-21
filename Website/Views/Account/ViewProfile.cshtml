@@ -1,0 +1,16 @@
+﻿@model Website.ViewModel.ProfileUserViewModel
+@{
+    ViewBag.Title = "ViewProfile";
+    Layout = null;
+}
+
+<head>
+    <link href="~/Content/account/viewprofile.css" type="text/css" rel="stylesheet"/>
+</head>
+<!-- Nav Item - User Information -->
+<div class="nav-item dropdown no-arrow">
+    <div>
+        <img class="img-profile rounded-circle" src="@Model.Avatar">
+        <a class="mr-2 d-none d-lg-inline text-gray-600 small fullname" href="@Url.Action("Index","Manage", new { @Id = @Model.Id})">@Model.FullName</a>
+    </div>
+</div>

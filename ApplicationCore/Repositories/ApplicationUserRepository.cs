@@ -31,5 +31,14 @@ namespace ApplicationCore.Repositories
                 .ToList();
             return roles;
         }
+
+        public ApplicationUser GetUserFromUserName(string userName)
+        {
+            var model = _dbContext.Users.Single(u => u.UserName == userName);
+            if (model == null)
+                return null;
+
+            return model;
+        }
     }
 }

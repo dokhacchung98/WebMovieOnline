@@ -11,5 +11,7 @@ namespace ApplicationCore.Repositories
         IEnumerable<IdentityRole> GetRolesByUserId(object userId);
 
         bool AddRoleToUser(string userId, string roleId);
+
+        ApplicationUser GetUserFromUserName(string userName);
     }
 }
