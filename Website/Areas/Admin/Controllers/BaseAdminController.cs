@@ -1,14 +1,24 @@
-﻿using System;
+﻿using ApplicationCore.Services;
+using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Website.ViewModel;
 
 namespace Website.Areas.Admin.Controllers
 {
     public class BaseAdminController : Controller
     {
+        private readonly IApplicationUserService _userService;
+
+        public BaseAdminController(IApplicationUserService userService)
+        {
+            _userService = userService;
+        }
+
         // GET: Admin/BaseAdmin
         public ActionResult Index()
         {
@@ -38,6 +48,14 @@ namespace Website.Areas.Admin.Controllers
                 }
             }
             return View();
+        }
+
+        public ActionResult ViewProfile(string userName)
+        {
+            var user = _userService.GetUserFromUserName(userName);
+            var userProfile = Mapper.Map<ProfileUserViewModel>(user);
+
+            return View(userProfile);
         }
     }
 }

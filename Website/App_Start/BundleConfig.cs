@@ -22,6 +22,8 @@ namespace Website
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
+            bundles.Add(new ScriptBundle("~/Script/jquery").Include(
+                      "~/Scripts/jquery-3.3.1.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jsadmin").Include(
                     "~/Scripts/Admin/sb-admin-2.js"

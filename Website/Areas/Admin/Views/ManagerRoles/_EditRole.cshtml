@@ -1,0 +1,30 @@
+﻿@model Microsoft.AspNet.Identity.EntityFramework.IdentityRole
+@{
+    ViewBag.Title = "_EditRole";
+}
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        @using (Html.BeginForm("EditRole", "ManagerRoles", FormMethod.Post))
+        {
+            <div class="modal-header">
+                <h4 class="modal-title">Thêm quyền người dùng</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.Id)
+                <div class="form-group">
+                    <label for="Name">Tên quyền</label>
+                    @Html.TextBoxFor(m => m.Name, new { id = "Name", @class = "form-control", required = "required" })
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                <input type="submit" class="btn btn-success" value="Sửa quyền người dùng">
+            </div>
+        }
+    </div>
+</div>
