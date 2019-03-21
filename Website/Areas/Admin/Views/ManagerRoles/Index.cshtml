@@ -3,57 +3,92 @@
 @{
     ViewBag.Title = "Index";
 }
-
+<head>
+    <link rel="stylesheet" href="~/Areas/Admin/Content/ManageUser/list_user.css" type="text/css" />
+</head>
 <div class="row">
-
-    <div class="col-sm-6">
-
-        <h2>@ViewBag.Title</h2>
-
-        <hr />
-
-        @Html.ActionLink("Tạo role", "Create", null, new { @class = "btn btn-primary" })
-
-        <br /><br />
-
-        <table class="table table-bordered">
-
-            <thead>
-
-                <tr>
-
-                    <th>ID</th>
-
-                    <th>Tên quyền</th>
-
-                    <th>Thao tác</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody>
-
-                @foreach (var item in Model)
-
-                {
-
+    <div class="container">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2>Quản lý <b>Quyền Người Dùng</b></h2>
+                    </div>
+                    <div class="col-sm-6">
+                        <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus"></i><span>Thêm mới quyền</span></a>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-striped table-hover">
+                <thead>
                     <tr>
-
-                        <td>@item.Id</td>
-
-                        <td>@item.Name</td>
-
-                        <td>@Html.ActionLink("Xóa", "Delete", new { id = item.Id })</td>
-
+                        <th>ID</th>
+                        <th>Tên quyền</th>
+                        <th>Thao tác</th>
                     </tr>
-
-                }
-
-            </tbody>
-
-        </table>
-
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Name</td>
+                            <td>
+                                <a class="edit" data-targeturl="@Url.Action("EditRole","ManagerRoles",new { id = item.Id })">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                <a class="delete" data-targeturl="@Url.Action("DeleteRole","ManagerRoles",new { id = item.Id })">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="clearfix">
+                <div class="hint-text">Hiện thị <b>2</b> out of <b>@Model.Count()</b> entries</div>
+                <ul class="pagination">
+                    <li class="page-item disabled"><a href="#">Previous</a></li>
+                    <li class="page-item"><a href="#" class="page-link">1</a></li>
+                    <li class="page-item"><a href="#" class="page-link">2</a></li>
+                    <li class="page-item active"><a href="#" class="page-link">3</a></li>
+                    <li class="page-item"><a href="#" class="page-link">4</a></li>
+                    <li class="page-item"><a href="#" class="page-link">5</a></li>
+                    <li class="page-item"><a href="#" class="page-link">Next</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Edit Modal HTML -->
+    <div id="addEmployeeModal" class="modal fade">
+        @Html.Action("AddRole", "ManagerRoles")
     </div>
 
+    <!-- Edit Modal HTML -->
+    <div id="editEmployeeModal" class="modal fade"></div>
+
+    <div id="deleteEmployeeModal" class="modal fade"></div>
 </div>
+
+@Scripts.Render("~/Script/jquery")
+<script>
+    $(document).ready(function () {
+        $('body').on('click', '.edit', function (e) {
+            e.preventDefault();
+            $("#editEmployeeModal").remove();
+            $.get($(this).data("targeturl"), function (data) {
+                $('<div id="editEmployeeModal" class="modal fade">' +
+                    data + '</div>').modal();
+            });
+        });
+
+        $('body').on('click', '.delete', function (e) {
+            e.preventDefault();
+            $("#deleteEmployeeModal").remove();
+            $.get($(this).data("targeturl"), function (data) {
+                $('<div id="deleteEmployeeModal" class="modal fade">' +
+                    data + '</div>').modal();
+            });
+        });
+    });
+</script>

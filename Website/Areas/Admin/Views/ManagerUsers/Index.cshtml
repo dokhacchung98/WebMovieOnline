@@ -9,17 +9,14 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 
 }
-
 <div class="row">
     <div class="col-sm-12">
-        <h2>@ViewBag.Title</h2>
-        <hr />
         <table class="table table-borderer">
-            <thead>
+            <thead class="thead-dark">
                 <tr>
                     <th>Họ tên</th>
                     <th>Email</th>
-                    <th></th>
+                    <th>Hành động</th>
                 </tr>
             </thead>
 
@@ -27,7 +24,7 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>@item.UserName</td>
+                        <td scope="row">@item.UserName</td>
                         <td>@item.Email</td>
                         <td>
                             @Html.ActionLink("Sửa thông tin", "Edit", new { Id = item.Id }, null) |

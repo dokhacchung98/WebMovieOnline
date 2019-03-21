@@ -30,7 +30,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <div class="w3l_sign_in_register">
                 @if (Request.IsAuthenticated)
                 {
-                    @Html.Action("ViewProfile", "Account", new { userName = User.Identity.Name });
+                    @Html.Action("ViewProfile", "Base", new { userName = User.Identity.Name });
                 }
                 else
                 {

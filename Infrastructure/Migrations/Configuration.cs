@@ -10,28 +10,7 @@ namespace Infrastructure.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
-            AutomaticMigrationDataLossAllowed = true;
-        }
-
-        protected override void Seed(MovieDbContext context)
-        {
-            AddRole(context);
-        }
-
-        private void AddRole(MovieDbContext context)
-        {
-            context.Roles.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole
-            {
-                Id = Guid.NewGuid().ToString(),
-                Name = "Admin"
-            });
-            context.Roles.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole
-            {
-                Id = Guid.NewGuid().ToString(),
-                Name = "User"
-            });
-            context.SaveChanges();
+            AutomaticMigrationsEnabled = false;
         }
     }
 }

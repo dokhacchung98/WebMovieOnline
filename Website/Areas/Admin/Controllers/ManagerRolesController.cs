@@ -22,14 +22,14 @@ namespace Website.Areas.Admin.Controllers
             return View(model);
         }
 
-        public ViewResult Create()
+        public ActionResult AddRole()
         {
-            return View();
+            return PartialView("_AddNewRole");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IdentityRole role)
+        public ActionResult AddRole(IdentityRole role)
         {
             try
             {
@@ -37,6 +37,56 @@ namespace Website.Areas.Admin.Controllers
                 {
                     _roleService.Create(role);
                 }
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+            }
+            return View(role);
+        }
+
+
+        public ActionResult EditRole(string id)
+        {
+            var role = _roleService.Find(id);
+            return PartialView("_EditRole", role);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditRole(IdentityRole role)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _roleService.Update(role, role.Id);
+                }
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+            }
+            return View(role);
+        }
+
+        public ActionResult DeleteRole(string id)
+        {
+            var role = _roleService.Find(id);
+            return PartialView("_DeleteRole", role);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteRole(IdentityRole role)
+        {
+            try
+            {
+                _roleService.Delete(role);
 
                 return RedirectToAction("Index");
             }

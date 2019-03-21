@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Common.GenericRepository
 {
@@ -19,6 +20,8 @@ namespace Common.GenericRepository
         bool Exist(Expression<Func<TEntity, bool>> spec = null);
 
         TEntity GetByID(object Id);
+
+        Task CreateAsyn(TEntity entity);
 
         void Insert(TEntity entity);
 
