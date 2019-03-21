@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Common.GenericRepository
 {
@@ -133,6 +134,11 @@ namespace Common.GenericRepository
         {
             Dispose(true);
             GC.SuppressFinalize(this);
+        }
+
+        public Task CreateAsyn(TEntity entity)
+        {
+            return null;
         }
     }
 }
