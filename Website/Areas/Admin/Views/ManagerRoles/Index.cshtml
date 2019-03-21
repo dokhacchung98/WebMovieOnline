@@ -3,9 +3,8 @@
 @{
     ViewBag.Title = "Index";
 }
-<head>
-    <link rel="stylesheet" href="~/Areas/Admin/Content/ManageUser/list_user.css" type="text/css" />
-</head>
+
+@Styles.Render("~/Admin/table-css")
 <div class="row">
     <div class="container">
         <div class="table-wrapper">
@@ -15,7 +14,7 @@
                         <h2>Quản lý <b>Quyền Người Dùng</b></h2>
                     </div>
                     <div class="col-sm-6">
-                        <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus"></i><span>Thêm mới quyền</span></a>
+                        <a href="#addRoleModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus"></i><span>Thêm mới quyền</span></a>
                     </div>
                 </div>
             </div>
@@ -60,14 +59,14 @@
         </div>
     </div>
     <!-- Edit Modal HTML -->
-    <div id="addEmployeeModal" class="modal fade">
+    <div id="addRoleModal" class="modal fade">
         @Html.Action("AddRole", "ManagerRoles")
     </div>
 
     <!-- Edit Modal HTML -->
-    <div id="editEmployeeModal" class="modal fade"></div>
+    <div id="editRoleModal" class="modal fade"></div>
 
-    <div id="deleteEmployeeModal" class="modal fade"></div>
+    <div id="deleteRoleModal" class="modal fade"></div>
 </div>
 
 @Scripts.Render("~/Script/jquery")
@@ -75,18 +74,18 @@
     $(document).ready(function () {
         $('body').on('click', '.edit', function (e) {
             e.preventDefault();
-            $("#editEmployeeModal").remove();
+            $("#editRoleModal").remove();
             $.get($(this).data("targeturl"), function (data) {
-                $('<div id="editEmployeeModal" class="modal fade">' +
+                $('<div id="editRoleModal" class="modal fade">' +
                     data + '</div>').modal();
             });
         });
 
         $('body').on('click', '.delete', function (e) {
             e.preventDefault();
-            $("#deleteEmployeeModal").remove();
+            $("#deleteRoleModal").remove();
             $.get($(this).data("targeturl"), function (data) {
-                $('<div id="deleteEmployeeModal" class="modal fade">' +
+                $('<div id="deleteRoleModal" class="modal fade">' +
                     data + '</div>').modal();
             });
         });
