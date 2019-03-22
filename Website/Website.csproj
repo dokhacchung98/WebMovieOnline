@@ -214,7 +214,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Content\ManageUser\edit_user.css" />
-    <Content Include="Areas\Admin\Content\ManageUser\list_user.css" />
+    <Content Include="Areas\Admin\Content\table.css" />
     <Content Include="Content\account\viewprofile.css" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -369,8 +369,8 @@
     <Content Include="Areas\Admin\Views\Shared\_Footer.cshtml" />
     <Content Include="Areas\Admin\Views\ManagerRoles\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ManagerUsers\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\ManagerUsers\EditRole.cshtml" />
-    <Content Include="Areas\Admin\Views\ManagerUsers\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerUsers\_EditRole.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerUsers\_EditUser.cshtml" />
     <Content Include="Areas\Admin\Views\ManagerNews\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ManagerNews\Create.cshtml" />
     <Content Include="Scripts\ckeditor\adapters\jquery.js" />
@@ -812,6 +812,7 @@
     <Content Include="Areas\Admin\Views\ManagerRoles\_AddNewRole.cshtml" />
     <Content Include="Areas\Admin\Views\ManagerRoles\_EditRole.cshtml" />
     <Content Include="Areas\Admin\Views\ManagerRoles\_DeleteRole.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerUsers\_DeleteUser.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />

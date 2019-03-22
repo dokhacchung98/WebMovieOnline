@@ -1,42 +1,111 @@
 ﻿@using Infrastructure.Identity
-
 @model IEnumerable<ApplicationUser>
 
 @{
-
     ViewBag.Title = "Quản lý thành viên";
-
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
-
 }
+
+@Styles.Render("~/Admin/table-css")
+
 <div class="row">
-    <div class="col-sm-12">
-        <table class="table table-borderer">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Họ tên</th>
-                    <th>Email</th>
-                    <th>Hành động</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                @foreach (var item in Model)
-                {
+    <div class="container">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2>Quản lý <b>Người Dùng</b></h2>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-striped table-hover">
+                <thead>
                     <tr>
-                        <td scope="row">@item.UserName</td>
-                        <td>@item.Email</td>
-                        <td>
-                            @Html.ActionLink("Sửa thông tin", "Edit", new { Id = item.Id }, null) |
-
-                            @Html.ActionLink("Sửa quyền", "EditRole", new { Id = item.Id }, null) |
-
-                            @Html.ActionLink("Xóa", "Delete", new { Id = item.Id }, null) |
-                            
-                        </td>
+                        <th>Ảnh đại diện</th>
+                        <th>Họ Tên</th>
+                        <th>Email</th>
+                        <th>Tên tài khoản</th>
+                        <th>Địa chỉ</th>
+                        <th>Thao tác</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <img src="@item.Avatar" style="width:50px; height:50px" />
+                            </td>
+                            <td>@item.FullName</td>
+                            <td>@item.Email</td>
+                            <td>@item.UserName</td>
+                            <td>@item.Address</td>
+                            <td class="row">
+                                <a class="edit col-md-3" data-targeturl="@Url.Action("EditUser","ManagerUsers",new { id = item.Id })">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                <a class="delete col-md-3" data-targeturl="@Url.Action("DeleteUser","ManagerUsers",new { id = item.Id })">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </a>
+                                <a class="edit-role col-md-3" data-targeturl="@Url.Action("EditRole","ManagerUsers",new { id = item.Id })">
+                                    <i class="fa fa-tools"></i>
+                                </a>
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="clearfix">
+                <div class="hint-text">Hiện thị <b>2</b> out of <b>@Model.Count()</b> entries</div>
+                <ul class="pagination">
+                    <li class="page-item disabled"><a href="#">Previous</a></li>
+                    <li class="page-item"><a href="#" class="page-link">1</a></li>
+                    <li class="page-item"><a href="#" class="page-link">2</a></li>
+                    <li class="page-item active"><a href="#" class="page-link">3</a></li>
+                    <li class="page-item"><a href="#" class="page-link">4</a></li>
+                    <li class="page-item"><a href="#" class="page-link">5</a></li>
+                    <li class="page-item"><a href="#" class="page-link">Next</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
+
+    <!-- Edit Modal HTML -->
+    <div id="editUserModal" class="modal fade"></div>
+
+    <div id="deleteUserModal" class="modal fade"></div>
+
+    <div id="EditRoleModal" class="modal fade"></div>
+
 </div>
+
+@Scripts.Render("~/Script/jquery")
+<script>
+    $(document).ready(function () {
+        $('body').on('click', '.edit', function (e) {
+            e.preventDefault();
+            $("#editUserModal").remove();
+            $.get($(this).data("targeturl"), function (data) {
+                $('<div id="editUserModal" class="modal fade">' +
+                    data + '</div>').modal();
+            });
+        });
+
+        $('body').on('click', '.delete', function (e) {
+            e.preventDefault();
+            $("#deleteUserModal").remove();
+            $.get($(this).data("targeturl"), function (data) {
+                $('<div id="deleteUserModal" class="modal fade">' +
+                    data + '</div>').modal();
+            });
+        });
+        $('body').on('click', '.edit-role', function (e) {
+            e.preventDefault();
+            $("#EditRoleModal").remove();
+            $.get($(this).data("targeturl"), function (data) {
+                $('<div id="EditRoleModal" class="modal fade">' +
+                    data + '</div>').modal();
+            });
+        });
+    });
+</script>

@@ -66,6 +66,10 @@ namespace Website
             bundles.Add(new StyleBundle("~/Content/manageuser").Include(
                     "~/Content/manageuser/manager_user.css"
                 ));
+
+            bundles.Add(new StyleBundle("~/Admin/table-css").Include(
+                "~/Areas/Admin/Content/table.css"
+                ));
             
         }
     }

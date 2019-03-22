@@ -30,16 +30,16 @@ namespace Website.Areas.Admin.Controllers
             return View(models);
         }
 
-        public ActionResult Edit(string id)
+        public ActionResult EditUser(string id)
         {
             ApplicationUser user = _userService.Find(id);
             var viewUser = Mapper.Map<UpdateUserViewModel>(user);
-            return View(viewUser);
+            return PartialView("_EditUser", viewUser);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(UpdateUserViewModel viewUser)
+        public ActionResult EditUser(UpdateUserViewModel viewUser)
         {
             var user = Mapper.Map<ApplicationUser>(viewUser);
             _userService.UpdateUser(user, user.Id);
@@ -58,24 +58,34 @@ namespace Website.Areas.Admin.Controllers
 
             ViewBag.Roles = new SelectList(roles, "Id", "Name");
 
-            return View(model);
+            return View("_EditRole", model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddToRole(string userId, string roleId)
+        public ActionResult AddToRole(string Id, string roleId)
         {
-            if (roleId != null && userId != null)
+            if (roleId != null && Id != null)
             {
-                _userService.AddRoleToUser(userId, roleId);
+                var role = _roleService.Find(roleId);
+                _userService.AddRoleToUser(Id, role.Name);
             }
 
             return RedirectToAction("Index");
         }
-        [CustomRoleAuthorize(Roles = "Admin")]
-        public ActionResult Delete(string Id)
+
+        public ActionResult DeleteUser(string id)
         {
-            var model = _userService.Find(Id);
+            ApplicationUser user = _userService.Find(id);
+            var viewUser = Mapper.Map<UpdateUserViewModel>(user);
+            return PartialView("_DeleteUser", viewUser);
+        }
+
+        [CustomRoleAuthorize(Roles = "Admin")]
+        [HttpPost]
+        public ActionResult DeleteUser(UpdateUserViewModel user)
+        {
+            var model = _userService.Find(user.Id);
             if (model != null)
             {
                 _userService.Delete(model);
