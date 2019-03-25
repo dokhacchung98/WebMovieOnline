@@ -17,6 +17,7 @@ namespace Infrastructure.Entities
 
         [Key]
         public Guid Id { get; set; }
+
         public string Description { get; set; }
         public string Thumbnail { get; set; }
 

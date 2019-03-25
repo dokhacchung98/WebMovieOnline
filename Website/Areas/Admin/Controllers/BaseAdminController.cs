@@ -1,5 +1,6 @@
 ﻿using ApplicationCore.Services;
 using AutoMapper;
+using Extension.Extensions;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -29,26 +30,7 @@ namespace Website.Areas.Admin.Controllers
         {
             return View();
         }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult UploadImage(HttpPostedFileBase image)
-        {
-            var path = "";
-            if (image!=null && image.ContentLength>0)
-            {
-                if (Path.GetExtension(image.FileName).ToLower()==".jpg"
-                    || Path.GetExtension(image.FileName).ToLower() == ".png"
-                    || Path.GetExtension(image.FileName).ToLower() == ".gif"
-                    || Path.GetExtension(image.FileName).ToLower() == ".jpeg")
-                {
-                    path = Path.Combine(Server.MapPath("~/Images/Upload"),image.FileName);
-                    image.SaveAs(path);
-                    ViewBag.UploadSuccess = true;
-                }
-            }
-            return View();
-        }
+       
 
         public ActionResult ViewProfile(string userName)
         {

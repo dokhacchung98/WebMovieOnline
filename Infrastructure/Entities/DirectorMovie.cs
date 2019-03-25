@@ -4,18 +4,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Infrastructure.Entities
 {
-    public class ActorMovie
+    public class DirectorMovie
     {
-        public string Role { get; set; }
-
         #region Relation
 
         [Key]
         [Column(Order = 1)]
-        [ForeignKey("Actor")]
-        public Guid ActorId { get; set; }
+        [ForeignKey("Director")]
+        public Guid DirectorId { get; set; }
 
-        public virtual Actor Actor { get; set; }
+        public virtual Director Director { get; set; }
 
         [Key]
         [Column(Order = 2)]

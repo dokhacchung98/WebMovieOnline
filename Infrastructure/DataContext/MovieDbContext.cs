@@ -33,5 +33,7 @@ namespace Infrastructure.DataContext
         public DbSet<ProducerMovie> ProducerMovies { get; set; }
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<Resolution> Resolutions { get; set; }
+        public DbSet<TagMovie> TagMovies { get; set; }
+        public DbSet<DirectorMovie> DirectorMovies { get; set; }
     }
 }

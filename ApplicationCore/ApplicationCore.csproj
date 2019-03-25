@@ -58,14 +58,18 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ApplicationUserRepository.cs" />
     <Compile Include="Repositories\IApplicationUserRepository.cs" />
+    <Compile Include="Repositories\IMoviesRepository.cs" />
     <Compile Include="Repositories\INewsRepository.cs" />
     <Compile Include="Repositories\IRoleRepository.cs" />
+    <Compile Include="Repositories\MoviesRepository.cs" />
     <Compile Include="Repositories\NewsRepository.cs" />
     <Compile Include="Repositories\RoleRepository.cs" />
     <Compile Include="Services\ApplicationUserService.cs" />
     <Compile Include="Services\IApplicationUserService.cs" />
+    <Compile Include="Services\IMoviesService.cs" />
     <Compile Include="Services\INewsService.cs" />
     <Compile Include="Services\IRoleService.cs" />
+    <Compile Include="Services\MoviesService.cs" />
     <Compile Include="Services\NewsService.cs" />
     <Compile Include="Services\RoleService.cs" />
   </ItemGroup>

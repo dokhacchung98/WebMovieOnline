@@ -1,4 +1,5 @@
 ﻿using Common.GenericRepository;
+using Infrastructure.DataContext;
 using Infrastructure.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,9 +9,10 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Repositories
 {
-    public interface INewsRepository : IEntityService<News>
+    public class MoviesRepository : GenericRepository<Movie>, IMoviesRepository
     {
-        /* Get number of items on list news for generate slidebar */
-        IEnumerable<News> GetListNews(int number);
+        public MoviesRepository(MovieDbContext dbContext) : base(dbContext)
+        {
+        }
     }
 }

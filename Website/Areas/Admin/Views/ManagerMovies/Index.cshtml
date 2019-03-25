@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Website.ViewModel.MoviesViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Admin/table-css")
+<div class="row">
+    <div class="container">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2>Quản lý <b>Bộ phim</b></h2>
+                    </div>
+                    <div class="col-sm-6">
+                        <a href="#addMovieModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus"></i><span>Thêm mới bộ phim</span></a>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Tên phim</th>
+                        <th>Ngày phát hành</th>
+                        <th>Độ dài phim</th>
+                        <th>Ngôn ngữ</th>
+                        <th>Quốc gia</th>
+                        <th>Độ tuổi</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Name</td>
+                            <td>@item.DatePublish</td>
+                            <td>@item.LengthTime</td>
+                            <td>@item.Language</td>
+                            <td>@item.Country</td>
+                            <td>@item.EnableAge</td>
+                            <td>
+                                <a class="edit" data-targeturl="@Url.Action("Edit","ManagerMovies",new { id = item.Id })">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                <a class="delete" data-targeturl="@Url.Action("Delete","ManagerMovies",new { id = item.Id })">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="clearfix">
+                <div class="hint-text">Hiện thị <b>2</b> out of <b>@Model.Count()</b> entries</div>
+                <ul class="pagination">
+                    <li class="page-item disabled"><a href="#">Previous</a></li>
+                    <li class="page-item"><a href="#" class="page-link">1</a></li>
+                    <li class="page-item"><a href="#" class="page-link">2</a></li>
+                    <li class="page-item active"><a href="#" class="page-link">3</a></li>
+                    <li class="page-item"><a href="#" class="page-link">4</a></li>
+                    <li class="page-item"><a href="#" class="page-link">5</a></li>
+                    <li class="page-item"><a href="#" class="page-link">Next</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Edit Modal HTML -->
+    <div id="addMovieModal" class="modal fade">
+        @Html.Action("Create", "ManagerMovies")
+    </div>
+
+    <!-- Edit Modal HTML -->
+    <div id="editRoleModal" class="modal fade"></div>
+
+    <div id="deleteRoleModal" class="modal fade"></div>
+</div>

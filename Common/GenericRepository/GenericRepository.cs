@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Common.GenericRepository
 {
-    public class GenericRepository<TEntity> : IGenericRepository<TEntity>
+    public class GenericRepository<TEntity> : IEntityService<TEntity>
         where TEntity : class
     {
         private const string ParamNull = "Entity input can't null";

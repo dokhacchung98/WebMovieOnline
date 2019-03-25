@@ -1,10 +1,6 @@
 ﻿using AutoMapper;
 using Infrastructure.Entities;
 using Infrastructure.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using Website.Models;
 using Website.ViewModel;
 
@@ -16,19 +12,20 @@ namespace Website.Mapping
         {
             CreateMapFromEntitiesToViewModels();
             CreateMapFromViewModelsToEntites();
-
-            CreateMap<News, NewsViewModel>();
-            CreateMap<NewsViewModel, News>();
         }
 
         private void CreateMapFromViewModelsToEntites()
         {
             CreateMap<UpdateUserViewModel, ApplicationUser>();
+            CreateMap<NewsViewModel, News>();
+            CreateMap<MoviesViewModel, Movie>();
         }
 
         private void CreateMapFromEntitiesToViewModels()
         {
             CreateMap<ApplicationUser, UpdateUserViewModel>();
+            CreateMap<News, NewsViewModel>();
+            CreateMap<Movie, MoviesViewModel>();
         }
     }
 }
