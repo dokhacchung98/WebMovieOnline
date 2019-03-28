@@ -3,7 +3,7 @@ using Infrastructure.Entities;
 
 namespace ApplicationCore.Repositories
 {
-    public interface IMoviesRepository : IEntityService<Movie>
+    public interface IMoviesRepository : IGenericRepository<Movie>
     {
     }
 }

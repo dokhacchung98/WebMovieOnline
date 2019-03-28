@@ -5,10 +5,12 @@
     Layout = null;
 }
 
+<script src="~/Scripts/ckeditor/ckeditor.js"></script>
+<script src="~/Scripts/ckfinder/ckfinder.js"></script>
 
 <div class="modal-dialog">
     <div class="modal-content">
-        @using (Html.BeginForm("Create", "ManagerMovies", FormMethod.Post))
+        @using (Html.BeginForm("Create", "ManagerMovies", FormMethod.Post, , new { enctype = "multipart/form-data", @name = "formupload" }))
         {
             <div class="modal-header">
                 <h4 class="modal-title">Thêm mới bộ phim</h4>
@@ -44,7 +46,7 @@
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.IsHot)
-                    @Html.EditorFor(model => model.IsHot, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.CheckBoxFor(model => model.IsHot)
                 </div>
 
                 <div class="form-group">
@@ -59,23 +61,31 @@
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.Thumbnail)
-                    @Html.EditorFor(model => model.Thumbnail, new { htmlAttributes = new { @class = "form-control" } })
+                    <input type='file' name="image" id="upload" onchange="ShowImagePreview(this)" />
                 </div>
-
+                <img id="imagePreview" style="width:100%"/>
                 <div class="form-group">
                     @Html.LabelFor(model => model.Description)
-                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.CreatedDate)
-                    @Html.EditorFor(model => model.CreatedDate, new { htmlAttributes = new { @class = "form-control" } })
+                    <textarea name="Description" id="ckeditor"></textarea>
                 </div>
             </div>
             <div class="modal-footer">
                 <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                <input type="submit" class="btn btn-success" value="Thêm quyền">
+                <input type="submit" class="btn btn-success" value="Thêm bộ phim">
             </div>
         }
     </div>
 </div>
+@Scripts.Render("~/Script/jquery")
+<script>
+    CKEDITOR.replace('ckeditor');
+    function ShowImagePreview(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#imagePreview').prop('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>

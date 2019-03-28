@@ -8,11 +8,11 @@ namespace Infrastructure.Entities
     {
         public string Name { get; set; }
         public DateTime DatePublish { get; set; }
-        public DateTime LengthTime { get; set; }
+        public int LengthTime { get; set; }
         public string Language { get; set; }
         public string Country { get; set; }
         public int CountView { get; set; }
-        public int IsHot { get; set; }
+        public Boolean IsHot { get; set; }
         public string NameEn { get; set; }
         public int EnableAge { get; set; }
 

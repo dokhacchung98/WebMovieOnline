@@ -19,6 +19,7 @@ namespace Website.Mapping
             CreateMap<UpdateUserViewModel, ApplicationUser>();
             CreateMap<NewsViewModel, News>();
             CreateMap<MoviesViewModel, Movie>();
+            CreateMap<ActorViewModel, Actor>();
         }
 
         private void CreateMapFromEntitiesToViewModels()
@@ -26,6 +27,7 @@ namespace Website.Mapping
             CreateMap<ApplicationUser, UpdateUserViewModel>();
             CreateMap<News, NewsViewModel>();
             CreateMap<Movie, MoviesViewModel>();
+            CreateMap<Actor, ActorViewModel>();
         }
     }
 }

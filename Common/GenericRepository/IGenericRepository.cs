@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Common.GenericRepository
 {
-    public interface IEntityService<TEntity> where TEntity : class
+    public interface IGenericRepository<TEntity> where TEntity : class
     {
         IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,

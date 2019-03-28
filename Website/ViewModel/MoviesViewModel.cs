@@ -15,8 +15,7 @@ namespace Website.ViewModel
         public DateTime DatePublish { get; set; }
 
         [DisplayName("Độ dài phim")]
-        [DataType(DataType.Time)]
-        public DateTime LengthTime { get; set; }
+        public int LengthTime { get; set; }
 
         [DisplayName("Ngôn ngữ")]
         public string Language { get; set; }
@@ -25,7 +24,7 @@ namespace Website.ViewModel
         public string Country { get; set; }
         
         [DisplayName("Phim hot")]
-        public int IsHot { get; set; }
+        public Boolean IsHot { get; set; }
 
         [DisplayName("Tên tiếng Anh")]
         public string NameEn { get; set; }

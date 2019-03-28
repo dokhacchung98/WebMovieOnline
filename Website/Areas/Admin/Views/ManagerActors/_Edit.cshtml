@@ -1,0 +1,71 @@
+﻿@model Website.ViewModel.ActorViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/ckeditor/ckeditor.js"></script>
+<script src="~/Scripts/ckfinder/ckfinder.js"></script>
+<head>
+    <style>
+        .label {
+            display: inline-block;
+            margin-bottom: .5rem;
+            font-weight: bold;
+            font-size: 19px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row" style="line-height:40px">
+            @using (Html.BeginForm("Edit", "ManagerActors", FormMethod.Post, new { enctype = "multipart/form-data", @name = "formupload" }))
+            {
+                <div class="form-horizontal">
+
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NameActor, new { @class = "label" })
+                        <span style="color:red">(*)</span>
+                        @Html.EditorFor(model => model.NameActor, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Thumbnail, new { @class = "label" })
+                        <span style="color:red">(*)</span>
+                        <br />
+                        <input type='file' name="image" id="upload" onchange="ShowImagePreview(this)" />
+                    </div>
+                    <img id="imagePreview" style="width:100%" src="@Model.Thumbnail" />
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Description, new { @class = "label" })
+                        <span style="color:red">(*)</span>
+                        @Html.TextAreaFor(model => model.Description, new { @id = "ckeditor" })
+                        <script type="text/javascript">
+                            CKEDITOR.replace("ckeditor");
+                        </script>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    Lưu thông tin
+                </button>
+                <a class="btn btn-outline-danger" href="@Url.Action("Index")">
+                    Hủy
+                </a>
+            }
+        </div>
+    </div>
+</body>
+@Scripts.Render("~/Script/jquery")
+<script>
+    function ShowImagePreview(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#imagePreview').prop('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>

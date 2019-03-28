@@ -14,13 +14,13 @@ namespace Common.Service
 
         private const string ParamNull = "Entity input cant null";
 
-        private readonly GenericRepository.IEntityService<TEntity> _repository;
+        private readonly GenericRepository.IGenericRepository<TEntity> _repository;
 
         #endregion properties
 
         #region constructor
 
-        public EntityService(GenericRepository.IEntityService<TEntity> repository)
+        public EntityService(GenericRepository.IGenericRepository<TEntity> repository)
         {
             _repository = repository;
         }

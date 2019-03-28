@@ -56,6 +56,7 @@ namespace Website.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Create([Bind(Include = "Name,DatePublish,LengthTime,Language,Country,IsHot,NameEn,EnableAge,Thumbnail,Description,CreatedDate")] MoviesViewModel moviesViewModel)
         {
             if (ModelState.IsValid)
