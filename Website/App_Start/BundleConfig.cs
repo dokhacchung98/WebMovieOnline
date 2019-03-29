@@ -26,7 +26,8 @@ namespace Website
                       "~/Scripts/jquery-3.3.1.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jsadmin").Include(
-                    "~/Scripts/Admin/sb-admin-2.js"
+                    "~/Scripts/Admin/sb-admin-2.js",
+                    "~/Scripts/jquery.unobtrusive-ajax.js"
                     ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
@@ -35,7 +36,8 @@ namespace Website
                       "~/Content/fontawesome/all.css"));
             bundles.Add(new StyleBundle("~/Content/admincss").Include(
                     "~/Content/sb-admin-2.min.css",
-                      "~/Content/fontawesome/all.css"
+                      "~/Content/fontawesome/all.css",
+                      "~/Content/PagedList.css"
                 ));
             bundles.Add(new StyleBundle("~/Content/unauthorized").Include(
                     "~/Content/unauthorized/unauthorized.css"

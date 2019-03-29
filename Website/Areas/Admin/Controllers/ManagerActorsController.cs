@@ -3,9 +3,11 @@ using AutoMapper;
 using Common.Utils;
 using Extension.Extensions;
 using Infrastructure.Entities;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -18,23 +20,29 @@ namespace Website.Areas.Admin.Controllers
     public class ManagerActorsController : Controller
     {
         private readonly IActorsService _actorsService;
+        private IList<ActorViewModel> _listActorViewModel;
 
         public ManagerActorsController(IActorsService actorsService)
         {
             _actorsService = actorsService;
+
+            var actors = _actorsService.GetAll();
+            if (actors != null)
+            {
+                var actorViewModels = Mapper.Map<IEnumerable<ActorViewModel>>(actors);
+
+                _listActorViewModel = actorViewModels.ToList();
+            }
+
         }
 
         public ActionResult Index()
         {
-            var actors = _actorsService.GetAll();
-            if (actors == null)
+            if (_listActorViewModel == null)
             {
                 return View();
             }
-
-            var actorViewModels = Mapper.Map<IEnumerable<ActorViewModel>>(actors);
-
-            return View(actorViewModels);
+            return View(_listActorViewModel);
         }
 
         public ActionResult Details(Guid? id)
@@ -69,7 +77,7 @@ namespace Website.Areas.Admin.Controllers
                 actorViewModel.Id = Guid.NewGuid();
 
                 Actor actor = Mapper.Map<Actor>(actorViewModel);
-                if(image != null)
+                if (image != null)
                 {
                     if (CheckImageUploadExtension.CheckImagePath(image.FileName) == true)
                     {
@@ -137,6 +145,15 @@ namespace Website.Areas.Admin.Controllers
             _actorsService.Delete(actor);
 
             return RedirectToAction("Index");
+        }
+
+        public PartialViewResult GetPaging(int? page)
+        {
+            // Number item in page
+            int pageSize = 3;
+            
+            int pageNumber = (page ?? 1);
+            return PartialView("_PartialViewActor", _listActorViewModel.ToPagedList(pageNumber, pageSize));
         }
     }
 }
