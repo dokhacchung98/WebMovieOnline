@@ -111,7 +111,9 @@ namespace Website.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 Actor actor = Mapper.Map<Actor>(actorViewModel);
-                if (CheckImageUploadExtension.CheckImagePath(image.FileName) == true)
+                if (image != null && 
+                    image.FileName != null &&
+                    CheckImageUploadExtension.CheckImagePath(image.FileName) == true)
                 {
                     var path = Path.Combine(Server.MapPath("~/Images/Upload"), image.FileName);
                     image.SaveAs(path);
@@ -149,11 +151,9 @@ namespace Website.Areas.Admin.Controllers
 
         public PartialViewResult GetPaging(int? page)
         {
-            // Number item in page
-            int pageSize = 3;
-            
             int pageNumber = (page ?? 1);
-            return PartialView("_PartialViewActor", _listActorViewModel.ToPagedList(pageNumber, pageSize));
+            return PartialView("_PartialViewActor", _listActorViewModel
+                .ToPagedList(pageNumber, VariableUtils.pageSize));
         }
     }
 }

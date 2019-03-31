@@ -9,5 +9,6 @@ namespace Common.Utils
     public static class VariableUtils
     {
         public static string UrlUpLoadImage = "/Images/Upload/";
+        public static int pageSize = 3;
     }
 }
