@@ -61,7 +61,7 @@ table.table tr th, table.table tr td {
 }
 
     table.table tr th:first-child {
-        width: 60px;
+        width: 200px;
     }
 
     table.table tr th:last-child {
@@ -231,6 +231,7 @@ table.table .avatar {
 
 .modal .modal-content {
     border-radius: 3px;
+    width: 650px;
 }
 
 .modal .modal-footer {

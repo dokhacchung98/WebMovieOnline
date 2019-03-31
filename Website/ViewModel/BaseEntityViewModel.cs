@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Extension.Extensions;
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -10,7 +11,7 @@ namespace Website.ViewModels
         public BaseEntityViewModel()
         {
             Id = Guid.NewGuid();
-            CreatedDate = DateTime.Now;
+            CreatedDate = GetCurrentDateExtension.GetCurrentTime();
             Thumbnail = "";
             Description = "";
         }
