@@ -20,6 +20,7 @@ namespace Website.Mapping
             CreateMap<NewsViewModel, News>();
             CreateMap<MoviesViewModel, Movie>();
             CreateMap<ActorViewModel, Actor>();
+            CreateMap<DirectorViewModel, Director>();
         }
 
         private void CreateMapFromEntitiesToViewModels()
@@ -28,6 +29,7 @@ namespace Website.Mapping
             CreateMap<News, NewsViewModel>();
             CreateMap<Movie, MoviesViewModel>();
             CreateMap<Actor, ActorViewModel>();
+            CreateMap<Director, DirectorViewModel>();
         }
     }
 }
