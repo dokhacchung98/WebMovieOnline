@@ -1,0 +1,25 @@
+﻿@model Website.ViewModel.ActorViewModel
+
+
+@{
+    ViewBag.Title = "_Search";
+    Layout = null;
+}
+
+@using (Html.BeginForm("GetPagingSearching", "ManagerActors", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-xs-6 col-md-4">
+            <div class="input-group">
+                @Html.TextBoxFor(model => model.NameActor, new { @class = "form-control bg-light border-0 small", @placeholder = "Tìm kiếm"})
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fas fa-search fa-sm"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+}
