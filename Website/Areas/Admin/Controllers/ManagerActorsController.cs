@@ -11,6 +11,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using Website.Configuaration;
 using Website.ViewModel;
 
@@ -25,24 +26,22 @@ namespace Website.Areas.Admin.Controllers
         public ManagerActorsController(IActorsService actorsService)
         {
             _actorsService = actorsService;
-
-            var actors = _actorsService.GetAll();
-            if (actors != null)
-            {
-                var actorViewModels = Mapper.Map<IEnumerable<ActorViewModel>>(actors);
-
-                _listActorViewModel = actorViewModels.ToList();
-            }
-
         }
 
         public ActionResult Index()
         {
-            if (_listActorViewModel == null)
+            var listActors = TempData["listActors"];
+            if (listActors == null)
             {
-                return View();
+                var actors = _actorsService.GetAll();
+                if (actors != null)
+                {
+                    var actorViewModels = Mapper.Map<IEnumerable<ActorViewModel>>(actors);
+
+                    listActors = actorViewModels.ToList();
+                }
             }
-            return View(_listActorViewModel);
+            return View(listActors);
         }
 
         public ActionResult Details(Guid? id)
@@ -149,11 +148,32 @@ namespace Website.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        public PartialViewResult GetPaging(int? page)
+        public PartialViewResult GetPagingSearching(IList<ActorViewModel> listView, int? page)
         {
             int pageNumber = (page ?? 1);
-            return PartialView("_PartialViewActor", _listActorViewModel
+            return PartialView("_PartialViewActor", listView
                 .ToPagedList(pageNumber, VariableUtils.pageSize));
+        }
+
+        public ActionResult Search()
+        {
+            return PartialView("_Search");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult GetPagingSearching(ActorViewModel actor, int? page)
+        {
+            int pageNumber = (page ?? 1);
+            if (actor != null && actor.NameActor != null)
+            {
+                var listSearching = this._actorsService.SearchActorByName(actor.NameActor);
+                var actorViewModels = Mapper.Map<IEnumerable<ActorViewModel>>(listSearching);
+
+                this._listActorViewModel = actorViewModels.ToList();
+                TempData["listActors"] = this._listActorViewModel;
+            }
+            return RedirectToAction("Index");
         }
     }
 }

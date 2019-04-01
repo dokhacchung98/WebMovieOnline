@@ -17,5 +17,10 @@ namespace ApplicationCore.Services
         {
             _repository = repository;
         }
+
+        public ICollection<Actor> SearchActorByName(string actorName)
+        {
+            return this._repository.SearchActorByName(actorName);
+        }
     }
 }

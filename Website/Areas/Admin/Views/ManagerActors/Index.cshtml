@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div id="customer_area">
-                @{Html.RenderAction("GetPaging", "ManagerActors", new { page = 1 });}
+                @{Html.RenderAction("GetPagingSearching", "ManagerActors", new { page = 1 , listView = Model});}
             </div>
         </div>
     </div>

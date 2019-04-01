@@ -1297,6 +1297,7 @@
     <Content Include="Scripts\ckfinder\plugins\fileeditor\codemirror\LICENSE" />
     <Content Include="Scripts\ckfinder\userfiles\.htaccess" />
     <Content Include="Areas\Admin\Views\ManagerActors\_PartialViewActor.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerActors\_Search.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />

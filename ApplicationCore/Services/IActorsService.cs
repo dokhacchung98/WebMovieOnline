@@ -10,5 +10,6 @@ namespace ApplicationCore.Services
 {
     public interface IActorsService: IEntityService<Actor>
     {
+        ICollection<Actor> SearchActorByName(string actorName);
     }
 }
