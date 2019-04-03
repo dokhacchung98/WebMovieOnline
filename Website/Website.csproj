@@ -203,6 +203,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ManagerCategorysController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManagerDirectorsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManagerActorsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManagerMoviesController.cs" />
@@ -226,6 +227,7 @@
     <Compile Include="Modules\ServiceModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModel\CategorysViewModel.cs" />
     <Compile Include="ViewModel\DirectorViewModel.cs" />
     <Compile Include="ViewModel\ActorViewModel.cs" />
     <Compile Include="ViewModel\BaseEntityViewModel.cs" />
@@ -1304,6 +1306,11 @@
     <Content Include="Areas\Admin\Views\ManagerDirectors\_CreateDirector.cshtml" />
     <Content Include="Areas\Admin\Views\ManagerDirectors\_EditDirector.cshtml" />
     <Content Include="Areas\Admin\Views\ManagerDirectors\_DeleteDirector.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerCategorys\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerCategorys\_CreateCategorys.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerCategorys\_DeleteCategorys.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerCategorys\_EditCategorys.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerCategorys\_PartialViewCategorys.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
