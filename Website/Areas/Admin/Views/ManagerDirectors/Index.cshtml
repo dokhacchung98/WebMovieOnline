@@ -3,10 +3,16 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    AjaxOptions options = new AjaxOptions
+    {
+        UpdateTargetId = "searchResult",
+        Confirm = "Are you sure to start search?",
+        InsertionMode = InsertionMode.Replace,
+        LoadingElementId = "divLoading"
+    };
 }
 
 @Styles.Render("~/Admin/table-css")
-
 
 <div class="row">
     <div class="container">
@@ -21,6 +27,24 @@
                     </div>
                 </div>
             </div>
+
+            <div class="input-group">
+                <input type="text" class="form-control bg-light border-0 small" placeholder="Tìm kiếm..." aria-label="Search" id="keyword" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" id="btnSeach" type="button">
+                        <i class="fas fa-search fa-sm"></i>
+                    </button>
+                </div>
+            </div>
+
+            <script type="text/javascript">
+                function search() {
+                    var s = $('#keyword').val();
+                    var url = "/ManagerDirectors/Index?name=" + s;
+                    window.location = url;
+                };
+            </script>
+
             <div id="customer_area">
                 @{Html.RenderAction("GetPaging", "ManagerDirectors", new { page = 1 });}
             </div>
@@ -44,6 +68,18 @@
                 $('<div id="addDirectorModal" class="modal fade">' +
                     data + '</div>').modal();
             });
+        });
+
+        $('body').on('click', '#btnSeach', function (e) {
+            e.preventDefault();
+            var name = $('#keyword').val();
+            if (name.trim() != null && name.trim().length != 0 && name.trim() != null) {
+                var url = "/Admin/ManagerDirectors?name=" + name;
+                window.location = url;
+            } else {
+                var url = "/Admin/ManagerDirectors";
+                window.location = url;
+            }
         });
     });
 </script>

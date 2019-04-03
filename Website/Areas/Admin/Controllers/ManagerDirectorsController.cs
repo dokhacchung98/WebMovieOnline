@@ -35,8 +35,16 @@ namespace Website.Areas.Admin.Controllers
             }
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string name)
         {
+            if (name == null)
+            {
+                Session["PageList"] = null;
+            }
+            else
+            {
+                Session["PageList"] = name;
+            }
             if (_listDirectorViewModel == null)
             {
                 return View();
@@ -164,7 +172,21 @@ namespace Website.Areas.Admin.Controllers
             int pageSize = 5;
 
             int pageNumber = (page ?? 1);
+
+
+            if (Session["PageList"] != null)
+            {
+                var name = Session["PageList"].ToString();
+                var listSearch = _directorService.Search(name);
+                var listSearchModel = AutoMapper.Mapper.Map<IEnumerable<DirectorViewModel>>(listSearch);
+                return PartialView("_PartialViewDirector", listSearchModel.ToPagedList(pageNumber, pageSize));
+            }
+
+
+
             return PartialView("_PartialViewDirector", _listDirectorViewModel.ToPagedList(pageNumber, pageSize));
         }
+
+
     }
 }

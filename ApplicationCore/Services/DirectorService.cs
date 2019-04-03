@@ -17,5 +17,10 @@ namespace ApplicationCore.Services
         {
             _repository = repository;
         }
+
+        public IEnumerable<Director> Search(string keywork)
+        {
+            return _repository.Search(keywork);
+        }
     }
 }
