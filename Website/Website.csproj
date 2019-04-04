@@ -208,6 +208,7 @@
     <Compile Include="Areas\Admin\Controllers\ManagerMoviesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManagerNewsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManagerRolesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ManagerTagController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManagerUsersController.cs" />
     <Compile Include="Configuaration\CustomRoleAuthorize.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -232,6 +233,7 @@
     <Compile Include="ViewModel\MoviesViewModel.cs" />
     <Compile Include="ViewModel\NewsViewModel.cs" />
     <Compile Include="ViewModel\ProfileUserViewModel.cs" />
+    <Compile Include="ViewModel\TagViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Content\ManageUser\edit_user.css" />
@@ -1304,6 +1306,11 @@
     <Content Include="Areas\Admin\Views\ManagerDirectors\_CreateDirector.cshtml" />
     <Content Include="Areas\Admin\Views\ManagerDirectors\_EditDirector.cshtml" />
     <Content Include="Areas\Admin\Views\ManagerDirectors\_DeleteDirector.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerTag\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerTag\_PartialViewTag.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerTag\_CreateTag.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerTag\_EditTag.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerTag\_DeleteTag.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />

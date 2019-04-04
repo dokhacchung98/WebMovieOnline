@@ -1,4 +1,4 @@
-﻿using Common.GenericRepository;
+﻿using Common.Service;
 using Infrastructure.Entities;
 using System;
 using System.Collections.Generic;
@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApplicationCore.Repositories
+namespace ApplicationCore.Services
 {
-    public interface IDirectorRepository : ITagRepository<Director>
+    public interface ITagService: IEntityService<Tag>
     {
     }
 }

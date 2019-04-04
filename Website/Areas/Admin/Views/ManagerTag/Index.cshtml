@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Website.ViewModel.TagViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Admin/table-css")
+
+
+<div class="row">
+    <div class="container">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2>Quản lý <b> thẻ </b></h2>
+                    </div>
+                    <div class="col-sm-6">
+                        <a href="#addTagModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus"></i><span>Thêm mới thẻ</span></a>
+                    </div>
+                </div>
+            </div>
+            <div id="customer_area">
+                @{Html.RenderAction("GetPaging", "ManagerTag", new { page = 1 });}
+            </div>
+        </div>
+    </div>
+    <!-- Edit Modal HTML -->
+    <div id="addActorModal" class="modal fade">
+        @Html.Action("Create", "ManagerTag")
+    </div>
+
+    <div id="deleteActorModal" class="modal fade"></div>
+</div>
+
+@Scripts.Render("~/Script/jquery")
+<script>
+    $(document).ready(function () {
+        $('body').on('click', '.delete', function (e) {
+            e.preventDefault();
+            $("#deleteTagModal").remove();
+            $.get($(this).data("targeturl"), function (data) {
+                $('<div id="deleteTagModal" class="modal fade">' +
+                    data + '</div>').modal();
+            });
+        });
+    });
+</script>

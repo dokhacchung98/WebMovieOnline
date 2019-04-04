@@ -65,9 +65,11 @@
     <Compile Include="Repositories\IMoviesRepository.cs" />
     <Compile Include="Repositories\INewsRepository.cs" />
     <Compile Include="Repositories\IRoleRepository.cs" />
+    <Compile Include="Repositories\ITagRepository.cs" />
     <Compile Include="Repositories\MoviesRepository.cs" />
     <Compile Include="Repositories\NewsRepository.cs" />
     <Compile Include="Repositories\RoleRepository.cs" />
+    <Compile Include="Repositories\TagRepository.cs" />
     <Compile Include="Services\ActorsService.cs" />
     <Compile Include="Services\ApplicationUserService.cs" />
     <Compile Include="Services\DirectorService.cs" />
@@ -77,9 +79,11 @@
     <Compile Include="Services\IMoviesService.cs" />
     <Compile Include="Services\INewsService.cs" />
     <Compile Include="Services\IRoleService.cs" />
+    <Compile Include="Services\ITagService.cs" />
     <Compile Include="Services\MoviesService.cs" />
     <Compile Include="Services\NewsService.cs" />
     <Compile Include="Services\RoleService.cs" />
+    <Compile Include="Services\TagService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">

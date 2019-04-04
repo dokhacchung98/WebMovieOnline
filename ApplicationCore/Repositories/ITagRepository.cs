@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Repositories
 {
-    public interface IDirectorRepository : ITagRepository<Director>
+    public interface ITagRepository : ITagRepository<Tag>
     {
     }
 }

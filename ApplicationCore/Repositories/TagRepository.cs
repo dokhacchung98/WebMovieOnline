@@ -1,4 +1,5 @@
 ﻿using Common.GenericRepository;
+using Infrastructure.DataContext;
 using Infrastructure.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,10 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Repositories
 {
-    public interface IDirectorRepository : ITagRepository<Director>
+    public class TagRepository : GenericRepository<Tag>, ITagRepository
     {
+        public TagRepository(MovieDbContext dbContext) : base(dbContext)
+        {
+        }
     }
 }
