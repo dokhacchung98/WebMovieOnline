@@ -5,23 +5,79 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<script src="~/Scripts/ckeditor/ckeditor.js"></script>
-<script src="~/Scripts/ckfinder/ckfinder.js"></script>
 <head>
     <style>
         .label {
             display: inline-block;
-            margin-bottom: .5rem;
+            margin-bottom: 0;
             font-weight: bold;
-            font-size: 19px;
+            font-size: 14px;
+        }
+        }
+
+        .upload-avatar {
+            cursor: pointer;
+            margin-top: 50%;
+            margin-left: 10px;
         }
     </style>
+    @Styles.Render("~/Content/manageuser")
+    <script src="~/Scripts/ckeditor/ckeditor.js"></script>
+    <script src="~/Scripts/ckfinder/ckfinder.js"></script>
 </head>
 <body>
-    <div class="container">
-        <div class="row" style="line-height:40px">
-            @using (Html.BeginForm("Edit", "ManagerActors", FormMethod.Post, new { enctype = "multipart/form-data", @name = "formupload" }))
-            {
+    <div class="container mb-4 main-container">
+        @using (Html.BeginForm("Edit", "ManagerActors",
+                    FormMethod.Post, new
+                    {
+                        enctype = "multipart/form-data",
+                        @name = "formupload"
+                    }))
+        {
+        <div class="row">
+            <div class="col-lg-4 pb-5" style="height:100%">
+                <div class="author-card pb-3">
+                    @if (@Model.Thumbnail != null)
+                    {
+                        <div id="avatar" class="author-card-cover" 
+                             style="background-image: url(@Model.Thumbnail);height: 200px;">
+                        </div>
+                    }
+                    else
+                    {
+                        <div id="avatar" class="author-card-cover" 
+                             style="background-image: url(/Images/default-avatar.png);height: 200px;">
+                        </div>
+                    }
+
+                    <div class="author-card-profile">
+                        <div class="author-card-avatar" style="width:100px; height:100px">
+                            @if (@Model.Thumbnail != null)
+                            {
+                                <img class="img-profile rounded-circle avatar"
+                                        src="@Model.Thumbnail" style="width:100%; height:100%" />
+                            }
+                            else
+                            {
+                                <img class="img-profile rounded-circle avatar"
+                                        src="~/Images/default-avatar.png" style="width:100%; height:100%" />
+                            }
+                        </div>
+                        <label for="uploadFile" style="cursor: pointer" class="upload-avatar">
+                            Thay đổi
+                            <i class="fas fa-upload"></i>
+                        </label>
+                        <input id="uploadFile"
+                                type="file"
+                                name="image"
+                                style="display: none;"
+                                onchange="ShowImagePreview(this)">
+
+                    </div>
+                </div>
+            </div>
+            <!-- Orders Table-->
+            <div class="col-lg-8 pb-5 tab-content" id="v-pills-tabContent">
                 <div class="form-horizontal">
 
                     @Html.AntiForgeryToken()
@@ -31,13 +87,7 @@
                         <span style="color:red">(*)</span>
                         @Html.EditorFor(model => model.NameActor, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Thumbnail, new { @class = "label" })
-                        <span style="color:red">(*)</span>
-                        <br />
-                        <input type='file' name="image" id="upload" onchange="ShowImagePreview(this)" />
-                    </div>
-                    <img id="imagePreview" style="width:100%" src="@Model.Thumbnail" />
+                    
                     <div class="form-group">
                         @Html.LabelFor(model => model.Description, new { @class = "label" })
                         <span style="color:red">(*)</span>
@@ -53,8 +103,9 @@
                 <a class="btn btn-outline-danger" href="@Url.Action("Index")">
                     Hủy
                 </a>
-            }
+            </div>
         </div>
+        }
     </div>
 </body>
 @Scripts.Render("~/Script/jquery")
@@ -63,7 +114,7 @@
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function (e) {
-                $('#imagePreview').prop('src', e.target.result);
+                $('.img-profile.rounded-circle.avatar').prop('src', e.target.result);
             };
             reader.readAsDataURL(input.files[0]);
         }

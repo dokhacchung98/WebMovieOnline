@@ -21,27 +21,37 @@ namespace Website.Areas.Admin.Controllers
     public class ManagerActorsController : Controller
     {
         private readonly IActorsService _actorsService;
-        private IList<ActorViewModel> _listActorViewModel;
+
+        private IList<ActorViewModel> _listActorViewModels;
 
         public ManagerActorsController(IActorsService actorsService)
         {
             _actorsService = actorsService;
+
+            var actors = _actorsService.GetAll();
+            if (actors != null)
+            {
+                var actorViewModels = Mapper.Map<IEnumerable<ActorViewModel>>(actors);
+
+                _listActorViewModels = actorViewModels.ToList();
+            }
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string name)
         {
-            var listActors = TempData["listActors"];
-            if (listActors == null)
+            if (name == null)
             {
-                var actors = _actorsService.GetAll();
-                if (actors != null)
-                {
-                    var actorViewModels = Mapper.Map<IEnumerable<ActorViewModel>>(actors);
-
-                    listActors = actorViewModels.ToList();
-                }
+                Session["KeyWordSearch"] = null;
             }
-            return View(listActors);
+            else
+            {
+                Session["KeyWordSearch"] = name;
+            }
+            if (_listActorViewModels == null)
+            {
+                return View();
+            }
+            return View(_listActorViewModels);
         }
 
         public ActionResult Details(Guid? id)
@@ -147,33 +157,23 @@ namespace Website.Areas.Admin.Controllers
 
             return RedirectToAction("Index");
         }
-
-        public PartialViewResult GetPagingSearching(IList<ActorViewModel> listView, int? page)
+        
+        public ActionResult GetPageSearch(int? page)
         {
+            int pageSize = VariableUtils.pageSize;
+
             int pageNumber = (page ?? 1);
-            return PartialView("_PartialViewActor", listView
-                .ToPagedList(pageNumber, VariableUtils.pageSize));
-        }
 
-        public ActionResult Search()
-        {
-            return PartialView("_Search");
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult GetPagingSearching(ActorViewModel actor, int? page)
-        {
-            int pageNumber = (page ?? 1);
-            if (actor != null && actor.NameActor != null)
+            if (Session["KeyWordSearch"] != null)
             {
-                var listSearching = this._actorsService.SearchActorByName(actor.NameActor);
-                var actorViewModels = Mapper.Map<IEnumerable<ActorViewModel>>(listSearching);
-
-                this._listActorViewModel = actorViewModels.ToList();
-                TempData["listActors"] = this._listActorViewModel;
+                var name = Session["KeyWordSearch"].ToString();
+                var listSearch = _actorsService.SearchActorByName(name);
+                var listSearchModel = AutoMapper.Mapper.Map<IEnumerable<ActorViewModel>>(listSearch);
+                return PartialView("_PartialViewActor", listSearchModel.ToPagedList(pageNumber, pageSize));
             }
-            return RedirectToAction("Index");
+
+            return PartialView("_PartialViewActor", 
+                _listActorViewModels.ToPagedList(pageNumber, pageSize));
         }
     }
 }
