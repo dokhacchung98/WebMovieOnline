@@ -13,7 +13,6 @@
             font-weight: bold;
             font-size: 14px;
         }
-        }
 
         .upload-avatar {
             cursor: pointer;
@@ -35,23 +34,10 @@
                     }))
         {
         <div class="row">
-            <div class="col-lg-4 pb-5" style="height:100%">
+            <div class="col-lg-4 pb-5" style="height:100%; box-shadow: none; padding-top: 50px;">
                 <div class="author-card pb-3">
-                    @if (@Model.Thumbnail != null)
-                    {
-                        <div id="avatar" class="author-card-cover" 
-                             style="background-image: url(@Model.Thumbnail);height: 200px;">
-                        </div>
-                    }
-                    else
-                    {
-                        <div id="avatar" class="author-card-cover" 
-                             style="background-image: url(/Images/default-avatar.png);height: 200px;">
-                        </div>
-                    }
-
                     <div class="author-card-profile">
-                        <div class="author-card-avatar" style="width:100px; height:100px">
+                        <div class="author-card-avatar" style="width:100px; height:100px; ">
                             @if (@Model.Thumbnail != null)
                             {
                                 <img class="img-profile rounded-circle avatar"
