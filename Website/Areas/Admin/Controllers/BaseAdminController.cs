@@ -30,14 +30,14 @@ namespace Website.Areas.Admin.Controllers
         {
             return View();
         }
-       
 
+        [HttpGet]
         public ActionResult ViewProfile(string userName)
         {
             var user = _userService.GetUserFromUserName(userName);
             var userProfile = Mapper.Map<ProfileUserViewModel>(user);
 
-            return View(userProfile);
+            return PartialView(userProfile);
         }
     }
 }
