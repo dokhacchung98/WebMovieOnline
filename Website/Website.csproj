@@ -207,6 +207,7 @@
     <Compile Include="Areas\Admin\Controllers\ManagerActorsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManagerMoviesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManagerNewsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ManagerProducerController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManagerRolesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManagerUsersController.cs" />
     <Compile Include="Configuaration\CustomRoleAuthorize.cs" />
@@ -231,6 +232,7 @@
     <Compile Include="ViewModel\BaseEntityViewModel.cs" />
     <Compile Include="ViewModel\MoviesViewModel.cs" />
     <Compile Include="ViewModel\NewsViewModel.cs" />
+    <Compile Include="ViewModel\ProducerViewModel.cs" />
     <Compile Include="ViewModel\ProfileUserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1305,6 +1307,11 @@
     <Content Include="Areas\Admin\Views\ManagerDirectors\_CreateDirector.cshtml" />
     <Content Include="Areas\Admin\Views\ManagerDirectors\_EditDirector.cshtml" />
     <Content Include="Areas\Admin\Views\ManagerDirectors\_DeleteDirector.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerProducer\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerProducer\_CreateProducer.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerProducer\_DeleteProducer.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerProducer\_EditProducer.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerProducer\_PartialViewProducer.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
