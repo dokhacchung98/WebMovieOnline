@@ -285,6 +285,7 @@
     <Content Include="Content\webfonts\fa-regular-400.svg" />
     <Content Include="Content\webfonts\fa-solid-900.svg" />
     <Content Include="Images\cc.jpg" />
+    <Content Include="Images\default-avatar.png" />
     <Content Include="Scripts\ckfinder\changelog.txt" />
     <Content Include="Scripts\ckfinder\ckfinder.html" />
     <Content Include="Scripts\ckfinder\ckfinder.js" />

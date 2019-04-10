@@ -35,8 +35,16 @@ namespace Website.Areas.Admin.Controllers
             }
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string name)
         {
+            if (name == null)
+            {
+                Session["KeyWordSearch"] = null;
+            }
+            else
+            {
+                Session["KeyWordSearch"] = name;
+            }
             if (_listProducerViewModel == null)
             {
                 return View();
@@ -166,6 +174,21 @@ namespace Website.Areas.Admin.Controllers
 
             int pageNumber = (page ?? 1);
             return PartialView("_PartialViewProducer", _listProducerViewModel.ToPagedList(pageNumber, pageSize));
+        }
+        public ActionResult GetPageSearch(int? page)
+        {
+            int pageSize = VariableUtils.pageSize;
+            int pageNumber = (page ?? 1);
+            if (Session["KeyWordSearch"] != null)
+            {
+                var name = Session["KeyWordSearch"].ToString();
+                var listSearch = _producerService.SearchProducerByName(name);
+                var listSearchModel = AutoMapper.Mapper.Map<IEnumerable<ProducerViewModel>>(listSearch);
+                return PartialView("_PartialViewProducer", listSearchModel.ToPagedList(pageNumber, pageSize));
+            }
+
+            return PartialView("_PartialViewProducer",
+                _listProducerViewModel.ToPagedList(pageNumber, pageSize));
         }
     }
 }

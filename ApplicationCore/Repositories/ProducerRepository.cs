@@ -14,5 +14,13 @@ namespace ApplicationCore.Repositories
         public ProducerRepository(MovieDbContext dbContext) : base(dbContext)
         {
         }
+
+        public ICollection<Producer> SearchProducerByName(string producerName)
+        {
+            IQueryable<Producer> list = this._dbContext.Producers
+                                        .Where(actor => actor.NameProducer.Contains(producerName));
+
+            return list.ToList();
+        }
     }
 }

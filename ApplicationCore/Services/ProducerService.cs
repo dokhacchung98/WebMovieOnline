@@ -17,5 +17,10 @@ namespace ApplicationCore.Services
         {
             _repository = repository;
         }
+
+        public ICollection<Producer> SearchProducerByName(string producerName)
+        {
+            return _repository.SearchProducerByName(producerName);
+        }
     }
 }

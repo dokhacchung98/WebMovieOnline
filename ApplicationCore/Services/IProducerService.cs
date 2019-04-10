@@ -10,5 +10,6 @@ namespace ApplicationCore.Services
 {
     public interface IProducerService: IEntityService<Producer>
     {
+        ICollection<Producer> SearchProducerByName(string ProducerName);
     }
 }

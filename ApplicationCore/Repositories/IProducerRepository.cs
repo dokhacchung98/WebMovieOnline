@@ -10,5 +10,7 @@ namespace ApplicationCore.Repositories
 {
     public interface IProducerRepository: IGenericRepository<Producer>
     {
+        ICollection<Producer> SearchProducerByName(string producerName);
+
     }
 }
