@@ -17,7 +17,7 @@ using Website.ViewModel;
 namespace Website.Areas.Admin.Controllers
 {
     [CustomRoleAuthorize(Roles = "Admin")]
-    public class ManagerDirectorsController : Controller
+    public class ManagerDirectorsController : Controller    
     {
         private readonly IDirectorService _directorService;
         private IList<DirectorViewModel> _listDirectorViewModel;
@@ -85,7 +85,7 @@ namespace Website.Areas.Admin.Controllers
                         director.Thumbnail = VariableUtils.UrlUpLoadImage + image.FileName;
                     }
                 }
-                _directorService.Create(director);
+                _directorService.Create(director);  
 
                 return RedirectToAction("Index");
             }
