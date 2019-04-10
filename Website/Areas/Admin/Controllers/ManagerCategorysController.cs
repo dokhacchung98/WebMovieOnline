@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Routing;
 using System.Web.Mvc;
 using Website.ViewModel;
 
@@ -30,9 +31,21 @@ namespace Website.Areas.Admin.Controllers
             }
         }
         // GET: Admin/ManagerCategorys
-        public ActionResult Index()
+        public ActionResult Index(string name)
         {
-            if (_listCategorysViewModel == null) return View();
+
+            if (name == null)
+            {
+                Session["KeyWordSearch"] = null;
+            }
+            else
+            {
+                Session["KeyWordSearch"] = name;
+            }
+            if (_listCategorysViewModel == null)
+            {
+                return View();
+            }
             return View(_listCategorysViewModel);
         }
         public ActionResult Details (Guid? id)
@@ -65,7 +78,7 @@ namespace Website.Areas.Admin.Controllers
                 {
                     if (CheckImageUploadExtension.CheckImagePath(image.FileName) == true)
                     {
-                        var path = Path.Combine(Server.MapPath("~Image/Upload"), image.FileName);
+                        var path = Path.Combine(Server.MapPath("~/Images/Upload"), image.FileName);
                         image.SaveAs(path);
                         category.Thumbnail = VariableUtils.UrlUpLoadImage + image.FileName;
                     }
@@ -99,7 +112,7 @@ namespace Website.Areas.Admin.Controllers
                 {
                     if (CheckImageUploadExtension.CheckImagePath(image.FileName) == true)
                     {
-                        var path = Path.Combine(Server.MapPath("~/Image/Upload"), image.FileName);
+                        var path = Path.Combine(Server.MapPath("~/Images/Upload"), image.FileName);
                         image.SaveAs(path);
                         category.Thumbnail = VariableUtils.UrlUpLoadImage + image.FileName;
                     }
@@ -140,6 +153,23 @@ namespace Website.Areas.Admin.Controllers
             int pageSize = 5;
             int pageNumber = (page ?? 1);
             return PartialView("_PartialViewCategorys", _listCategorysViewModel.ToPagedList(pageNumber, pageSize));
+        }
+        public ActionResult GetPageSearch(int? page)
+        {
+            int pageSize = VariableUtils.pageSize;
+
+            int pageNumber = (page ?? 1);
+
+            if (Session["KeyWordSearch"] != null)
+            {
+                var name = Session["KeyWordSearch"].ToString();
+                var listSearch = _categorysService.SearchCategoryByName(name);
+                var listSearchModel = AutoMapper.Mapper.Map<IEnumerable<CategorysViewModel>>(listSearch);
+                return PartialView("_PartialViewCategorys", listSearchModel.ToPagedList(pageNumber, pageSize));
+            }
+
+            return PartialView("_PartialViewCategorys",
+                _listCategorysViewModel.ToPagedList(pageNumber, pageSize));
         }
     }
 }

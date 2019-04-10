@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Services
 {
-    public interface IActorsService: IEntityService<Actor>
+    public interface IProducerService: IEntityService<Producer>
     {
-        ICollection<Actor> SearchActorByName(string actorName);
+        ICollection<Producer> SearchProducerByName(string ProducerName);
     }
 }

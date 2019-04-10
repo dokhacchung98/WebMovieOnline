@@ -1,6 +1,6 @@
-﻿@model IEnumerable<Website.ViewModel.ActorViewModel>
+﻿@model IEnumerable<Website.ViewModel.ProducerViewModel>
 
-@{  
+@{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 
     AjaxOptions options = new AjaxOptions
@@ -21,19 +21,17 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-9">
-                        <h2>Quản lý <b>Diễn viên</b></h2>
+                        <h2>Quản lý <b>Nhà sản xuất</b></h2>
                     </div>
                     <div class="col-sm-3">
-                        <a href="#addActorModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus"></i><span>Thêm mới diễn viên</span></a>
+                        <a href="#addProducerModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus"></i><span>Thêm mới nhà sản xuất</span></a>
                     </div>
                 </div>
             </div>
             <div class="input-group">
-                <input type="text" class="form-control bg-light border-0 small" 
-                       placeholder="Tìm kiếm..." aria-label="Search" 
-                       id="keyword" aria-describedby="basic-addon2"
-
-                >
+                <input type="text" class="form-control bg-light border-0 small"
+                       placeholder="Tìm kiếm..." aria-label="Search"
+                       id="keyword" aria-describedby="basic-addon2">
                 <div class="input-group-append">
                     <button class="btn btn-primary" id="btnSeach" type="button">
                         <i class="fas fa-search fa-sm"></i>
@@ -42,16 +40,16 @@
             </div>
 
             <div id="customer_area">
-                @{Html.RenderAction("GetPageSearch", "ManagerActors", new { page = 1 });}
+                @{Html.RenderAction("GetPageSearch", "ManagerProducer", new { page = 1 });}
             </div>
         </div>
     </div>
     <!-- Edit Modal HTML -->
-    <div id="addActorModal" class="modal fade">
-        @Html.Action("Create", "ManagerActors")
+    <div id="addProducerModal" class="modal fade">
+        @Html.Action("Create", "ManagerProducer")
     </div>
 
-    <div id="deleteActorModal" class="modal fade"></div>
+    <div id="deleteProducerModal" class="modal fade"></div>
 </div>
 
 @Scripts.Render("~/Script/jquery")
@@ -59,9 +57,9 @@
     $(document).ready(function () {
         $('body').on('click', '.delete', function (e) {
             e.preventDefault();
-            $("#deleteActorModal").remove();
+            $("#deleteProducerModal").remove();
             $.get($(this).data("targeturl"), function (data) {
-                $('<div id="deleteActorModal" class="modal fade">' +
+                $('<div id="deleteProducerModal" class="modal fade">' +
                     data + '</div>').modal();
             });
         });
@@ -71,10 +69,10 @@
         e.preventDefault();
         var name = $('#keyword').val();
         if (name.trim() != null && name.trim().length != 0 && name.trim() != null) {
-            var url = "/Admin/ManagerActors?name=" + name;
+            var url = "/Admin/ManagerProducer?name=" + name;
             window.location = url;
         } else {
-            var url = "/Admin/ManagerActors";
+            var url = "/Admin/ManagerProducer";
             window.location = url;
         }
     });
@@ -83,8 +81,8 @@
 <script type="text/javascript">
     function search() {
         var s = $('#keyword').val();
-        var url = "/ManagerActors/Index?name=" + s;
+        var url = "/ManagerProducer/Index?name=" + s;
         window.location = url;
     };
-    
+
 </script>

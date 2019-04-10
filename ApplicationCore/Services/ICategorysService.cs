@@ -10,5 +10,6 @@ namespace ApplicationCore.Services
 {
     public interface ICategorysService: IEntityService<Category>
     {
+        ICollection<Category> SearchCategoryByName(string nameCategory);
     }
 }

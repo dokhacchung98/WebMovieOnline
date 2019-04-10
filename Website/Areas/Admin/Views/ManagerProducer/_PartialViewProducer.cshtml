@@ -1,11 +1,11 @@
-﻿@model PagedList.IPagedList<Website.ViewModel.CategorysViewModel>
+﻿@model PagedList.IPagedList<Website.ViewModel.ProducerViewModel>
 
 @using PagedList.Mvc
 
 <table class="table table-striped table-hover">
     <thead>
         <tr>
-            <th>Tên thể loại</th>
+            <th>Tên nhà sản xuất</th>
             <th>Hình ảnh</th>
             <th>Ngày tạo</th>
             <th>Thao tác</th>
@@ -15,7 +15,7 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.NameCategory</td>
+                <td>@item.NameProducer</td>
                 <td>
                     @if (item.Thumbnail != null)
                     {
@@ -30,10 +30,10 @@
                 </td>
                 <td>@item.CreatedDate</td>
                 <td>
-                    <a class="edit" href="@Url.Action("Edit", "ManagerCategorys", new { id = item.Id })">
+                    <a class="edit" href="@Url.Action("Edit", "ManagerProducer", new { id = item.Id })">
                         <i class="fa fa-edit"></i>
                     </a>
-                    <a class="delete" data-targeturl="@Url.Action("Delete", "ManagerCategorys", new { id = item.Id })">
+                    <a class="delete" data-targeturl="@Url.Action("Delete", "ManagerProducer", new { id = item.Id })">
                         <i class="fa fa-trash" aria-hidden="true"></i>
                     </a>
                 </td>
@@ -55,7 +55,7 @@
         }
     </div>
     <div class="col-md-3">
-        @Html.PagedListPager(Model, page => Url.Action("GetPageSearch", "ManagerCategorys", new { page }),
+        @Html.PagedListPager(Model, page => Url.Action("GetPageSearch", "ManagerProducer", new { page }),
      PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() {
          HttpMethod = "GET", UpdateTargetId = "customer_area"}))
     </div>

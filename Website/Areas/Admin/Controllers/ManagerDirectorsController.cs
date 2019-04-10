@@ -164,7 +164,8 @@ namespace Website.Areas.Admin.Controllers
             int pageSize = 5;
 
             int pageNumber = (page ?? 1);
-            return PartialView("_PartialViewDirector", _listDirectorViewModel.ToPagedList(pageNumber, pageSize));
+            return PartialView("_PartialViewDirector", _listDirectorViewModel
+                .ToPagedList(pageNumber, pageSize));
         }
     }
 }

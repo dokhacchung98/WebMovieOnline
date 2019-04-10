@@ -14,5 +14,11 @@ namespace ApplicationCore.Repositories
         public CategorysRepository(MovieDbContext dbContext) : base(dbContext)
         {
         }
+
+        public ICollection<Category> SearchCategoryByName(string nameCategory)
+        {
+            return _dbContext.Categories.Where(t => t.NameCategory.Contains(nameCategory)).ToList();
+            //return from Category in _dbContext.Categories where Category.NameCategory.Contains(nameCategory) select Category.NameCategory;
+        }
     }
 }
