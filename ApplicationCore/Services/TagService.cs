@@ -17,5 +17,10 @@ namespace ApplicationCore.Services
         {
             _repository = repository;
         }
+
+        public ICollection<Tag> SearchTagByName(string nameTag)
+        {
+            return _repository.SearchTagByName(nameTag);
+        }
     }
 }

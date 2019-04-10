@@ -14,5 +14,10 @@ namespace ApplicationCore.Repositories
         public TagRepository(MovieDbContext dbContext) : base(dbContext)
         {
         }
+
+        public ICollection<Tag> SearchTagByName(string nameTag)
+        {
+            return _dbContext.Tags.Where(t => t.NameTag.Contains(nameTag)).ToList();
+        }
     }
 }

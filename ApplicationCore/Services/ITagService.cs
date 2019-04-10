@@ -10,5 +10,6 @@ namespace ApplicationCore.Services
 {
     public interface ITagService: IEntityService<Tag>
     {
+        ICollection<Tag> SearchTagByName(string nameTag);
     }
 }

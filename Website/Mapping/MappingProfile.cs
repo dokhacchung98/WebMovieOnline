@@ -22,6 +22,8 @@ namespace Website.Mapping
             CreateMap<ActorViewModel, Actor>();
             CreateMap<DirectorViewModel, Director>();
             CreateMap<TagViewModel, Tag>();
+            CreateMap<CategorysViewModel, Category>();
+            CreateMap<ProducerViewModel, Producer>();
         }
 
         private void CreateMapFromEntitiesToViewModels()
@@ -32,6 +34,8 @@ namespace Website.Mapping
             CreateMap<Actor, ActorViewModel>();
             CreateMap<Director, DirectorViewModel>();
             CreateMap<Tag, TagViewModel>();
+            CreateMap<Category, CategorysViewModel>();
+            CreateMap<Producer, ProducerViewModel>();
         }
     }
 }

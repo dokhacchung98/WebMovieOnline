@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Repositories
 {
-    public interface IDirectorRepository : IGenericRepository<Director>
+    public interface ICategorysRepository : IGenericRepository<Category>
     {
+        ICollection<Category> SearchCategoryByName(string nameCategory);
     }
+    
 }

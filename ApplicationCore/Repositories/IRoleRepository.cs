@@ -3,7 +3,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ApplicationCore.Repositories
 {
-    public interface IRoleRepository : ITagRepository<IdentityRole>
+    public interface IRoleRepository : IGenericRepository<IdentityRole>
     {
         string GetRoleNameByRoleId(string id);
     }

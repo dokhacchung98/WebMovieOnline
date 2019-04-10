@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Repositories
 {
-    public interface IDirectorRepository : IGenericRepository<Director>
+    public interface IProducerRepository: IGenericRepository<Producer>
     {
+        ICollection<Producer> SearchProducerByName(string producerName);
+
     }
 }

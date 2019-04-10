@@ -34,10 +34,21 @@ namespace Website.Areas.Admin.Controllers
 
 
         // GET: Admin/ManagerTag
-        public ActionResult Index()
+        public ActionResult Index(string name)
         {
-            if (_listTagViewModel == null) return View();
-            else return View(_listTagViewModel);
+            if (name == null)
+            {
+                Session["KeyWordSearch"] = null;
+            }
+            else
+            {
+                Session["KeyWordSearch"] = name;
+            }
+            if (_listTagViewModel == null)
+            {
+                return View();
+            }
+            return View(_listTagViewModel);
         }
 
         public ActionResult Details (Guid? id)
@@ -56,21 +67,12 @@ namespace Website.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Create (TagViewModel tagViewModel, HttpPostedFileBase image)
+        public ActionResult Create (TagViewModel tagViewModel)
         {
             if (ModelState.IsValid)
             {
                 tagViewModel.Id = Guid.NewGuid();
                 Tag tag = Mapper.Map<Tag>(tagViewModel);
-                if (image != null)
-                {
-                    if (CheckImageUploadExtension.CheckImagePath(image.FileName) == true)
-                    {
-                        var path = Path.Combine(Server.MapPath("~/Images/Upload"), image.FileName);
-                        image.SaveAs(path);
-                        tag.Thumbnail = VariableUtils.UrlUpLoadImage + image.FileName;
-                    }
-                }               
                 _tagService.Create(tag);
                 return RedirectToAction("Index");
             }
@@ -87,27 +89,9 @@ namespace Website.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Edit (TagViewModel tagViewModel, HttpPostedFileBase image)
+        public ActionResult Edit (TagViewModel tagViewModel)
         {
-            Tag oldTag = _tagService.Find(tagViewModel.Id);
-            if (oldTag == null) return HttpNotFound();
             Tag tag = Mapper.Map<Tag>(tagViewModel);
-            if (image != null)
-            {
-                if (CheckImageUploadExtension.CheckImagePath(image.FileName) == true)
-                {
-                    var path = Path.Combine(Server.MapPath("~/Images/Upload"), image.FileName);
-                    image.SaveAs(path);
-                    tag.Thumbnail = VariableUtils.UrlUpLoadImage + image.FileName;
-                }
-            }
-            else
-            {
-                if (oldTag.Thumbnail != null)
-                {
-                    tag.Thumbnail = oldTag.Thumbnail;
-                }
-            }
             _tagService.Update(tag, tag.Id);
             return RedirectToAction("Index");
         }
@@ -135,6 +119,24 @@ namespace Website.Areas.Admin.Controllers
 
             int pageNumber = (page ?? 1);
             return PartialView("_PartialViewTag", _listTagViewModel.ToPagedList(pageNumber, pageSize));
+        }
+
+        public ActionResult GetPageSearch(int? page)
+        {
+            int pageSize = VariableUtils.pageSize;
+
+            int pageNumber = (page ?? 1);
+
+            if (Session["KeyWordSearch"] != null)
+            {
+                var name = Session["KeyWordSearch"].ToString();
+                var listSearch = _tagService.SearchTagByName(name);
+                var listSearchModel = AutoMapper.Mapper.Map<IEnumerable<TagViewModel>>(listSearch);
+                return PartialView("_PartialViewTag", listSearchModel.ToPagedList(pageNumber, pageSize));
+            }
+
+            return PartialView("_PartialViewTag",
+                _listTagViewModel.ToPagedList(pageNumber, pageSize));
         }
     }
 

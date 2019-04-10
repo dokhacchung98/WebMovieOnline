@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace ApplicationCore.Repositories
 {
-    public interface IApplicationUserRepository : ITagRepository<ApplicationUser>
+    public interface IApplicationUserRepository : IGenericRepository<ApplicationUser>
     {
         IEnumerable<IdentityRole> GetRolesByUserId(object userId);
 

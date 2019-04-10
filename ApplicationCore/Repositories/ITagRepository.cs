@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Repositories
 {
-    public interface ITagRepository : ITagRepository<Tag>
+    public interface ITagRepository : IGenericRepository<Tag>
     {
+        ICollection<Tag> SearchTagByName(string nameTag);
     }
 }

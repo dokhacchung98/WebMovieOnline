@@ -10,17 +10,17 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Services
 {
-    public class ActorsService : EntityService<Actor>, IActorsService
+    public class ProducerService : EntityService<Producer>, IProducerService
     {
-        private readonly IActorRepository _repository;
-        public ActorsService(IActorRepository repository) : base(repository)
+        private readonly IProducerRepository _repository;
+        public ProducerService(IProducerRepository repository) : base(repository)
         {
             _repository = repository;
         }
 
-        public ICollection<Actor> SearchActorByName(string actorName)
+        public ICollection<Producer> SearchProducerByName(string producerName)
         {
-            return this._repository.SearchActorByName(actorName);
+            return _repository.SearchProducerByName(producerName);
         }
     }
 }
