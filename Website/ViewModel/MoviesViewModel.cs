@@ -7,6 +7,18 @@ namespace Website.ViewModel
 {
     public class MoviesViewModel : BaseEntityViewModel
     {
+        public MoviesViewModel() : base()
+        {
+            if (DatePublish == null)
+            {
+                DatePublish = DateTime.Now;
+            }
+            IsHot = false;
+
+            if (Language == null)
+                Language = "En";
+        }
+
         [DisplayName("Tên phim")]
         public string Name { get; set; }
 
@@ -31,5 +43,13 @@ namespace Website.ViewModel
 
         [DisplayName("Độ tuổi cho phép")]
         public int EnableAge { get; set; }
+
+        [DisplayName("Lượt xem")]
+        public int CountView { get; set; }
+
+        [DisplayName("Số Tập")]
+        public int Episodes { get; set; }
+
+        public Boolean IsSeriesMovie { get; set; }
     }
 }
