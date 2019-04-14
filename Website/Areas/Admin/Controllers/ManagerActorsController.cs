@@ -11,6 +11,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using Website.Configuaration;
 using Website.ViewModel;
 
@@ -20,7 +21,8 @@ namespace Website.Areas.Admin.Controllers
     public class ManagerActorsController : Controller
     {
         private readonly IActorsService _actorsService;
-        private IList<ActorViewModel> _listActorViewModel;
+
+        private IList<ActorViewModel> _listActorViewModels;
 
         public ManagerActorsController(IActorsService actorsService)
         {
@@ -31,18 +33,25 @@ namespace Website.Areas.Admin.Controllers
             {
                 var actorViewModels = Mapper.Map<IEnumerable<ActorViewModel>>(actors);
 
-                _listActorViewModel = actorViewModels.ToList();
+                _listActorViewModels = actorViewModels.ToList();
             }
-
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string name)
         {
-            if (_listActorViewModel == null)
+            if (name == null)
+            {
+                Session["KeyWordSearch"] = null;
+            }
+            else
+            {
+                Session["KeyWordSearch"] = name;
+            }
+            if (_listActorViewModels == null)
             {
                 return View();
             }
-            return View(_listActorViewModel);
+            return View(_listActorViewModels);
         }
 
         public ActionResult Details(Guid? id)
@@ -111,7 +120,9 @@ namespace Website.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 Actor actor = Mapper.Map<Actor>(actorViewModel);
-                if (CheckImageUploadExtension.CheckImagePath(image.FileName) == true)
+                if (image != null && 
+                    image.FileName != null &&
+                    CheckImageUploadExtension.CheckImagePath(image.FileName) == true)
                 {
                     var path = Path.Combine(Server.MapPath("~/Images/Upload"), image.FileName);
                     image.SaveAs(path);
@@ -146,14 +157,23 @@ namespace Website.Areas.Admin.Controllers
 
             return RedirectToAction("Index");
         }
-
-        public PartialViewResult GetPaging(int? page)
+        
+        public ActionResult GetPageSearch(int? page)
         {
-            // Number item in page
-            int pageSize = 3;
-            
+            int pageSize = VariableUtils.pageSize;
+
             int pageNumber = (page ?? 1);
-            return PartialView("_PartialViewActor", _listActorViewModel.ToPagedList(pageNumber, pageSize));
+
+            if (Session["KeyWordSearch"] != null)
+            {
+                var name = Session["KeyWordSearch"].ToString();
+                var listSearch = _actorsService.SearchActorByName(name);
+                var listSearchModel = AutoMapper.Mapper.Map<IEnumerable<ActorViewModel>>(listSearch);
+                return PartialView("_PartialViewActor", listSearchModel.ToPagedList(pageNumber, pageSize));
+            }
+
+            return PartialView("_PartialViewActor", 
+                _listActorViewModels.ToPagedList(pageNumber, pageSize));
         }
     }
 }

@@ -33,7 +33,7 @@ namespace Website.Controllers
             var user = _userService.GetUserFromUserName(userName);
             var userProfile = Mapper.Map<ProfileUserViewModel>(user);
 
-            return View(userProfile);
+            return PartialView(userProfile);
         }
     }
 }

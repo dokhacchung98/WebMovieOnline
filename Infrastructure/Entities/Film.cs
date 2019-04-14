@@ -5,7 +5,7 @@ namespace Infrastructure.Entities
 {
     public class Film : BaseEntity
     {
-        public string NameFilm { get; set; }
+        public int Episodes { get; set; }
         public string Link { get; set; }
 
         #region Relation

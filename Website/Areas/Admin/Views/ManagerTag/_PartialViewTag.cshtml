@@ -1,0 +1,49 @@
+﻿@model PagedList.IPagedList<Website.ViewModel.TagViewModel>
+
+@using PagedList.Mvc
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Tên thẻ</th>
+            <th>Ngày tạo</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.NameTag</td>
+                <td>@item.CreatedDate</td>
+                <td>
+                    <a class="edit" href="@Url.Action("Edit", "ManagerTag", new { id = item.Id })">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <a class="delete" data-targeturl="@Url.Action("Delete", "ManagerTag", new { id = item.Id })">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+
+<div class="clearfix row">
+    <div class="col-md-9">
+        @if (Model.Count() > 0)
+        {
+            <div class="hint-text">Trang <b>@(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)</b> / <b>@Model.PageCount</b></div>
+        }
+        else
+        {
+            <div class="hint-text">Không có dữ liệu</div>
+        }
+    </div>
+    <div class="col-md-3">
+        @Html.PagedListPager(Model, page => Url.Action("GetPageSearch", "ManagerTag", new { page }),
+     PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() {
+         HttpMethod = "GET", UpdateTargetId = "customer_area"}))
+    </div>
+</div>
