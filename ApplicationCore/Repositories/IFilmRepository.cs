@@ -10,5 +10,6 @@ namespace ApplicationCore.Repositories
 {
     public interface IFilmRepository : IGenericRepository<Film>
     {
+        Film GetFilmByIdMovie(Guid IdMovie);
     }
 }

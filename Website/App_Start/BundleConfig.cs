@@ -23,7 +23,7 @@ namespace Website
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
             bundles.Add(new ScriptBundle("~/Script/jquery").Include(
-                      "~/Scripts/jquery-3.3.1.min.js"));
+                      ));
 
             bundles.Add(new ScriptBundle("~/bundles/jsadmin").Include(
                     "~/Scripts/Admin/sb-admin-2.js",
@@ -72,7 +72,18 @@ namespace Website
             bundles.Add(new StyleBundle("~/Admin/table-css").Include(
                 "~/Areas/Admin/Content/table.css"
                 ));
-            
+
+
+            bundles.Add(new StyleBundle("~/Content/select2").Include(
+                "~/Content/css/select2.min.css",
+                "~/Content/css/selectmystyle.css"
+                ));
+
+            bundles.Add(new ScriptBundle("~/Script/select2").Include(
+                    "~/Scripts/select2.min.js"
+                ));
+
+
         }
     }
 }

@@ -1,0 +1,117 @@
+﻿@model Website.ViewModel.FeatureFilmViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = null;
+    var producers = ViewBag.Producers as IEnumerable<Infrastructure.Entities.Producer>;
+}
+
+<script src="~/Scripts/ckeditor/ckeditor.js"></script>
+<script src="~/Scripts/ckfinder/ckfinder.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $(".Country").select2({
+            placeholder: "Nhà sản xuất",
+            theme: "classic",
+            ajax: {
+                url: "/Admin/ManagerFeatureFilm/GetProducerList",
+                dataType: "json",
+                data: function (params) {
+                    return {
+                        searchTerm: params.term
+                    };
+                },
+                processResults: function (data, params) {
+                    return {
+                        results: data
+                    };
+                }
+            }
+        });
+    });
+</script>
+<div class="modal-dialog">
+    <div class="modal-content">
+        @using (Html.BeginForm("Create", "ManagerFeatureFilm", FormMethod.Post, new { enctype = "multipart/form-data", @name = "formupload" }))
+        {
+            <div class="modal-header">
+                <h4 class="modal-title">Thêm mới <b>Phim Lẻ</b></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MoviesViewModel.Name)
+                    <span style="color:red">(*)</span>
+                    @Html.EditorFor(model => model.MoviesViewModel.Name, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MoviesViewModel.NameEn)
+                    <span style="color:red">(*)</span>
+                    @Html.EditorFor(model => model.MoviesViewModel.NameEn, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MoviesViewModel.Thumbnail)
+                    <span style="color:red">(*)</span>
+                    <input type='file' name="image" id="upload" onchange="ShowImagePreview(this)" />
+                </div>
+                <img id="imagePreview" style="width:30%" class="img-thumbnail mb-2" />
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FilmViewModel.Link)
+                    <span style="color:red">(*)</span>
+                    @Html.EditorFor(model => model.FilmViewModel.Link, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MoviesViewModel.DatePublish)
+                    <span style="color:red">(*)</span>
+                    @Html.EditorFor(model => model.MoviesViewModel.DatePublish, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MoviesViewModel.LengthTime)
+                    @Html.EditorFor(model => model.MoviesViewModel.LengthTime, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MoviesViewModel.Language)
+                    @Html.EditorFor(model => model.MoviesViewModel.Language, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MoviesViewModel.Country)
+                    @Html.EditorFor(model => model.MoviesViewModel.Country, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="form-group">
+                    <label>Nhà sản xuất</label>
+                    <br />
+                    <select class="Country form-control"></select>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MoviesViewModel.IsHot, new { @class = "mr-2" })
+                    @Html.CheckBoxFor(model => model.MoviesViewModel.IsHot)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MoviesViewModel.Description)
+                    <span style="color:red">(*)</span>
+                    @Html.TextAreaFor(model => model.MoviesViewModel.Description, new { id = "ckeditor" });
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                <input type="submit" class="btn btn-success" value="Thêm mới">
+            </div>
+        }
+    </div>
+</div>
+<script>
+    CKEDITOR.replace('ckeditor');
+    function ShowImagePreview(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#imagePreview').prop('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>

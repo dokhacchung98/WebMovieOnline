@@ -4,33 +4,44 @@
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-
 @Styles.Render("~/Admin/table-css")
+
 
 <div class="row">
     <div class="container">
         <div class="table-wrapper">
             <div class="table-title">
                 <div class="row">
-                    <div class="col-sm-6">
-                        <h2>Quản lý <b>Đạo diễn</b></h2>
+                    <div class="col-sm-9">
+                        <h2>Quản lý <b>Phim Lẻ</b></h2>
                     </div>
-                    <div class="col-sm-6">
-                        <a href="#addDirectorModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus"></i><span>Thêm mới đạo diễn</span></a>
+                    <div class="col-sm-3">
+                        <a href="#addActorModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus"></i><span>Thêm mới</span></a>
                     </div>
                 </div>
             </div>
+            <div class="input-group">
+                <input type="text" class="form-control bg-light border-0 small"
+                       placeholder="Tìm kiếm..." aria-label="Search"
+                       id="keyword" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" id="btnSeach" type="button">
+                        <i class="fas fa-search fa-sm"></i>
+                    </button>
+                </div>
+            </div>
+
             <div id="customer_area">
-                @{Html.RenderAction("GetPaging", "ManagerDirectors", new { page = 1 });}
+                @{Html.RenderAction("GetPageSearch", "ManagerFeatureFilm", new { page = 1 });}
             </div>
         </div>
     </div>
     <!-- Edit Modal HTML -->
-    <div id="addDirectorModal" class="modal fade">
-        @Html.Action("Create", "ManagerDirectors")
+    <div id="addActorModal" class="modal fade">
+        @Html.Action("Create", "ManagerFeatureFilm")
     </div>
 
-    <div id="deleteActorModal" class="modal fade"></div>
+    <div id="deleteFilmModal" class="modal fade"></div>
 </div>
 
 @Scripts.Render("~/Script/jquery")
@@ -38,11 +49,32 @@
     $(document).ready(function () {
         $('body').on('click', '.delete', function (e) {
             e.preventDefault();
-            $("#addDirectorModal").remove();
+            $("#deleteFilmModal").remove();
             $.get($(this).data("targeturl"), function (data) {
-                $('<div id="addDirectorModal" class="modal fade">' +
+                $('<div id="deleteFilmModal" class="modal fade">' +
                     data + '</div>').modal();
             });
         });
     });
+
+    $('body').on('click', '#btnSeach', function (e) {
+        e.preventDefault();
+        var name = $('#keyword').val();
+        if (name.trim() != null && name.trim().length != 0 && name.trim() != null) {
+            var url = "/Admin/ManagerFeatureFilm?name=" + name;
+            window.location = url;
+        } else {
+            var url = "/Admin/ManagerFeatureFilm";
+            window.location = url;
+        }
+    });
+</script>
+
+<script type="text/javascript">
+    function search() {
+        var s = $('#keyword').val();
+        var url = "/ManagerFeatureFilm/Index?name=" + s;
+        window.location = url;
+    };
+
 </script>

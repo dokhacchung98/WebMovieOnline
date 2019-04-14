@@ -14,9 +14,6 @@ namespace Website.ViewModel
                 DatePublish = DateTime.Now;
             }
             IsHot = false;
-
-            if (Language == null)
-                Language = "En";
         }
 
         [DisplayName("Tên phim")]
@@ -24,6 +21,7 @@ namespace Website.ViewModel
 
         [DisplayName("Ngày chiếu")]
         [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime DatePublish { get; set; }
 
         [DisplayName("Độ dài phim")]
@@ -34,7 +32,7 @@ namespace Website.ViewModel
 
         [DisplayName("Quốc gia")]
         public string Country { get; set; }
-        
+
         [DisplayName("Phim hot")]
         public Boolean IsHot { get; set; }
 

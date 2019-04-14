@@ -14,5 +14,10 @@ namespace ApplicationCore.Repositories
         public FilmRepository(MovieDbContext dbContext) : base(dbContext)
         {
         }
+
+        public Film GetFilmByIdMovie(Guid IdMovie)
+        {
+            return _dbContext.Films.Where(t => t.MovieId == IdMovie).FirstOrDefault();
+        }
     }
 }

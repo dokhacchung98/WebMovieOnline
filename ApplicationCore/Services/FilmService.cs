@@ -18,5 +18,10 @@ namespace ApplicationCore.Services
         {
             _repository = repository;
         }
+
+        public Film GetFilmByIdMovie(Guid IdMovie)
+        {
+            return _repository.GetFilmByIdMovie(IdMovie);
+        }
     }
 }

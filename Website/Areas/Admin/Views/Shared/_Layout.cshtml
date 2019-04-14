@@ -3,9 +3,12 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     @Styles.Render("~/Content/admincss")
     @Scripts.Render("~/bundles/modernizr")
-    
+    @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/Content/select2")
+    @Scripts.Render("~/Script/select2")
 </head>
 <body id="page-top">
     <div id="wrapper">
@@ -24,7 +27,7 @@
 
 
 
-    @Scripts.Render("~/bundles/jquery")
+
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/jsadmin")
     @RenderSection("scripts", required: false)
