@@ -41,7 +41,7 @@ namespace Infrastructure.Entities
         public virtual ICollection<CategoryMovie> CategoryMovies { get; set; }
         public virtual ICollection<Rating> Ratings { get; set; }
         public virtual ICollection<News> News { get; set; }
-        public virtual ICollection<Resolution> Resolutions { get; set; }
+        public virtual ICollection<MovieResolution> MovieResolutions { get; set; }
 
         public virtual ICollection<Trailer> Trailers { get; set; }
 

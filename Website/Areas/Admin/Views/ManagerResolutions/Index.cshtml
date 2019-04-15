@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Website.ViewModel.DirectorViewModel>
+﻿@model IEnumerable<Website.ViewModel.ResolutionViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -26,10 +26,10 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h2>Quản lý <b>Đạo diễn</b></h2>
+                        <h2>Quản lý <b>Độ phân giải</b></h2>
                     </div>
                     <div class="col-sm-6">
-                        <a href="#addDirectorModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus"></i><span>Thêm mới đạo diễn</span></a>
+                        <a href="#addResolutionModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus"></i><span>Thêm mới đạo diễn</span></a>
                     </div>
                 </div>
             </div>
@@ -46,19 +46,19 @@
             <script type="text/javascript">
                 function search() {
                     var s = $('#keyword').val();
-                    var url = "/ManagerDirectors/Index?name=" + s;
+                    var url = "/ManagerResolutions/Index?name=" + s;
                     window.location = url;
                 };
             </script>
 
             <div id="customer_area">
-                @{Html.RenderAction("GetPaging", "ManagerDirectors", new { page = 1 });}
+                @{Html.RenderAction("GetPaging", "ManagerResolutions", new { page = 1 });}
             </div>
         </div>
     </div>
     <!-- Edit Modal HTML -->
-    <div id="addDirectorModal" class="modal fade">
-        @Html.Action("Create", "ManagerDirectors")
+    <div id="addResolutionModal" class="modal fade">
+        @Html.Action("Create", "ManagerResolutions")
     </div>
 
     <div id="deleteActorModal" class="modal fade"></div>
@@ -69,9 +69,9 @@
     $(document).ready(function () {
         $('body').on('click', '.delete', function (e) {
             e.preventDefault();
-            $("#addDirectorModal").remove();
+            $("#addResolutionModal").remove();
             $.get($(this).data("targeturl"), function (data) {
-                $('<div id="addDirectorModal" class="modal fade">' +
+                $('<div id="addResolutionModal" class="modal fade">' +
                     data + '</div>').modal();
             });
         });
@@ -80,10 +80,10 @@
             e.preventDefault();
             var name = $('#keyword').val();
             if (name.trim() != null && name.trim().length != 0 && name.trim() != null) {
-                var url = "/Admin/ManagerDirectors?name=" + name;
+                var url = "/Admin/ManagerResolutions?name=" + name;
                 window.location = url;
             } else {
-                var url = "/Admin/ManagerDirectors";
+                var url = "/Admin/ManagerResolutions";
                 window.location = url;
             }
         });

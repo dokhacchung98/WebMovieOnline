@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Services
 {
-    public interface IDirectorService : IEntityService<Director>
+    public interface IResolutionService : IEntityService<Resolution>
     {
-        IEnumerable<Director> Search(string keywork);
+        IEnumerable<Resolution> SearchByName(string keyword);
     }
 }

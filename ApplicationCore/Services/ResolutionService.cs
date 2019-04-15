@@ -10,17 +10,17 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Services
 {
-    public class DirectorService : EntityService<Director>, IDirectorService
+    public class ResolutionService : EntityService<Resolution>, IResolutionService
     {
-        private readonly IDirectorRepository _repository;
-        public DirectorService(IDirectorRepository repository) : base(repository)
+        private readonly IResolutionRepository _repository;
+        public ResolutionService(IResolutionRepository repository) : base(repository)
         {
             _repository = repository;
         }
 
-        public IEnumerable<Director> Search(string keywork)
+        public IEnumerable<Resolution> SearchByName(string keyword)
         {
-            return _repository.Search(keywork);
+            return _repository.Search(keyword);
         }
     }
 }

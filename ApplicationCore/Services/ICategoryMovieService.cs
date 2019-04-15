@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Services
 {
-    public interface IDirectorService : IEntityService<Director>
+    public interface ICategoryMovieService : IEntityService<CategoryMovie>
     {
-        IEnumerable<Director> Search(string keywork);
     }
 }

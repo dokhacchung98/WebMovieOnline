@@ -10,17 +10,12 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Services
 {
-    public class DirectorService : EntityService<Director>, IDirectorService
+    public class ResolutionMovieService : EntityService<MovieResolution>, IResolutionMovieService
     {
-        private readonly IDirectorRepository _repository;
-        public DirectorService(IDirectorRepository repository) : base(repository)
+        private readonly IResolutionMovieRepository _repository;
+        public ResolutionMovieService(IResolutionMovieRepository repository) : base(repository)
         {
             _repository = repository;
-        }
-
-        public IEnumerable<Director> Search(string keywork)
-        {
-            return _repository.Search(keywork);
         }
     }
 }
