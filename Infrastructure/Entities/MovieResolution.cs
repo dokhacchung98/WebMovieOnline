@@ -11,7 +11,7 @@ namespace Infrastructure.Entities
         [Key]
         [Column(Order = 1)]
         [ForeignKey("Resolution")]
-        public Guid ProducerId { get; set; }
+        public Guid ResolutionId { get; set; }
 
         public virtual Resolution Resolution { get; set; }
 

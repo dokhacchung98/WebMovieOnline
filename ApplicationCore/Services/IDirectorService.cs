@@ -10,5 +10,6 @@ namespace ApplicationCore.Services
 {
     public interface IDirectorService : IEntityService<Director>
     {
+        IEnumerable<Director> Search(string keywork);
     }
 }

@@ -21,9 +21,11 @@ namespace Website.Mapping
             CreateMap<MoviesViewModel, Movie>();
             CreateMap<ActorViewModel, Actor>();
             CreateMap<DirectorViewModel, Director>();
+            CreateMap<ResolutionViewModel, Resolution>();
             CreateMap<TagViewModel, Tag>();
             CreateMap<CategorysViewModel, Category>();
             CreateMap<ProducerViewModel, Producer>();
+            CreateMap<FilmViewModel, Film>();
         }
 
         private void CreateMapFromEntitiesToViewModels()
@@ -33,9 +35,11 @@ namespace Website.Mapping
             CreateMap<Movie, MoviesViewModel>();
             CreateMap<Actor, ActorViewModel>();
             CreateMap<Director, DirectorViewModel>();
+            CreateMap<Resolution, ResolutionViewModel>();
             CreateMap<Tag, TagViewModel>();
             CreateMap<Category, CategorysViewModel>();
             CreateMap<Producer, ProducerViewModel>();
+            CreateMap<Film, FilmViewModel>();
         }
     }
 }

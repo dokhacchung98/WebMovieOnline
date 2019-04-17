@@ -36,7 +36,6 @@ namespace Infrastructure.DataContext
         public DbSet<TagMovie> TagMovies { get; set; }
         public DbSet<DirectorMovie> DirectorMovies { get; set; }
         public DbSet<Tag> Tags { get; set; }
-
-
+        public DbSet<MovieResolution> MovieResolutions { get; set; }
     }
 }

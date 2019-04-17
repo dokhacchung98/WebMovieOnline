@@ -7,11 +7,21 @@ namespace Website.ViewModel
 {
     public class MoviesViewModel : BaseEntityViewModel
     {
+        public MoviesViewModel() : base()
+        {
+            if (DatePublish == null)
+            {
+                DatePublish = DateTime.Now;
+            }
+            IsHot = false;
+        }
+
         [DisplayName("Tên phim")]
         public string Name { get; set; }
 
         [DisplayName("Ngày chiếu")]
         [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime DatePublish { get; set; }
 
         [DisplayName("Độ dài phim")]
@@ -22,7 +32,7 @@ namespace Website.ViewModel
 
         [DisplayName("Quốc gia")]
         public string Country { get; set; }
-        
+
         [DisplayName("Phim hot")]
         public Boolean IsHot { get; set; }
 
@@ -31,5 +41,13 @@ namespace Website.ViewModel
 
         [DisplayName("Độ tuổi cho phép")]
         public int EnableAge { get; set; }
+
+        [DisplayName("Lượt xem")]
+        public int CountView { get; set; }
+
+        [DisplayName("Số Tập")]
+        public int Episodes { get; set; }
+
+        public Boolean IsSeriesMovie { get; set; }
     }
 }
