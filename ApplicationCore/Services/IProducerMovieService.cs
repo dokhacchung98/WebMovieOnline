@@ -8,7 +8,10 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Services
 {
-    public interface  IProducerMovieService: IEntityService<ProducerMovie>
+    public interface IProducerMovieService : IEntityService<ProducerMovie>
     {
+        ICollection<Guid> GetIdProducerByMovieId(Guid movieId);
+
+        ProducerMovie FindBy2Id(Guid movieId, Guid modelId);
     }
 }

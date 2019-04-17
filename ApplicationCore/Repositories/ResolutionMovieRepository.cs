@@ -14,5 +14,15 @@ namespace ApplicationCore.Repositories
         public ResolutionMovieRepository(MovieDbContext dbContext) : base(dbContext)
         {
         }
+
+        public ICollection<Guid> GetIdResolutionByMovieId(Guid movieId)
+        {
+            return _dbContext.MovieResolutions.Where(t => t.MovieId == movieId).Select(t => t.ResolutionId).ToList();
+        }
+
+        public MovieResolution FindBy2Id(Guid movieId, Guid modelId)
+        {
+            return _dbContext.MovieResolutions.Where(t => t.ResolutionId == modelId && t.MovieId == movieId).FirstOrDefault();
+        }
     }
 }

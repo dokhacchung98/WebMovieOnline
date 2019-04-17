@@ -17,5 +17,15 @@ namespace ApplicationCore.Services
         {
             _repository = repository;
         }
+
+        public ICollection<Guid> GetIdDirectorByMovieId(Guid movieId)
+        {
+            return _repository.GetIdDirectorByMovieId(movieId);
+        }
+
+        public DirectorMovie FindBy2Id(Guid movieId, Guid modelId)
+        {
+            return _repository.FindBy2Id(movieId, modelId);
+        }
     }
 }

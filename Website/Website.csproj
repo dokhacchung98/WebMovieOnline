@@ -1400,6 +1400,7 @@
     <Content Include="Areas\Admin\Views\ManagerFeatureFilm\_Edit.cshtml" />
     <Content Include="Areas\Admin\Views\ManagerFeatureFilm\_PartialViewFeatureFilm.cshtml" />
     <Content Include="Areas\Admin\Views\ManagerFeatureFilm\_Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerFeatureFilm\_Detail.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />

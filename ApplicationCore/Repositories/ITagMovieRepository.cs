@@ -10,5 +10,8 @@ namespace ApplicationCore.Repositories
 {
     public interface ITagMovieRepository : IGenericRepository<TagMovie>
     {
+        ICollection<Guid> GetIdTagByMovieId(Guid movieId);
+
+        TagMovie FindBy2Id(Guid movieId, Guid modelId);
     }
 }

@@ -14,5 +14,15 @@ namespace ApplicationCore.Repositories
         public CategoryMovieRepository(MovieDbContext dbContext) : base(dbContext)
         {
         }
+
+        public ICollection<Guid> GetIdCategoryByMovieId(Guid movieId)
+        {
+            return _dbContext.GetCategoryMovies.Where(t => t.MovieId == movieId).Select(t => t.CategoryId).ToList();
+        }
+
+        public CategoryMovie FindBy2Id(Guid movieId, Guid modelId)
+        {
+            return _dbContext.GetCategoryMovies.Where(t => t.CategoryId == modelId && t.MovieId == movieId).FirstOrDefault();
+        }
     }
 }

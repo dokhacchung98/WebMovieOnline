@@ -14,5 +14,15 @@ namespace ApplicationCore.Repositories
         public TagMovieRepository(MovieDbContext dbContext) : base(dbContext)
         {
         }
+
+        public ICollection<Guid> GetIdTagByMovieId(Guid movieId)
+        {
+            return _dbContext.TagMovies.Where(t => t.MovieId == movieId).Select(t => t.TagId).ToList();
+        }
+
+        public TagMovie FindBy2Id(Guid movieId, Guid modelId)
+        {
+            return _dbContext.TagMovies.Where(t => t.TagId == modelId && t.MovieId == movieId).FirstOrDefault();
+        }
     }
 }

@@ -3,6 +3,12 @@
 @{
     ViewBag.Title = "Create";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var listDirector = ViewBag.ListDirector as List<SelectListItem>;
+    var listActor = ViewBag.ListActor as List<SelectListItem>;
+    var listProducer = ViewBag.ListProducer as List<SelectListItem>;
+    var listCategory = ViewBag.ListCategory as List<SelectListItem>;
+    var listResolution = ViewBag.ListResolution as List<SelectListItem>;
+    var listTag = ViewBag.ListTag as List<SelectListItem>;
 }
 
 <head>
@@ -24,7 +30,19 @@
     <script src="~/Scripts/ckeditor/ckeditor.js"></script>
     <script src="~/Scripts/ckfinder/ckfinder.js"></script>
 </head>
+
 <body>
+    <script>
+        $(document).ready(function () {
+            $(".Director").select2();
+            $(".Actor").select2();
+            $(".Category").select2();
+            $(".Producer").select2();
+            $(".Resolution").select2();
+            $(".Tag").select2();
+        });
+    </script>
+
     <div class="container mb-4 main-container">
         @using (Html.BeginForm("Edit", "ManagerFeatureFilm",
                     FormMethod.Post, new
@@ -65,7 +83,8 @@
                 <!-- Orders Table-->
                 <div class="col-lg-8 pb-5 tab-content" id="v-pills-tabContent">
                     <div class="form-horizontal">
-
+                        @Html.EditorFor(model => model.MoviesViewModel.Id, new { htmlAttributes = new { @type = "hidden" } })
+                        @Html.EditorFor(model => model.FilmViewModel.Id, new { htmlAttributes = new { @type = "hidden" } })
                         @Html.AntiForgeryToken()
                         @Html.ValidationSummary("", new { @class = "text-danger" })
                         <div class="form-group">
@@ -107,6 +126,36 @@
                         </div>
 
                         <div class="form-group">
+                            <label>Diễn viên</label>
+                            <br />
+                            @Html.DropDownList("Actor", listActor, new { @class = "Actor", @multiple = "multiple" })
+                        </div>
+                        <div class="form-group">
+                            <label>Đạo diễn</label>
+                            <br />
+                            @Html.DropDownList("Director", listDirector, new { @class = "Director", @multiple = "multiple" })
+                        </div>
+                        <div class="form-group">
+                            <label>Thể loại</label>
+                            <br />
+                            @Html.DropDownList("Category", listCategory, new { @class = "Category", @multiple = "multiple" })
+                        </div>
+                        <div class="form-group">
+                            <label>Nhà sản xuất</label>
+                            <br />
+                            @Html.DropDownList("Producer", listProducer, new { @class = "Producer", @multiple = "multiple" })
+                        </div>
+                        <div class="form-group">
+                            <label>Chất lượng</label>
+                            <br />
+                            @Html.DropDownList("Resolution", listResolution, new { @class = "Resolution", @multiple = "multiple" })
+                        </div>
+                        <div class="form-group">
+                            <label>Thẻ</label>
+                            <br />
+                            @Html.DropDownList("Tag", listTag, new { @class = "Tag", @multiple = "multiple" })
+                        </div>
+                        <div class="form-group">
                             @Html.LabelFor(model => model.MoviesViewModel.Description, new { @class = "label" })
                             <span style="color:red">(*)</span>
                             @Html.TextAreaFor(model => model.MoviesViewModel.Description, new { @id = "ckeditor" })
@@ -126,7 +175,6 @@
         }
     </div>
 </body>
-@Scripts.Render("~/Script/jquery")
 <script>
     function ShowImagePreview(input) {
         if (input.files && input.files[0]) {

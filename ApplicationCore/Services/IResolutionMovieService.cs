@@ -8,7 +8,10 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Services
 {
-    public interface IResolutionMovieService: IEntityService<MovieResolution>
+    public interface IResolutionMovieService : IEntityService<MovieResolution>
     {
+        ICollection<Guid> GetIdResolutionByMovieId(Guid movieId);
+
+        MovieResolution FindBy2Id(Guid movieId, Guid modelId);
     }
 }

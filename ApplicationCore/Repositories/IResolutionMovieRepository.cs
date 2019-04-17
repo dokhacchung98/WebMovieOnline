@@ -8,7 +8,10 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Repositories
 {
-    public interface IResolutionMovieRepository: IGenericRepository<MovieResolution>
+    public interface IResolutionMovieRepository : IGenericRepository<MovieResolution>
     {
+        ICollection<Guid> GetIdResolutionByMovieId(Guid movieId);
+
+        MovieResolution FindBy2Id(Guid movieId, Guid modelId);
     }
 }

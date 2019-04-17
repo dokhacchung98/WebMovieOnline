@@ -10,5 +10,8 @@ namespace ApplicationCore.Repositories
 {
     public interface IActorMovieRepository : IGenericRepository<ActorMovie>
     {
+        ICollection<Guid> GetIdActorByMovieId(Guid movieId);
+
+        ActorMovie FindBy2Id(Guid movieId, Guid modelId);
     }
 }

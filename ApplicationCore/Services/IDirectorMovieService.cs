@@ -10,5 +10,8 @@ namespace ApplicationCore.Services
 {
     public interface IDirectorMovieService : IEntityService<DirectorMovie>
     {
+        ICollection<Guid> GetIdDirectorByMovieId(Guid movieId);
+
+        DirectorMovie FindBy2Id(Guid movieId, Guid modelId);
     }
 }

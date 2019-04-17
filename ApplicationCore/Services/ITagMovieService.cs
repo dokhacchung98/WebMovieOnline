@@ -8,7 +8,10 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Services
 {
-    public interface ITagMovieService: IEntityService<TagMovie>
+    public interface ITagMovieService : IEntityService<TagMovie>
     {
+        ICollection<Guid> GetIdTagByMovieId(Guid movieId);
+
+        TagMovie FindBy2Id(Guid movieId, Guid modelId);
     }
 }
