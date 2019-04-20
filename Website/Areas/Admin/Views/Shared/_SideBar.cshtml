@@ -1,11 +1,18 @@
 ﻿<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-        
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-film"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">One Movies</div>
+    </a>
+    <hr class="sidebar-divider">
+
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
+    <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString().Equals("Home") ? "active" : "")">
         <a class="nav-link" href="index.html">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Danh mục</span>
+            <span>Danh Mục</span>
         </a>
     </li>
 
@@ -14,37 +21,112 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
-        Người dùng
+        Người Dùng
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
+    <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString().Equals("ManagerUsers") ? "active" : "")">
         <a class="nav-link collapsed" href="@Url.Action("Index","ManagerUsers")">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>Người dùng</span>
+            <i class="fas fa-user"></i>
+            <span>Người Dùng</span>
         </a>
     </li>
 
     <!-- Nav Item - Utilities Collapse Menu -->
-    <li class="nav-item">
+    <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString().Equals("ManagerRoles") ? "active" : "")">
         <a class="nav-link collapsed" href="@Url.Action("Index","ManagerRoles")">
-            <i class="fas fa-fw fa-wrench"></i>
-            <span>Quyền người dùng</span>
+            <i class="fas fa-user-cog"></i>
+            <span>Quyền Tgười Dùng</span>
+        </a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider" />
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Phim
+    </div>
+
+    <!-- Nav Item - Utilities Collapse Menu -->
+    <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString().Equals("ManagerFeatureFilm") ? "active" : "")">
+        <a class="nav-link collapsed" href="@Url.Action("Index","ManagerFeatureFilm")">
+            <i class="fas fa-ticket-alt"></i>
+            <span>Phim Lẻ</span>
+        </a>
+    </li>
+
+    <!-- Nav Item - Utilities Collapse Menu -->
+    <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString().Equals("ManagerSeriesTV") ? "active" : "")">
+        <a class="nav-link collapsed" href="@Url.Action("Index","ManagerSeriesTV")">
+            <i class="fas fa-video"></i>
+            <span>Phim Bộ</span>
+        </a>
+    </li>
+
+    <!-- Nav Item - Utilities Collapse Menu -->
+    <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString().Equals("ManagerNews") ? "active" : "")">
+        <a class="nav-link collapsed" href="@Url.Action("Index","ManagerNews")">
+            <i class="fas fa-newspaper"></i>
+            <span>Tin Tức</span>
         </a>
     </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider">
 
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Đối Tượng
+    </div>
+
     <!-- Nav Item - Utilities Collapse Menu -->
-    <li class="nav-item">
+    <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString().Equals("ManagerActors") ? "active" : "")">
         <a class="nav-link collapsed" href="@Url.Action("Index","ManagerActors")">
-            <i class="fas fa-user-tag"></i>
-            <span>Diễn viên</span>
+            <i class="fas fa-user-tie"></i>
+            <span>Diễn Viên</span>
         </a>
     </li>
 
-    
+    <!-- Nav Item - Utilities Collapse Menu -->
+    <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString().Equals("ManagerDirectors") ? "active" : "")">
+        <a class="nav-link collapsed" href="@Url.Action("Index","ManagerDirectors")">
+            <i class="fas fa-chalkboard-teacher"></i>
+            <span>Đạo Diễn</span>
+        </a>
+    </li>
+
+    <!-- Nav Item - Utilities Collapse Menu -->
+    <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString().Equals("ManagerCategorys") ? "active" : "")">
+        <a class="nav-link collapsed" href="@Url.Action("Index","ManagerCategorys")">
+            <i class="fas fa-torah"></i>
+            <span>Thể Loại</span>
+        </a>
+    </li>
+
+    <!-- Nav Item - Utilities Collapse Menu -->
+    <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString().Equals("ManagerProducer") ? "active" : "")">
+        <a class="nav-link collapsed" href="@Url.Action("Index","ManagerProducer")">
+            <i class="fas fa-building"></i>
+            <span>Nhà Sản Xuất</span>
+        </a>
+    </li>
+
+    <!-- Nav Item - Utilities Collapse Menu -->
+    <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString().Equals("ManagerResolutions") ? "active" : "")">
+        <a class="nav-link collapsed" href="@Url.Action("Index","ManagerResolutions")">
+            <i class="fas fa-quote-right"></i>
+            <span>Chất Lượng</span>
+        </a>
+    </li>
+
+    <!-- Nav Item - Utilities Collapse Menu -->
+    <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString().Equals("ManagerTag") ? "active" : "")">
+        <a class="nav-link collapsed" href="@Url.Action("Index","ManagerTag")">
+            <i class="fas fa-tags"></i>
+            <span>Thẻ</span>
+        </a>
+    </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
