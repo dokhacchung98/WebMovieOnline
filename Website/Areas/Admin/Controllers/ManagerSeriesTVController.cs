@@ -7,13 +7,14 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Website.ViewModel;
 
 namespace Website.Areas.Admin.Controllers
 {
-    public class ManagerFeatureFilmController : Controller
+    public class ManagerSeriesTVController : Controller
     {
         private readonly IMoviesService _movieService;
         private readonly IFilmService _filmService;
@@ -31,9 +32,9 @@ namespace Website.Areas.Admin.Controllers
         private readonly IResolutionMovieService _resolutionMovieService;
         private readonly ITagMovieService _tagMovieService;
 
-        private IList<FeatureFilmViewModel> _listFeatureFilmViewModels = new List<FeatureFilmViewModel>();
+        private IList<SeriesTVViewModel> _listSeriesTV = new List<SeriesTVViewModel>();
 
-        public ManagerFeatureFilmController(IMoviesService movieService, IFilmService filmService, IProducerService producerService,
+        public ManagerSeriesTVController(IMoviesService movieService, IFilmService filmService, IProducerService producerService,
                                             IActorsService actorService, ICategorysService categorysService,
                                             IDirectorService directorService, ITagService tagService,
                                             IResolutionService resolutionService,
@@ -59,20 +60,22 @@ namespace Website.Areas.Admin.Controllers
             _resolutionMovieService = resolutionMovieService;
             _tagMovieService = tagMovieService;
 
-            var listMovies = _movieService.GetAllFeatureMovie();
 
-            if (!_listFeatureFilmViewModels.Any())
+            var listMovies = _movieService.GetAllSeriesTV();
+
+            if (!_listSeriesTV.Any())
                 foreach (var item in listMovies)
                 {
                     var movieViewModel = AutoMapper.Mapper.Map<MoviesViewModel>(item);
-                    var film = _filmService.GetFilmByIdMovie(item.Id);
-                    var filmViewModel = AutoMapper.Mapper.Map<FilmViewModel>(film);
-                    var model = new FeatureFilmViewModel()
+                    var listFilm = _filmService.GetAllFilmInSeriesTV(item.Id);
+                    var filmViewModel = AutoMapper.Mapper.Map<IList<FilmViewModel>>(listFilm);
+
+                    var model = new SeriesTVViewModel()
                     {
                         MoviesViewModel = movieViewModel,
-                        FilmViewModel = filmViewModel
+                        FilmViewModels = filmViewModel
                     };
-                    _listFeatureFilmViewModels.Add(model);
+                    _listSeriesTV.Add(model);
                 }
         }
 
@@ -86,12 +89,13 @@ namespace Website.Areas.Admin.Controllers
             {
                 Session["KeyWordSearch"] = name;
             }
-            if (_listFeatureFilmViewModels == null)
+            if (_listSeriesTV == null)
             {
                 return View();
             }
-            return View(_listFeatureFilmViewModels);
+            return View(_listSeriesTV);
         }
+
 
         public ActionResult Create(Guid? id)
         {
@@ -101,18 +105,15 @@ namespace Website.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Create(FeatureFilmViewModel viewModel, HttpPostedFileBase image,
+        public ActionResult Create(SeriesTVViewModel viewModel, HttpPostedFileBase image,
                                     IEnumerable<string> actor, IEnumerable<string> director,
                                     IEnumerable<string> category, IEnumerable<string> producer,
                                     IEnumerable<string> resolution, IEnumerable<string> tag)
         {
-            var filmViewModel = viewModel.FilmViewModel;
             var movieViewModel = viewModel.MoviesViewModel;
 
-            var film = AutoMapper.Mapper.Map<Film>(filmViewModel);
             var movie = AutoMapper.Mapper.Map<Movie>(movieViewModel);
-            movie.IsSeriesMovie = false;
-            film.MovieId = movie.Id;
+            movie.IsSeriesMovie = true;
 
             if (image != null &&
                 image.FileName != null &&
@@ -124,7 +125,6 @@ namespace Website.Areas.Admin.Controllers
             }
 
             _movieService.Create(movie);
-            _filmService.Create(film);
 
             if (actor != null)
                 foreach (var item in actor)
@@ -183,21 +183,56 @@ namespace Website.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult Delete(Guid? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Index");
+            }
+            var movie = _movieService.Find(id.Value);
+            if (movie == null)
+            {
+                return HttpNotFound();
+            }
+
+            var movieViewModel = AutoMapper.Mapper.Map<MoviesViewModel>(movie);
+
+            return PartialView("_Delete", movieViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(Guid id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Index");
+            }
+            var movie = _movieService.Find(id);
+            if (movie == null)
+            {
+                return HttpNotFound();
+            }
+
+            _movieService.Delete(movie);
+
+            return RedirectToAction("Index");
+        }
+
+
         public ActionResult Edit(Guid id)
         {
             if (id == null)
             {
                 return RedirectToAction("Index");
             }
-            var film = _filmService.Find(id);
-            if (film == null)
+            var movie = _movieService.Find(id);
+            if (movie == null)
             {
                 return HttpNotFound();
             }
-            var movie = _movieService.Find(film.MovieId);
 
             var movieViewModel = AutoMapper.Mapper.Map<MoviesViewModel>(movie);
-            var filmViewModel = AutoMapper.Mapper.Map<FilmViewModel>(film);
 
             //Director Start
             var listDirectorMovie = _directorMovieService.GetIdDirectorByMovieId(movie.Id);
@@ -370,10 +405,9 @@ namespace Website.Areas.Admin.Controllers
             ViewBag.ListTag = listTagSelect;
 
 
-            var model = new FeatureFilmViewModel()
+            var model = new SeriesTVViewModel()
             {
-                MoviesViewModel = movieViewModel,
-                FilmViewModel = filmViewModel
+                MoviesViewModel = movieViewModel
             };
 
             return View("_Edit", model);
@@ -382,7 +416,7 @@ namespace Website.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Edit(FeatureFilmViewModel viewModel, HttpPostedFileBase image,
+        public ActionResult Edit(SeriesTVViewModel viewModel, HttpPostedFileBase image,
                                 IList<string> actor, IList<string> director,
                                 IList<string> category, IList<string> producer,
                                 IList<string> resolution, IList<string> tag)
@@ -390,7 +424,6 @@ namespace Website.Areas.Admin.Controllers
             Movie oldMovie = _movieService.Find(viewModel.MoviesViewModel.Id);
 
             var movie = AutoMapper.Mapper.Map<Movie>(viewModel.MoviesViewModel);
-            var film = AutoMapper.Mapper.Map<Film>(viewModel.FilmViewModel);
             if (image != null &&
                 image.FileName != null &&
             CheckImageUploadExtension.CheckImagePath(image.FileName) == true)
@@ -406,9 +439,8 @@ namespace Website.Areas.Admin.Controllers
                     movie.Thumbnail = oldMovie.Thumbnail;
                 }
             }
-            film.MovieId = movie.Id;
+            movie.IsSeriesMovie = true;
             _movieService.Update(movie, movie.Id);
-            _filmService.Update(film, film.Id);
 
             IList<string> _actor = new List<string>();
             if (actor != null)
@@ -606,46 +638,174 @@ namespace Website.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Delete(Guid? id)
+        public ActionResult ListFilm(string name, Guid idMovie)
         {
-            if (id == null)
+            if (idMovie == null)
+            {
+                return HttpNotFound();
+            }
+            var movie = _movieService.Find(idMovie);
+
+            if (movie == null)
+            {
+                return HttpNotFound();
+            }
+
+            var listFilm = _filmService.GetAllFilmInSeriesTV(idMovie);
+            var listFilmViewModel = AutoMapper.Mapper.Map<IList<FilmViewModel>>(listFilm);
+            var movieViewModel = AutoMapper.Mapper.Map<MoviesViewModel>(movie);
+            var viewModel = new SeriesTVViewModel()
+            {
+                MoviesViewModel = movieViewModel,
+                FilmViewModels = listFilmViewModel
+            };
+            ViewBag.IdMovie = idMovie;
+            if (name == null)
+            {
+                Session["KeyWordSearch"] = null;
+            }
+            else
+            {
+                Session["KeyWordSearch"] = name;
+            }
+            if (viewModel == null)
+            {
+                return View("_ListFilm");
+            }
+            return View("_ListFilm", viewModel);
+        }
+
+
+        public ActionResult CreateFilm(Guid idMovie)
+        {
+            ViewBag.IdMovie = idMovie;
+            var listString = new List<string>();
+            var listFilms = _filmService.GetAllFilmInSeriesTV(idMovie);
+            foreach (var item in listFilms)
+            {
+                listString.Add(item.Episodes.ToString());
+            }
+            ViewBag.IdFilms = listString;
+            return PartialView("_CreateFilm");
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        public ActionResult CreateFilm(FilmViewModel viewModel, Guid idMovie)
+        {
+            if (idMovie == null)
+            {
+                return HttpNotFound();
+            }
+            var film = AutoMapper.Mapper.Map<Film>(viewModel);
+            film.MovieId = idMovie;
+            _filmService.Create(film);
+
+            return RedirectToAction("ListFilm", new { idMovie = idMovie });
+        }
+
+
+        public ActionResult DeleteFilm(Guid? idFilm, Guid idMovie)
+        {
+            if (idFilm == null)
             {
                 return RedirectToAction("Index");
             }
-            var film = _filmService.Find(id.Value);
+            var film = _filmService.Find(idFilm.Value);
             if (film == null)
             {
                 return HttpNotFound();
             }
-            var movie = _movieService.Find(film.MovieId);
-            var movieViewModel = AutoMapper.Mapper.Map<MoviesViewModel>(movie);
 
-            return PartialView("_Delete", movieViewModel);
+            ViewBag.IdMovie = idMovie;
+            var filmViewModel = AutoMapper.Mapper.Map<FilmViewModel>(film);
+
+            return PartialView("_DeleteFilm", filmViewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(Guid id)
+        public ActionResult DeleteFilm(Guid idFilm, Guid idMovie)
         {
-            if (id == null)
+            if (idFilm == null)
             {
                 return RedirectToAction("Index");
             }
-            var film = _filmService.Find(id);
+            var film = _filmService.Find(idFilm);
             if (film == null)
             {
                 return HttpNotFound();
             }
-            var movie = _movieService.Find(film.MovieId);
 
-            _movieService.Delete(movie);
+            _filmService.Delete(film);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("ListFilm", new { idMovie = idMovie });
         }
 
-        public ActionResult ManagementListFilm()
+
+        public ActionResult EditFilm(Guid idFilm, Guid idMovie)
         {
-            return View();
+            if (idFilm == null)
+            {
+                return RedirectToAction("Index");
+            }
+            var film = _filmService.Find(idFilm);
+            if (film == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.IdMovie = idMovie;
+
+            var filmViewModel = AutoMapper.Mapper.Map<FilmViewModel>(film);
+
+            return PartialView("_EditFilm", filmViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        public ActionResult EditFilm(FilmViewModel viewModel, Guid idMovie)
+        {
+            var film = AutoMapper.Mapper.Map<Film>(viewModel);
+            film.MovieId = idMovie;
+
+            _filmService.Update(film, film.Id);
+            return RedirectToAction("ListFilm", new { idMovie = idMovie });
+        }
+
+        public JsonResult CheckEpisodes(string idMovie, string currentId, string value)
+        {
+            var check = true;
+            if (string.IsNullOrEmpty(value))
+            {
+                check = false;
+                return Json(check, JsonRequestBehavior.AllowGet);
+            }
+            var listFilm = _filmService.GetAllFilmInSeriesTV(Guid.Parse(idMovie));
+            if (!string.IsNullOrEmpty(currentId))
+            {
+                listFilm.Remove(_filmService.Find(Guid.Parse(currentId)));
+            }
+
+
+            foreach (var item in listFilm)
+            {
+                if (item.Episodes.ToString() == value)
+                {
+                    check = false;
+                    break;
+                }
+            }
+
+            var movie = _movieService.Find(Guid.Parse(idMovie));
+            if (int.Parse(value) > movie.Episodes || int.Parse(value) < 1)
+            {
+                check = false;
+            }
+            return Json(check, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetProducerList(string searchTerm)
@@ -738,6 +898,7 @@ namespace Website.Areas.Admin.Controllers
             return Json(modifiedData, JsonRequestBehavior.AllowGet);
         }
 
+
         public ActionResult GetPageSearch(int? page)
         {
             int pageSize = VariableUtils.pageSize;
@@ -751,26 +912,72 @@ namespace Website.Areas.Admin.Controllers
 
                 var listMoviesViewModel = AutoMapper.Mapper.Map<IEnumerable<MoviesViewModel>>(listMovieSearch);
 
-                var listFeatureFilmViewModel = new List<FeatureFilmViewModel>();
+                var listSeriesTViewModel = new List<SeriesTVViewModel>();
 
                 foreach (var item in listMoviesViewModel)
                 {
-                    var film = _filmService.GetFilmByIdMovie(item.Id);
-                    var filmViewModel = AutoMapper.Mapper.Map<FilmViewModel>(film);
+                    var listFilm = _filmService.GetAllFilmInSeriesTV(item.Id);
+                    var filmViewModel = AutoMapper.Mapper.Map<IList<FilmViewModel>>(listFilm);
 
-                    listFeatureFilmViewModel.Add(new FeatureFilmViewModel()
+                    listSeriesTViewModel.Add(new SeriesTVViewModel()
                     {
-                        FilmViewModel = filmViewModel,
+                        FilmViewModels = filmViewModel,
                         MoviesViewModel = item
                     });
                 }
 
 
-                return PartialView("_PartialViewFeatureFilm", listFeatureFilmViewModel.ToPagedList(pageNumber, pageSize));
+                return PartialView("_PartialViewSeriesTV", listSeriesTViewModel.ToPagedList(pageNumber, pageSize));
             }
 
-            return PartialView("_PartialViewFeatureFilm",
-                _listFeatureFilmViewModels.ToPagedList(pageNumber, pageSize));
+            return PartialView("_PartialViewSeriesTV",
+                _listSeriesTV.ToPagedList(pageNumber, pageSize));
+        }
+
+        public ActionResult GetPageSearchFilm(int? page, Guid idMovie)
+        {
+            int pageSize = VariableUtils.pageSize;
+
+            int pageNumber = (page ?? 1);
+
+            if (idMovie == null)
+            {
+                return HttpNotFound();
+            }
+            var movie = _movieService.Find(idMovie);
+            if (movie == null)
+            {
+                return HttpNotFound();
+            }
+
+            var listFilm = _filmService.GetAllFilmInSeriesTV(idMovie);
+            var listMovieSearch = new List<FilmViewModel>();
+
+            if (Session["KeyWordSearch"] != null)
+            {
+                var name = Session["KeyWordSearch"].ToString();
+
+                foreach (var item in listFilm)
+                {
+                    if (item.MovieId == idMovie)
+                    {
+                        var filmViewModel = AutoMapper.Mapper.Map<FilmViewModel>(item);
+                        listMovieSearch.Add(filmViewModel);
+                    }
+                }
+            }
+            else
+            {
+                foreach (var item in listFilm)
+                {
+                    var filmViewModel = AutoMapper.Mapper.Map<FilmViewModel>(item);
+                    listMovieSearch.Add(filmViewModel);
+                }
+            }
+            ViewBag.IdMovie = idMovie;
+
+            return PartialView("_PartialViewFilm",
+                listMovieSearch.ToPagedList(pageNumber, pageSize));
         }
     }
 }

@@ -1,0 +1,49 @@
+﻿@model Website.ViewModel.SeriesTVViewModel
+
+@{
+    ViewBag.Title = "List Film";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var idMovie = ViewBag.IdMovie;
+}
+@Styles.Render("~/Admin/table-css")
+
+<div class="row">
+    <div class="container">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-9">
+                        <h2><a href="/Admin/ManagerSeriesTV" style="color: #fff;"><i class="fas fa-chevron-left"></i></a> @Model.MoviesViewModel.Name</h2>
+                    </div>
+                    <div class="col-sm-3">
+                        <a href="#addActorModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus"></i><span>Thêm mới</span></a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="customer_area">
+                @{Html.RenderAction("GetPageSearchFilm", "ManagerSeriesTV", new { page = 1, idMovie = idMovie });}
+            </div>
+        </div>
+    </div>
+    <!-- Edit Modal HTML -->
+    <div id="addActorModal" class="modal fade">
+        @Html.Action("CreateFilm", "ManagerSeriesTV", new { idMovie = @idMovie })
+    </div>
+
+    <div id="deleteFilmModal" class="modal fade"></div>
+</div>
+
+@Scripts.Render("~/Script/jquery")
+<script>
+    $(document).ready(function () {
+        $('body').on('click', '.delete', function (e) {
+            e.preventDefault();
+            $("#deleteFilmModal").remove();
+            $.get($(this).data("targeturl"), function (data) {
+                $('<div id="deleteFilmModal" class="modal fade">' +
+                    data + '</div>').modal();
+            });
+        });
+    });
+</script>

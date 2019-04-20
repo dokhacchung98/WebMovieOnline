@@ -1,0 +1,70 @@
+﻿@model Website.ViewModel.FilmViewModel
+
+@{
+    ViewBag.Title = "Edit Film";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var idMovie = ViewBag.IdMovie;
+}
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        @using (Html.BeginForm("EditFilm", "ManagerSeriesTV", FormMethod.Post, new { enctype = "multipart/form-data", @name = "formupload" }))
+        {
+            <div class="modal-header">
+                <h4 class="modal-title">Chỉnh sửa phim tập @Model.Episodes</h4>
+            </div>
+            <div class="modal-body">
+                <input name="idMovie" value="@idMovie" hidden />
+                <input name="Id" value="@Model.Id" hidden />
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                <input type="hidden" value="@idMovie" name="idMovie" />
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Link)
+                    <span style="color:red">(*)</span>
+                    @Html.EditorFor(model => model.Link, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Episodes)
+                    <span style="color:red">(*)</span>
+                    <br />
+                    <small id="error" style="color: #ff6464; font-style: italic;">Vui lòng kiểm tra lại dữ liệu</small>
+                    <br />
+                    @Html.EditorFor(model => model.Episodes, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default" href="/Admin/ManagerSeriesTV/ListFilm?idMovie=@idMovie">Cancel</a>
+                <input type="submit" class="btn btn-success" id="btnsubmit" value="Chỉnh sửa">
+            </div>
+        }
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#error').hide();
+        $('#Episodes').on('input', function (e) {
+            var txt = $('#Episodes').val();
+            $.ajax({
+                url: "/Admin/ManagerSeriesTV/CheckEpisodes",
+                type: "post",
+                dateType: "json",
+                data: {
+                    idMovie: "@idMovie",
+                    value: txt,
+                    currentId: "@Model.Id"
+                },
+                success: function (result) {
+                    console.log(result);
+                    if (result == true) {
+                        $('#btnsubmit').prop('disabled', false);
+                        $('#error').hide();
+                    } else {
+                        $('#btnsubmit').prop('disabled', true);
+                        $('#error').show();
+                    }
+                }
+            });
+        });
+    });
+</script>

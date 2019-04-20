@@ -19,6 +19,11 @@ namespace ApplicationCore.Services
             _repository = repository;
         }
 
+        public IList<Film> GetAllFilmInSeriesTV(Guid IdMovie)
+        {
+            return _repository.GetAllFilmInSeriesTV(IdMovie);
+        }
+
         public Film GetFilmByIdMovie(Guid IdMovie)
         {
             return _repository.GetFilmByIdMovie(IdMovie);

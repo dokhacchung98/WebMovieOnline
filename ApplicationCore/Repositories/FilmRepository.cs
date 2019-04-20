@@ -15,6 +15,11 @@ namespace ApplicationCore.Repositories
         {
         }
 
+        public IList<Film> GetAllFilmInSeriesTV(Guid IdMovie)
+        {
+            return _dbContext.Films.Where(t => t.MovieId == IdMovie).ToList();
+        }
+
         public Film GetFilmByIdMovie(Guid IdMovie)
         {
             return _dbContext.Films.Where(t => t.MovieId == IdMovie).FirstOrDefault();

@@ -1,0 +1,52 @@
+﻿@model PagedList.IPagedList<Website.ViewModel.FilmViewModel>
+
+@using PagedList.Mvc
+@{
+    var idMovie = ViewBag.IdMovie;
+}
+
+<table class="table table-striped table-hover" style="white-space: nowrap;">
+    <thead>
+        <tr>
+            <th>Tập phim</th>
+            <th>Ngày tạo</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Episodes</td>
+                <td>@item.CreatedDate</td>
+                <td>
+                    <a class="edit" href="@Url.Action("EditFilm", "ManagerSeriesTV", new { idFilm = item.Id, idMovie = idMovie})">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <a class="delete" data-targeturl="@Url.Action("DeleteFilm", "ManagerSeriesTV", new { idFilm = item.Id, idMovie = idMovie })">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+
+<div class="clearfix row">
+    <div class="col-md-9">
+        @if (Model.Count() > 0)
+        {
+            <div class="hint-text">Trang <b>@(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)</b> / <b>@Model.PageCount</b></div>
+        }
+        else
+        {
+            <div class="hint-text">Không có dữ liệu</div>
+        }
+    </div>
+    <div class="col-md-3">
+        @Html.PagedListPager(Model, page => Url.Action("GetPageSearchFilm", "ManagerSeriesTV", new { page }),
+     PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() {
+         HttpMethod = "GET", UpdateTargetId = "customer_area"}))
+    </div>
+</div>

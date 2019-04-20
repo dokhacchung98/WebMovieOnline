@@ -108,6 +108,10 @@ table.table td a {
         color: #F44336;
     }
 
+    table.table td a.list {
+        color: #249600;
+    }
+
 table.table td i {
     font-size: 19px;
 }

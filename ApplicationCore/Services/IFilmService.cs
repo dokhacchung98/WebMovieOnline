@@ -11,5 +11,7 @@ namespace ApplicationCore.Services
     public interface IFilmService : IEntityService<Film>
     {
         Film GetFilmByIdMovie(Guid IdMovie);
+
+        IList<Film> GetAllFilmInSeriesTV(Guid IdMovie);
     }
 }

@@ -212,6 +212,7 @@
     <Compile Include="Areas\Admin\Controllers\ManagerResolutionsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManagerProducerController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManagerRolesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ManagerSeriesTVController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManagerTagController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManagerUsersController.cs" />
     <Compile Include="Configuaration\CustomRoleAuthorize.cs" />
@@ -235,6 +236,7 @@
     <Compile Include="ViewModel\DirectorViewModel.cs" />
     <Compile Include="ViewModel\ActorViewModel.cs" />
     <Compile Include="ViewModel\BaseEntityViewModel.cs" />
+    <Compile Include="ViewModel\SeriesTVViewModel.cs" />
     <Compile Include="ViewModel\FeatureFilmViewModel.cs" />
     <Compile Include="ViewModel\FilmViewModel.cs" />
     <Compile Include="ViewModel\MoviesViewModel.cs" />
@@ -1401,6 +1403,16 @@
     <Content Include="Areas\Admin\Views\ManagerFeatureFilm\_PartialViewFeatureFilm.cshtml" />
     <Content Include="Areas\Admin\Views\ManagerFeatureFilm\_Delete.cshtml" />
     <Content Include="Areas\Admin\Views\ManagerFeatureFilm\_Detail.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerSeriesTV\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerSeriesTV\_PartialViewSeriesTV.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerSeriesTV\_Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerSeriesTV\_Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerSeriesTV\_Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerSeriesTV\_ListFilm.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerSeriesTV\_CreateFilm.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerSeriesTV\_PartialViewFilm.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerSeriesTV\_DeleteFilm.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerSeriesTV\_EditFilm.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
