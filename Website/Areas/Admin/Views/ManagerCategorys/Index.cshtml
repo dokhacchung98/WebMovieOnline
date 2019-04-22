@@ -1,0 +1,88 @@
+﻿@model IEnumerable<Website.ViewModel.CategorysViewModel>
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+    AjaxOptions options = new AjaxOptions
+    {
+        UpdateTargetId = "searchResult",
+        Confirm = "Are you sure to start search?",
+        InsertionMode = InsertionMode.Replace,
+        LoadingElementId = "divLoading"
+    };
+}
+
+@Styles.Render("~/Admin/table-css")
+
+
+<div class="row">
+    <div class="container">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-9">
+                        <h2>Quản lý <b>Thể loại</b></h2>
+                    </div>
+                    <div class="col-sm-3">
+                        <a href="#addCategorysModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus"></i><span>Thêm mới thể loại</span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="input-group">
+                <input type="text" class="form-control bg-light border-0 small"
+                       placeholder="Tìm kiếm..." aria-label="Search"
+                       id="keyword" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" id="btnSeach" type="button">
+                        <i class="fas fa-search fa-sm"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="customer_area">
+                @{Html.RenderAction("GetPageSearch", "ManagerCategorys", new { page = 1 });}
+            </div>
+        </div>
+    </div>
+    <!-- Edit Modal HTML -->
+    <div id="addCategorysModal" class="modal fade">
+        @Html.Action("Create", "ManagerCategorys")
+    </div>
+
+    <div id="deleteActorModal" class="modal fade"></div>
+</div>
+
+@Scripts.Render("~/Script/jquery")
+<script>
+    $(document).ready(function () {
+        $('body').on('click', '.delete', function (e) {
+            e.preventDefault();
+            $("#deleteActorModal").remove();
+            $.get($(this).data("targeturl"), function (data) {
+                $('<div id="deleteActorModal" class="modal fade">' +
+                    data + '</div>').modal();
+            });
+        });
+    });
+
+    $('body').on('click', '#btnSeach', function (e) {
+        e.preventDefault();
+        var name = $('#keyword').val();
+        if (name.trim() != null && name.trim().length != 0 && name.trim() != null) {
+            var url = "/Admin/ManagerCategorys?name=" + name;
+            window.location = url;
+        } else {
+            var url = "/Admin/ManagerCategorys";
+            window.location = url;
+        }
+    });
+</script>
+
+<script type="text/javascript">
+    function search() {
+        var s = $('#keyword').val();
+        var url = "/ManagerCategorys/Index?name=" + s;
+        window.location = url;
+    };
+
+</script>

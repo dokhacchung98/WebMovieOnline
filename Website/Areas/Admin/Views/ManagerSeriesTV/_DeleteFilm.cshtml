@@ -1,0 +1,29 @@
+﻿@model Website.ViewModel.FilmViewModel
+
+@{
+    Layout = null;
+    var idMovie = ViewBag.IdMovie;
+}
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        @using (Html.BeginForm("DeleteFilm", "ManagerSeriesTV", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.Id)
+            <input name="idMovie" value="@idMovie" hidden />
+            <input name="idFilm" value="@Model.Id" hidden />
+            <div class="modal-header">
+                <h4 class="modal-title">Xóa Phim</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="text-warning">Bạn có muốn xóa tập @Model.Episodes không?</p>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                <input type="submit" class="btn btn-danger" value="Xóa">
+            </div>
+        }
+    </div>
+</div>

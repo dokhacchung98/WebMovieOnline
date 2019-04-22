@@ -1,0 +1,62 @@
+﻿@model PagedList.IPagedList<Website.ViewModel.CategorysViewModel>
+
+@using PagedList.Mvc
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Tên thể loại</th>
+            <th>Hình ảnh</th>
+            <th>Ngày tạo</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.NameCategory</td>
+                <td>
+                    @if (item.Thumbnail != null)
+                    {
+                        <img class="img-profile rounded-circle"
+                             src="@item.Thumbnail" style="width:50px; height:50px" />
+                    }
+                    else
+                    {
+                        <img class="img-profile rounded-circle"
+                             src="~/Images/default-avatar.png" style="width:50px; height:50px" />
+                    }
+                </td>
+                <td>@item.CreatedDate</td>
+                <td>
+                    <a class="edit" href="@Url.Action("Edit", "ManagerCategorys", new { id = item.Id })">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <a class="delete" data-targeturl="@Url.Action("Delete", "ManagerCategorys", new { id = item.Id })">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+
+<div class="clearfix row">
+    <div class="col-md-9">
+        @if (Model.Count() > 0)
+        {
+            <div class="hint-text">Trang <b>@(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)</b> / <b>@Model.PageCount</b></div>
+        }
+        else
+        {
+            <div class="hint-text">Không có dữ liệu</div>
+        }
+    </div>
+    <div class="col-md-3">
+        @Html.PagedListPager(Model, page => Url.Action("GetPageSearch", "ManagerCategorys", new { page }),
+     PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() {
+         HttpMethod = "GET", UpdateTargetId = "customer_area"}))
+    </div>
+</div>

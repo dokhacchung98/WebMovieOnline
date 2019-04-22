@@ -26,5 +26,7 @@ namespace Common.Service
         void Delete(TEntity entity);
 
         void Update(TEntity entity, object id);
+
+        void Dispose();
     }
 }

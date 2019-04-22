@@ -23,10 +23,11 @@ namespace Website
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
             bundles.Add(new ScriptBundle("~/Script/jquery").Include(
-                      "~/Scripts/jquery-3.3.1.min.js"));
+                      ));
 
             bundles.Add(new ScriptBundle("~/bundles/jsadmin").Include(
-                    "~/Scripts/Admin/sb-admin-2.js"
+                    "~/Scripts/Admin/sb-admin-2.js",
+                    "~/Scripts/jquery.unobtrusive-ajax.js"
                     ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
@@ -35,7 +36,8 @@ namespace Website
                       "~/Content/fontawesome/all.css"));
             bundles.Add(new StyleBundle("~/Content/admincss").Include(
                     "~/Content/sb-admin-2.min.css",
-                      "~/Content/fontawesome/all.css"
+                      "~/Content/fontawesome/all.css",
+                      "~/Content/PagedList.css"
                 ));
             bundles.Add(new StyleBundle("~/Content/unauthorized").Include(
                     "~/Content/unauthorized/unauthorized.css"
@@ -66,7 +68,22 @@ namespace Website
             bundles.Add(new StyleBundle("~/Content/manageuser").Include(
                     "~/Content/manageuser/manager_user.css"
                 ));
-            
+
+            bundles.Add(new StyleBundle("~/Admin/table-css").Include(
+                "~/Areas/Admin/Content/table.css"
+                ));
+
+
+            bundles.Add(new StyleBundle("~/Content/select2").Include(
+                "~/Content/css/select2.min.css",
+                "~/Content/css/selectmystyle.css"
+                ));
+
+            bundles.Add(new ScriptBundle("~/Script/select2").Include(
+                    "~/Scripts/select2.min.js"
+                ));
+
+
         }
     }
 }

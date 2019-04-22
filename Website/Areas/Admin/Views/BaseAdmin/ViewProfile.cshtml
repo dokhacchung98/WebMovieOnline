@@ -4,6 +4,15 @@
     Layout = null;
 }
 
-<span class="mr-2 d-none d-lg-inline text-gray-600 small">@Model.FullName</span>
-<img class="img-profile rounded-circle" src="@Model.Avatar" style="width:40px; height:40px">
+@if (Model.Avatar != null)
+{
+    <img class="img-profile rounded-circle"
+         src="@Model.Avatar" style="width:50px; height:50px; margin-right: 15px;" />
+}
+else
+{
+    <img class="img-profile rounded-circle"
+         src="@(Model.Avatar==null ? "/Images/default-avatar.png" : Model.Avatar)" style="width:50px; height:50px; margin-right: 15px;" />
+}
+<span class="mr-2 d-none d-lg-inline text-gray-600 small" style="font-size: 16px">Xin chào, @Model.FullName</span>
 

@@ -1,9 +1,11 @@
 ﻿
 using ApplicationCore.Services;
 using AutoMapper;
+using Extension.Extensions;
 using Infrastructure.Entities;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -36,11 +38,18 @@ namespace Website.Areas.Admin.Controllers
 
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Create(NewsViewModel model)
+        public ActionResult Create(HttpPostedFileBase image, NewsViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View();
+            }
+
+            if (CheckImageUploadExtension.CheckImagePath(image.FileName) == true)
+            {
+                var path = Path.Combine(Server.MapPath("~/Images/Upload"), image.FileName);
+                image.SaveAs(path);
+                model.Thumbnail = "~/Images/Upload/" + image.FileName;
             }
 
             var news = Mapper.Map<News>(model);

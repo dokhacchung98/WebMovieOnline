@@ -1,0 +1,68 @@
+﻿@model PagedList.IPagedList<Website.ViewModel.SeriesTVViewModel>
+
+@using PagedList.Mvc
+
+<table class="table table-striped table-hover" style="white-space: nowrap;">
+    <thead>
+        <tr>
+            <th>Tên phim</th>
+            <th>Hình ảnh</th>
+            <th>Trạng thái</th>
+            <th>Ngày tạo</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.MoviesViewModel.Name</td>
+                <td>
+                    @if (item.MoviesViewModel.Thumbnail != null)
+                    {
+                        <img class="img-profile rounded-circle"
+                             src="@item.MoviesViewModel.Thumbnail" style="width:50px; height:50px" />
+                    }
+                    else
+                    {
+                        <img class="img-profile rounded-circle"
+                             src="~/Images/default-avatar.png" style="width:50px; height:50px" />
+                    }
+                </td>
+                <td>@item.FilmViewModels.Count / @item.MoviesViewModel.Episodes</td>
+                <td>@item.MoviesViewModel.CreatedDate</td>
+                <td>
+                    <a class="list" href="@Url.Action("ListFilm", "ManagerSeriesTV", new { idMovie = item.MoviesViewModel.Id })">
+                        <i class="fas fa-list-ol" aria-hidden="true"></i>
+                    </a>
+                    <a class="edit" href="@Url.Action("Edit", "ManagerSeriesTV", new { id = item.MoviesViewModel.Id })">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <a class="delete" data-targeturl="@Url.Action("Delete", "ManagerSeriesTV", new { id = item.MoviesViewModel.Id })">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+
+<div class="clearfix row">
+    <div class="col-md-9">
+        @if (Model.Count() > 0)
+        {
+            <div class="hint-text">Trang <b>@(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)</b> / <b>@Model.PageCount</b></div>
+        }
+        else
+        {
+            <div class="hint-text">Không có dữ liệu</div>
+        }
+    </div>
+    <div class="col-md-3">
+        @Html.PagedListPager(Model, page => Url.Action("GetPageSearch", "ManagerSeriesTV", new { page }),
+     PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() {
+         HttpMethod = "GET", UpdateTargetId = "customer_area"}))
+    </div>
+</div>

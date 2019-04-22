@@ -1,0 +1,188 @@
+﻿@model Website.ViewModel.FeatureFilmViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var listDirector = ViewBag.ListDirector as List<SelectListItem>;
+    var listActor = ViewBag.ListActor as List<SelectListItem>;
+    var listProducer = ViewBag.ListProducer as List<SelectListItem>;
+    var listCategory = ViewBag.ListCategory as List<SelectListItem>;
+    var listResolution = ViewBag.ListResolution as List<SelectListItem>;
+    var listTag = ViewBag.ListTag as List<SelectListItem>;
+}
+
+<head>
+    <style>
+        .label {
+            display: inline-block;
+            margin-bottom: 0;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .upload-avatar {
+            cursor: pointer;
+            margin-top: 50%;
+            margin-left: 10px;
+        }
+    </style>
+    @Styles.Render("~/Content/manageuser")
+    <script src="~/Scripts/ckeditor/ckeditor.js"></script>
+    <script src="~/Scripts/ckfinder/ckfinder.js"></script>
+</head>
+
+<body>
+    <script>
+        $(document).ready(function () {
+            $(".Director").select2();
+            $(".Actor").select2();
+            $(".Category").select2();
+            $(".Producer").select2();
+            $(".Resolution").select2();
+            $(".Tag").select2();
+        });
+    </script>
+
+    <div class="container mb-4 main-container">
+        @using (Html.BeginForm("Edit", "ManagerFeatureFilm",
+                    FormMethod.Post, new
+                    {
+                        enctype = "multipart/form-data",
+                        @name = "formupload"
+                    }))
+        {
+            <div class="row">
+                <div class="col-lg-4 pb-5" style="height:100%; box-shadow: none; padding-top: 50px;">
+                    <div class="author-card pb-3">
+                        <div class="author-card-profile">
+                            <div class="author-card-avatar" style="width:100px; height:100px; ">
+                                @if (@Model.MoviesViewModel.Thumbnail != null)
+                                {
+                                    <img class="img-profile rounded-circle avatar"
+                                         src="@Model.MoviesViewModel.Thumbnail" style="width:100%; height:100%" />
+                                }
+                                else
+                                {
+                                    <img class="img-profile rounded-circle avatar"
+                                         src="~/Images/default-avatar.png" style="width:100%; height:100%" />
+                                }
+                            </div>
+                            <label for="uploadFile" style="cursor: pointer" class="upload-avatar">
+                                Thay đổi
+                                <i class="fas fa-upload"></i>
+                            </label>
+                            <input id="uploadFile"
+                                   type="file"
+                                   name="image"
+                                   style="display: none;"
+                                   onchange="ShowImagePreview(this)">
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Orders Table-->
+                <div class="col-lg-8 pb-5 tab-content" id="v-pills-tabContent">
+                    <div class="form-horizontal">
+                        @Html.EditorFor(model => model.MoviesViewModel.Id, new { htmlAttributes = new { @type = "hidden" } })
+                        @Html.EditorFor(model => model.FilmViewModel.Id, new { htmlAttributes = new { @type = "hidden" } })
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.MoviesViewModel.Name)
+                            <span style="color:red">(*)</span>
+                            @Html.EditorFor(model => model.MoviesViewModel.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.MoviesViewModel.NameEn)
+                            <span style="color:red">(*)</span>
+                            @Html.EditorFor(model => model.MoviesViewModel.NameEn, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.FilmViewModel.Link)
+                            <span style="color:red">(*)</span>
+                            @Html.EditorFor(model => model.FilmViewModel.Link, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.MoviesViewModel.DatePublish)
+                            <span style="color:red">(*)</span>
+                            @Html.EditorFor(model => model.MoviesViewModel.DatePublish, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.MoviesViewModel.LengthTime)
+                            @Html.EditorFor(model => model.MoviesViewModel.LengthTime, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.MoviesViewModel.Language)
+                            @Html.EditorFor(model => model.MoviesViewModel.Language, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.MoviesViewModel.Country)
+                            @Html.EditorFor(model => model.MoviesViewModel.Country, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.MoviesViewModel.IsHot, new { @class = "mr-2" })
+                            <span style="color:red">(*)</span>
+                            @Html.CheckBoxFor(model => model.MoviesViewModel.IsHot)
+                        </div>
+
+                        <div class="form-group">
+                            <label>Diễn viên</label>
+                            <br />
+                            @Html.DropDownList("Actor", listActor, new { @class = "Actor", @multiple = "multiple" })
+                        </div>
+                        <div class="form-group">
+                            <label>Đạo diễn</label>
+                            <br />
+                            @Html.DropDownList("Director", listDirector, new { @class = "Director", @multiple = "multiple" })
+                        </div>
+                        <div class="form-group">
+                            <label>Thể loại</label>
+                            <br />
+                            @Html.DropDownList("Category", listCategory, new { @class = "Category", @multiple = "multiple" })
+                        </div>
+                        <div class="form-group">
+                            <label>Nhà sản xuất</label>
+                            <br />
+                            @Html.DropDownList("Producer", listProducer, new { @class = "Producer", @multiple = "multiple" })
+                        </div>
+                        <div class="form-group">
+                            <label>Chất lượng</label>
+                            <br />
+                            @Html.DropDownList("Resolution", listResolution, new { @class = "Resolution", @multiple = "multiple" })
+                        </div>
+                        <div class="form-group">
+                            <label>Thẻ</label>
+                            <br />
+                            @Html.DropDownList("Tag", listTag, new { @class = "Tag", @multiple = "multiple" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.MoviesViewModel.Description, new { @class = "label" })
+                            <span style="color:red">(*)</span>
+                            @Html.TextAreaFor(model => model.MoviesViewModel.Description, new { @id = "ckeditor" })
+                            <script type="text/javascript">
+                                CKEDITOR.replace("ckeditor");
+                            </script>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        Lưu thông tin
+                    </button>
+                    <a class="btn btn-outline-danger" href="@Url.Action("Index")">
+                        Hủy
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+</body>
+<script>
+    function ShowImagePreview(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('.img-profile.rounded-circle.avatar').prop('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
