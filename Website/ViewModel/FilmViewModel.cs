@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
-using Website.ViewModels;
 
 namespace Website.ViewModel
 {
@@ -18,13 +14,18 @@ namespace Website.ViewModel
             if (MovieId == null)
                 MovieId = Guid.NewGuid();
         }
+
         [Key]
         public Guid Id { get; set; }
+
         [DisplayName("Tập phim")]
         public int Episodes { get; set; }
+
         [DisplayName("Đường dẫn")]
         public string Link { get; set; }
+
         public Guid MovieId { get; set; }
+
         [DisplayName("Ngày tạo")]
         [DataType(DataType.Date)]
         [Column(TypeName = "Date")]

@@ -65,6 +65,15 @@
     </li>
 
     <!-- Nav Item - Utilities Collapse Menu -->
+    <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString().Equals("ManagerTrailers") ? "active" : "")">
+        <a class="nav-link collapsed" href="@Url.Action("Index","ManagerTrailers")">
+            <i class="fas fa-newspaper"></i>
+            <span>Trailer</span>
+        </a>
+    </li>
+
+    <!-- Nav Item - Utilities Collapse Menu -->
+    <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString().Equals("ManagerNews") ? "active" : "")">
     <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString().ToLower().Equals("managernews") ? "active" : "")">
         <a class="nav-link collapsed" href="@Url.Action("Index","ManagerNews")">
             <i class="fas fa-newspaper"></i>

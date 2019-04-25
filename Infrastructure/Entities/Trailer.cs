@@ -7,6 +7,8 @@ namespace Infrastructure.Entities
     {
         public string Link { get; set; }
 
+        public string TrailerName { get; set; }
+ 
         #region Relation
 
         [ForeignKey("Movie")]

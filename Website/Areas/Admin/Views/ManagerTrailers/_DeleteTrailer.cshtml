@@ -1,0 +1,26 @@
+﻿@model Website.ViewModel.TrailerViewModel
+
+@{
+    Layout = null;
+}
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        @using (Html.BeginForm("Delete", "ManagerTrailers", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.Id)
+            <div class="modal-header">
+                <h4 class="modal-title">Xóa Trailer</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="text-warning">Bạn có muốn xóa @Model.TrailerName không?</p>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn btn-default" data-dismiss="modal" value="Hủy">
+                <input type="submit" class="btn btn-danger" value="Xóa Trailer">
+            </div>
+        }
+    </div>
+</div>

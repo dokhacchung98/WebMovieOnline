@@ -81,6 +81,7 @@
     <Compile Include="Repositories\IRoleRepository.cs" />
     <Compile Include="Repositories\ITagMovieRepository.cs" />
     <Compile Include="Repositories\ITagRepository.cs" />
+    <Compile Include="Repositories\ITrailerRepository.cs" />
     <Compile Include="Repositories\MoviesRepository.cs" />
     <Compile Include="Repositories\NewsRepository.cs" />
     <Compile Include="Repositories\ProducerMovieRepository.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Repositories\RoleRepository.cs" />
     <Compile Include="Repositories\TagMovieRepository.cs" />
     <Compile Include="Repositories\TagRepository.cs" />
+    <Compile Include="Repositories\TrailerRepository.cs" />
     <Compile Include="Services\ActorMovieService.cs" />
     <Compile Include="Services\ActorsService.cs" />
     <Compile Include="Services\ApplicationUserService.cs" />
@@ -115,6 +117,7 @@
     <Compile Include="Services\IRoleService.cs" />
     <Compile Include="Services\ITagMovieService.cs" />
     <Compile Include="Services\ITagService.cs" />
+    <Compile Include="Services\ITrailerService.cs" />
     <Compile Include="Services\MoviesService.cs" />
     <Compile Include="Services\NewsService.cs" />
     <Compile Include="Services\ProducerMovieService.cs" />
@@ -124,6 +127,7 @@
     <Compile Include="Services\RoleService.cs" />
     <Compile Include="Services\TagMovieService.cs" />
     <Compile Include="Services\TagService.cs" />
+    <Compile Include="Services\TrailerService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
