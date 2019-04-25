@@ -35,6 +35,13 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <Target Name="CopyRoslynFiles" AfterTargets="AfterBuild" Condition="!$(Disable_CopyWebApplication) And '$(OutDir)' != '$(OutputPath)'">
+    <ItemGroup>
+      <RoslynFiles Include="$(CscToolPath)\*" />
+    </ItemGroup>
+    <MakeDir Directories="$(WebProjectOutputDir)\bin\roslyn" />
+    <Copy SourceFiles="@(RoslynFiles)" DestinationFolder="$(WebProjectOutputDir)\bin\roslyn" SkipUnchangedFiles="true" Retries="$(CopyRetryCount)" RetryDelayMilliseconds="$(CopyRetryDelayMilliseconds)" />
+  </Target>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>pdbonly</DebugType>
@@ -920,8 +927,6 @@
     <Content Include="Areas\Admin\Views\ManagerUsers\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ManagerUsers\_EditRole.cshtml" />
     <Content Include="Areas\Admin\Views\ManagerUsers\_EditUser.cshtml" />
-    <Content Include="Areas\Admin\Views\ManagerNews\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\ManagerNews\Create.cshtml" />
     <Content Include="Scripts\ckeditor\adapters\jquery.js" />
     <Content Include="Scripts\ckeditor\build-config.js" />
     <Content Include="Scripts\ckeditor\ckeditor.js" />
@@ -1413,6 +1418,11 @@
     <Content Include="Areas\Admin\Views\ManagerSeriesTV\_PartialViewFilm.cshtml" />
     <Content Include="Areas\Admin\Views\ManagerSeriesTV\_DeleteFilm.cshtml" />
     <Content Include="Areas\Admin\Views\ManagerSeriesTV\_EditFilm.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerNews\_Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerNews\_Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerNews\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerNews\_PartialViewNews.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerNews\Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -1469,6 +1479,7 @@
     <Content Include="Views\Manage\_InformationUserPage.cshtml" />
     <Content Include="Views\Shared\_LayoutManagerUser.cshtml" />
     <Content Include="Views\Base\ViewProfile.cshtml" />
+    <Content Include="Views\Shared\_PartialMovie.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

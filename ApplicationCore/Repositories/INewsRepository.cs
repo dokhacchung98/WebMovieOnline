@@ -12,5 +12,7 @@ namespace ApplicationCore.Repositories
     {
         /* Get number of items on list news for generate slidebar */
         IEnumerable<News> GetListNews(int number);
+
+        IEnumerable<News> SearchNewsByTitle(string value);
     }
 }
