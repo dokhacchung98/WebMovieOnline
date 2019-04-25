@@ -19,5 +19,10 @@ namespace ApplicationCore.Repositories
         {
             return _dbContext.News.ToList().OrderBy(t => t.CreatedBy).Take(number);
         }
+
+        public IEnumerable<News> SearchNewsByTitle(string value)
+        {
+            return _dbContext.News.Where(t => t.Title.Contains(value)).ToList();
+        }
     }
 }

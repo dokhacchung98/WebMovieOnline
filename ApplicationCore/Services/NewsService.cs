@@ -22,5 +22,10 @@ namespace ApplicationCore.Services
         {
             return _repository.GetListNews(number);
         }
+
+        public IEnumerable<News> SearchNewsByTitle(string value)
+        {
+            return _repository.SearchNewsByTitle(value);
+        }
     }
 }
