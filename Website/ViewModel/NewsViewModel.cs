@@ -13,5 +13,7 @@ namespace Website.ViewModel
         public string Title { get; set; }
         [DisplayName("Mô Tả Ngắn")]
         public string ShortDescription { get; set; }
+        [DisplayName("Phim")]
+        public Guid? MovieId { get; set; }
     }
 }

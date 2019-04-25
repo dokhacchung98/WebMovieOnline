@@ -17,8 +17,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <script src="~/Scripts/select2.min.js"></script>
     <link href="~/Content/css/select2.min.css" rel="stylesheet" />
 
-    @Styles.Render("~/Content/style-bootstrap3")
-    @Scripts.Render("~/Script/script-website")
+    <script type="text/javascript" src="js/move-top.js"></script>
+    <script type="text/javascript" src="js/easing.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1000);
+            });
+        });
+    </script>
 
 </head>
 
@@ -38,7 +46,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="w3l_sign_in_register">
                 @if (Request.IsAuthenticated)
                 {
-                    @Html.Action("ViewProfile", "Base", new { userName = User.Identity.Name});
+                    @Html.Action("ViewProfile", "Base", new { userName = User.Identity.Name });
                 }
                 else
                 {
@@ -110,82 +118,50 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
                     <nav>
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="index.html">Home</a></li>
+                            <li class="active"><a href="index.html">Trang Chủ</a></li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Genres <b class="caret"></b></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Thể Loại <b class="caret"></b></a>
                                 <ul class="dropdown-menu multi-column columns-3">
                                     <li>
                                         <div class="col-sm-4">
                                             <ul class="multi-column-dropdown">
-                                                <li><a href="genres.html">Action</a></li>
-                                                <li><a href="genres.html">Biography</a></li>
-                                                <li><a href="genres.html">Crime</a></li>
-                                                <li><a href="genres.html">Family</a></li>
-                                                <li><a href="horror.html">Horror</a></li>
-                                                <li><a href="genres.html">Romance</a></li>
-                                                <li><a href="genres.html">Sports</a></li>
-                                                <li><a href="genres.html">War</a></li>
+                                                <li><a href="genres.html">Phim hành động</a></li>
+                                                <li><a href="genres.html">Phim viễn tưởng</a></li>
+                                                <li><a href="genres.html">Phim chiến tranh</a></li>
+                                                <li><a href="genres.html">Phim hình sự</a></li>
+                                                <li><a href="horror.html">Phim phiêu lưu</a></li>
+                                                <li><a href="genres.html">Phim hài hước</a></li>
+                                                <li><a href="genres.html">Phim võ thuật</a></li>
+                                                <li><a href="genres.html">Phim kinh dị</a></li>
                                             </ul>
                                         </div>
                                         <div class="col-sm-4">
                                             <ul class="multi-column-dropdown">
-                                                <li><a href="genres.html">Adventure</a></li>
-                                                <li><a href="comedy.html">Comedy</a></li>
-                                                <li><a href="genres.html">Documentary</a></li>
-                                                <li><a href="genres.html">Fantasy</a></li>
-                                                <li><a href="genres.html">Thriller</a></li>
+                                                <li><a href="genres.html">Phim hồi hộp-Gây cấn</a></li>
+                                                <li><a href="comedy.html">Phim Bí ẩn-Siêu nhiên</a></li>
+                                                <li><a href="genres.html">Phim cổ trang</a></li>
+                                                <li><a href="genres.html">Phim thần thoại</a></li>
+                                                <li><a href="genres.html">Phim tâm lý</a></li>
                                             </ul>
                                         </div>
                                         <div class="col-sm-4">
                                             <ul class="multi-column-dropdown">
-                                                <li><a href="genres.html">Animation</a></li>
-                                                <li><a href="genres.html">Costume</a></li>
-                                                <li><a href="genres.html">Drama</a></li>
-                                                <li><a href="genres.html">History</a></li>
-                                                <li><a href="genres.html">Musical</a></li>
-                                                <li><a href="genres.html">Psychological</a></li>
+                                                <li><a href="genres.html">Phim tài liệu</a></li>
+                                                <li><a href="genres.html">Phim tình cảm-Lãng mạn</a></li>
+                                                <li><a href="genres.html">Phim chính kịch - Drama</a></li>
+                                                <li><a href="genres.html">Phim Thể thao-Âm nhạc</a></li>
+                                                <li><a href="genres.html">Phim gia đình</a></li>
+                                                <li><a href="genres.html">Phim hoạt hình</a></li>
                                             </ul>
                                         </div>
                                         <div class="clearfix"></div>
                                     </li>
                                 </ul>
                             </li>
-                            <li><a href="series.html">tv - series</a></li>
-                            <li><a href="news.html">news</a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Country <b class="caret"></b></a>
-                                <ul class="dropdown-menu multi-column columns-3">
-                                    <li>
-                                        <div class="col-sm-4">
-                                            <ul class="multi-column-dropdown">
-                                                <li><a href="genres.html">Asia</a></li>
-                                                <li><a href="genres.html">France</a></li>
-                                                <li><a href="genres.html">Taiwan</a></li>
-                                                <li><a href="genres.html">United States</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <ul class="multi-column-dropdown">
-                                                <li><a href="genres.html">China</a></li>
-                                                <li><a href="genres.html">HongCong</a></li>
-                                                <li><a href="genres.html">Japan</a></li>
-                                                <li><a href="genres.html">Thailand</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <ul class="multi-column-dropdown">
-                                                <li><a href="genres.html">Euro</a></li>
-                                                <li><a href="genres.html">India</a></li>
-                                                <li><a href="genres.html">Korea</a></li>
-                                                <li><a href="genres.html">United Kingdom</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a href="short-codes.html">Short Codes</a></li>
-                            <li><a href="list.html">A - z list</a></li>
+                            <li><a href="series.html">Phim Bộ</a></li>
+                            <li><a href="news.html">Phim Lẻ</a></li>
+                            <li><a href="short-codes.html">Tin Tức</a></li>
+                            <li><a href="list.html">Trailer</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -198,7 +174,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         @Html.Action("SlideBarTopView", "Base")
     </div>
     <!-- //banner -->
-    <!-- banner-bottom -->
 
 
     @RenderBody()
@@ -209,10 +184,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="w3ls_footer_grid">
                 <div class="col-md-6 w3ls_footer_grid_left">
                     <div class="w3ls_footer_grid_left1">
-                        <h2>Subscribe to us</h2>
+                        <h2>Đăng ký với chúng tôi</h2>
                         <div class="w3ls_footer_grid_left1_pos">
                             <form action="#" method="post">
-                                <input type="email" name="email" placeholder="Your email..." required="">
+                                <input type="email" name="email" placeholder="Email của bạn..." required="">
                                 <input type="submit" value="Send">
                             </form>
                         </div>
@@ -224,37 +199,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="clearfix"> </div>
             </div>
             <div class="col-md-5 w3ls_footer_grid1_left">
-                <p>&copy; 2016 One Movies</p>
-            </div>
-            <div class="col-md-7 w3ls_footer_grid1_right">
-                <ul>
-                    <li>
-                        <a href="genres.html">Movies</a>
-                    </li>
-                    <li>
-                        <a href="faq.html">FAQ</a>
-                    </li>
-                    <li>
-                        <a href="horror.html">Action</a>
-                    </li>
-                    <li>
-                        <a href="genres.html">Adventure</a>
-                    </li>
-                    <li>
-                        <a href="comedy.html">Comedy</a>
-                    </li>
-                    <li>
-                        <a href="icons.html">Icons</a>
-                    </li>
-                    <li>
-                        <a href="contact.html">Contact Us</a>
-                    </li>
-                </ul>
+                <p>&copy; 2019 One Movies</p>
             </div>
             <div class="clearfix"> </div>
         </div>
     </div>
     <!-- //footer -->
+
+    @Styles.Render("~/Content/style-bootstrap3")
+    @Scripts.Render("~/Script/script-website")
+
+    <script type="text/javascript">
+        $("#slidey").slidey({
+            interval: 8000,
+            listCount: 5,
+            autoplay: false,
+            showList: true
+        });
+        $(".slidey-list-description").dotdotdot();
+    </script>
     @RenderSection("scripts", required: false)
 
 </body>

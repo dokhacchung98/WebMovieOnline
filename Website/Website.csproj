@@ -35,6 +35,13 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <Target Name="CopyRoslynFiles" AfterTargets="AfterBuild" Condition="!$(Disable_CopyWebApplication) And '$(OutDir)' != '$(OutputPath)'">
+    <ItemGroup>
+      <RoslynFiles Include="$(CscToolPath)\*" />
+    </ItemGroup>
+    <MakeDir Directories="$(WebProjectOutputDir)\bin\roslyn" />
+    <Copy SourceFiles="@(RoslynFiles)" DestinationFolder="$(WebProjectOutputDir)\bin\roslyn" SkipUnchangedFiles="true" Retries="$(CopyRetryCount)" RetryDelayMilliseconds="$(CopyRetryDelayMilliseconds)" />
+  </Target>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>pdbonly</DebugType>
@@ -979,6 +986,12 @@
     <Content Include="webfonts\fa-solid-900.ttf" />
     <Content Include="webfonts\fa-solid-900.woff" />
     <Content Include="webfonts\fa-solid-900.woff2" />
+    <Content Include="Areas\Admin\Views\Shared\_TopBar.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Footer.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerRoles\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerUsers\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerUsers\_EditRole.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerUsers\_EditUser.cshtml" />
     <Content Include="Scripts\ckeditor\adapters\jquery.js" />
     <Content Include="Scripts\ckeditor\build-config.js" />
     <Content Include="Scripts\ckeditor\ckeditor.js" />
@@ -1413,6 +1426,53 @@
     <Content Include="Content\webfonts\fa-solid-900.woff2" />
     <Content Include="Scripts\ckfinder\plugins\fileeditor\codemirror\LICENSE" />
     <Content Include="Scripts\ckfinder\userfiles\.htaccess" />
+    <Content Include="Areas\Admin\Views\ManagerActors\_PartialViewActor.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerDirectors\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerDirectors\_PartialViewDirector.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerDirectors\_CreateDirector.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerDirectors\_EditDirector.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerDirectors\_DeleteDirector.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerResolutions\_CreateResolution.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerResolutions\_DeleteResolution.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerResolutions\_EditResolution.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerResolutions\_PartialViewResolution.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerResolutions\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerTag\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerTag\_PartialViewTag.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerTag\_CreateTag.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerTag\_EditTag.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerTag\_DeleteTag.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerCategorys\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerCategorys\_CreateCategorys.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerCategorys\_DeleteCategorys.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerCategorys\_EditCategorys.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerCategorys\_PartialViewCategorys.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerProducer\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerProducer\_CreateProducer.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerProducer\_DeleteProducer.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerProducer\_EditProducer.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerProducer\_PartialViewProducer.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerFeatureFilm\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerFeatureFilm\_Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerFeatureFilm\_Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerFeatureFilm\_PartialViewFeatureFilm.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerFeatureFilm\_Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerFeatureFilm\_Detail.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerSeriesTV\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerSeriesTV\_PartialViewSeriesTV.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerSeriesTV\_Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerSeriesTV\_Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerSeriesTV\_Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerSeriesTV\_ListFilm.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerSeriesTV\_CreateFilm.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerSeriesTV\_PartialViewFilm.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerSeriesTV\_DeleteFilm.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerSeriesTV\_EditFilm.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerNews\_Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerNews\_Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerNews\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerNews\_PartialViewNews.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerNews\Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -1469,6 +1529,7 @@
     <Content Include="Views\Manage\_InformationUserPage.cshtml" />
     <Content Include="Views\Shared\_LayoutManagerUser.cshtml" />
     <Content Include="Views\Base\ViewProfile.cshtml" />
+    <Content Include="Views\Shared\_PartialMovie.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
