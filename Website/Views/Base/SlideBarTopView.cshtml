@@ -10,7 +10,7 @@
         {
             foreach (var mv in Model)
             {
-                <li><img src="@Url.Content(@mv.Thumbnail)" alt=" "><p class='title'>@mv.Title</p><p class='description'> @mv.ShortDescription</p></li>
+                <li><img src="@mv.Thumbnail" alt=" "><p class='title'>@mv.Title</p><p class='description'> @mv.ShortDescription</p></li>
             }
         }
 
@@ -26,4 +26,3 @@
         });
         $(".slidey-list-description").dotdotdot();
 </script>
-

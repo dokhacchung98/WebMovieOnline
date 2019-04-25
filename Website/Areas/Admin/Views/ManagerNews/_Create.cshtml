@@ -1,20 +1,29 @@
-﻿@model Website.ViewModel.CategorysViewModel
+﻿@model Website.ViewModel.NewsViewModel
 
 @{
     ViewBag.Title = "Create";
     Layout = null;
+    var listMovie = ViewBag.ListMovie as List<SelectListItem>;
 }
 
 
 <script src="~/Scripts/ckeditor/ckeditor.js"></script>
 <script src="~/Scripts/ckfinder/ckfinder.js"></script>
-
+<script>
+    $(document).ready(function () {
+        $('#MovieId').select2({
+            placeholder: "",
+            allowClear: true,
+            selectOnClose: false,
+        });
+    });
+</script>
 <div class="modal-dialog">
     <div class="modal-content">
-        @using (Html.BeginForm("Create", "ManagerCategorys", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("Create", "ManagerNews", FormMethod.Post, new { enctype = "multipart/form-data", @name = "formupload" }))
         {
             <div class="modal-header">
-                <h4 class="modal-title">Thêm mới <b>Thể Loại</b></h4>
+                <h4 class="modal-title">Thêm mới <b>Tin tức</b></h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
@@ -22,8 +31,16 @@
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary("", new { @class = "text-danger" })
                 <div class="form-group">
-                    @Html.LabelFor(model => model.NameCategory)
-                    @Html.EditorFor(model => model.NameCategory, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.LabelFor(model => model.Title)
+                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ShortDescription)
+                    @Html.EditorFor(model => model.ShortDescription, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MovieId)
+                    @Html.DropDownListFor(model => model.MovieId, listMovie, new { @class = "form-control" })
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.Thumbnail)
@@ -38,7 +55,7 @@
             </div>
             <div class="modal-footer">
                 <input type="button" class="btn btn-default" data-dismiss="modal" value="Hủy">
-                <input type="submit" class="btn btn-success" value="Thêm mới thể loại">
+                <input type="submit" class="btn btn-success" value="Thêm mới tin tức">
             </div>
         }
     </div>
