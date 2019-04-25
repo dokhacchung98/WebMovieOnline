@@ -34,14 +34,39 @@
 <body>
     <script>
         $(document).ready(function () {
-            $(".Director").select2();
-            $(".Actor").select2();
-            $(".Category").select2();
-            $(".Producer").select2();
-            $(".Resolution").select2();
-            $(".Tag").select2();
+            $(".Director").select2({
+                placeholder: "",
+                allowClear: true,
+                selectOnClose: false,
+            });
+            $(".Actor").select2({
+                placeholder: "",
+                allowClear: true,
+                selectOnClose: false,
+            });
+            $(".Category").select2({
+                placeholder: "",
+                allowClear: true,
+                selectOnClose: false,
+            });
+            $(".Producer").select2({
+                placeholder: "",
+                allowClear: true,
+                selectOnClose: false,
+            });
+            $(".Resolution").select2({
+                placeholder: "",
+                allowClear: true,
+                selectOnClose: false,
+            });
+            $(".Tag").select2({
+                placeholder: "",
+                allowClear: true,
+                selectOnClose: false,
+            });
         });
-    </script>
+
+/**/</script>
 
     <div class="container mb-4 main-container">
         @using (Html.BeginForm("Edit", "ManagerSeriesTV",

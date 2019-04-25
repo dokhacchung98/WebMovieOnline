@@ -28,7 +28,12 @@
 <body>
     <script>
         $(document).ready(function () {
-            $('#MovieId').select2();
+            $('#MovieId').select2({
+            placeholder: "",
+            allowClear: true,
+            selectOnClose: false,
+        });
+    });
         });
     </script>
     <div class="container mb-4 main-container">
