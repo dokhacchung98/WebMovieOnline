@@ -1,0 +1,77 @@
+﻿@model Website.ViewModel.TrailerViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = null;
+}
+<head>
+    <style>
+        select#MovieId {
+            width: 100%;
+            height: 40px;
+            font-size: 15px;
+            border-radius: 2px;
+            border: 1px solid gray;
+        }
+    </style>
+</head>
+
+<script src="~/Scripts/ckeditor/ckeditor.js"></script>
+<script src="~/Scripts/ckfinder/ckfinder.js"></script>
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        @using (Html.BeginForm("Create", "ManagerTrailers", FormMethod.Post, new { enctype = "multipart/form-data", @name = "formupload" }))
+        {
+            <div class="modal-header">
+                <h4 class="modal-title">Thêm mới <b>Trailer</b></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Thumbnail)
+                    <span style="color:red">(*)</span>
+                    <input type='file' name="image" id="upload" onchange="ShowImagePreview(this)" />
+                </div>
+                <img id="imagePreview" style="width:30%" class="img-thumbnail mb-2" />
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TrailerName)
+                    @Html.EditorFor(model => model.TrailerName, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Link)
+                    @Html.EditorFor(model => model.Link, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="form-group">
+                    <label>Tên phim</label>
+                    @Html.DropDownList("MovieId", (SelectList)ViewBag.Movies, new { @class = "selected" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Description)
+                    <textarea name="Description" id="ckeditor"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn btn-default" data-dismiss="modal" value="Hủy">
+                <input type="submit" class="btn btn-success" value="Thêm mới trailer">
+            </div>
+        }
+    </div>
+</div>
+@Scripts.Render("~/Script/jquery")
+<script>
+    CKEDITOR.replace('ckeditor');
+    function ShowImagePreview(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#imagePreview').prop('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
