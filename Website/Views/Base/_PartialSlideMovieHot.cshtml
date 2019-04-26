@@ -3,42 +3,46 @@
 @{
     Layout = null;
 }
-
-<script>
-    $(document).ready(function () {
-        $("#owl-demo").owlCarousel({
-
-            autoPlay: 3000, //Set AutoPlay to 3 seconds
-
-            items: 5,
-            itemsDesktop: [640, 4],
-            itemsDesktopSmall: [414, 3]
-
-        });
-
-    });
-</script>
-
-
+@*@Html.Partial("_PartialMovie", item);*@
 
 <div class="banner-bottom">
     <div class="container">
         <div class="w3_agile_banner_bottom_grid">
-            <div id="owl-demo" class="owl-carousel owl-theme" style="opacity: 1; display: block;">
-                <div class="owl-wrapper-outer">
-                    <div class="owl-wrapper" style="width: 3996px; left: 0px; display: block; transition: all 800ms ease 0s; transform: translate3d(-444px, 0px, 0px);">
-                        @foreach (var item in Model)
-                        {
-                            <div class="owl-item" style="width: 222px;">
-                                <div class="item">
-                                    @Html.Partial("_PartialMovie", item);
+            <div id="owl-demo" class="owl-carousel owl-theme">
+                @foreach (var item in Model)
+                {
+                    <div class="item">
+                        <div class="w3l-movie-gride-agile w3l-movie-gride-agile1">
+                            <a href="single.html" class="hvr-shutter-out-horizontal">
+                                <img src="@item.Thumbnail" title="album-name" class="img-responsive" alt="@item.Name" />
+                                <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+                            </a>
+                            <div class="mid-1 agileits_w3layouts_mid_1_home">
+                                <div class="w3l-movie-text">
+                                    <h6><a href="single.html">@item.Name</a></h6>
+                                </div>
+                                <div class="mid-2 agile_mid_2_home">
+                                    <p>@item.CreatedDate.Value.Year</p>
+                                    <div class="block-stars">
+                                        <ul class="w3l-ratings">
+                                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="clearfix"></div>
                                 </div>
                             </div>
-                        }
+                            @if (item.IsHot)
+                            {<div class="ribben">
+                                    <p>HOT</p>
+                                </div>
+                            }
+                        </div>
                     </div>
-                </div>
-
-                <div class="owl-controls clickable"><div class="owl-pagination"><div class="owl-page active"><span class=""></span></div><div class="owl-page"><span class=""></span></div></div></div>
+                }
             </div>
         </div>
     </div>

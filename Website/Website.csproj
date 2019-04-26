@@ -885,6 +885,7 @@
     <Content Include="Scripts\i18n\zh-TW.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\ScriptWebsite\owl.carousel.js" />
     <Content Include="Scripts\select2.js" />
     <Content Include="Scripts\select2.min.js" />
     <Content Include="webfonts\fa-brands-400.svg" />
@@ -1500,7 +1501,6 @@
     <Content Include="Scripts\ScriptWebsite\jquery.magnific-popup.js" />
     <Content Include="Scripts\ScriptWebsite\jquery.slidey.js" />
     <Content Include="Scripts\ScriptWebsite\move-top.js" />
-    <Content Include="Scripts\ScriptWebsite\owl.carousel.js" />
     <Content Include="Scripts\ScriptWebsite\simplePlayer.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
