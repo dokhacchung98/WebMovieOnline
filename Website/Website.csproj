@@ -885,6 +885,7 @@
     <Content Include="Scripts\i18n\zh-TW.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\ScriptWebsite\owl.carousel.js" />
     <Content Include="Scripts\select2.js" />
     <Content Include="Scripts\select2.min.js" />
     <Content Include="webfonts\fa-brands-400.svg" />
@@ -1500,7 +1501,6 @@
     <Content Include="Scripts\ScriptWebsite\jquery.magnific-popup.js" />
     <Content Include="Scripts\ScriptWebsite\jquery.slidey.js" />
     <Content Include="Scripts\ScriptWebsite\move-top.js" />
-    <Content Include="Scripts\ScriptWebsite\owl.carousel.js" />
     <Content Include="Scripts\ScriptWebsite\simplePlayer.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -1513,8 +1513,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
@@ -1530,6 +1528,7 @@
     <Content Include="Views\Shared\_LayoutManagerUser.cshtml" />
     <Content Include="Views\Base\ViewProfile.cshtml" />
     <Content Include="Views\Shared\_PartialMovie.cshtml" />
+    <Content Include="Views\Base\_PartialSlideMovieHot.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

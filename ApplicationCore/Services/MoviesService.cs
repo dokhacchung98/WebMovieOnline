@@ -24,6 +24,21 @@ namespace ApplicationCore.Services
             return _repository.GetAllSeriesTV();
         }
 
+        public ICollection<Movie> GetCountFeatureFilm(int countMovie)
+        {
+            return _repository.GetCountFeatureFilm(countMovie);
+        }
+
+        public ICollection<Movie> GetCountMovieHot(int countMovie)
+        {
+            return _repository.GetCountMovieHot(countMovie);
+        }
+
+        public ICollection<Movie> GetCountSeriesMovies(int countMovie)
+        {
+            return _repository.GetCountSeriesMovies(countMovie);
+        }
+
         public ICollection<Movie> SearchFeatureMovieByName(string name)
         {
             return _repository.SearchMovieByNameAndType(name, false);
