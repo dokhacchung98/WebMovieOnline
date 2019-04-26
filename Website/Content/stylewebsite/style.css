@@ -4,6 +4,19 @@ Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 --*/
+
+/**
+    reset css
+*/
+html, body {
+    overflow-x: hidden;
+}
+
+ul, li, ol {
+    margin: 0;
+    padding: 0;
+}
+
 html, body{
     font-size: 100%;
 	font-family: 'Roboto Condensed', sans-serif;
