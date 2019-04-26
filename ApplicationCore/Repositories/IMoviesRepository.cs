@@ -13,5 +13,7 @@ namespace ApplicationCore.Repositories
         ICollection<Movie> SearchMovieByName(string name);
 
         ICollection<Movie> SearchMovieByNameAndType(string name, bool isSeriesTV);
+
+        ICollection<Movie> GetCountMovieHot(int countMovie);
     }
 }

@@ -11,20 +11,20 @@ namespace Website.Controllers
 {
     public class BaseController : Controller
     {
-        private INewsService _service;
+        private INewsService _newsService;
 
         private readonly IApplicationUserService _userService;
 
-        public BaseController(INewsService service, IApplicationUserService userService)
+        public BaseController(INewsService newsService, IApplicationUserService userService)
         {
-            _service = service;
+            _newsService = newsService;
             _userService = userService;
         }
 
         // GET: Base
         public ActionResult SlideBarTopView()
         {
-            var items = _service.GetNumberOfListNews(7);
+            var items = _newsService.GetNumberOfListNews(7);
             return View(items);
         }
 
@@ -34,6 +34,13 @@ namespace Website.Controllers
             var userProfile = Mapper.Map<ProfileUserViewModel>(user);
 
             return PartialView(userProfile);
+        }
+
+        public ActionResult ViewSlideMovieHot()
+        {
+            var listMovieHot = _newsService.GetNumberOfListNews(10);
+            var listMovieHotViewModel = Mapper.Map<MoviesViewModel>(listMovieHot);
+            return PartialView("_PartialSlideMovieHot", listMovieHotViewModel);
         }
     }
 }

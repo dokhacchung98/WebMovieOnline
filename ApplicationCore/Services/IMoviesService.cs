@@ -15,5 +15,7 @@ namespace ApplicationCore.Services
         ICollection<Movie> SearchFeatureMovieByName(string name);
 
         ICollection<Movie> SearchSeriesTVByName(string name);
+
+        ICollection<Movie> GetCountMovieHot(int countMovie);
     }
 }

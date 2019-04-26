@@ -13,7 +13,7 @@
             <h6><a href="single.html">@Model.Name</a></h6>
         </div>
         <div class="mid-2 agile_mid_2_home">
-            <p>2016</p>
+            <p>@Model.CreatedDate.Value.Year</p>
             <div class="block-stars">
                 <ul class="w3l-ratings">
                     <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
@@ -27,6 +27,9 @@
         </div>
     </div>
     <div class="ribben">
-        <p>NEW</p>
+        @if (Model.IsHot)
+        {
+            <p>HOT</p>
+        }
     </div>
 </div>
