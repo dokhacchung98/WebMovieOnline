@@ -5,7 +5,7 @@
 }
 <div class="col-md-2 w3l-movie-gride-agile">
     <a href="single.html" class="hvr-shutter-out-horizontal">
-        <img src="@Model.Thumbnail" title="album-name" class="img-responsive" alt=" " />
+        <img style="width:175px; height:257.688px;" src="@Model.Thumbnail" title="album-name" class="img-responsive" alt=" " />
         <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
     </a>
     <div class="mid-1 agileits_w3layouts_mid_1_home">
@@ -26,10 +26,11 @@
             <div class="clearfix"></div>
         </div>
     </div>
-    <div class="ribben">
-        @if (Model.IsHot)
-        {
+
+    @if (Model.IsHot)
+    {<div class="ribben">
             <p>HOT</p>
-        }
-    </div>
+        </div>
+    }
+
 </div>

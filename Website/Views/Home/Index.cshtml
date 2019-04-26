@@ -1,5 +1,26 @@
 ﻿@{
     ViewBag.Title = "Home Page";
+    var listFeatureFilm = ViewBag.ListFeatureFilm as IEnumerable<Website.ViewModel.MoviesViewModel>;
+    var listSeriesMovie = ViewBag.ListSeriesMovie as IEnumerable<Website.ViewModel.MoviesViewModel>;
 }
 
 @Html.Action("ViewSlideMovieHot", "Base")
+
+<div class="general">
+    <h4 class="latest-text w3_latest_text">Phim Lẻ</h4>
+    <div class="container">
+        <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+            <div id="myTabContent" class="tab-content">
+                <div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
+                    <div class="w3_agile_featured_movies">
+                        @foreach (var item in listFeatureFilm)
+                        {
+                            @Html.Partial("_PartialMovie", item)
+                        }
+                        <div class="clearfix"> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -25,9 +25,19 @@ namespace ApplicationCore.Repositories
             return _dbContext.Movies.Where(t => t.IsSeriesMovie == true).ToList();
         }
 
+        public ICollection<Movie> GetCountFeatureFilm(int countMovie)
+        {
+            return _dbContext.Movies.Where(t => t.IsSeriesMovie == false).OrderBy(t => t.CreatedDate).Take(countMovie).ToList();
+        }
+
         public ICollection<Movie> GetCountMovieHot(int countMovie)
         {
             return _dbContext.Movies.Where(t => t.IsHot == true).OrderBy(t => t.CreatedDate).Take(countMovie).ToList();
+        }
+
+        public ICollection<Movie> GetCountSeriesMovies(int countMovie)
+        {
+            return _dbContext.Movies.Where(t => t.IsSeriesMovie == true).OrderBy(t => t.CreatedDate).Take(countMovie).ToList();
         }
 
         public ICollection<Movie> SearchMovieByName(string name)

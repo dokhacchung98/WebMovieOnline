@@ -12,13 +12,17 @@ namespace Website.Controllers
     public class BaseController : Controller
     {
         private INewsService _newsService;
+        private readonly IMoviesService _moviesService;
+        
 
         private readonly IApplicationUserService _userService;
 
-        public BaseController(INewsService newsService, IApplicationUserService userService)
+        public BaseController(INewsService newsService, IApplicationUserService userService,
+                                IMoviesService moviesService)
         {
             _newsService = newsService;
             _userService = userService;
+            _moviesService = moviesService;
         }
 
         // GET: Base
@@ -38,8 +42,8 @@ namespace Website.Controllers
 
         public ActionResult ViewSlideMovieHot()
         {
-            var listMovieHot = _newsService.GetNumberOfListNews(10);
-            var listMovieHotViewModel = Mapper.Map<MoviesViewModel>(listMovieHot);
+            var listMovieHot = _moviesService.GetCountMovieHot(10);
+            var listMovieHotViewModel = Mapper.Map<IEnumerable<MoviesViewModel>>(listMovieHot);
             return PartialView("_PartialSlideMovieHot", listMovieHotViewModel);
         }
     }
