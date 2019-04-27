@@ -228,6 +228,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MoviesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1529,6 +1530,8 @@
     <Content Include="Views\Base\ViewProfile.cshtml" />
     <Content Include="Views\Shared\_PartialMovie.cshtml" />
     <Content Include="Views\Base\_PartialSlideMovieHot.cshtml" />
+    <Content Include="Views\Movies\Details.cshtml" />
+    <Content Include="Views\Movies\_NewestMovies.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

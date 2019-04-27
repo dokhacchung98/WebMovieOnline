@@ -40,6 +40,11 @@ namespace ApplicationCore.Repositories
             return _dbContext.Movies.Where(t => t.IsSeriesMovie == true).OrderBy(t => t.CreatedDate).Take(countMovie).ToList();
         }
 
+        public ICollection<Movie> GetNewestMovies(int countMovie)
+        {
+            return _dbContext.Movies.OrderBy(t => t.CreatedDate).Take(countMovie).ToList();
+        }
+
         public ICollection<Movie> SearchMovieByName(string name)
         {
             return _dbContext.Movies.Where(t => t.Name.Contains(name)).ToList();

@@ -27,6 +27,7 @@ namespace Website.Controllers
 
             ViewBag.ListFeatureFilm = listFeatureFilmViewModel;
             ViewBag.ListSeriesMovie = listSeriesMovieViewModel;
+            ViewBag.MoviesSeen = (ICollection<MoviesViewModel>) Session["MoviesSeen"];
 
             return View();
         }

@@ -19,5 +19,7 @@ namespace ApplicationCore.Repositories
         ICollection<Movie> GetCountFeatureFilm(int countMovie);
 
         ICollection<Movie> GetCountSeriesMovies(int countMovie);
+
+        ICollection<Movie> GetNewestMovies(int countMovie);
     }
 }

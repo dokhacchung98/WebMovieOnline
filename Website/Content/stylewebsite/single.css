@@ -9,11 +9,12 @@ font-family: 'Roboto Condensed', sans-serif;
  padding: 1em 0 0 0;
 }
 .video-grid-single-page-agileits img {
-    width: 100%;
+    width: 250px;
+    margin: auto;
 }
 #video {
   position: relative;
-  background: #000;
+  background: black;
      width: 100%;
     margin: 20px auto;
 }
@@ -28,7 +29,7 @@ font-family: 'Roboto Condensed', sans-serif;
     width: 77px;
     height: 77px;
     cursor: pointer;
-    background: url('../images/play-button.png') no-repeat 0px 0px;
+    background: url('../../Images/play-button.png') no-repeat 0px 0px;
     background-size: auto, cover;
     z-index: 9;
 }
@@ -527,7 +528,7 @@ width:100%;
 	#play {
 		width: 50px;
 		height: 50px;
-		background: url('../images/play-button.png') no-repeat 0px 0px;
+		background: url('../../Images/play-button.png') no-repeat 0px 0px;
 		background-size: 100%;
 	}
 	.single-right {
