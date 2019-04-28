@@ -1,0 +1,101 @@
+﻿@model Website.ViewModel.MoviesViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<script src="~/Scripts/ScriptWebsite/simplePlayer.js"></script>
+<script>
+    $("document").ready(function () {
+        $("#video").simplePlayer();
+    });
+</script>
+
+<div class="single-page-agile-main">
+    <div class="container">
+        <!-- /w3l-medile-movies-grids -->
+        <div class="agileits-single-top">
+            <ol class="breadcrumb">
+                <li><a href="index.html">Trang chủ</a></li>
+                <li class="active">@Model.Name</li>
+            </ol>
+        </div>
+        <div class="single-page-agile-info">
+            <!-- /movie-browse-agile -->
+            <div class="show-top-grids-w3lagile">
+                <div class="col-sm-8 single-left">
+                    <div class="song">
+                        <div class="song-info">
+                            <h3>@Model.Name</h3>
+                        </div>
+                        <div class="video-grid-single-page-agileits">
+                            <div class="video-grid-single-page-agileits">
+                                <div data-video="tcat9CPiAZ4" id="video">
+                                    <img src="@Model.Thumbnail" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"> </div>
+
+                    <div class="all-comments">
+                        <div class="media-grids">
+                            <div class="media">
+                                <h5>TOM BROWN</h5>
+                                <div class="media-left">
+                                    <a href="#">
+                                        <img src="~/Images/user.jpg" title="One movies" alt=" ">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <p>Maecenas ultricies rhoncus tincidunt maecenas imperdiet ipsum id ex pretium hendrerit maecenas imperdiet ipsum id ex pretium hendrerit</p>
+                                    <span>View all posts by :<a href="#"> Admin </a></span>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <h5>MARK JOHNSON</h5>
+                                <div class="media-left">
+                                    <a href="#">
+                                        <img src="~/Images/user.jpg" title="One movies" alt=" ">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <p>Maecenas ultricies rhoncus tincidunt maecenas imperdiet ipsum id ex pretium hendrerit maecenas imperdiet ipsum id ex pretium hendrerit</p>
+                                    <span>View all posts by :<a href="#"> Admin </a></span>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <h5>STEVEN SMITH</h5>
+                                <div class="media-left">
+                                    <a href="#">
+                                        <img src="~/Images/user.jpg" title="One movies" alt=" ">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <p>Maecenas ultricies rhoncus tincidunt maecenas imperdiet ipsum id ex pretium hendrerit maecenas imperdiet ipsum id ex pretium hendrerit</p>
+                                    <span>View all posts by :<a href="#"> Admin </a></span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 single-right">
+                    <h3>Up Next</h3>
+                    <div class="single-grid-right">
+                        @Html.Action("GetNewestMovies", "Movies")
+                    </div>
+                </div>
+
+
+
+                <div class="clearfix"> </div>
+            </div>
+            <!-- //movie-browse-agile -->
+            <!--body wrapper start-->
+            @Html.Action("ViewSlideMovieHot", "Base")
+            <!--body wrapper end-->
+        </div>
+        <!-- //w3l-latest-movies-grids -->
+    </div>
+</div>

@@ -39,6 +39,11 @@ namespace ApplicationCore.Services
             return _repository.GetCountSeriesMovies(countMovie);
         }
 
+        public ICollection<Movie> GetNewestMovies(int countMovie)
+        {
+            return _repository.GetNewestMovies(countMovie);
+        }
+
         public ICollection<Movie> SearchFeatureMovieByName(string name)
         {
             return _repository.SearchMovieByNameAndType(name, false);
