@@ -1,7 +1,8 @@
 ﻿@model Website.ViewModel.MoviesViewModel
 
 @{
-    ViewBag.Title = "Details";
+    var episodes = ViewBag.Episodes as IEnumerable<Website.ViewModel.FilmViewModel>;
+    var currentEpisode = ViewBag.CurrentEpisode as string;
 }
 <head>
     <style>
@@ -11,22 +12,40 @@
             width: 100%;
         }
 
-            #customers td, #customers th {
-                border: 1px solid #ddd;
-                padding: 8px;
-            }
+        #customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
 
-            #customers tr:hover {
-                background-color: #ddd;
-            }
+        #customers tr:hover {
+            background-color: #ddd;
+        }
 
-            #customers th {
-                padding-top: 12px;
-                padding-bottom: 12px;
-                text-align: left;
-                background-color: #ecf0f1;
-                color: black;
-            }
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #ecf0f1;
+            color: black;
+        }
+
+        ul.episodes {
+            display: flex;
+            list-style: none;
+        }
+
+        li.episode {
+            margin: 0px 12px;
+            border: 1px solid;
+            padding: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 1px 1px;
+        }
+
+        li.episode:hover {
+            cursor: pointer;
+        }
     </style>
 </head>
 <script src="~/Scripts/ScriptWebsite/simplePlayer.js"></script>
@@ -55,11 +74,20 @@
                         </div>
                         <div class="video-grid-single-page-agileits">
                             <div class="video-grid-single-page-agileits">
-                                <div data-video="" id="video">
+                                <div data-video="@currentEpisode" id="video">
                                     <img src="@Model.Thumbnail" />
                                 </div>
                             </div>
                         </div>
+                        @if(episodes.Count() > 0)
+                        {
+                            <ul class="episodes">
+                                @foreach(var episode in episodes)
+                                {
+                                    <li class="episode" onclick="onChangeEpisode('@episode.Link')">Tập @episode.Episodes</li>
+                                }
+                            </ul>
+                        }
                     </div>
                     <div class="clearfix"> </div>
 
@@ -224,3 +252,24 @@
         <!-- //w3l-latest-movies-grids -->
     </div>
 </div>
+
+<script>
+    function onChangeEpisode(link) {
+        var data = JSON.stringify({
+            'link': link
+        });
+        $.ajax({  
+            type: "POST",  
+            url: '@Url.Action("CurrentEpisode", "Movies")',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: data,
+            success: function () {
+                window.location.reload();
+            },  
+            error: function () {  
+                window.location.reload(); 
+            }  
+        });  
+    }
+</script>

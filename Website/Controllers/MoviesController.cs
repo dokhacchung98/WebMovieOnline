@@ -1,4 +1,5 @@
 ﻿using ApplicationCore.Services;
+using AutoMapper;
 using Infrastructure.DataContext;
 using Infrastructure.Entities;
 using System;
@@ -23,22 +24,26 @@ namespace Website.Controllers
 
         private readonly IDirectorMovieService _directorMovieService;
 
+        private readonly IFilmService _filmService;
+
 
         public MoviesController(IMoviesService moviesService, 
                                 IActorMovieService actorMovieService,
                                 IActorsService actorsService,
                                 IDirectorService directorService,
-                                IDirectorMovieService directorMovieService)
+                                IDirectorMovieService directorMovieService,
+                                IFilmService filmService)
         {
             _moviesService = moviesService;
             _actorMovieService = actorMovieService;
             _actorsService = actorsService;
             _directorService = directorService;
             _directorMovieService = directorMovieService;
+            _filmService = filmService;
         }
 
         // GET: Movie/Details/5
-        public ActionResult Details(Guid? id)
+        public ActionResult Details(Guid id)
         {
             if (id == null)
             {
@@ -64,6 +69,24 @@ namespace Website.Controllers
             }
 
             Session["MoviesSeen"] = list;
+
+            // lấy ra số tập phim
+            var episodes = _filmService.GetFilmsByMovieId(id);
+            var episodeViewModels = Mapper.Map<IEnumerable<FilmViewModel>>(episodes);
+            ViewBag.Episodes = episodeViewModels;
+
+            // lấy ra tập đang xem
+            string currentLink = (string) Session["CurrentEpisode"];
+            bool existCurrentEpisode = episodes.Any(episode => episode.Link.Equals(currentLink));
+            if (existCurrentEpisode == true)
+            {
+                ViewBag.CurrentEpisode = currentLink;
+            } else
+            {
+                ViewBag.CurrentEpisode = episodes.First().Link;
+            }
+            
+            
 
             if (movie == null)
             {
@@ -113,6 +136,11 @@ namespace Website.Controllers
             return PartialView("_DirectorsOfMovie", directorViewModels);
         }
 
+        [HttpPost]
+        public void CurrentEpisode(string link)
+        {
+            Session["CurrentEpisode"] = link;
+        }
 
     }
 }

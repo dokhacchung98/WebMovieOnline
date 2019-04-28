@@ -24,5 +24,10 @@ namespace ApplicationCore.Repositories
         {
             return _dbContext.Films.Where(t => t.MovieId == IdMovie).FirstOrDefault();
         }
+
+        public ICollection<Film> GetFilmsByMovieId(Guid id)
+        {
+            return _dbContext.Films.Where(t => t.MovieId == id).ToList();
+        }
     }
 }
