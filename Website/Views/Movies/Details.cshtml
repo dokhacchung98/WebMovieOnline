@@ -3,7 +3,32 @@
 @{
     ViewBag.Title = "Details";
 }
+<head>
+    <style>
+        #customers {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
 
+            #customers td, #customers th {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
+
+            #customers tr:hover {
+                background-color: #ddd;
+            }
+
+            #customers th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: #ecf0f1;
+                color: black;
+            }
+    </style>
+</head>
 <script src="~/Scripts/ScriptWebsite/simplePlayer.js"></script>
 <script>
     $("document").ready(function () {
@@ -16,7 +41,7 @@
         <!-- /w3l-medile-movies-grids -->
         <div class="agileits-single-top">
             <ol class="breadcrumb">
-                <li><a href="index.html">Trang chủ</a></li>
+                <li><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
                 <li class="active">@Model.Name</li>
             </ol>
         </div>
@@ -30,10 +55,110 @@
                         </div>
                         <div class="video-grid-single-page-agileits">
                             <div class="video-grid-single-page-agileits">
-                                <div data-video="tcat9CPiAZ4" id="video">
+                                <div data-video="" id="video">
                                     <img src="@Model.Thumbnail" />
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"> </div>
+
+                    <div class="song-grid-right">
+                        <div class="share">
+                            <p class="detail-title">Thông tin <b>Phim</b></p>
+                            <br />
+                            <table id="customers">
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                <tr>
+                                    <td>Tên Phim</td>
+                                    <td>@Model.Name</td>
+                                </tr>
+                                <tr>
+                                    <td>Tên Tiếng Anh</td>
+                                    <td>@Model.NameEn</td>
+                                </tr>
+                                <tr>
+                                    <td>Số Lượt Xem</td>
+                                    <td>@Model.CountView</td>
+                                </tr>
+                                <tr>
+                                    <td>Ngôn Ngữ</td>
+                                    @if (Model.Language != null)
+                                    {
+                                        <td>@Model.Language</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Đang cập nhập</td>
+                                    }
+                                </tr>
+                                <tr>
+                                    <td>Quốc Gia</td>
+                                    @if (Model.Country != null)
+                                    {
+                                        <td>@Model.Country</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Đang cập nhập</td>
+                                    }
+                                </tr>
+                                <tr>
+                                    <td>Độ tuổi cho phép</td>
+                                    <td>@Model.EnableAge</td>
+                                </tr>
+                                <tr>
+                                    <td>Số tập</td>
+                                    @if (Model.IsSeriesMovie)
+                                    {
+                                        <td>@Model.Episodes tập</td>
+                                    }
+                                    else
+                                    {
+                                        <td>1 tập</td>
+                                    }
+                                </tr>
+                                <tr>
+                                    <td>Độ dài phim</td>
+                                    <td>@Model.LengthTime <b>phút</b></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="clearfix"> </div>
+
+                    <div class="song-grid-right">
+                        <div class="share">
+                            <p class="detail-title">Diễn <b>Viên</b></p>
+                            <br />
+                            @Html.Action("GetActorsOfMovie", "Movies", new { id = Model.Id})
+                        </div>
+                    </div>
+                    <div class="clearfix"> </div>
+
+                    <div class="song-grid-right">
+                        <div class="share">
+                            <p class="detail-title">Đạo <b>Diễn</b></p>
+                            <br />
+                            @Html.Action("GetDirectorsOfMovie", "Movies", new { id = Model.Id })
+                        </div>
+                    </div>
+                    <div class="clearfix"> </div>
+
+                    <div class="song-grid-right">
+                        <div class="share">
+                            <p class="detail-title">Mô tả <b>Phim</b></p>
+                            <br />
+                            @if (Model.Description != null)
+                            {
+                                @Html.Raw(Model.Description)
+                            } else
+                            {
+                                <p>Chưa cập nhật</p>
+                            }
                         </div>
                     </div>
                     <div class="clearfix"> </div>

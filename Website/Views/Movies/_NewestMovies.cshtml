@@ -13,7 +13,7 @@
     <div class="col-md-8 single-right-grid-right">
         <a href="@Url.Action("Details","Movies", new { id = item.Id })" class="title"> @item.Name</a>
         <p class="author"><a href="#" class="author">@item.LengthTime <b>phút</b></a></p>
-        <p class="views">2,114,200 views</p>
+        <p class="views">@item.CountView lượt xem</p>
     </div>
     <div class="clearfix"> </div>
 </div>
