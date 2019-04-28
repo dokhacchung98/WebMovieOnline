@@ -83,7 +83,13 @@ namespace Website.Controllers
                 ViewBag.CurrentEpisode = currentLink;
             } else
             {
-                ViewBag.CurrentEpisode = episodes.First().Link;
+                if (episodes.Count() > 0)
+                {
+                    ViewBag.CurrentEpisode = episodes.First().Link;
+                } else
+                {
+                    ViewBag.CurrentEpisode = null;
+                }
             }
             
             
