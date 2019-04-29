@@ -1532,6 +1532,8 @@
     <Content Include="Views\Base\_PartialSlideMovieHot.cshtml" />
     <Content Include="Views\Movies\Details.cshtml" />
     <Content Include="Views\Movies\_NewestMovies.cshtml" />
+    <Content Include="Views\Movies\_ActorsOfMovie.cshtml" />
+    <Content Include="Views\Movies\_DirectorsOfMovie.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
