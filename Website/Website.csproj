@@ -1487,6 +1487,8 @@
     <Content Include="Views\Movies\_NewestMovies.cshtml" />
     <Content Include="Views\Movies\_ActorsOfMovie.cshtml" />
     <Content Include="Views\Movies\_DirectorsOfMovie.cshtml" />
+	<Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1577,4 +1579,5 @@
     <MakeDir Directories="$(WebProjectOutputDir)\bin\roslyn" />
     <Copy SourceFiles="@(RoslynFiles)" DestinationFolder="$(WebProjectOutputDir)\bin\roslyn" SkipUnchangedFiles="true" Retries="$(CopyRetryCount)" RetryDelayMilliseconds="$(CopyRetryDelayMilliseconds)" />
   </Target>
+</Project>
 </Project>
