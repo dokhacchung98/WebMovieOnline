@@ -25,6 +25,18 @@ namespace ApplicationCore.Repositories
             return _dbContext.Movies.Where(t => t.IsSeriesMovie == true).ToList();
         }
 
+        //đây là hàm thực thi nè
+        public ICollection<Movie> GetMovieHotByNumber(int countMovie)
+        {
+            //đầu tiên là:model hoặc đặt tên gì cũng dc nhé
+            //cuối cùng phải .ToList để convert nó về dạng lít, nếu ko có mặc định là kiểu iqueryable : giống sql là câu truy vấn chứ ko phải kiểu
+            //quên cái count movie nè, lấy ra bao nhiêu phần tử thì dùng .take
+            //tuy nhieenn cái khỉ này nó ko sắp xếp theo thời gian, mà mình chỉ muốn lấy ra những phần tử là mới nhất => ỏderby theo createDate
+            //có chỗ nào ko hiểu ko
+            //xong repo rooifi => sẻvice
+            return _dbContext.Movies.Where(t => t.IsHot == true).OrderBy(t => t.CreatedDate).Take(countMovie).ToList();
+        }
+
         public ICollection<Movie> SearchMovieByName(string name)
         {
             return _dbContext.Movies.Where(t => t.Name.Contains(name)).ToList();
@@ -36,3 +48,4 @@ namespace ApplicationCore.Repositories
         }
     }
 }
+
