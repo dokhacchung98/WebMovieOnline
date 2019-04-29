@@ -986,8 +986,6 @@
     <Content Include="webfonts\fa-solid-900.ttf" />
     <Content Include="webfonts\fa-solid-900.woff" />
     <Content Include="webfonts\fa-solid-900.woff2" />
-    <Content Include="Areas\Admin\Views\Shared\_TopBar.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_Footer.cshtml" />
     <Content Include="Scripts\ckeditor\adapters\jquery.js" />
     <Content Include="Scripts\ckeditor\build-config.js" />
     <Content Include="Scripts\ckeditor\ckeditor.js" />
@@ -1579,5 +1577,4 @@
     <MakeDir Directories="$(WebProjectOutputDir)\bin\roslyn" />
     <Copy SourceFiles="@(RoslynFiles)" DestinationFolder="$(WebProjectOutputDir)\bin\roslyn" SkipUnchangedFiles="true" Retries="$(CopyRetryCount)" RetryDelayMilliseconds="$(CopyRetryDelayMilliseconds)" />
   </Target>
-</Project>
 </Project>
