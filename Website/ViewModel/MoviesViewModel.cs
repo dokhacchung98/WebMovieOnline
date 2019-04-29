@@ -48,6 +48,8 @@ namespace Website.ViewModel
         [DisplayName("Số Tập")]
         public int Episodes { get; set; }
 
+        [DisplayName("Đánh giá")]
+        public float Rating { get; set; }
         public Boolean IsSeriesMovie { get; set; }
     }
 }

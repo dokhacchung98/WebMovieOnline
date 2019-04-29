@@ -32,6 +32,8 @@ namespace Infrastructure.Entities
         public Boolean IsSeriesMovie { get; set; }
         //number of epsode movie
         public int Episodes { get; set; }
+        //number of rating
+        public float Rating { get; set; }
 
         #region Relation
 
