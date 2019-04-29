@@ -13,5 +13,7 @@ namespace ApplicationCore.Repositories
         Film GetFilmByIdMovie(Guid IdMovie);
 
         IList<Film> GetAllFilmInSeriesTV(Guid IdMovie);
+
+        ICollection<Film> GetFilmsByMovieId(Guid id);
     }
 }
