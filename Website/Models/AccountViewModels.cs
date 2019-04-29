@@ -49,5 +49,25 @@ namespace Website.Models
         [Compare("Password", ErrorMessage = "Mật khẩu xác thực không đúng.")]
         public string ConfirmPassword { get; set; }
     }
+
+    public class ExternalLoginConfirmationViewModel
+    {
+        [Required]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "Họ và tên")]
+        public string FullName { get; set; }
+
+        [Display(Name = "Mật khẩu")]
+        public string Password { get; set; }
+    }
+
+    public class ExternalLoginListViewModel
+    {
+        public string ReturnUrl { get; set; }
+    }
+
     
 }
