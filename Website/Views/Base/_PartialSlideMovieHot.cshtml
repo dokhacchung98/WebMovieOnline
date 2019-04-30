@@ -24,22 +24,11 @@
                                 <div class="mid-2 agile_mid_2_home">
                                     <p>@item.CreatedDate.Value.Year</p>
                                     <div class="block-stars">
-                                        <ul class="w3l-ratings">
-                                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
-                                        </ul>
+                                        @Html.Partial("_PartialStar", (double)item.Rating)
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
                             </div>
-                            @if (item.IsHot)
-                            {<div class="ribben">
-                                    <p>HOT</p>
-                                </div>
-                            }
                         </div>
                     </div>
                 }

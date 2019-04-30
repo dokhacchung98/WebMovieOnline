@@ -27,6 +27,7 @@ namespace Website.Mapping
             CreateMap<ProducerViewModel, Producer>();
             CreateMap<FilmViewModel, Film>();
             CreateMap<TrailerViewModel, Trailer>();
+            CreateMap<RatingViewModel, Rating>();
         }
 
         private void CreateMapFromEntitiesToViewModels()
@@ -42,6 +43,7 @@ namespace Website.Mapping
             CreateMap<Producer, ProducerViewModel>();
             CreateMap<Film, FilmViewModel>();
             CreateMap<Trailer, TrailerViewModel>();
+            CreateMap<Rating, RatingViewModel>();
         }
     }
 }
