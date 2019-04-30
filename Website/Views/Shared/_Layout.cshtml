@@ -34,6 +34,8 @@
     <!-- //js -->
     <!-- banner-bottom-plugin -->
     <link href="~/Content/stylewebsite/owl.carousel.css" rel="stylesheet" type="text/css" media="all">
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
     <script src="~/Scripts/ScriptWebsite/owl.carousel.js"></script>
     <script>
         $(document).ready(function () {
@@ -59,6 +61,12 @@
                 $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1000);
             });
         });
+
+        function SearchMovie() {
+            var keyword = $('#key-search').val();
+            var urlLink = "/SearchMovie?keyword=" + keyword.trim();
+            window.location = urlLink;
+        }
     </script>
     <!-- start-smoth-scrolling -->
 </head>
@@ -75,10 +83,8 @@
                 <a href="index.html"><h1>One<span>Movies</span></h1></a>
             </div>
             <div class="w3_search">
-                <form action="#" method="post">
-                    <input type="text" name="Search" placeholder="Search" required="">
-                    <input type="submit" value="Go">
-                </form>
+                <input type="text" id="key-search" name="Search" placeholder="Tên phim..." required="">
+                <input type="submit" value="Tìm kiếm" onclick="return SearchMovie();">
             </div>
             <div class="w3l_sign_in_register">
                 @if (Request.IsAuthenticated)

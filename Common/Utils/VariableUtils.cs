@@ -10,5 +10,6 @@ namespace Common.Utils
     {
         public static string UrlUpLoadImage = "/Images/Upload/";
         public static int pageSize = 3;
+        public static int pageSearch = 12;
     }
 }

@@ -54,5 +54,24 @@ namespace ApplicationCore.Repositories
         {
             return _dbContext.Movies.Where(t => t.Name.Contains(name) && t.IsSeriesMovie == isSeriesTV).ToList();
         }
+
+        public ICollection<Movie> SearchMoviesByKeyWord(string keyword)
+        {
+            while (keyword.Contains("  "))
+            {
+                keyword = keyword.Replace("  ", " ");
+            }
+            var listKeywords = keyword.Split(' ');
+            var listMovie = new List<Movie>();
+
+            foreach (var item in listKeywords)
+            {
+                listMovie = listMovie.Union(_dbContext.Movies.Where(t => t.Name.Contains(item)))
+                    .Union(_dbContext.Movies.Where(t => t.NameEn.Contains(item)))
+                    .ToList();
+            }
+
+            return listMovie;
+        }
     }
 }

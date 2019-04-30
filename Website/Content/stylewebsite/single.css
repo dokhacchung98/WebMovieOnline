@@ -409,12 +409,6 @@ width:100%;
     color:#ff8d1b;
     text-decoration: none;
 }
-.media:nth-child(3) {
-  padding-left: 4em;
-}
-.media:nth-child(5) {
-  padding-left: 4em;
-}
 .single-grid-right{
 	margin-top:2em;
 }
