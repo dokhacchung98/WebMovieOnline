@@ -12,271 +12,64 @@
     var listSeriesMovie = ViewBag.ListSeriesMovie as IEnumerable<Website.ViewModel.MoviesViewModel>;
     var moviesSeen = ViewBag.MoviesSeen as IEnumerable<Website.ViewModel.MoviesViewModel>;
 
-}
-<!--Sy-->
+}<!-- khó nhỉ, tại ô for thế là sai rồi, mà t vẫn ko hiểu nó sao ko hiển thị nữa, làm lại thôi. hihi, cái nó cần for là cả cái <li> ấy, ko phải mấy cái bé bé bên trong đâu-->
+
+
+<!--===================-->
+
+<!-- Trailer-->
 <div class="Latest-tv-series">
     <h4 class="latest-text w3_latest_text w3_home_popular">New Trailer</h4>
     <div class="container">
         <section class="slider">
             <div class="flexslider">
+
                 <div class="flex-viewport" style="overflow: hidden; position: relative;">
-                    <ul class="slides" style="width: 1000%; transition-duration: 0.6s; transform: translate3d(-4560px, 0px, 0px);">
-                        <li class="clone" style="width: 1140px; float: left; display: block;">
-                            <div class="agile_tv_series_grid">
-                                <div class="col-md-6 agile_tv_series_grid_left">
-                                    <div class="w3ls_market_video_grid1">
-                                        @{
-                                            if (count == length) { count = 0; }
-                                        }
-                                        <img src="@ListNewTrailer[count].Thumbnail" alt=" " class="img-responsive">
-                                        <a class="w3_play_icon2" href="#small-dialog2">
-                                            <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
-                                        </a>
+                    <ul class="slides" style="width: 1000%; transition-duration: 0.6s; transform: translate3d(-3420px, 0px, 0px);">
+
+                        @foreach (var item in ListNewTrailer)
+                        {
+                            var movie = Model.Where(t => t.Id == item.MovieId).FirstOrDefault();
+                            
+                            <li style="width: 1140px; float: left; display: block;" class="">
+                                <div class="agile_tv_series_grid">
+                                    <div class="col-md-6 agile_tv_series_grid_left">
+                                        <div class="w3ls_market_video_grid1">
+                                            <img src="@movie.Thumbnail" alt=" " class="img-responsive">
+                                            <a class="w3_play_icon1" href="#small-dialog1">
+                                                <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6 agile_tv_series_grid_right">
-                                    <p class="fexi_header">@ListNewTrailer[count].TrailerName</p>
-                                    <p class="fexi_header_para"><span class="conjuring_w3">Description<label>:</label></span> @ListNewTrailer[count].Description ...</p>
-                                    @{
-                                        foreach (var item in Model)
-                                        {
-                                            if (ListNewTrailer[count].MovieId == item.Id)
-                                            {
-                                                <p class="fexi_header_para"><span>Date of Release<label>:</label></span> @item.CreatedDate </p>
-                                                <p class="fexi_header_para">
-                                                    <span>Categorys<label>:</label> </span>
-                                                    <a href="genres.html">Đang cập nhật</a>
-                                                </p>
-                                            }
-                                        }
-                                        count++;
-
-                                        }
-
+                                    <div class="col-md-6 agile_tv_series_grid_right">
+                                        <p class="fexi_header">@item.TrailerName</p>
+                                        <p class="fexi_header_para"><span>Nội dung phim<label>:</label></span>@Html.Raw(item.Description)</p>
+                                        <p class="fexi_header_para"><span>Ngày phát hành<label>:</label></span> @movie.CreatedDate </p>
+                                        <p class="fexi_header_para">
+                                            <span>Thể loại<label>:</label> </span>
+                                            <a href="genres.html">fds</a> 
+                                        </p>
                                         <p class="fexi_header_para fexi_header_para1">
                                             <span>Star Rating<label>:</label></span>
-                                            <a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-                                            <a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-                                            <a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-                                            <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
-                                            <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
+                                        
+                                            <div style="background: yellow border-box">                                                
+                                                @Html.Partial("_PartialStar", (double)movie.Rating)
+                                            </div>
                                         </p>
-                                        <div class="clearfix"> </div>
+                                        
                                     </div>
-                                </div>
-                            </div>
-                        </li>
-
-
-                        <li class="clone" style="width: 1140px; float: left; display: block;">
-                            <div class="agile_tv_series_grid">
-                                <div class="col-md-6 agile_tv_series_grid_left">
-                                    <div class="w3ls_market_video_grid1">
-                                        @{
-                                            if (count == length) { count = 0; }
-                                        }
-                                        <img src="@ListNewTrailer[count].Thumbnail" alt=" " class="img-responsive">
-                                        <a class="w3_play_icon2" href="#small-dialog2">
-                                            <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 agile_tv_series_grid_right">
-                                    <p class="fexi_header">@ListNewTrailer[count].TrailerName</p>
-                                    <p class="fexi_header_para"><span class="conjuring_w3">Description<label>:</label></span> @ListNewTrailer[count].Description ...</p>
-                                    @{
-                                        foreach (var item in Model)
-                                        {
-                                            if (ListNewTrailer[count].MovieId == item.Id)
-                                            {
-                                                <p class="fexi_header_para"><span>Date of Release<label>:</label></span> @item.CreatedDate </p>
-                                                <p class="fexi_header_para">
-                                                    <span>Categorys<label>:</label> </span>
-                                                    <a href="genres.html">Đang cập nhật</a>
-                                                </p>
-                                            }
-                                        }
-
-                                    }
-
-                                    <p class="fexi_header_para fexi_header_para1">
-                                        <span>Star Rating<label>:</label></span>
-                                        <a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-                                        <a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-                                        <a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-                                        <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
-                                        <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
-                                    </p>
-                                </div>
-                                <div class="clearfix"> </div>
-                                </div>
-                            </div>
-                        </li>
-
-
-                        <li style="width: 1140px; float: left; display: block;" class="flex-active-slide">
-                            <div class="agile_tv_series_grid">
-                                <div class="col-md-6 agile_tv_series_grid_left">
-                                    <div class="w3ls_market_video_grid1">
-                                        <img src="images/h1-1.jpg" alt=" " class="img-responsive">
-                                        <a class="w3_play_icon" href="#small-dialog">
-                                            <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 agile_tv_series_grid_right">
-                                    <p class="fexi_header">the conjuring 2</p>
-                                    <p class="fexi_header_para"><span class="conjuring_w3">Story Line<label>:</label></span> 720p,Bluray HD Free Movie Downloads, Watch Free Movies Online with high speed Free Movie Streaming | MyDownloadTube Lorraine and Ed Warren go to north London to help a single...</p>
-                                    <p class="fexi_header_para"><span>Date of Release<label>:</label></span> Jun 10, 2016 </p>
-                                    <p class="fexi_header_para">
-                                        <span>Genres<label>:</label> </span>
-                                        <a href="genres.html">Drama</a> |
-                                        <a href="genres.html">Adventure</a> |
-                                        <a href="genres.html">Family</a>
-                                    </p>
-                                    <p class="fexi_header_para fexi_header_para1">
-                                        <span>Star Rating<label>:</label></span>
-                                        <a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-                                        <a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-                                        <a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a>
-                                        <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
-                                        <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
-                                    </p>
-                                </div>
-                                <div class="clearfix"> </div>
-
-                                </div>
-                            </div>
-                        </li>
-                        <li class="" style="width: 1140px; float: left; display: block;">
-                            <div class="agile_tv_series_grid">
-                                <div class="col-md-6 agile_tv_series_grid_left">
-                                    <div class="w3ls_market_video_grid1">
-                                        <img src="images/h2-1.jpg" alt=" " class="img-responsive">
-                                        <a class="w3_play_icon1" href="#small-dialog1">
-                                            <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 agile_tv_series_grid_right">
-                                    <p class="fexi_header">a haunting in cawdor</p>
-                                    <p class="fexi_header_para"><span class="conjuring_w3">Story Line<label>:</label></span> Vivian Miller, sent to a rehabilitation programme for young offenders, where a theatre camp is used as an alternative to jail time. After she views tape ...</p>
-                                    <p class="fexi_header_para"><span>Date of Release<label>:</label></span> Oct 09, 2015 </p>
-                                    <p class="fexi_header_para">
-                                        <span>Genres<label>:</label> </span>
-                                        <a href="genres.html">Thriller</a> |
-                                        <a href="genres.html">Horror</a>
-                                    </p>
-                                    <p class="fexi_header_para fexi_header_para1">
-                                        <span>Star Rating<label>:</label></span>
-                                        <a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-                                        <a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-                                        <a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-                                        <a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a>
-                                        <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
-                                    </p>
-                                </div>
                                     <div class="clearfix"> </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li class="" style="width: 1140px; float: left; display: block;">
-                            <div class="agile_tv_series_grid">
-                                <div class="col-md-6 agile_tv_series_grid_left">
-                                    <div class="w3ls_market_video_grid1">
-                                        <img src="@ListNewTrailer[count].Thumbnail" alt=" " width="300" height="300" class="img-responsive">
-                                        <a class="w3_play_icon2" href="#small-dialog2">
-                                            <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 agile_tv_series_grid_right">
-                                    <p class="fexi_header">@ListNewTrailer[count].TrailerName</p>
-                                    <p class="fexi_header_para"><span class="conjuring_w3">Description<label>:</label></span> @ListNewTrailer[count].Description ...</p>
-                                    @{
-                                        foreach (var item in Model)
-                                        {
-                                            if (ListNewTrailer[count].MovieId == item.Id)
-                                            {
-                                                <p class="fexi_header_para"><span>Date of Release<label>:</label></span> @item.CreatedDate </p>
-                                                <p class="fexi_header_para">
-                                                    <span>Categorys<label>:</label> </span>
-                                                    <a href="genres.html">Đang cập nhật</a>
-                                                </p>
-                                                break;
-                                                if (count == length)
-                                                {
-                                                    count = 0;
-                                                }
-                                                else { count++; }
-                                            }
-                                        }
+                            </li>
+                        }
 
-                                    }
-                                    <p class="fexi_header_para fexi_header_para1">
-                                        <span>Star Rating<label>:</label></span>
-                                        <a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-                                        <a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-                                        <a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-                                        <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
-                                        <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
-                                    </p>
-                                </div>
-                                <div class="clearfix"> </div>
-                            </div>
-                        </li>
-                        <li class="" style="width: 1140px; float: left; display: block;">
-                            <div class="agile_tv_series_grid">
-                                <div class="col-md-6 agile_tv_series_grid_left">
-                                    <div class="w3ls_market_video_grid1">
-                                        <img src="@ListNewTrailer[count].Thumbnail" alt=" " class="img-responsive">
-                                        <a class="w3_play_icon2" href="#small-dialog2">
-                                            <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 agile_tv_series_grid_right">
-                                    <p class="fexi_header">@ListNewTrailer[count].TrailerName</p>
-                                    <p class="fexi_header_para"><span class="conjuring_w3">Description<label>:</label></span> @ListNewTrailer[count].Description ...</p>
-                                    @{
-                                        foreach (var item in Model)
-                                        {
-                                            if (ListNewTrailer[count].MovieId == item.Id)
-                                            {
-                                                <p class="fexi_header_para"><span>Date of Release<label>:</label></span> @item.CreatedDate </p>
-                                                <p class="fexi_header_para">
-                                                    <span>Categorys<label>:</label> </span>
-                                                    <a href="genres.html">Đang cập nhật</a>
-                                                </p>
-                                                break;
-                                                if (count == length)
-                                                {
-                                                    count = 0;
-                                                }
-                                                else { count++; }
-                                            }
-                                        }
-
-                                    }
-                                    <p class="fexi_header_para fexi_header_para1">
-                                        <span>Star Rating<label>:</label></span>
-                                        <a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-                                        <a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-                                        <a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-                                        <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
-                                        <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
-                                    </p>
-                                </div>
-                                <div class="clearfix"> </div>
-                            </div>
-                        </li>
                     </ul>
-                </div><ol class="flex-control-nav flex-control-paging"><li><a class="flex-active">1</a></li><li><a class="">2</a></li><li><a class="">3</a></li></ol><ul class="flex-direction-nav"><li><a class="flex-prev" href="#">Previous</a></li><li><a class="flex-next" href="#">Next</a></li></ul>
+                </div><ol class="flex-control-nav flex-control-paging"><li><a class="">1</a></li><li><a class="">2</a></li><li><a class="flex-active">3</a></li></ol><ul class="flex-direction-nav"><li><a class="flex-prev" href="#">Previous</a></li><li><a class="flex-next" href="#">Next</a></li></ul>
             </div>
         </section>
         <!-- flexSlider -->
-        <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" property="">
-        <script defer="" src="js/jquery.flexslider.js"></script>
+        <link rel="stylesheet" href="/Content/stylewebsite/flexslider.css" type="text/css" media="screen" property="">
+        <script defer="" src="/Scripts/ScriptWebsite/jquery.flexslider.js"></script>
         <script type="text/javascript">
             $(window).load(function () {
                 $('.flexslider').flexslider({
@@ -290,8 +83,12 @@
         <!-- //flexSlider -->
     </div>
 </div>
-<!--Sy-->
-=======
+
+
+<!--===================-->
+<!--Trailer-->
+
+
 <!-- pop-up-box -->
 
 <script>
@@ -390,4 +187,3 @@
     </div>
 </div>
 <!-- //Series TV -->
->>>>>>> develop
