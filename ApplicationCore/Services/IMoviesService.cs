@@ -23,5 +23,7 @@ namespace ApplicationCore.Services
         ICollection<Movie> GetCountSeriesMovies(int countMovie);
 
         ICollection<Movie> GetNewestMovies(int countMovie);
+
+        ICollection<Movie> SearchMoviesByKeyWord(string keyword);
     }
 }

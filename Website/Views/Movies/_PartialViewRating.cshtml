@@ -40,10 +40,10 @@
             }
         </div>
         <div class="col-md-3">
-            @Html.PagedListPager(Model, page => Url.Action("GetPageSearch", "Movies", new { page }),
-         PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions()
+            @Html.PagedListPager(Model, page => Url.Action("GetPadingRating", "Movies", new { idMovie = ViewBag.IdMovie, page = page }),
+            PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions()
               {
-             HttpMethod = "GET",
+                  HttpMethod = "GET",
                   UpdateTargetId = "customer_area"
               }))
         </div>

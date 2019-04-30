@@ -84,6 +84,12 @@ namespace Website
                     "~/Scripts/select2.min.js"
                 ));
 
+            bundles.Add(new ScriptBundle("~/Script/pading").Include(
+                    "~/Scripts/jquery.unobtrusive-ajax.js"
+                ));
+            bundles.Add(new StyleBundle("~/Content/pading").Include(
+                    "~/Content/PagedList.css"
+                ));
 
         }
     }
