@@ -1,5 +1,6 @@
 ﻿using ApplicationCore.Services;
 using AutoMapper;
+using Common.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,9 @@ namespace Website.Controllers
 {
     public class BaseController : Controller
     {
-        private INewsService _newsService;
+        private readonly INewsService _newsService;
         private readonly IMoviesService _moviesService;
-        
+
 
         private readonly IApplicationUserService _userService;
 
@@ -45,6 +46,14 @@ namespace Website.Controllers
             var listMovieHot = _moviesService.GetCountMovieHot(10);
             var listMovieHotViewModel = Mapper.Map<IEnumerable<MoviesViewModel>>(listMovieHot);
             return PartialView("_PartialSlideMovieHot", listMovieHotViewModel);
+        }
+
+        public ActionResult ViewNews()
+        {
+            var listNews = _newsService.GetCountNews(VariableUtils.countNews);
+            var listNewsViewModel = Mapper.Map<ICollection<NewsViewModel>>(listNews);
+
+            return PartialView("_PartialNews", listNewsViewModel);
         }
     }
 }

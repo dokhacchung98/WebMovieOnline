@@ -229,6 +229,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MoviesController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\SearchMovieController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -245,6 +246,7 @@
     <Compile Include="ViewModel\DirectorViewModel.cs" />
     <Compile Include="ViewModel\ActorViewModel.cs" />
     <Compile Include="ViewModel\BaseEntityViewModel.cs" />
+    <Compile Include="ViewModel\NewsMovieViewModel.cs" />
     <Compile Include="ViewModel\RatingViewModel.cs" />
     <Compile Include="ViewModel\SeriesTVViewModel.cs" />
     <Compile Include="ViewModel\FeatureFilmViewModel.cs" />
@@ -260,6 +262,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\FontText.css" />
+    <Content Include="Content\stylewebsite\list.css" />
     <Content Include="Scripts\ScriptWebsite\bootstrap-rating.js" />
     <Content Include="Areas\Admin\Content\ManageUser\edit_user.css" />
     <Content Include="Areas\Admin\Content\table.css" />
@@ -1497,6 +1500,9 @@
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\SearchMovie\Search.cshtml" />
     <Content Include="Views\SearchMovie\_PartialViewSearch.cshtml" />
+    <Content Include="Views\News\Index.cshtml" />
+    <Content Include="Views\Base\_PartialNews.cshtml" />
+    <Content Include="Views\News\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
