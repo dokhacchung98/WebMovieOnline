@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Website.ViewModel.MoviesViewModel>
+
+@{
+    Layout = null;
+}
+@*@Html.Partial("_PartialMovie", item);*@
+
+<div class="banner-bottom">
+    <div class="container">
+        <div class="w3_agile_banner_bottom_grid">
+            <div id="owl-demo" class="owl-carousel owl-theme">
+                @foreach (var item in Model)
+                {
+                    <div class="item">
+                        <div class="w3l-movie-gride-agile w3l-movie-gride-agile1">
+                            <a href="@Url.Action("Details", "Movies", new { id = item.Id })" class="hvr-shutter-out-horizontal">
+                                <img src="@item.Thumbnail" title="album-name" class="img-responsive" alt="@item.Name" />
+                                <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+                            </a>
+                            <div class="mid-1 agileits_w3layouts_mid_1_home">
+                                <div class="w3l-movie-text">
+                                    <h6><a href="@Url.Action("Details", "Movies", new { id = item.Id })">@item.Name</a></h6>
+                                </div>
+                                <div class="mid-2 agile_mid_2_home">
+                                    <p>@item.CreatedDate.Value.Year</p>
+                                    <div class="block-stars">
+                                        @Html.Partial("_PartialStar", (double)item.Rating)
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

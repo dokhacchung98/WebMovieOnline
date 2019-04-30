@@ -1,0 +1,60 @@
+﻿@model Website.Models.ExternalLoginConfirmationViewModel
+
+<head>
+    <style>
+        form.form-horizontal {
+            height: 500px;
+            padding-top: 60px;
+            padding-left: 300px;
+        }
+    </style>
+</head>
+@using (Html.BeginForm("ExternalLoginConfirmation", "Account", 
+    new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group row">
+        <div class="col-md-6">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "col-md-6" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-6">
+            @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "col-md-6" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FullName,
+                    new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-6">
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "col-md-6" })
+            <div class="col-md-10">
+                @Html.PasswordFor(model => model.Password,
+                    new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <button type="submit" class="btn btn-primary btn-user btn-block col-md-3"
+                style="text-align:center;
+                    left: 31px;
+                    top: 35px;
+                    width:200px;">
+            Lưu thông tin
+        </button>
+    </div>
+</div>
+}

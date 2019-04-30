@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Website.ViewModel.DirectorViewModel>
+
+@{
+    ViewBag.Title = "_ActorsOfMovie";
+    Layout = null;
+}
+
+<head>
+    <style>
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            max-width: 110px;
+            margin: auto;
+            text-align: center;
+            font-family: arial;
+            height: auto;
+            margin: 8px;
+        }
+
+        .actors-block {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .card p {
+            text-align: center;
+            font-size: 13px;
+            padding-top: 12px;
+            color: black;
+            font-weight: 500;
+            font-family: unset;
+            text-decoration: none;
+        }
+
+        .card:hover {
+            cursor: pointer;
+        }
+    </style>
+</head>
+@if (Model.Count() > 0)
+{
+    <div class="actors-block">
+        @foreach (var item in Model)
+        {
+            <a class="card" href="@Url.Action("Details", "Directors", new { id = item.Id })">
+                <img src="@item.Thumbnail" alt="@item.Thumbnail" style="width:100%">
+                <p>@item.NameDirector</p>
+            </a>
+        }
+    </div>
+} else
+{
+    <p>Chưa cập nhật</p>
+}

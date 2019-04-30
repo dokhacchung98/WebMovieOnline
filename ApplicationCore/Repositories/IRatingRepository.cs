@@ -8,12 +8,10 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Repositories
 {
-    public interface IFilmRepository : IGenericRepository<Film>
+    public interface IRatingRepository : IGenericRepository<Rating>
     {
-        Film GetFilmByIdMovie(Guid IdMovie);
+        Rating Find(Guid IdMovie, string IdUse);
 
-        IList<Film> GetAllFilmInSeriesTV(Guid IdMovie);
-
-        ICollection<Film> GetFilmsByMovieId(Guid id);
+        ICollection<Rating> GetAllRatingByIdMovie(Guid IdMovie);
     }
 }

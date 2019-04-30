@@ -56,9 +56,9 @@ namespace Website
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "510313972709946",
+               appSecret: "eba25cd3f3f0b8afadedcf032acc4b68");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{

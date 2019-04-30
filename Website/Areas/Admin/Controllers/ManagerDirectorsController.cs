@@ -181,12 +181,7 @@ namespace Website.Areas.Admin.Controllers
                 var listSearchModel = AutoMapper.Mapper.Map<IEnumerable<DirectorViewModel>>(listSearch);
                 return PartialView("_PartialViewDirector", listSearchModel.ToPagedList(pageNumber, pageSize));
             }
-
-
-
-            //return PartialView("_PartialViewDirector", _listDirectorViewModel.ToPagedList(pageNumber, pageSize));
-            return PartialView("_PartialViewDirector", _listDirectorViewModel
-                .ToPagedList(pageNumber, pageSize));
+            return PartialView("_PartialViewDirector", _listDirectorViewModel.ToPagedList(pageNumber, pageSize));
         }
 
 

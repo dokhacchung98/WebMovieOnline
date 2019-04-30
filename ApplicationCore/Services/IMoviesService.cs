@@ -15,9 +15,17 @@ namespace ApplicationCore.Services
         ICollection<Movie> SearchFeatureMovieByName(string name);
 
         ICollection<Movie> SearchSeriesTVByName(string name);
-        //cũng bắt đầu từ interface trc
+        
         //ICollection<Movie> GetMovieHotByNumber(int countMovie);
 
-        
+        ICollection<Movie> GetCountMovieHot(int countMovie);
+
+        ICollection<Movie> GetCountFeatureFilm(int countMovie);
+
+        ICollection<Movie> GetCountSeriesMovies(int countMovie);
+
+        ICollection<Movie> GetNewestMovies(int countMovie);
+
+        ICollection<Movie> SearchMoviesByKeyWord(string keyword);
     }
 }

@@ -24,12 +24,34 @@ namespace ApplicationCore.Services
             return _repository.GetAllSeriesTV();
         }
 
+
         /*public ICollection<Movie> GetMovieHotByNumber(int countMovie)
         {
             return _repository.GetMovieHotByNumber(countMovie);
             //xong
         }
         */
+        
+
+        public ICollection<Movie> GetCountFeatureFilm(int countMovie)
+        {
+            return _repository.GetCountFeatureFilm(countMovie);
+        }
+
+        public ICollection<Movie> GetCountMovieHot(int countMovie)
+        {
+            return _repository.GetCountMovieHot(countMovie);
+        }
+
+        public ICollection<Movie> GetCountSeriesMovies(int countMovie)
+        {
+            return _repository.GetCountSeriesMovies(countMovie);
+        }
+
+        public ICollection<Movie> GetNewestMovies(int countMovie)
+        {
+            return _repository.GetNewestMovies(countMovie);
+        }
         
         public ICollection<Movie> SearchFeatureMovieByName(string name)
         {
@@ -39,6 +61,11 @@ namespace ApplicationCore.Services
         public ICollection<Movie> SearchMovieByName(string name)
         {
             return _repository.SearchMovieByName(name);
+        }
+
+        public ICollection<Movie> SearchMoviesByKeyWord(string keyword)
+        {
+            return _repository.SearchMoviesByKeyWord(keyword);
         }
 
         public ICollection<Movie> SearchSeriesTVByName(string name)

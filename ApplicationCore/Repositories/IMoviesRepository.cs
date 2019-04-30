@@ -14,11 +14,16 @@ namespace ApplicationCore.Repositories
 
         ICollection<Movie> SearchMovieByNameAndType(string name, bool isSeriesTV);
 
-        // mà có thể hàm này dùng nhiều chỗ, như trang chủ thì lấy ra 10 phần từ,trang khỉ gió nào đó lại lấy ra 40 phần tử =>> tham số
-        //đầu tiên bên interface nè, ta muốn lấy ra 1 list movie => kiểu trả về là I gì cũng dc :D(IList, ICollection, IEnbl...)
         //ICollection<Movie> GetMovieHotByNumber(int countMovie);
         
+        ICollection<Movie> GetCountMovieHot(int countMovie);
 
+        ICollection<Movie> GetCountFeatureFilm(int countMovie);
 
+        ICollection<Movie> GetCountSeriesMovies(int countMovie);
+
+        ICollection<Movie> GetNewestMovies(int countMovie);
+
+        ICollection<Movie> SearchMoviesByKeyWord(string keyword);
     }
 }
