@@ -14,19 +14,22 @@ namespace Website.Controllers
     {
         private readonly INewsService _newsService;
         private readonly IMoviesService _moviesService;
+        private readonly ICategorysService _categorysService;
 
 
         private readonly IApplicationUserService _userService;
 
-        public BaseController(INewsService newsService, IApplicationUserService userService,
-                                IMoviesService moviesService)
+        public BaseController(INewsService newsService,
+                                IApplicationUserService userService,
+                                IMoviesService moviesService,
+                                ICategorysService categorysService)
         {
             _newsService = newsService;
             _userService = userService;
             _moviesService = moviesService;
+            _categorysService = categorysService;
         }
 
-        // GET: Base
         public ActionResult SlideBarTopView()
         {
             var items = _newsService.GetNumberOfListNews(7);
@@ -54,6 +57,13 @@ namespace Website.Controllers
             var listNewsViewModel = Mapper.Map<ICollection<NewsViewModel>>(listNews);
 
             return PartialView("_PartialNews", listNewsViewModel);
+        }
+
+        public ActionResult ViewMenu()
+        {
+            var listCategory = _categorysService.GetAll();
+            var listCategoryViewModel = Mapper.Map<ICollection<CategorysViewModel>>(listCategory);
+            return PartialView("_PartialMenu", listCategoryViewModel);
         }
     }
 }

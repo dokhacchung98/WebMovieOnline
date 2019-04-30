@@ -226,11 +226,15 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\FeatureFilmController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ListMovieController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MovieHotController.cs" />
     <Compile Include="Controllers\MoviesController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\SearchMovieController.cs" />
+    <Compile Include="Controllers\SeriesTVController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1503,6 +1507,15 @@
     <Content Include="Views\News\Index.cshtml" />
     <Content Include="Views\Base\_PartialNews.cshtml" />
     <Content Include="Views\News\Detail.cshtml" />
+    <Content Include="Views\Base\_PartialMenu.cshtml" />
+    <Content Include="Views\ListMovie\Index.cshtml" />
+    <Content Include="Views\ListMovie\_PartialViewMovie.cshtml" />
+    <Content Include="Views\SeriesTV\Index.cshtml" />
+    <Content Include="Views\SeriesTV\_PartialViewMovie.cshtml" />
+    <Content Include="Views\FeatureFilm\Index.cshtml" />
+    <Content Include="Views\FeatureFilm\_PartialViewMovie.cshtml" />
+    <Content Include="Views\MovieHot\Index.cshtml" />
+    <Content Include="Views\MovieHot\_PartialViewMovie.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
