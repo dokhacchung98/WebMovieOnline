@@ -24,12 +24,13 @@ namespace ApplicationCore.Services
             return _repository.GetAllSeriesTV();
         }
 
-        public ICollection<Movie> GetMovieHotByNumber(int countMovie)
+        /*public ICollection<Movie> GetMovieHotByNumber(int countMovie)
         {
             return _repository.GetMovieHotByNumber(countMovie);
             //xong
         }
-
+        */
+        
         public ICollection<Movie> SearchFeatureMovieByName(string name)
         {
             return _repository.SearchMovieByNameAndType(name, false);

@@ -25,7 +25,7 @@ namespace ApplicationCore.Repositories
             return _dbContext.Movies.Where(t => t.IsSeriesMovie == true).ToList();
         }
 
-        //đây là hàm thực thi nè
+        /*đây là hàm thực thi nè
         public ICollection<Movie> GetMovieHotByNumber(int countMovie)
         {
             //đầu tiên là:model hoặc đặt tên gì cũng dc nhé
@@ -36,6 +36,7 @@ namespace ApplicationCore.Repositories
             //xong repo rooifi => sẻvice
             return _dbContext.Movies.Where(t => t.IsHot == true).OrderBy(t => t.CreatedDate).Take(countMovie).ToList();
         }
+        */
 
         public ICollection<Movie> SearchMovieByName(string name)
         {

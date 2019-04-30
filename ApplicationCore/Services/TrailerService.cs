@@ -2,6 +2,7 @@
 using Common.GenericRepository;
 using Common.Service;
 using Infrastructure.Entities;
+using System.Collections.Generic;
 
 namespace ApplicationCore.Services
 {
@@ -16,6 +17,10 @@ namespace ApplicationCore.Services
         public object SearchTrailerByName(string name)
         {
             return _repository.SearchTrailerByName(name);
+        }
+        public ICollection<Trailer> GetNewTrailerByNumber(int countTrailer)
+        {
+            return _repository.GetNewTrailerByNumber(countTrailer);
         }
     }
 }

@@ -11,5 +11,7 @@ namespace ApplicationCore.Services
     public interface ITrailerService : IEntityService<Trailer>
     {
         object SearchTrailerByName(string name);
+        ICollection<Trailer> GetNewTrailerByNumber(int countTrailer);
     }
+    
 }

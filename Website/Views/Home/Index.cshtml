@@ -1,99 +1,943 @@
 ﻿@model ICollection<Website.ViewModel.MoviesViewModel>
-    <!--  //mỗi 1 trang view thì chỉ có 1 cái model này thôi, và bên contrller phải truyền đùng kiểu
-    như này là đang chuuyeefn sai: biết lý do ko: uk, vì bên này model là 1 phần tử, mà bên kia truyền 1 list
-        bây giờ bên home này cần 1 lít movie để dưới for đúng ko => sửa lại kiểu của model
-        ok rồi, giờ bên này sẽ nhận được dữ liệu từ controller gửi tới qua model
-        //Cách 2 là truyền qua ViewBag vì mỗi 1 trang view chỉ được 1 cái model như trên, nhưng ví dụ như trang home
-        nó ngoài danh sách phim hot, còn phải cần cả phim lẻ, phim bộ, traileer => t khuyên nên dùng cách này
-        // cái này t ví dụ bằng cả 2 cách luôn :D-->
 
-    @{
-        /**/
+@{
+    ViewBag.Title = "Home Page";
+    var listNewTrailer = ViewBag.ListNewTrailer as ICollection<Website.ViewModel.TrailerViewModel>;
+    var length = listNewTrailer.Count();
+    var ListNewTrailer = listNewTrailer.ToArray();
+    var count = 0;
 
-        ViewBag.Title = "Home Page";
-        var duLieu = ViewBag.SyHocGioi as ICollection<Website.ViewModel.MoviesViewModel>;//nhìn ép kiểu này => ok
-    }
-    <div class="banner-bottom">
-        <div class="container">
-            <div class="w3_agile_banner_bottom_grid">
-                <div id="owl-demo" class="owl-carousel owl-theme" style="opacity: 1; display: block;">
-                    <div class="owl-wrapper-outer">
-                        <div class="owl-wrapper" style="width: 3996px; left: 0px; display: block; transition: all 800ms ease 0s; transform: translate3d(-666px, 0px, 0px);">
-
-                            <!-- start giờ for nè, tieeps theo là sửa dữ liệu như từng item 1-->
-                            @* ko, cái nhánh này tạo ra để train cho ô thôi, mục tiêu của ô là đây: nó đấy
-        trailer, cái trên thôi, ko cần cái slide chạy ở dưới*@
-
-
-                            @*
-
-        dđầu tiên là ô tạo repo của trailer, lấy ra được list các trailer mới nhất orderby theo createdate
-                                tiếp đó là for để tìm ra được từng cái movie theo idMovie có trong item trailer => được list movie,
-                                chỗ này hiểu ko
-                                for này ô có thể for ở controleer hoặc view đều dc cả
-                                đây nhé
-                                có 1 list trailer, mà mỗi 1 cái triler sẽ có id của movie đúng ko
-                                => cách đó cũng dc, 
-                                mà thôi, ô thấy cách nào dễ hiểu thì làm ;)
-                                game dễ mà nhỉ :D
-                                ok thế có gì ko hiểu ko => good luck từ thanh niên 41 điểm đầu vào ;) 41 41 41 41
-                                ok bye bb*@
-                            @foreach (var item in Model)
-                            {
-                                <div class="owl-item" style="width: 222px;">
-                                    <div class="item">
-                                        <div class="w3l-movie-gride-agile w3l-movie-gride-agile1">
-                                            <a href="single.html" class="hvr-shutter-out-horizontal">
-                                                <img src="@item.Thumbnail" title="album-name" class="img-responsive" alt=" ">
-                                                <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-                                            </a>
-                                            <div class="mid-1 agileits_w3layouts_mid_1_home">
-                                                <div class="w3l-movie-text">
-                                                    <h6><a href="single.html">@item.Name</a></h6>
-                                                </div>
-                                                <div class="mid-2 agile_mid_2_home">
-                                                    <p>@item.CreatedDate.Value.Year</p>
-                                                    <div class="block-stars">
-                                                        <ul class="w3l-ratings">
-                                                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
-                                                            <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="clearfix"></div>
-                                                </div>
-                                            </div>
-                                            @if (item.IsHot) //ko hot thì ko hiểu thị đúng ko :D, :'(, tý nữa t nói cái nè
-                                            {
-                                                <div class="ribben">
-                                                    <p>HOT</p>
-                                                </div>
-                                            }
-
-                                        </div>
+}
+<!--Sy-->
+<div class="Latest-tv-series">
+    <h4 class="latest-text w3_latest_text w3_home_popular">New Trailer</h4>
+    <div class="container">
+        <section class="slider">
+            <div class="flexslider">
+                <div class="flex-viewport" style="overflow: hidden; position: relative;">
+                    <ul class="slides" style="width: 1000%; transition-duration: 0.6s; transform: translate3d(-4560px, 0px, 0px);">
+                        <li class="clone" style="width: 1140px; float: left; display: block;">
+                            <div class="agile_tv_series_grid">
+                                <div class="col-md-6 agile_tv_series_grid_left">
+                                    <div class="w3ls_market_video_grid1">
+                                        @{
+                                            if (count == length) { count = 0; }
+                                        }
+                                        <img src="@ListNewTrailer[count].Thumbnail" alt=" " class="img-responsive">
+                                        <a class="w3_play_icon2" href="#small-dialog2">
+                                            <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
+                                        </a>
                                     </div>
                                 </div>
-                            }
-                            <!-- end, tất cả các item nó đây đúng ko
-    các cái ảnh ấy, chuẩn rồi, mỗi 1 cái item này tương ứng với 1 movie,
-    nên giờ ta xóa bỏ tất, chỉ để lại 1 để tý foreach là nó ra nhiều ok
-    nhầm home rồi, admin coi như xong r
-    dm nhầm r :),
-                            coi như xong r đấy, h chạy thôi, nhưng sẽ lỗi layout và éo chạy dc
-                            tối qua ngồi mãi để sửa lại file layout :'()'
-                            để t copy cho nhanh
-                            chờ xíu
-                            lý do là chưa có phim nào hot cả:)
-                            thấy cái khung ko, nó đấy, nhưng chưa có phim nào để hiển thị thôi
-    -->
-                        </div>
-                    </div>
+                                <div class="col-md-6 agile_tv_series_grid_right">
+                                    <p class="fexi_header">@ListNewTrailer[count].TrailerName</p>
+                                    <p class="fexi_header_para"><span class="conjuring_w3">Description<label>:</label></span> @ListNewTrailer[count].Description ...</p>
+                                    @{
+                                        foreach (var item in Model)
+                                        {
+                                            if (ListNewTrailer[count].MovieId == item.Id)
+                                            {
+                                                <p class="fexi_header_para"><span>Date of Release<label>:</label></span> @item.CreatedDate </p>
+                                                <p class="fexi_header_para">
+                                                    <span>Categorys<label>:</label> </span>
+                                                    <a href="genres.html">Đang cập nhật</a>
+                                                </p>
+                                            }
+                                        }
+                                        count++;
+
+                                    }
+
+                                    <p class="fexi_header_para fexi_header_para1">
+                                        <span>Star Rating<label>:</label></span>
+                                        <a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
+                                        <a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
+                                        <a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
+                                        <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
+                                        <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
+                                    </p>
+                                </div>
+                                <div class="clearfix"> </div>
+                                <div class="agileinfo_flexislider_grids">
+                                    <div class="col-md-2 w3l-movie-gride-agile">
+                                        <a href="single.html" class="hvr-shutter-out-horizontal">
+                                            <img src="images/m2.jpg" title="album-name" class="img-responsive" alt=" ">
+                                            <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+                                        </a>
+                                        <div class="mid-1 agileits_w3layouts_mid_1_home">
+                                            <div class="w3l-movie-text">
+                                                <h6><a href="single.html">Bad Moms</a></h6>
+                                            </div>
+                                            <div class="mid-2 agile_mid_2_home">
+                                                <p>2016</p>
+                                                <div class="block-stars">
+                                                    <ul class="w3l-ratings">
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                        <div class="ribben">
+                                            <p>NEW</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 w3l-movie-gride-agile">
+                                        <a href="single.html" class="hvr-shutter-out-horizontal">
+                                            <img src="images/m9.jpg" title="album-name" class="img-responsive" alt=" ">
+                                            <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+                                        </a>
+                                        <div class="mid-1 agileits_w3layouts_mid_1_home">
+                                            <div class="w3l-movie-text">
+                                                <h6><a href="single.html">Central Intelligence</a></h6>
+                                            </div>
+                                            <div class="mid-2 agile_mid_2_home">
+                                                <p>2016</p>
+                                                <div class="block-stars">
+                                                    <ul class="w3l-ratings">
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                        <div class="ribben">
+                                            <p>NEW</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 w3l-movie-gride-agile">
+                                        <a href="single.html" class="hvr-shutter-out-horizontal">
+                                            <img src="images/m7.jpg" title="album-name" class="img-responsive" alt=" ">
+                                            <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+                                        </a>
+                                        <div class="mid-1 agileits_w3layouts_mid_1_home">
+                                            <div class="w3l-movie-text">
+                                                <h6><a href="single.html">Light B/t Oceans</a></h6>
+                                            </div>
+                                            <div class="mid-2 agile_mid_2_home">
+                                                <p>2016</p>
+                                                <div class="block-stars">
+                                                    <ul class="w3l-ratings">
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                        <div class="ribben">
+                                            <p>NEW</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 w3l-movie-gride-agile">
+                                        <a href="single.html" class="hvr-shutter-out-horizontal">
+                                            <img src="images/m11.jpg" title="album-name" class="img-responsive" alt=" ">
+                                            <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+                                        </a>
+                                        <div class="mid-1 agileits_w3layouts_mid_1_home">
+                                            <div class="w3l-movie-text">
+                                                <h6><a href="single.html">X-Men</a></h6>
+                                            </div>
+                                            <div class="mid-2 agile_mid_2_home">
+                                                <p>2016</p>
+                                                <div class="block-stars">
+                                                    <ul class="w3l-ratings">
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                        <div class="ribben">
+                                            <p>NEW</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 w3l-movie-gride-agile">
+                                        <a href="single.html" class="hvr-shutter-out-horizontal">
+                                            <img src="images/m17.jpg" title="album-name" class="img-responsive" alt=" ">
+                                            <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+                                        </a>
+                                        <div class="mid-1 agileits_w3layouts_mid_1_home">
+                                            <div class="w3l-movie-text">
+                                                <h6><a href="single.html">Peter</a></h6>
+                                            </div>
+                                            <div class="mid-2 agile_mid_2_home">
+                                                <p>2016</p>
+                                                <div class="block-stars">
+                                                    <ul class="w3l-ratings">
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                        <div class="ribben">
+                                            <p>NEW</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 w3l-movie-gride-agile">
+                                        <a href="single.html" class="hvr-shutter-out-horizontal">
+                                            <img src="images/m20.jpg" title="album-name" class="img-responsive" alt=" ">
+                                            <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+                                        </a>
+                                        <div class="mid-1 agileits_w3layouts_mid_1_home">
+                                            <div class="w3l-movie-text">
+                                                <h6><a href="single.html">The Secret Life of Pets</a></h6>
+                                            </div>
+                                            <div class="mid-2 agile_mid_2_home">
+                                                <p>2016</p>
+                                                <div class="block-stars">
+                                                    <ul class="w3l-ratings">
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                        <div class="ribben">
+                                            <p>NEW</p>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"> </div>
+                                </div>
+                            </div>
+                        </li>
 
 
-                    <div class="owl-controls clickable"><div class="owl-pagination"><div class="owl-page active"><span class=""></span></div><div class="owl-page"><span class=""></span></div></div></div>
-                </div>
+                        <li class="clone" style="width: 1140px; float: left; display: block;">
+                            <div class="agile_tv_series_grid">
+                                <div class="col-md-6 agile_tv_series_grid_left">
+                                    <div class="w3ls_market_video_grid1">
+                                        @{
+                                            if (count == length) { count = 0; }
+                                        }
+                                        <img src="@ListNewTrailer[count].Thumbnail" alt=" " class="img-responsive">
+                                        <a class="w3_play_icon2" href="#small-dialog2">
+                                            <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 agile_tv_series_grid_right">
+                                    <p class="fexi_header">@ListNewTrailer[count].TrailerName</p>
+                                    <p class="fexi_header_para"><span class="conjuring_w3">Description<label>:</label></span> @ListNewTrailer[count].Description ...</p>
+                                    @{
+                                        foreach (var item in Model)
+                                        {
+                                            if (ListNewTrailer[count].MovieId == item.Id)
+                                            {
+                                                <p class="fexi_header_para"><span>Date of Release<label>:</label></span> @item.CreatedDate </p>
+                                                <p class="fexi_header_para">
+                                                    <span>Categorys<label>:</label> </span>
+                                                    <a href="genres.html">Đang cập nhật</a>
+                                                </p>
+                                            }
+                                        }
+
+                                    }
+
+                                    <p class="fexi_header_para fexi_header_para1">
+                                        <span>Star Rating<label>:</label></span>
+                                        <a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
+                                        <a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
+                                        <a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
+                                        <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
+                                        <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
+                                    </p>
+                                </div>
+                                <div class="clearfix"> </div>
+                                <div class="agileinfo_flexislider_grids">
+                                    <div class="col-md-2 w3l-movie-gride-agile">
+                                        <a href="single.html" class="hvr-shutter-out-horizontal">
+                                            <img src="images/m2.jpg" title="album-name" class="img-responsive" alt=" ">
+                                            <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+                                        </a>
+                                        <div class="mid-1 agileits_w3layouts_mid_1_home">
+                                            <div class="w3l-movie-text">
+                                                <h6><a href="single.html">Bad Moms</a></h6>
+                                            </div>
+                                            <div class="mid-2 agile_mid_2_home">
+                                                <p>2016</p>
+                                                <div class="block-stars">
+                                                    <ul class="w3l-ratings">
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                        <div class="ribben">
+                                            <p>NEW</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 w3l-movie-gride-agile">
+                                        <a href="single.html" class="hvr-shutter-out-horizontal">
+                                            <img src="images/m9.jpg" title="album-name" class="img-responsive" alt=" ">
+                                            <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+                                        </a>
+                                        <div class="mid-1 agileits_w3layouts_mid_1_home">
+                                            <div class="w3l-movie-text">
+                                                <h6><a href="single.html">Central Intelligence</a></h6>
+                                            </div>
+                                            <div class="mid-2 agile_mid_2_home">
+                                                <p>2016</p>
+                                                <div class="block-stars">
+                                                    <ul class="w3l-ratings">
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                        <div class="ribben">
+                                            <p>NEW</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 w3l-movie-gride-agile">
+                                        <a href="single.html" class="hvr-shutter-out-horizontal">
+                                            <img src="images/m7.jpg" title="album-name" class="img-responsive" alt=" ">
+                                            <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+                                        </a>
+                                        <div class="mid-1 agileits_w3layouts_mid_1_home">
+                                            <div class="w3l-movie-text">
+                                                <h6><a href="single.html">Light B/t Oceans</a></h6>
+                                            </div>
+                                            <div class="mid-2 agile_mid_2_home">
+                                                <p>2016</p>
+                                                <div class="block-stars">
+                                                    <ul class="w3l-ratings">
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                        <div class="ribben">
+                                            <p>NEW</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 w3l-movie-gride-agile">
+                                        <a href="single.html" class="hvr-shutter-out-horizontal">
+                                            <img src="images/m11.jpg" title="album-name" class="img-responsive" alt=" ">
+                                            <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+                                        </a>
+                                        <div class="mid-1 agileits_w3layouts_mid_1_home">
+                                            <div class="w3l-movie-text">
+                                                <h6><a href="single.html">X-Men</a></h6>
+                                            </div>
+                                            <div class="mid-2 agile_mid_2_home">
+                                                <p>2016</p>
+                                                <div class="block-stars">
+                                                    <ul class="w3l-ratings">
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                        <div class="ribben">
+                                            <p>NEW</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 w3l-movie-gride-agile">
+                                        <a href="single.html" class="hvr-shutter-out-horizontal">
+                                            <img src="images/m17.jpg" title="album-name" class="img-responsive" alt=" ">
+                                            <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+                                        </a>
+                                        <div class="mid-1 agileits_w3layouts_mid_1_home">
+                                            <div class="w3l-movie-text">
+                                                <h6><a href="single.html">Peter</a></h6>
+                                            </div>
+                                            <div class="mid-2 agile_mid_2_home">
+                                                <p>2016</p>
+                                                <div class="block-stars">
+                                                    <ul class="w3l-ratings">
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                        <div class="ribben">
+                                            <p>NEW</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 w3l-movie-gride-agile">
+                                        <a href="single.html" class="hvr-shutter-out-horizontal">
+                                            <img src="images/m20.jpg" title="album-name" class="img-responsive" alt=" ">
+                                            <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+                                        </a>
+                                        <div class="mid-1 agileits_w3layouts_mid_1_home">
+                                            <div class="w3l-movie-text">
+                                                <h6><a href="single.html">The Secret Life of Pets</a></h6>
+                                            </div>
+                                            <div class="mid-2 agile_mid_2_home">
+                                                <p>2016</p>
+                                                <div class="block-stars">
+                                                    <ul class="w3l-ratings">
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                        <div class="ribben">
+                                            <p>NEW</p>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"> </div>
+                                </div>
+                            </div>
+                        </li>
+
+
+                        <li style="width: 1140px; float: left; display: block;" class="flex-active-slide">
+                            <div class="agile_tv_series_grid">
+                                <div class="col-md-6 agile_tv_series_grid_left">
+                                    <div class="w3ls_market_video_grid1">
+                                        <img src="images/h1-1.jpg" alt=" " class="img-responsive">
+                                        <a class="w3_play_icon" href="#small-dialog">
+                                            <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 agile_tv_series_grid_right">
+                                    <p class="fexi_header">the conjuring 2</p>
+                                    <p class="fexi_header_para"><span class="conjuring_w3">Story Line<label>:</label></span> 720p,Bluray HD Free Movie Downloads, Watch Free Movies Online with high speed Free Movie Streaming | MyDownloadTube Lorraine and Ed Warren go to north London to help a single...</p>
+                                    <p class="fexi_header_para"><span>Date of Release<label>:</label></span> Jun 10, 2016 </p>
+                                    <p class="fexi_header_para">
+                                        <span>Genres<label>:</label> </span>
+                                        <a href="genres.html">Drama</a> |
+                                        <a href="genres.html">Adventure</a> |
+                                        <a href="genres.html">Family</a>
+                                    </p>
+                                    <p class="fexi_header_para fexi_header_para1">
+                                        <span>Star Rating<label>:</label></span>
+                                        <a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
+                                        <a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
+                                        <a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a>
+                                        <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
+                                        <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
+                                    </p>
+                                </div>
+                                <div class="clearfix"> </div>
+                                <div class="agileinfo_flexislider_grids">
+                                    <div class="col-md-2 w3l-movie-gride-agile">
+                                        <a href="single.html" class="hvr-shutter-out-horizontal">
+                                            <img src="images/m22.jpg" title="album-name" class="img-responsive" alt=" ">
+                                            <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+                                        </a>
+                                        <div class="mid-1 agileits_w3layouts_mid_1_home">
+                                            <div class="w3l-movie-text">
+                                                <h6><a href="single.html">Assassin's Creed 3</a></h6>
+                                            </div>
+                                            <div class="mid-2 agile_mid_2_home">
+                                                <p>2016</p>
+                                                <div class="block-stars">
+                                                    <ul class="w3l-ratings">
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                        <div class="ribben">
+                                            <p>NEW</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 w3l-movie-gride-agile">
+                                        <a href="single.html" class="hvr-shutter-out-horizontal">
+                                            <img src="images/m2.jpg" title="album-name" class="img-responsive" alt=" ">
+                                            <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+                                        </a>
+                                        <div class="mid-1 agileits_w3layouts_mid_1_home">
+                                            <div class="w3l-movie-text">
+                                                <h6><a href="single.html">Bad Moms</a></h6>
+                                            </div>
+                                            <div class="mid-2 agile_mid_2_home">
+                                                <p>2016</p>
+                                                <div class="block-stars">
+                                                    <ul class="w3l-ratings">
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                        <div class="ribben">
+                                            <p>NEW</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 w3l-movie-gride-agile">
+                                        <a href="single.html" class="hvr-shutter-out-horizontal">
+                                            <img src="images/m9.jpg" title="album-name" class="img-responsive" alt=" ">
+                                            <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+                                        </a>
+                                        <div class="mid-1 agileits_w3layouts_mid_1_home">
+                                            <div class="w3l-movie-text">
+                                                <h6><a href="single.html">Central Intelligence</a></h6>
+                                            </div>
+                                            <div class="mid-2 agile_mid_2_home">
+                                                <p>2016</p>
+                                                <div class="block-stars">
+                                                    <ul class="w3l-ratings">
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                        <div class="ribben">
+                                            <p>NEW</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 w3l-movie-gride-agile">
+                                        <a href="single.html" class="hvr-shutter-out-horizontal">
+                                            <img src="images/m7.jpg" title="album-name" class="img-responsive" alt=" ">
+                                            <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+                                        </a>
+                                        <div class="mid-1 agileits_w3layouts_mid_1_home">
+                                            <div class="w3l-movie-text">
+                                                <h6><a href="single.html">Light B/t Oceans</a></h6>
+                                            </div>
+                                            <div class="mid-2 agile_mid_2_home">
+                                                <p>2016</p>
+                                                <div class="block-stars">
+                                                    <ul class="w3l-ratings">
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                        <div class="ribben">
+                                            <p>NEW</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 w3l-movie-gride-agile">
+                                        <a href="single.html" class="hvr-shutter-out-horizontal">
+                                            <img src="images/m11.jpg" title="album-name" class="img-responsive" alt=" ">
+                                            <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+                                        </a>
+                                        <div class="mid-1 agileits_w3layouts_mid_1_home">
+                                            <div class="w3l-movie-text">
+                                                <h6><a href="single.html">X-Men</a></h6>
+                                            </div>
+                                            <div class="mid-2 agile_mid_2_home">
+                                                <p>2016</p>
+                                                <div class="block-stars">
+                                                    <ul class="w3l-ratings">
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                        <div class="ribben">
+                                            <p>NEW</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 w3l-movie-gride-agile">
+                                        <a href="single.html" class="hvr-shutter-out-horizontal">
+                                            <img src="images/m17.jpg" title="album-name" class="img-responsive" alt=" ">
+                                            <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+                                        </a>
+                                        <div class="mid-1 agileits_w3layouts_mid_1_home">
+                                            <div class="w3l-movie-text">
+                                                <h6><a href="single.html">Peter</a></h6>
+                                            </div>
+                                            <div class="mid-2 agile_mid_2_home">
+                                                <p>2016</p>
+                                                <div class="block-stars">
+                                                    <ul class="w3l-ratings">
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                        <div class="ribben">
+                                            <p>NEW</p>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"> </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="" style="width: 1140px; float: left; display: block;">
+                            <div class="agile_tv_series_grid">
+                                <div class="col-md-6 agile_tv_series_grid_left">
+                                    <div class="w3ls_market_video_grid1">
+                                        <img src="images/h2-1.jpg" alt=" " class="img-responsive">
+                                        <a class="w3_play_icon1" href="#small-dialog1">
+                                            <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 agile_tv_series_grid_right">
+                                    <p class="fexi_header">a haunting in cawdor</p>
+                                    <p class="fexi_header_para"><span class="conjuring_w3">Story Line<label>:</label></span> Vivian Miller, sent to a rehabilitation programme for young offenders, where a theatre camp is used as an alternative to jail time. After she views tape ...</p>
+                                    <p class="fexi_header_para"><span>Date of Release<label>:</label></span> Oct 09, 2015 </p>
+                                    <p class="fexi_header_para">
+                                        <span>Genres<label>:</label> </span>
+                                        <a href="genres.html">Thriller</a> |
+                                        <a href="genres.html">Horror</a>
+                                    </p>
+                                    <p class="fexi_header_para fexi_header_para1">
+                                        <span>Star Rating<label>:</label></span>
+                                        <a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
+                                        <a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
+                                        <a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
+                                        <a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a>
+                                        <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
+                                    </p>
+                                </div>
+                                <div class="clearfix"> </div>
+                                <div class="agileinfo_flexislider_grids">
+                                    <div class="col-md-2 w3l-movie-gride-agile">
+                                        <a href="single.html" class="hvr-shutter-out-horizontal">
+                                            <img src="images/m2.jpg" title="album-name" class="img-responsive" alt=" ">
+                                            <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+                                        </a>
+                                        <div class="mid-1 agileits_w3layouts_mid_1_home">
+                                            <div class="w3l-movie-text">
+                                                <h6><a href="single.html">Bad Moms</a></h6>
+                                            </div>
+                                            <div class="mid-2 agile_mid_2_home">
+                                                <p>2016</p>
+                                                <div class="block-stars">
+                                                    <ul class="w3l-ratings">
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                        <div class="ribben">
+                                            <p>NEW</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 w3l-movie-gride-agile">
+                                        <a href="single.html" class="hvr-shutter-out-horizontal">
+                                            <img src="images/m9.jpg" title="album-name" class="img-responsive" alt=" ">
+                                            <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+                                        </a>
+                                        <div class="mid-1 agileits_w3layouts_mid_1_home">
+                                            <div class="w3l-movie-text">
+                                                <h6><a href="single.html">Central Intelligence</a></h6>
+                                            </div>
+                                            <div class="mid-2 agile_mid_2_home">
+                                                <p>2016</p>
+                                                <div class="block-stars">
+                                                    <ul class="w3l-ratings">
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                        <div class="ribben">
+                                            <p>NEW</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 w3l-movie-gride-agile">
+                                        <a href="single.html" class="hvr-shutter-out-horizontal">
+                                            <img src="images/m7.jpg" title="album-name" class="img-responsive" alt=" ">
+                                            <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+                                        </a>
+                                        <div class="mid-1 agileits_w3layouts_mid_1_home">
+                                            <div class="w3l-movie-text">
+                                                <h6><a href="single.html">Light B/t Oceans</a></h6>
+                                            </div>
+                                            <div class="mid-2 agile_mid_2_home">
+                                                <p>2016</p>
+                                                <div class="block-stars">
+                                                    <ul class="w3l-ratings">
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                        <div class="ribben">
+                                            <p>NEW</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 w3l-movie-gride-agile">
+                                        <a href="single.html" class="hvr-shutter-out-horizontal">
+                                            <img src="images/m11.jpg" title="album-name" class="img-responsive" alt=" ">
+                                            <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+                                        </a>
+                                        <div class="mid-1 agileits_w3layouts_mid_1_home">
+                                            <div class="w3l-movie-text">
+                                                <h6><a href="single.html">X-Men</a></h6>
+                                            </div>
+                                            <div class="mid-2 agile_mid_2_home">
+                                                <p>2016</p>
+                                                <div class="block-stars">
+                                                    <ul class="w3l-ratings">
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                        <div class="ribben">
+                                            <p>NEW</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 w3l-movie-gride-agile">
+                                        <a href="single.html" class="hvr-shutter-out-horizontal">
+                                            <img src="images/m17.jpg" title="album-name" class="img-responsive" alt=" ">
+                                            <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+                                        </a>
+                                        <div class="mid-1 agileits_w3layouts_mid_1_home">
+                                            <div class="w3l-movie-text">
+                                                <h6><a href="single.html">Peter</a></h6>
+                                            </div>
+                                            <div class="mid-2 agile_mid_2_home">
+                                                <p>2016</p>
+                                                <div class="block-stars">
+                                                    <ul class="w3l-ratings">
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                        <div class="ribben">
+                                            <p>NEW</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 w3l-movie-gride-agile">
+                                        <a href="single.html" class="hvr-shutter-out-horizontal">
+                                            <img src="images/m21.jpg" title="album-name" class="img-responsive" alt=" ">
+                                            <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+                                        </a>
+                                        <div class="mid-1 agileits_w3layouts_mid_1_home">
+                                            <div class="w3l-movie-text">
+                                                <h6><a href="single.html">The Jungle Book</a></h6>
+                                            </div>
+                                            <div class="mid-2 agile_mid_2_home">
+                                                <p>2016</p>
+                                                <div class="block-stars">
+                                                    <ul class="w3l-ratings">
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                        <div class="ribben">
+                                            <p>NEW</p>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"> </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="" style="width: 1140px; float: left; display: block;">
+                            <div class="agile_tv_series_grid">
+                                <div class="col-md-6 agile_tv_series_grid_left">
+                                    <div class="w3ls_market_video_grid1">
+                                        <img src="@ListNewTrailer[count].Thumbnail" alt=" " width="300" height="300" class="img-responsive">
+                                        <a class="w3_play_icon2" href="#small-dialog2">
+                                            <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 agile_tv_series_grid_right">
+                                    <p class="fexi_header">@ListNewTrailer[count].TrailerName</p>
+                                    <p class="fexi_header_para"><span class="conjuring_w3">Description<label>:</label></span> @ListNewTrailer[count].Description ...</p>
+                                    @{
+                                        foreach (var item in Model)
+                                        {
+                                            if (ListNewTrailer[count].MovieId == item.Id)
+                                            {
+                                                <p class="fexi_header_para"><span>Date of Release<label>:</label></span> @item.CreatedDate </p>
+                                                <p class="fexi_header_para">
+                                                    <span>Categorys<label>:</label> </span>
+                                                    <a href="genres.html">Đang cập nhật</a>
+                                                </p>
+                                                break;
+                                                if (count == length)
+                                                {
+                                                    count = 0;
+                                                }
+                                                else { count++; }
+                                            }
+                                        }
+
+                                    }
+                                    <p class="fexi_header_para fexi_header_para1">
+                                        <span>Star Rating<label>:</label></span>
+                                        <a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
+                                        <a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
+                                        <a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
+                                        <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
+                                        <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
+                                    </p>
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                        </li>
+                        <li class="" style="width: 1140px; float: left; display: block;">
+                            <div class="agile_tv_series_grid">
+                                <div class="col-md-6 agile_tv_series_grid_left">
+                                    <div class="w3ls_market_video_grid1">
+                                        <img src="@ListNewTrailer[count].Thumbnail" alt=" " class="img-responsive">
+                                        <a class="w3_play_icon2" href="#small-dialog2">
+                                            <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 agile_tv_series_grid_right">
+                                    <p class="fexi_header">@ListNewTrailer[count].TrailerName</p>
+                                    <p class="fexi_header_para"><span class="conjuring_w3">Description<label>:</label></span> @ListNewTrailer[count].Description ...</p>
+                                    @{
+                                        foreach (var item in Model)
+                                        {
+                                            if (ListNewTrailer[count].MovieId == item.Id)
+                                            {
+                                                <p class="fexi_header_para"><span>Date of Release<label>:</label></span> @item.CreatedDate </p>
+                                                <p class="fexi_header_para">
+                                                    <span>Categorys<label>:</label> </span>
+                                                    <a href="genres.html">Đang cập nhật</a>
+                                                </p>
+                                                break;
+                                                if (count == length)
+                                                {
+                                                    count = 0;
+                                                }
+                                                else { count++; }
+                                            }
+                                        }
+
+                                    }
+                                    <p class="fexi_header_para fexi_header_para1">
+                                        <span>Star Rating<label>:</label></span>
+                                        <a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
+                                        <a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
+                                        <a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
+                                        <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
+                                        <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
+                                    </p>
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div><ol class="flex-control-nav flex-control-paging"><li><a class="flex-active">1</a></li><li><a class="">2</a></li><li><a class="">3</a></li></ol><ul class="flex-direction-nav"><li><a class="flex-prev" href="#">Previous</a></li><li><a class="flex-next" href="#">Next</a></li></ul>
             </div>
-        </div>
+        </section>
+        <!-- flexSlider -->
+        <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" property="">
+        <script defer="" src="js/jquery.flexslider.js"></script>
+        <script type="text/javascript">
+            $(window).load(function () {
+                $('.flexslider').flexslider({
+                    animation: "slide",
+                    start: function (slider) {
+                        $('body').removeClass('loading');
+                    }
+                });
+            });
+        </script>
+        <!-- //flexSlider -->
     </div>
+</div>
+<!--Sy-->

@@ -184,7 +184,7 @@ namespace Website.Areas.Admin.Controllers
 
 
 
-            return PartialView("_PartialViewDirector", _listDirectorViewModel.ToPagedList(pageNumber, pageSize));
+            //return PartialView("_PartialViewDirector", _listDirectorViewModel.ToPagedList(pageNumber, pageSize));
             return PartialView("_PartialViewDirector", _listDirectorViewModel
                 .ToPagedList(pageNumber, pageSize));
         }
