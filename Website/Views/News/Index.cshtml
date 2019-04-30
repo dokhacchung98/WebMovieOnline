@@ -1,0 +1,80 @@
+﻿@*@model PagedList.PagedList<Website.ViewModel.NewsMovieViewModel>*@
+@model ICollection<Website.ViewModel.NewsMovieViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="general">
+    <div class="container">
+        <!--Breacrumb-->
+        <div class="agileits-news-top">
+            <ol class="breadcrumb">
+                <li><a href="/Home">Trang chủ</a></li>
+                <li class="active">Tin tức</li>
+            </ol>
+        </div>
+        <!--//Breacrumb-->
+        <h4 class="latest-text w3_latest_text">Tin tức</h4>
+
+        <div class="agileinfo-news-top-grids">
+            <!--List News-->
+            <div class="col-md-8 wthree-top-news-left" style="box-shadow:0px 0 2px #C1C1C1 !important; padding: 1em;">
+
+                <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+
+                    <div id="myTabContent" class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade active in" id="home1" aria-labelledby="home1-tab">
+                            @for (int i = 0; i < Model.Count; i += 2)
+                            {
+                                var item1 = Model.ElementAt(i);
+                                var item2 = Model.ElementAtOrDefault(i + 1);
+
+                                <div class="wthree-news-top-left">
+
+                                    <div class="col-md-6 w3-agileits-news-left">
+                                        <div class="col-sm-5 wthree-news-img">
+                                            <a href="/News/Detail?idMovie=@item1.NewsViewModel.Id"><img src="@item1.NewsViewModel.Thumbnail" alt=""></a>
+                                        </div>
+                                        <div class="col-sm-7 wthree-news-info">
+                                            <h5><a href="news-single.html">@item1.NewsViewModel.Title</a></h5>
+                                            <p>@item1.NewsViewModel.ShortDescription</p>
+                                            <ul>
+                                                <li><i class="far fa-clock" aria-hidden="true"></i> @item1.NewsViewModel.CreatedDate.Value.ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture)</li>
+                                            </ul>
+                                        </div>
+                                        <div class="clearfix"> </div>
+                                    </div>
+
+                                    @if (item2 != null)
+                                    {
+                                        <div class="col-md-6 w3-agileits-news-left">
+                                            <div class="col-sm-5 wthree-news-img">
+                                                <a href="/News/Detail?idMovie=@item2.NewsViewModel.Id"><img src="@item2.NewsViewModel.Thumbnail" alt=""></a>
+                                            </div>
+                                            <div class="col-sm-7 wthree-news-info">
+                                                <h5><a href="news-single.html"> @item2.NewsViewModel.Title</a></h5>
+                                                <p>@item2.NewsViewModel.ShortDescription</p>
+                                                <ul>
+                                                    <li><i class="far fa-clock" aria-hidden="true"></i> @item2.NewsViewModel.CreatedDate.Value.ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture)</li>
+                                                </ul>
+                                            </div>
+                                            <div class="clearfix"> </div>
+                                        </div>
+                                    }
+                                    <div class="clearfix"> </div>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--//List News-->
+            <!--Slide News-->
+            @Html.Action("ViewNews", "Base")
+            <!--//Slide News-->
+        </div>
+    </div>
+</div>
+
