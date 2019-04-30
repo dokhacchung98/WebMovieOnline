@@ -54,6 +54,11 @@ namespace ApplicationCore.Services
             return _repository.SearchMovieByName(name);
         }
 
+        public ICollection<Movie> SearchMoviesByKeyWord(string keyword)
+        {
+            return _repository.SearchMoviesByKeyWord(keyword);
+        }
+
         public ICollection<Movie> SearchSeriesTVByName(string name)
         {
             return _repository.SearchMovieByNameAndType(name, true);

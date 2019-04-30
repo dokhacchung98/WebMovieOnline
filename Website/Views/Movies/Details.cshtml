@@ -230,8 +230,9 @@
                                 <hr />
                             }
                         }
-
-                        @{Html.RenderAction("GetPadingRating", "Movies", new { page = 1, idMovie = Model.Id }); }
+                        <div id="customer_area">
+                            @{Html.RenderAction("GetPadingRating", "Movies", new { page = 1, idMovie = Model.Id }); }
+                        </div>
 
                     </div>
 

@@ -226,6 +226,7 @@ namespace Website.Controllers
                         UseViewModel = use
                     });
                 }
+                ViewBag.IdMovie = idMovie;
                 return PartialView("_PartialViewRating",
                 listUseRatingViewModel.ToPagedList(pageNumber, pageSize));
             }

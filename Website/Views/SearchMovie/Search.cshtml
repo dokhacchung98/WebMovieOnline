@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    AjaxOptions options = new AjaxOptions
+    {
+        UpdateTargetId = "searchResult",
+        Confirm = "Are you sure to start search?",
+        InsertionMode = InsertionMode.Replace,
+        LoadingElementId = "divLoading"
+    };
+    var keywordSearch = "";
+    if (Session["PageList"] != null)
+    {
+        keywordSearch = Session["PageList"].ToString();
+    }
+}
+
+<!-- List Movie -->
+<div class="general">
+    <h4 class="latest-text w3_latest_text">Kết quả tìm kiếm "@keywordSearch"</h4>
+    <div class="container">
+        <br />
+        <div id="customer_area">
+            @{Html.RenderAction("GetPageSearch", "SearchMovie", new { page = 1 });}
+        </div>
+    </div>
+</div>
+<!-- //List Movie -->
