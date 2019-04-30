@@ -990,8 +990,6 @@
     <Content Include="webfonts\fa-solid-900.ttf" />
     <Content Include="webfonts\fa-solid-900.woff" />
     <Content Include="webfonts\fa-solid-900.woff2" />
-    <Content Include="Areas\Admin\Views\Shared\_TopBar.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_Footer.cshtml" />
     <Content Include="Scripts\ckeditor\adapters\jquery.js" />
     <Content Include="Scripts\ckeditor\build-config.js" />
     <Content Include="Scripts\ckeditor\ckeditor.js" />
@@ -1494,6 +1492,8 @@
     <Content Include="Views\Movies\_DirectorsOfMovie.cshtml" />
     <Content Include="Views\Movies\_PartialViewRating.cshtml" />
     <Content Include="Views\Shared\_PartialStar.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
