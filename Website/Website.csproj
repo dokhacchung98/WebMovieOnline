@@ -244,6 +244,7 @@
     <Compile Include="ViewModel\DirectorViewModel.cs" />
     <Compile Include="ViewModel\ActorViewModel.cs" />
     <Compile Include="ViewModel\BaseEntityViewModel.cs" />
+    <Compile Include="ViewModel\RatingViewModel.cs" />
     <Compile Include="ViewModel\SeriesTVViewModel.cs" />
     <Compile Include="ViewModel\FeatureFilmViewModel.cs" />
     <Compile Include="ViewModel\FilmViewModel.cs" />
@@ -254,8 +255,11 @@
     <Compile Include="ViewModel\ResolutionViewModel.cs" />
     <Compile Include="ViewModel\TagViewModel.cs" />
     <Compile Include="ViewModel\TrailerViewModel.cs" />
+    <Compile Include="ViewModel\UseRatingViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\FontText.css" />
+    <Content Include="Scripts\ScriptWebsite\bootstrap-rating.js" />
     <Content Include="Areas\Admin\Content\ManageUser\edit_user.css" />
     <Content Include="Areas\Admin\Content\table.css" />
     <Content Include="Areas\Admin\Views\BaseAdmin\UploadImage.cshtml" />
@@ -1428,6 +1432,7 @@
     <Content Include="Areas\Admin\Views\ManagerNews\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\ManagerNews\_PartialViewNews.cshtml" />
     <Content Include="Areas\Admin\Views\ManagerNews\Index.cshtml" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -1487,6 +1492,8 @@
     <Content Include="Views\Movies\_NewestMovies.cshtml" />
     <Content Include="Views\Movies\_ActorsOfMovie.cshtml" />
     <Content Include="Views\Movies\_DirectorsOfMovie.cshtml" />
+    <Content Include="Views\Movies\_PartialViewRating.cshtml" />
+    <Content Include="Views\Shared\_PartialStar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1569,7 +1576,6 @@
   </Target>
   <Target Name="AfterBuild">
   </Target> -->
-
   <Target Name="CopyRoslynFiles" AfterTargets="AfterBuild" Condition="!$(Disable_CopyWebApplication) And '$(OutDir)' != '$(OutputPath)'">
     <ItemGroup>
       <RoslynFiles Include="$(CscToolPath)\*" />

@@ -75,6 +75,7 @@
     <Compile Include="Repositories\IMoviesRepository.cs" />
     <Compile Include="Repositories\INewsRepository.cs" />
     <Compile Include="Repositories\IProducerMovieRepository.cs" />
+    <Compile Include="Repositories\IRatingRepository.cs" />
     <Compile Include="Repositories\IResolutionMovieRepository.cs" />
     <Compile Include="Repositories\IResolutionRepository.cs" />
     <Compile Include="Repositories\IProducerRepository.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Repositories\MoviesRepository.cs" />
     <Compile Include="Repositories\NewsRepository.cs" />
     <Compile Include="Repositories\ProducerMovieRepository.cs" />
+    <Compile Include="Repositories\RatingRepository.cs" />
     <Compile Include="Repositories\ResolutionMovieRepository.cs" />
     <Compile Include="Repositories\ResolutionRepository.cs" />
     <Compile Include="Repositories\ProducerRepository.cs" />
@@ -111,6 +113,7 @@
     <Compile Include="Services\IMoviesService.cs" />
     <Compile Include="Services\INewsService.cs" />
     <Compile Include="Services\IProducerMovieService.cs" />
+    <Compile Include="Services\IRatingService.cs" />
     <Compile Include="Services\IResolutionMovieService.cs" />
     <Compile Include="Services\IResolutionService.cs" />
     <Compile Include="Services\IProducerService.cs" />
@@ -121,6 +124,7 @@
     <Compile Include="Services\MoviesService.cs" />
     <Compile Include="Services\NewsService.cs" />
     <Compile Include="Services\ProducerMovieService.cs" />
+    <Compile Include="Services\RatingService.cs" />
     <Compile Include="Services\ResolutionMovieService.cs" />
     <Compile Include="Services\ResolutionService.cs" />
     <Compile Include="Services\ProducerService.cs" />

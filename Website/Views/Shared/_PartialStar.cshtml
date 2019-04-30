@@ -1,0 +1,24 @@
+﻿@model double
+@{
+    Layout = null;
+    var star = Model;
+}
+<ul class="w3l-ratings">
+    @for (int i = 0; i < 5; i++)
+    {
+        if (star >= 0.4 && star <= 0.6)
+        {
+            <li><a href="#"><i class="fas fa-star-half-alt" aria-hidden="true"></i></a></li>
+        }
+        else if (star < 0.3)
+        {
+            <li><a href="#"><i class="far fa-star" aria-hidden="true"></i></a></li>
+        }
+        else if (star > 0.6)
+        {
+            <li><a href="#"><i class="fas fa-star" aria-hidden="true"></i></a></li>
+        }
+        star--;
+    }
+
+</ul>

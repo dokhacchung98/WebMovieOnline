@@ -3,8 +3,10 @@
 @{
     var episodes = ViewBag.Episodes as IEnumerable<Website.ViewModel.FilmViewModel>;
     var currentEpisode = ViewBag.CurrentEpisode as string;
+    var currenRating = ViewBag.CurrentRating as Website.ViewModel.RatingViewModel;
 }
 <head>
+    <link href="~/Content/css/FontText.css" rel="stylesheet" />
     <style>
         #customers {
             font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
@@ -12,22 +14,22 @@
             width: 100%;
         }
 
-        #customers td, #customers th {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
+            #customers td, #customers th {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
 
-        #customers tr:hover {
-            background-color: #ddd;
-        }
+            #customers tr:hover {
+                background-color: #ddd;
+            }
 
-        #customers th {
-            padding-top: 12px;
-            padding-bottom: 12px;
-            text-align: left;
-            background-color: #ecf0f1;
-            color: black;
-        }
+            #customers th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: #ecf0f1;
+                color: black;
+            }
 
         ul.episodes {
             display: flex;
@@ -43,8 +45,28 @@
             box-shadow: 1px 1px;
         }
 
-        li.episode:hover {
-            cursor: pointer;
+            li.episode:hover {
+                cursor: pointer;
+            }
+
+        span.glyphicon {
+            color: #e6ac02;
+        }
+
+        .btn-rating {
+            outline: none;
+            font-style: normal;
+            padding: 8px 20px;
+            background: #ff8d1b;
+            font-size: 14px;
+            color: #fff;
+            display: block;
+            border: none;
+            transition: .5s all;
+            -webkit-transition: .5s all;
+            -moz-transition: .5s all;
+            -o-transition: .5s all;
+            -ms-transition: .5s all;
         }
     </style>
 </head>
@@ -54,7 +76,7 @@
         $("#video").simplePlayer();
     });
 </script>
-
+<script src="~/Scripts/ScriptWebsite/bootstrap-rating.js"></script>
 <div class="single-page-agile-main">
     <div class="container">
         <!-- /w3l-medile-movies-grids -->
@@ -79,10 +101,10 @@
                                 </div>
                             </div>
                         </div>
-                        @if(episodes.Count() > 0)
+                        @if (episodes.Count() > 0)
                         {
                             <ul class="episodes">
-                                @foreach(var episode in episodes)
+                                @foreach (var episode in episodes)
                                 {
                                     <li class="episode" onclick="onChangeEpisode('@episode.Link')">Tập @episode.Episodes</li>
                                 }
@@ -153,6 +175,10 @@
                                     <td>Độ dài phim</td>
                                     <td>@Model.LengthTime <b>phút</b></td>
                                 </tr>
+                                <tr>
+                                    <td>Đánh giá sao</td>
+                                    <td>@Html.Partial("_PartialStar", (double)Model.Rating)</td>
+                                </tr>
                             </table>
                         </div>
                     </div>
@@ -162,7 +188,7 @@
                         <div class="share">
                             <p class="detail-title">Diễn <b>Viên</b></p>
                             <br />
-                            @Html.Action("GetActorsOfMovie", "Movies", new { id = Model.Id})
+                            @Html.Action("GetActorsOfMovie", "Movies", new { id = Model.Id })
                         </div>
                     </div>
                     <div class="clearfix"> </div>
@@ -183,13 +209,31 @@
                             @if (Model.Description != null)
                             {
                                 @Html.Raw(Model.Description)
-                            } else
+                            }
+                            else
                             {
                                 <p>Chưa cập nhật</p>
                             }
                         </div>
                     </div>
                     <div class="clearfix"> </div>
+
+                    <div class="all-comments">
+                        <p class="detail-title">Đánh Giá</p>
+                        @if (Request.IsAuthenticated)
+                        {
+                            if (currenRating == null)
+                            {
+                                <input type="number" name="My Rating System" id="rating-star" style="color : #ffd800 ;font-family:'Glyphicons Halflings';" class="rating" data-clearable="Xóa" />
+                                <textarea placeholder="Message" required="" id="content-rating" style="resize: none; min-height: 100px; margin: 1em 0; width: 100%;"></textarea>
+                                <button class="btn-rating" onclick="return ratingMovie('@Model.Id');">Đánh giá</button>
+                                <hr />
+                            }
+                        }
+
+                        @{Html.RenderAction("GetPadingRating", "Movies", new { page = 1, idMovie = Model.Id }); }
+
+                    </div>
 
                     <div class="all-comments">
                         <p class="detail-title">Bình Luận</p>
@@ -217,22 +261,77 @@
 </div>
 
 <script>
+    $(document).ready(function () {
+        $('input.rating').rating({
+          'min': 1,
+          'max': 5,
+          'empty-value': 1,
+          'iconLib': 'glyphicon',
+          'activeIcon': 'glyphicon-star',
+          'inactiveIcon': 'glyphicon-star-empty',
+          'clearable': false,
+          'clearableIcon': 'glyphicon-remove',
+          'inline': false,
+          'readonly': false,
+          'copyClasses': true
+        });
+
+        @*var stringUrl = '/Movies/GetPadingRating?idMovie=@Model.Id&page=1';
+        console.log(stringUrl);
+
+        $.ajax({
+            type: "GET",
+            url: stringUrl,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                console.log(data);
+            },
+            error: function () {
+                console.log('faild');
+            }
+        });*@
+    });
     function onChangeEpisode(link) {
         var data = JSON.stringify({
             'link': link
         });
-        $.ajax({  
-            type: "POST",  
+        $.ajax({
+            type: "POST",
             url: '@Url.Action("CurrentEpisode", "Movies")',
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             data: data,
             success: function () {
                 window.location.reload();
-            },  
-            error: function () {  
-                window.location.reload(); 
-            }  
-        });  
+            },
+            error: function () {
+                window.location.reload();
+            }
+        });
+    }
+
+    function ratingMovie(id) {
+        var star = $('#rating-star').val();
+        var content = $('#content-rating').val();
+
+        var data = JSON.stringify({
+            'idMovie' : id,
+            'feedback' : content,
+            'starRate' : star
+        });
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("Rating", "Movies")',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: data,
+            success: function () {
+                window.location.reload();
+            },
+            error: function () {
+                window.location.reload();
+            }
+        });
     }
 </script>
