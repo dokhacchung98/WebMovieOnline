@@ -1,9 +1,12 @@
 ﻿using ApplicationCore.Services;
 using AutoMapper;
+using Common.Utils;
+using Extension.Extensions;
 using Infrastructure.Identity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using System.IO;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -117,6 +120,26 @@ namespace Website.Controllers
             var currentUserView = Mapper.Map<UpdateUserViewModel>(currentUser);
 
             return PartialView("_InformationUserPage", currentUserView);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangeAvatar(UpdateUserViewModel model, HttpPostedFileBase image)
+        {
+            ApplicationUser currentUser = _userService.Find(model.Id);
+            if (currentUser != null &&image != null)
+            {
+                if (CheckImageUploadExtension.CheckImagePath(image.FileName) == true)
+                {
+                    var path = Path.Combine(Server.MapPath("~/Images/Upload"), image.FileName);
+                    image.SaveAs(path);
+                    currentUser.Avatar = VariableUtils.UrlUpLoadImage + image.FileName;
+                }
+                _userService.Update(currentUser, model.Id);
+            }
+
+            return RedirectToAction("Index", new { @id = model.Id});
+            
         }
 
         public ActionResult FavoriteMovie(string id)
