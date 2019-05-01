@@ -235,6 +235,7 @@
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\SearchMovieController.cs" />
     <Compile Include="Controllers\SeriesTVController.cs" />
+    <Compile Include="Controllers\TrailersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1527,6 +1528,7 @@
     <Content Include="Views\FeatureFilm\_PartialViewMovie.cshtml" />
     <Content Include="Views\MovieHot\Index.cshtml" />
     <Content Include="Views\MovieHot\_PartialViewMovie.cshtml" />
+    <Content Include="Views\Trailers\_NewestTrailers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
