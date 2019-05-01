@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="general">
+    <div class="container">
+        <!--Breacrumb-->
+        <div class="agileits-news-top">
+            <ol class="breadcrumb">
+                <li><a href="/Home">Trang chủ</a></li>
+                <li class="active">Trailer</li>
+            </ol>
+        </div>
+        <!--//Breacrumb-->
+        <h4 class="latest-text w3_latest_text">Trailer</h4>
+
+        <div class="agileinfo-news-top-grids">
+            <!--List Trailer-->
+            <div class="col-md-8 wthree-top-news-left" style="box-shadow:0px 0 2px #C1C1C1 !important; padding: 1em;">
+
+                <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+                    <div id="customer_area">
+                        @{Html.RenderAction("GetPage", "Trailer", new { page = 1 });}
+                    </div>
+                </div>
+            </div>
+            <!--//List Trailer-->
+            <!--Slide News-->
+            @Html.Action("ViewNews", "Base")
+            <!--//Slide News-->
+        </div>
+    </div>
+</div>
+

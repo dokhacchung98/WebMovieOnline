@@ -13,5 +13,7 @@ namespace ApplicationCore.Repositories
         bool ExistObject(Guid idMovie, string idUser);
 
         ICollection<FavoriteMovie> GetFavoriteMoviesByUserId(string idUser);
+
+        FavoriteMovie Find(Guid idMovie, string idUser);
     }
 }

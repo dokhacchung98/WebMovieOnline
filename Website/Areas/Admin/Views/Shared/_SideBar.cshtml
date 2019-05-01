@@ -1,6 +1,6 @@
 ﻿<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="~/Home">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-film"></i>
         </div>
@@ -10,7 +10,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString().ToLower().Equals("home") ? "active" : "")">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="~/Admin/Home">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Danh Mục</span>
         </a>

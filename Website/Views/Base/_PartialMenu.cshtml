@@ -28,7 +28,7 @@
             <li @(HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString().ToLower().Equals("featurefilm") ? "class=active" : "")><a href="/featurefilm">Phim Lẻ</a></li>
             <li @(HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString().ToLower().Equals("moviehot") ? "class=active" : "")><a href="/moviehot">Phim Hot</a></li>
             <li @(HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString().ToLower().Equals("news") ? "class=active" : "")><a href="/News">Tin Tức</a></li>
-            <li><a href="list.html">Trailer</a></li>
+            <li @(HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString().ToLower().Equals("trailer") ? "class=active" : "")><a href="/Trailer">Trailer</a></li>
         </ul>
     </nav>
 </div>

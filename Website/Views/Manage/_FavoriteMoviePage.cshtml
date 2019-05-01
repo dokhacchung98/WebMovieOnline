@@ -10,20 +10,36 @@
                     <th>Độ dài phim</th>
                     <th>Lượt xem</th>
                     <th>Đánh giá</th>
+                    <th>Hành động</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach(var movie in Model)
+                @if (Model != null && Model.Count() > 0)
                 {
-                    <tr>
-                        <td>@movie.Name</td>
-                        <td>@movie.DatePublish</td>
-                        <td><span class="badge badge-danger m-0">@movie.LengthTime <b>phút</b></span></td>
-                        <td><span>@movie.CountView</span></td>
-                        <td>
-                            @Html.Partial("_PartialStar", (double)movie.Rating)
-                        </td>
-                    </tr>
+                    foreach (var movie in Model)
+                    {
+                        <tr>
+                            <td>@movie.Name</td>
+                            <td>@movie.DatePublish</td>
+                            <td><span class="badge badge-warning m-0">@movie.LengthTime <b>phút</b></span></td>
+                            <td><span>@movie.CountView</span></td>
+                            <td>
+                                @Html.Partial("_PartialStar", (double)movie.Rating)
+                            </td>
+                            <td>
+                                <a class="delete" href="/Movies/Details/@movie.Id" title="Xem phim" style="margin-right:8px; color: #06d51e;">
+                                    <i class="fas fa-eye" aria-hidden="true"></i>
+                                </a>
+                                <a class="delete" href="/Movies/RemoveFavoriteMovie?idMovie=@movie.Id" title="Xoá yêu thích" style="color: #ed1717;">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <td>Không có yêu thích nào...</td>
                 }
             </tbody>
         </table>
