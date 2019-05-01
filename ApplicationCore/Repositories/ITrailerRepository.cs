@@ -11,5 +11,7 @@ namespace ApplicationCore.Repositories
     public interface ITrailerRepository : IGenericRepository<Trailer>
     {
         object SearchTrailerByName(string name);
+
+        ICollection<Trailer> GetNewTrailerByNumber(int countTrailer);
     }
 }
