@@ -1,0 +1,40 @@
+﻿@model PagedList.PagedList<Website.ViewModel.MoviesViewModel>
+
+@using PagedList.Mvc
+
+@{
+    Layout = null;
+}
+<style>
+    .pagination .active a{
+        background: #ff8d1b !important;
+        border-color: #ff8d1b !important;
+    }
+</style>
+@foreach (var item in Model)
+{
+    @Html.Partial("_PartialMovie", item)
+}
+<div class="clearfix"></div>
+<div class="clearfix">
+    @if (Model != null)
+    {
+        if (Model.Count() > 0)
+        {
+            <div class="hint-text">Trang <b>@(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)</b> / <b>@Model.PageCount</b></div>
+        }
+        else
+        {
+            <div class="hint-text">Không có dữ liệu</div>
+        }
+        <div style="float:right">
+            @Html.PagedListPager(Model, page => Url.Action("GetPage", "MovieHot", new { page }),
+                PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions()
+                {
+                    HttpMethod = "GET",
+                    UpdateTargetId = "customer_area"
+                }
+                ))
+        </div>
+    }
+</div>

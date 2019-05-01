@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="~/Content/stylewebsite/faqstyle.css" type="text/css" media="all" />
     <link href="~/Content/stylewebsite/single.css" rel='stylesheet' type='text/css' />
     <link href="~/Content/stylewebsite/medile.css" rel='stylesheet' type='text/css' />
+    <link href="~/Content/stylewebsite/news.css" rel="stylesheet" />
+    <link href="~/Content/stylewebsite/list.css" rel="stylesheet" />
     <!-- banner-slider -->
     <link href="~/Content/stylewebsite/jquery.slidey.min.css" rel="stylesheet">
     <!-- //banner-slider -->
@@ -77,7 +79,7 @@
     <div class="header">
         <div class="container">
             <div class="w3layouts_logo">
-                <a href="index.html"><h1>One<span>Movies</span></h1></a>
+                <a href="/Home"><h1>One<span>Movies</span></h1></a>
             </div>
             <div class="w3_search">
                 <input type="text" id="key-search" name="Search" placeholder="Tên phim..." required="">
@@ -96,7 +98,7 @@
                         <a href="javascript:document.getElementById('logoutForm').submit()">
                             Đăng Xuất<i class="fa fa-sign-out-alt" aria-hidden="true"></i>
                         </a>
-                        
+
                     }
                 }
                 else
@@ -123,56 +125,7 @@
                     </button>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
-                    <nav>
-                        <ul class="nav navbar-nav">
-                            <li class="active"><a href="index.html">Trang Chủ</a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Thể Loại <b class="caret"></b></a>
-                                <ul class="dropdown-menu multi-column columns-3">
-                                    <li>
-                                        <div class="col-sm-4">
-                                            <ul class="multi-column-dropdown">
-                                                <li><a href="genres.html">Phim hành động</a></li>
-                                                <li><a href="genres.html">Phim viễn tưởng</a></li>
-                                                <li><a href="genres.html">Phim chiến tranh</a></li>
-                                                <li><a href="genres.html">Phim hình sự</a></li>
-                                                <li><a href="horror.html">Phim phiêu lưu</a></li>
-                                                <li><a href="genres.html">Phim hài hước</a></li>
-                                                <li><a href="genres.html">Phim võ thuật</a></li>
-                                                <li><a href="genres.html">Phim kinh dị</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <ul class="multi-column-dropdown">
-                                                <li><a href="genres.html">Phim hồi hộp-Gây cấn</a></li>
-                                                <li><a href="comedy.html">Phim Bí ẩn-Siêu nhiên</a></li>
-                                                <li><a href="genres.html">Phim cổ trang</a></li>
-                                                <li><a href="genres.html">Phim thần thoại</a></li>
-                                                <li><a href="genres.html">Phim tâm lý</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <ul class="multi-column-dropdown">
-                                                <li><a href="genres.html">Phim tài liệu</a></li>
-                                                <li><a href="genres.html">Phim tình cảm-Lãng mạn</a></li>
-                                                <li><a href="genres.html">Phim chính kịch - Drama</a></li>
-                                                <li><a href="genres.html">Phim Thể thao-Âm nhạc</a></li>
-                                                <li><a href="genres.html">Phim gia đình</a></li>
-                                                <li><a href="genres.html">Phim hoạt hình</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a href="series.html">Phim Bộ</a></li>
-                            <li><a href="news.html">Phim Lẻ</a></li>
-                            <li><a href="short-codes.html">Tin Tức</a></li>
-                            <li><a href="list.html">Trailer</a></li>
-                        </ul>
-                    </nav>
-                </div>
+                @Html.Action("ViewMenu", "Base")
             </nav>
         </div>
     </div>
@@ -250,7 +203,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 w3ls_footer_grid_right">
-                    <a href="index.html"><h2>One<span>Movies</span></h2></a>
+                    <a href="?home"><h2>One<span>Movies</span></h2></a>
                 </div>
                 <div class="clearfix"> </div>
             </div>

@@ -1,0 +1,44 @@
+﻿@model ICollection<Website.ViewModel.NewsViewModel>
+<div class="col-md-4 wthree-news-right">
+    <!-- news-right-top -->
+    <div class="news-right-top">
+        <div class="wthree-news-right-heading">
+            <h3>Tin Mới</h3>
+        </div>
+        <div class="wthree-news-right-top">
+            <div class="news-grids-bottom">
+                <!-- date -->
+                <div id="design" class="date">
+                    <div id="cycler">
+                        @foreach (var item in Model)
+                        {
+                            <div class="date-text" style="display: block;">
+                                <a href="/News/Detail?idMovie=@item.Id">@item.Title</a>
+                                <p>@item.ShortDescription</p>
+                            </div>
+                        }
+                    </div>
+                    <script>
+                        function blinker() {
+                            $('.blinking').fadeOut(500);
+                            $('.blinking').fadeIn(500);
+                        }
+                        setInterval(blinker, 1000);
+                    </script>
+                    <script>
+                        function cycle($item, $cycler) {
+                            setTimeout(cycle, 2000, $item.next(), $cycler);
+
+                            $item.slideUp(1000, function () {
+                                $item.appendTo($cycler).show();
+                            });
+                        }
+                        cycle($('#cycler div:first'), $('#cycler'));
+                    </script>
+                </div>
+                <!-- //date -->
+            </div>
+        </div>
+    </div>
+    <!-- //news-right-top -->
+</div>
