@@ -13,9 +13,9 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                   @foreach(var movie in Model)
-                   {
+                @foreach(var movie in Model)
+                {
+                    <tr>
                         <td>@movie.Name</td>
                         <td>@movie.DatePublish</td>
                         <td><span class="badge badge-danger m-0">@movie.LengthTime <b>phút</b></span></td>
@@ -23,8 +23,8 @@
                         <td>
                             @Html.Partial("_PartialStar", (double)movie.Rating)
                         </td>
-                   }
-                </tr>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
