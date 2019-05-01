@@ -14,5 +14,7 @@ namespace ApplicationCore.Repositories
         IEnumerable<News> GetListNews(int number);
 
         IEnumerable<News> SearchNewsByTitle(string value);
+
+        IEnumerable<News> GetCountNews(int count);
     }
 }

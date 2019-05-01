@@ -48,13 +48,9 @@
                                             Đăng nhập
                                         </button>
                                         <hr>
-                                        <a href="index.html" class="btn btn-google btn-user btn-block">
-                                            <i class="fab fa-google fa-fw"></i> Google
-                                        </a>
-                                        <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                                            <i class="fab fa-facebook-f fa-fw"></i> Facebook
-                                        </a>
                                     }
+                                    @Html.Partial("_ExternalLoginsListPartial",
+                                            new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
                                     <hr>
                                     <div class="text-center">
                                         <a class="small" href="@Url.Action("ForgotPassword", "Account")">Quên mật khẩu?</a>

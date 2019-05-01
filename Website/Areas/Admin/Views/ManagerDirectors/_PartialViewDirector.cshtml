@@ -44,6 +44,9 @@
         <div class="hint-text">Không có dữ liệu</div>
     }
     @Html.PagedListPager(Model, page => Url.Action("GetPaging", "ManagerDirectors", new { page }),
-    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() {
-        HttpMethod = "GET", UpdateTargetId = "customer_area"}))
+    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions()
+        {
+        HttpMethod = "GET",
+            UpdateTargetId = "customer_area"
+        }))
 </div>

@@ -18,6 +18,11 @@ namespace ApplicationCore.Services
             _repository = repository;
         }
 
+        public IEnumerable<News> GetCountNews(int count)
+        {
+            return _repository.GetCountNews(count);
+        }
+
         public IEnumerable<News> GetNumberOfListNews(int number)
         {
             return _repository.GetListNews(number);

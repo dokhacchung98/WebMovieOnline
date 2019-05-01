@@ -1,31 +1,134 @@
 ﻿@{
+    /**/
+
     ViewBag.Title = "Home Page";
+    var listFeatureFilm = ViewBag.ListFeatureFilm as IEnumerable<Website.ViewModel.MoviesViewModel>;
+    var listSeriesMovie = ViewBag.ListSeriesMovie as IEnumerable<Website.ViewModel.MoviesViewModel>;
+    var moviesSeen = ViewBag.MoviesSeen as IEnumerable<Website.ViewModel.MoviesViewModel>;
+    var favoriteMovies = ViewBag.FavoriteMovies as IEnumerable<Website.ViewModel.MoviesViewModel>;
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<!-- pop-up-box -->
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+<script>
+    $(document).ready(function () {
+        $('.w3_play_icon,.w3_play_icon1,.w3_play_icon2').magnificPopup({
+            type: 'inline',
+            fixedContentPos: false,
+            fixedBgPos: true,
+            overflowY: 'auto',
+            closeBtnInside: true,
+            preloader: false,
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+
+    });
+</script>
+<!-- //list movie news-->
+<!-- banner-bottom -->
+<div class="general">
+    <h4 class="latest-text w3_latest_text">Phim Hot Gần Đây</h4>
+    <div class="container">
+        <a href="/moviehot" style="color: #ff8d1b; float: right;">Xem thêm >>></a>
+        <br />
+        @Html.Action("ViewSlideMovieHot", "Base")
     </div>
 </div>
+<!-- //banner-bottom -->
+<!-- Favorite Movies -->
+@if (favoriteMovies != null && favoriteMovies.Count() > 0)
+{
+    <div class="general">
+        <h4 class="latest-text w3_latest_text">Phim bạn đã thích</h4>
+        <div class="container">
+            <a href="#" style="color: #ff8d1b; float: right;">Xem thêm >>></a>
+            <br />
+            <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+                <div id="myTabContent" class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
+                        <div class="w3_agile_featured_movies">
+                            @foreach (var item in favoriteMovies)
+                            {
+                                @Html.Partial("_PartialMovie", item)
+                            }
+                            <div class="clearfix"> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- //Favorite Movies -->
+<!-- Movie has been seen -->
+@if (moviesSeen != null && moviesSeen.Count() > 0)
+{
+    <div class="general">
+        <h4 class="latest-text w3_latest_text">Phim bạn đã xem</h4>
+        <div class="container">
+            <a href="#" style="color: #ff8d1b; float: right;">Xem thêm >>></a>
+            <br />
+            <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+                <div id="myTabContent" class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
+                        <div class="w3_agile_featured_movies">
+                            @foreach (var item in moviesSeen)
+                            {
+                                @Html.Partial("_PartialMovie", item)
+                            }
+                            <div class="clearfix"> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<!-- // Movie has been seen -->
+<!-- Feature Film -->
+<div class="general">
+    <h4 class="latest-text w3_latest_text">Phim Lẻ</h4>
+    <div class="container">
+        <a href="/featurefilm" style="color: #ff8d1b; float: right;">Xem thêm >>></a>
+        <br />
+        <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+            <div id="myTabContent" class="tab-content">
+                <div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
+                    <div class="w3_agile_featured_movies">
+                        @foreach (var item in listFeatureFilm)
+                        {
+                            @Html.Partial("_PartialMovie", item)
+                        }
+                        <div class="clearfix"> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- //Feature Film -->
+<!-- Series TV -->
+<div class="general">
+    <h4 class="latest-text w3_latest_text">Phim Bộ</h4>
+    <div class="container">
+        <a href="/seriestv" style="color: #ff8d1b; float: right;">Xem thêm >>></a>
+        <br />
+        <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+            <div id="myTabContent" class="tab-content">
+                <div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
+                    <div class="w3_agile_featured_movies">
+                        @foreach (var item in listSeriesMovie)
+                        {
+                            @Html.Partial("_PartialMovie", item)
+                        }
+                        <div class="clearfix"> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- //Series TV -->

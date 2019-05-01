@@ -10,7 +10,15 @@
 <!-- Nav Item - User Information -->
 <div class="nav-item dropdown no-arrow">
     <div>
-        <img class="img-profile rounded-circle" src="@Model.Avatar">
-        <a class="mr-2 d-none d-lg-inline text-gray-600 small fullname" href="@Url.Action("Index","Manage", new { @Id = @Model.Id})">@Model.FullName</a>
+        @if (Model.Avatar != null)
+        {
+            <img class="img-profile rounded-circle" src="@Model.Avatar">
+        }
+        else
+        {
+            <img class="img-profile rounded-circle" src="~/Images/default-avatar.png">
+        }
+        <a class="mr-2 d-none d-lg-inline text-gray-600 small fullname"
+           href="@Url.Action("Index","Manage", new { @Id = @Model.Id})">@Model.FullName</a>
     </div>
 </div>

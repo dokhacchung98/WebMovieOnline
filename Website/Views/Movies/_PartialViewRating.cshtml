@@ -1,0 +1,51 @@
+﻿@model PagedList.IPagedList<Website.ViewModel.UseRatingViewModel>
+
+@using PagedList.Mvc
+<style>
+    .active > a {
+        background: #ff8d1b !important;
+        border-color: #ff8d1b !important;
+    }
+</style>
+<div class="media-grids">
+    @foreach (var item in Model)
+    {
+        <div class="media">
+            <h5>@item.UseViewModel.FullName</h5>
+            <div class="media-left">
+                <a href="#">
+                    <img src="@item.UseViewModel.Avatar" title="@item.UseViewModel.UserName" alt=" " style="width:64px; height:64px;">
+                </a>
+            </div>
+            <div class="media-body">
+                <p>@item.RatingViewModel.Feedback</p>
+                <div>
+                    @Html.Partial("_PartialStar", item.RatingViewModel.StarRating)
+                </div>
+            </div>
+        </div>
+    }
+
+    <br />
+
+    <div class="clearfix row">
+        <div class="col-md-9">
+            @if (Model.Count() > 0)
+            {
+                <div class="hint-text">Trang <b>@(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)</b> / <b>@Model.PageCount</b></div>
+            }
+            else
+            {
+                <div class="hint-text">Không có dữ liệu</div>
+            }
+        </div>
+        <div class="col-md-3">
+            @Html.PagedListPager(Model, page => Url.Action("GetPadingRating", "Movies", new { idMovie = ViewBag.IdMovie, page = page }),
+            PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions()
+              {
+                  HttpMethod = "GET",
+                  UpdateTargetId = "customer_area"
+              }))
+        </div>
+    </div>
+</div>

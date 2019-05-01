@@ -1,0 +1,25 @@
+﻿@model Website.ViewModel.CategorysViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var idCategory = ViewBag.IdCategory;
+}
+
+<div class="general">
+    <div class="container">
+        <!--Breacrumb-->
+        <div class="agileits-news-top">
+            <ol class="breadcrumb">
+                <li><a href="/Home">Trang chủ</a></li>
+                <li><a href="/News">Phim theo thể loại</a></li>
+                <li class="active">@Model.NameCategory</li>
+            </ol>
+        </div>
+        <!--//Breacrumb-->
+        <div class="container">
+            <div id="customer_area">
+                @{Html.RenderAction("GetPage", "ListMovie", new { page = 1, id = idCategory });}
+            </div>
+        </div>
+    </div>
+</div>

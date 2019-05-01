@@ -1,0 +1,25 @@
+﻿@model Website.Models.ExternalLoginListViewModel
+@using Microsoft.Owin.Security
+@{
+    var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+    if (loginProviders.Count() != 0)
+    {
+        using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = Model.ReturnUrl }))
+        {
+            @Html.AntiForgeryToken()
+            <div id="socialLoginList">
+                <p>
+                    @foreach (AuthenticationDescription p in loginProviders)
+                    {
+                        <button type="submit" class="btn btn-facebook btn-user btn-block"
+                                id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType"
+                                title="Đăng nhập với @p.Caption">
+                            <i class="fab fa-facebook fa-fw"></i> @p.AuthenticationType
+                        </button>
+                    }
+                </p>
+            </div>
+        }
+    }
+}
+

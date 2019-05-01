@@ -1,0 +1,338 @@
+﻿@model Website.ViewModel.MoviesViewModel
+
+@{
+    var episodes = ViewBag.Episodes as IEnumerable<Website.ViewModel.FilmViewModel>;
+    var currentEpisode = ViewBag.CurrentEpisode as string;
+    var currenRating = ViewBag.CurrentRating as Website.ViewModel.RatingViewModel;
+}
+<head>
+    <link href="~/Content/css/FontText.css" rel="stylesheet" />
+    <style>
+        #customers {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+            #customers td, #customers th {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
+
+            #customers tr:hover {
+                background-color: #ddd;
+            }
+
+            #customers th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: #ecf0f1;
+                color: black;
+            }
+
+        ul.episodes {
+            display: flex;
+            list-style: none;
+        }
+
+        li.episode {
+            margin: 0px 12px;
+            border: 1px solid;
+            padding: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 1px 1px;
+        }
+
+            li.episode:hover {
+                cursor: pointer;
+            }
+
+        span.glyphicon {
+            color: #e6ac02;
+        }
+
+        .btn-rating {
+            outline: none;
+            font-style: normal;
+            padding: 8px 20px;
+            background: #ff8d1b;
+            font-size: 14px;
+            color: #fff;
+            display: block;
+            border: none;
+            transition: .5s all;
+            -webkit-transition: .5s all;
+            -moz-transition: .5s all;
+            -o-transition: .5s all;
+            -ms-transition: .5s all;
+        }
+    </style>
+</head>
+<script src="~/Scripts/ScriptWebsite/simplePlayer.js"></script>
+<script>
+    $("document").ready(function () {
+        $("#video").simplePlayer();
+    });
+</script>
+<script src="~/Scripts/ScriptWebsite/bootstrap-rating.js"></script>
+<div class="single-page-agile-main">
+    <div class="container">
+        <!-- /w3l-medile-movies-grids -->
+        <div class="agileits-single-top">
+            <ol class="breadcrumb">
+                <li><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
+                <li class="active">@Model.Name</li>
+            </ol>
+        </div>
+        <div class="single-page-agile-info">
+            <!-- /movie-browse-agile -->
+            <div class="show-top-grids-w3lagile">
+                <div class="col-sm-8 single-left">
+                    <div class="song">
+                        <div class="song-info">
+                            <h3>@Model.Name</h3>
+                        </div>
+                        <div class="video-grid-single-page-agileits">
+                            <div class="video-grid-single-page-agileits">
+                                <div data-video="@currentEpisode" id="video">
+                                    <img src="@Model.Thumbnail" />
+                                </div>
+                            </div>
+                        </div>
+                        @if (episodes.Count() > 0)
+                        {
+                            <ul class="episodes">
+                                @foreach (var episode in episodes)
+                                {
+                                    <li class="episode" onclick="onChangeEpisode('@episode.Link')">Tập @episode.Episodes</li>
+                                }
+                            </ul>
+                        }
+                    </div>
+                    <div class="clearfix"> </div>
+
+                    <div class="song-grid-right">
+                        <div class="share">
+                            <p class="detail-title">Thông tin <b>Phim</b></p>
+                            <br />
+                            <table id="customers">
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                <tr>
+                                    <td>Tên Phim</td>
+                                    <td>@Model.Name</td>
+                                </tr>
+                                <tr>
+                                    <td>Tên Tiếng Anh</td>
+                                    <td>@Model.NameEn</td>
+                                </tr>
+                                <tr>
+                                    <td>Số Lượt Xem</td>
+                                    <td>@Model.CountView</td>
+                                </tr>
+                                <tr>
+                                    <td>Ngôn Ngữ</td>
+                                    @if (Model.Language != null)
+                                    {
+                                        <td>@Model.Language</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Đang cập nhập</td>
+                                    }
+                                </tr>
+                                <tr>
+                                    <td>Quốc Gia</td>
+                                    @if (Model.Country != null)
+                                    {
+                                        <td>@Model.Country</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Đang cập nhập</td>
+                                    }
+                                </tr>
+                                <tr>
+                                    <td>Độ tuổi cho phép</td>
+                                    <td>@Model.EnableAge</td>
+                                </tr>
+                                <tr>
+                                    <td>Số tập</td>
+                                    @if (Model.IsSeriesMovie)
+                                    {
+                                        <td>@Model.Episodes tập</td>
+                                    }
+                                    else
+                                    {
+                                        <td>1 tập</td>
+                                    }
+                                </tr>
+                                <tr>
+                                    <td>Độ dài phim</td>
+                                    <td>@Model.LengthTime <b>phút</b></td>
+                                </tr>
+                                <tr>
+                                    <td>Đánh giá sao</td>
+                                    <td>@Html.Partial("_PartialStar", (double)Model.Rating)</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="clearfix"> </div>
+
+                    <div class="song-grid-right">
+                        <div class="share">
+                            <p class="detail-title">Diễn <b>Viên</b></p>
+                            <br />
+                            @Html.Action("GetActorsOfMovie", "Movies", new { id = Model.Id })
+                        </div>
+                    </div>
+                    <div class="clearfix"> </div>
+
+                    <div class="song-grid-right">
+                        <div class="share">
+                            <p class="detail-title">Đạo <b>Diễn</b></p>
+                            <br />
+                            @Html.Action("GetDirectorsOfMovie", "Movies", new { id = Model.Id })
+                        </div>
+                    </div>
+                    <div class="clearfix"> </div>
+
+                    <div class="song-grid-right">
+                        <div class="share">
+                            <p class="detail-title">Mô tả <b>Phim</b></p>
+                            <br />
+                            @if (Model.Description != null)
+                            {
+                                @Html.Raw(Model.Description)
+                            }
+                            else
+                            {
+                                <p>Chưa cập nhật</p>
+                            }
+                        </div>
+                    </div>
+                    <div class="clearfix"> </div>
+
+                    <div class="all-comments">
+                        <p class="detail-title">Đánh Giá</p>
+                        @if (Request.IsAuthenticated)
+                        {
+                            if (currenRating == null)
+                            {
+                                <input type="number" name="My Rating System" id="rating-star" style="color : #ffd800 ;font-family:'Glyphicons Halflings';" class="rating" data-clearable="Xóa" />
+                                <textarea placeholder="Message" required="" id="content-rating" style="resize: none; min-height: 100px; margin: 1em 0; width: 100%;"></textarea>
+                                <button class="btn-rating" onclick="return ratingMovie('@Model.Id');">Đánh giá</button>
+                                <hr />
+                            }
+                        }
+                        <div id="customer_area">
+                            @{Html.RenderAction("GetPadingRating", "Movies", new { page = 1, idMovie = Model.Id }); }
+                        </div>
+
+                    </div>
+
+                    <div class="all-comments">
+                        <p class="detail-title">Bình Luận</p>
+                        <div class="fb-comments" data-href="http://localhost:55367/" data-width="610" data-numposts="5"></div>
+                    </div>
+                </div>
+                <div class="col-md-4 single-right">
+                    <h3>Up Next</h3>
+                    <div class="single-grid-right">
+                        @Html.Action("GetNewestMovies", "Movies")
+                    </div>
+                </div>
+
+
+
+                <div class="clearfix"> </div>
+            </div>
+            <!-- //movie-browse-agile -->
+            <!--body wrapper start-->
+            @Html.Action("ViewSlideMovieHot", "Base")
+            <!--body wrapper end-->
+        </div>
+        <!-- //w3l-latest-movies-grids -->
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('input.rating').rating({
+          'min': 1,
+          'max': 5,
+          'empty-value': 1,
+          'iconLib': 'glyphicon',
+          'activeIcon': 'glyphicon-star',
+          'inactiveIcon': 'glyphicon-star-empty',
+          'clearable': false,
+          'clearableIcon': 'glyphicon-remove',
+          'inline': false,
+          'readonly': false,
+          'copyClasses': true
+        });
+
+        @*var stringUrl = '/Movies/GetPadingRating?idMovie=@Model.Id&page=1';
+        console.log(stringUrl);
+
+        $.ajax({
+            type: "GET",
+            url: stringUrl,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                console.log(data);
+            },
+            error: function () {
+                console.log('faild');
+            }
+        });*@
+    });
+    function onChangeEpisode(link) {
+        var data = JSON.stringify({
+            'link': link
+        });
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("CurrentEpisode", "Movies")',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: data,
+            success: function () {
+                window.location.reload();
+            },
+            error: function () {
+                window.location.reload();
+            }
+        });
+    }
+
+    function ratingMovie(id) {
+        var star = $('#rating-star').val();
+        var content = $('#content-rating').val();
+
+        var data = JSON.stringify({
+            'idMovie' : id,
+            'feedback' : content,
+            'starRate' : star
+        });
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("Rating", "Movies")',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: data,
+            success: function () {
+                window.location.reload();
+            },
+            error: function () {
+                window.location.reload();
+            }
+        });
+    }
+</script>

@@ -1,0 +1,124 @@
+﻿@model IEnumerable<Website.ViewModel.MoviesViewModel>
+
+@{
+    Layout = null;
+}
+
+<div class="banner-bottom">
+    <div class="container">
+        <div class="w3_agile_banner_bottom_grid">
+            <div id="owl-demo" class="owl-carousel owl-theme">
+                @foreach (var item in Model)
+                {
+                    <div class="item">
+                        <div class="w3l-movie-gride-agile w3l-movie-gride-agile1">
+                            <a href="@Url.Action("Details", "Movies", new { id = item.Id })" class="hvr-shutter-out-horizontal">
+                                <img src="@item.Thumbnail" title="album-name" class="img-responsive" alt="@item.Name" />
+                                <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+                            </a>
+                            <div class="mid-1 agileits_w3layouts_mid_1_home">
+                                <div class="w3l-movie-text">
+                                    <h6>
+                                        <a href="@Url.Action("Details", "Movies", new { id = item.Id })" 
+                                           class="movie-name">@item.Name - @item.CreatedDate.Value.Year</a>
+                                        @if (Request.IsAuthenticated)
+                                        {
+                                            <a id="add-favorite" class="heart" title="Yêu thích" 
+                                               onclick="addFavoriteMovie('@item.Id', '@User.Identity.Name')">
+                                                <i class="fa fa-heart" style="color: red; cursor: pointer"></i>
+                                            </a>
+                                        }
+                                    </h6>
+                                </div>
+                                <div class="mid-2 agile_mid_2_home">
+                                    <div class="block-stars">
+                                        @Html.Partial("_PartialStar", (double)item.Rating)
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/ScriptWebsite/bootstrap-notify.min.js"></script>
+<script>
+    function addFavoriteMovie(idMovie, username) {
+        event.preventDefault();
+        var data = JSON.stringify({
+            'idMovie': idMovie,
+            'userName': username
+        });
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("AddFavoriteMovie", "Movies")',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: data,
+            success: function (res) {
+                if (res.status == 200) {
+                    $.notify({
+                        icon: 'glyphicon glyphicon-ok',
+                        message: 'Thêm thành công',
+                    }, {
+                            element: 'body',
+                            type: "success",
+                            allow_dismiss: true,
+                            newest_on_top: true,
+                            showProgressbar: false,
+                            placement: {
+                                from: "top",
+                                align: "right"
+                            },
+                            offset: 20,
+                            spacing: 10,
+                            z_index: 1031,
+                            delay: 5000,
+                            timer: 1000,
+                            animate: {
+                                enter: 'animated fadeInDown',
+                                exit: 'animated fadeOutUp'
+                            },
+                            template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
+                                '<span data-notify="icon"></span>' +
+                                '<span data-notify="message" style="padding-left: 10px">{2}</span>'
+                        });
+                } else if (res.status == 500) {
+                    $.notify({
+                        icon: 'glyphicon glyphicon-remove',
+                        message: 'Bạn đã thích phim này',
+                    }, {
+                            element: 'body',
+                            type: "danger",
+                            allow_dismiss: true,
+                            newest_on_top: true,
+                            showProgressbar: false,
+                            placement: {
+                                from: "top",
+                                align: "right"
+                            },
+                            offset: 20,
+                            spacing: 10,
+                            z_index: 1031,
+                            delay: 5000,
+                            timer: 1000,
+                            animate: {
+                                enter: 'animated fadeInDown',
+                                exit: 'animated fadeOutUp'
+                            },
+                            template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
+                                '<span data-notify="icon"></span>' +
+                                '<span data-notify="message" style="padding-left: 10px">{2}</span>'
+                        });
+                }
+            },
+            error: function (res) {
+                console.log(res);
+            }
+        });
+    }
+</script>

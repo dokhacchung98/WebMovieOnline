@@ -36,7 +36,7 @@ namespace Infrastructure.Identity
         [Display(Name = "Trạng thái")]
         public StatusEnum Status { get; set; }
 
-        public DateTime CreatedDate { get; set; }
+        public DateTime? CreatedDate { get; set; }
 
         #endregion propreties
 
