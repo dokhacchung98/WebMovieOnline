@@ -66,6 +66,7 @@
             success: function (res) {
                 if (res.status == 200) {
                     $.notify({
+                        icon: 'glyphicon glyphicon-ok',
                         message: 'Thêm thành công',
                     }, {
                             element: 'body',
@@ -87,11 +88,12 @@
                                 exit: 'animated fadeOutUp'
                             },
                             template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
-                                '<span data-notify="message">{2}</span>'
+                                '<span data-notify="icon"></span>' +
+                                '<span data-notify="message" style="padding-left: 10px">{2}</span>'
                         });
                 } else if (res.status == 500) {
                     $.notify({
-                        icon: 'glyphicon glyphicon-warning-sign',
+                        icon: 'glyphicon glyphicon-remove',
                         message: 'Bạn đã thích phim này',
                     }, {
                             element: 'body',
@@ -114,7 +116,7 @@
                             },
                             template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
                                 '<span data-notify="icon"></span>' +
-                                '<span data-notify="message"> {2}</span>'
+                                '<span data-notify="message" style="padding-left: 10px">{2}</span>'
                         });
                 }
             },

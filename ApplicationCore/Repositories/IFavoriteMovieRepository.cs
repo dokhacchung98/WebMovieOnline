@@ -11,5 +11,7 @@ namespace ApplicationCore.Repositories
     public interface IFavoriteMovieRepository : IGenericRepository<FavoriteMovie>
     {
         bool ExistObject(Guid idMovie, string idUser);
+
+        ICollection<FavoriteMovie> GetFavoriteMoviesByUserId(string idUser);
     }
 }

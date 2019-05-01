@@ -26,5 +26,10 @@ namespace ApplicationCore.Repositories
             }
             return false;
         }
+
+        public ICollection<FavoriteMovie> GetFavoriteMoviesByUserId(string idUser)
+        {
+            return _dbContext.FavoriteMovies.Where(t => t.UserId.Equals(idUser)).ToList();
+        }
     }
 }

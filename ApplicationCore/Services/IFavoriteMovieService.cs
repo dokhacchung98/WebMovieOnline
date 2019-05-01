@@ -11,5 +11,7 @@ namespace ApplicationCore.Services
     public interface IFavoriteMovieService : IEntityService<FavoriteMovie>
     {
         bool ExistObject(Guid idMovie, string idUser);
+
+        ICollection<FavoriteMovie> GetFavoriteMoviesByUserId(string idUser);
     }
 }

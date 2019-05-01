@@ -23,5 +23,10 @@ namespace ApplicationCore.Services
         {
             return _repository.ExistObject(idMovie, idUser);
         }
+
+        public ICollection<FavoriteMovie> GetFavoriteMoviesByUserId(string idUser)
+        {
+            return _repository.GetFavoriteMoviesByUserId(idUser);
+        }
     }
 }
