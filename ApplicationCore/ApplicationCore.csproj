@@ -63,6 +63,7 @@
     <Compile Include="Repositories\CategorysRepository.cs" />
     <Compile Include="Repositories\DirectorMovieRepository.cs" />
     <Compile Include="Repositories\DirectorRepository.cs" />
+    <Compile Include="Repositories\FavoriteMovieRepository.cs" />
     <Compile Include="Repositories\FilmRepository.cs" />
     <Compile Include="Repositories\IActorMovieRepository.cs" />
     <Compile Include="Repositories\IActorRepository.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Repositories\ICategorysRepository.cs" />
     <Compile Include="Repositories\IDirectorMovieRepository.cs" />
     <Compile Include="Repositories\IDirectorRepository.cs" />
+    <Compile Include="Repositories\IFavoriteMovieRepository.cs" />
     <Compile Include="Repositories\IFilmRepository.cs" />
     <Compile Include="Repositories\IMoviesRepository.cs" />
     <Compile Include="Repositories\INewsRepository.cs" />
@@ -101,6 +103,7 @@
     <Compile Include="Services\CategorysService.cs" />
     <Compile Include="Services\DirectorMovieService.cs" />
     <Compile Include="Services\DirectorService.cs" />
+    <Compile Include="Services\FavoriteMovieService.cs" />
     <Compile Include="Services\FilmService.cs" />
     <Compile Include="Services\IActorMovieService.cs" />
     <Compile Include="Services\IActorsService.cs" />
@@ -109,6 +112,7 @@
     <Compile Include="Services\ICategorysService.cs" />
     <Compile Include="Services\IDirectorMovieService.cs" />
     <Compile Include="Services\IDirectorService.cs" />
+    <Compile Include="Services\IFavoriteMovieService.cs" />
     <Compile Include="Services\IFilmService.cs" />
     <Compile Include="Services\IMoviesService.cs" />
     <Compile Include="Services\INewsService.cs" />

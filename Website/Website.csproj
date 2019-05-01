@@ -266,6 +266,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\FontText.css" />
+    <Content Include="Scripts\ScriptWebsite\bootstrap-notify.min.js" />
     <Content Include="Content\stylewebsite\list.css" />
     <Content Include="Scripts\ScriptWebsite\bootstrap-rating.js" />
     <Content Include="Areas\Admin\Content\ManageUser\edit_user.css" />

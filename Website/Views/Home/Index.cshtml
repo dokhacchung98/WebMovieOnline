@@ -1,8 +1,11 @@
 ﻿@{
+    /**/
+
     ViewBag.Title = "Home Page";
     var listFeatureFilm = ViewBag.ListFeatureFilm as IEnumerable<Website.ViewModel.MoviesViewModel>;
     var listSeriesMovie = ViewBag.ListSeriesMovie as IEnumerable<Website.ViewModel.MoviesViewModel>;
     var moviesSeen = ViewBag.MoviesSeen as IEnumerable<Website.ViewModel.MoviesViewModel>;
+    var favoriteMovies = ViewBag.FavoriteMovies as IEnumerable<Website.ViewModel.MoviesViewModel>;
 }
 
 <!-- pop-up-box -->
@@ -34,6 +37,32 @@
     </div>
 </div>
 <!-- //banner-bottom -->
+<!-- Favorite Movies -->
+@if (favoriteMovies != null && favoriteMovies.Count() > 0)
+{
+    <div class="general">
+        <h4 class="latest-text w3_latest_text">Phim bạn đã thích</h4>
+        <div class="container">
+            <a href="#" style="color: #ff8d1b; float: right;">Xem thêm >>></a>
+            <br />
+            <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+                <div id="myTabContent" class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
+                        <div class="w3_agile_featured_movies">
+                            @foreach (var item in favoriteMovies)
+                            {
+                                @Html.Partial("_PartialMovie", item)
+                            }
+                            <div class="clearfix"> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- //Favorite Movies -->
 <!-- Movie has been seen -->
 @if (moviesSeen != null && moviesSeen.Count() > 0)
 {
