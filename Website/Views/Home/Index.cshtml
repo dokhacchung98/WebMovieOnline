@@ -1,94 +1,16 @@
-﻿@model ICollection<Website.ViewModel.MoviesViewModel>
+﻿@model IEnumerable<Website.ViewModel.MoviesViewModel>
 
 @{
-    ViewBag.Title = "Home Page";
-    var listNewTrailer = ViewBag.ListNewTrailer as ICollection<Website.ViewModel.TrailerViewModel>;
-    var length = listNewTrailer.Count();
-    var ListNewTrailer = listNewTrailer.ToArray();
-    var count = 0;
-
-
     var listFeatureFilm = ViewBag.ListFeatureFilm as IEnumerable<Website.ViewModel.MoviesViewModel>;
     var listSeriesMovie = ViewBag.ListSeriesMovie as IEnumerable<Website.ViewModel.MoviesViewModel>;
     var moviesSeen = ViewBag.MoviesSeen as IEnumerable<Website.ViewModel.MoviesViewModel>;
 
-}<!-- khó nhỉ, tại ô for thế là sai rồi, mà t vẫn ko hiểu nó sao ko hiển thị nữa, làm lại thôi. hihi, cái nó cần for là cả cái <li> ấy, ko phải mấy cái bé bé bên trong đâu-->
+}
 
-
-<!--===================-->
 
 <!-- Trailer-->
-<div class="Latest-tv-series">
-    <h4 class="latest-text w3_latest_text w3_home_popular">New Trailer</h4>
-    <div class="container">
-        <section class="slider">
-            <div class="flexslider">
-
-                <div class="flex-viewport" style="overflow: hidden; position: relative;">
-                    <ul class="slides" style="width: 1000%; transition-duration: 0.6s; transform: translate3d(-3420px, 0px, 0px);">
-
-                        @foreach (var item in ListNewTrailer)
-                        {
-                            var movie = Model.Where(t => t.Id == item.MovieId).FirstOrDefault();
-                            
-                            <li style="width: 1140px; float: left; display: block;" class="">
-                                <div class="agile_tv_series_grid">
-                                    <div class="col-md-6 agile_tv_series_grid_left">
-                                        <div class="w3ls_market_video_grid1">
-                                            <img src="@movie.Thumbnail" alt=" " class="img-responsive">
-                                            <a class="w3_play_icon1" href="#small-dialog1">
-                                                <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 agile_tv_series_grid_right">
-                                        <p class="fexi_header">@item.TrailerName</p>
-                                        <p class="fexi_header_para"><span>Nội dung phim<label>:</label></span>@Html.Raw(item.Description)</p>
-                                        <p class="fexi_header_para"><span>Ngày phát hành<label>:</label></span> @movie.CreatedDate </p>
-                                        <p class="fexi_header_para">
-                                            <span>Thể loại<label>:</label> </span>
-                                            <a href="genres.html">fds</a> 
-                                        </p>
-                                        <p class="fexi_header_para fexi_header_para1">
-                                            <span>Star Rating<label>:</label></span>
-                                        
-                                            <div style="background: yellow border-box">                                                
-                                                @Html.Partial("_PartialStar", (double)movie.Rating)
-                                            </div>
-                                        </p>
-                                        
-                                    </div>
-                                    <div class="clearfix"> </div>
-                                </div>
-                            </li>
-                        }
-
-                    </ul>
-                </div><ol class="flex-control-nav flex-control-paging"><li><a class="">1</a></li><li><a class="">2</a></li><li><a class="flex-active">3</a></li></ol><ul class="flex-direction-nav"><li><a class="flex-prev" href="#">Previous</a></li><li><a class="flex-next" href="#">Next</a></li></ul>
-            </div>
-        </section>
-        <!-- flexSlider -->
-        <link rel="stylesheet" href="/Content/stylewebsite/flexslider.css" type="text/css" media="screen" property="">
-        <script defer="" src="/Scripts/ScriptWebsite/jquery.flexslider.js"></script>
-        <script type="text/javascript">
-            $(window).load(function () {
-                $('.flexslider').flexslider({
-                    animation: "slide",
-                    start: function (slider) {
-                        $('body').removeClass('loading');
-                    }
-                });
-            });
-        </script>
-        <!-- //flexSlider -->
-    </div>
-</div>
-
-
-<!--===================-->
+@Html.Action("NewestTrailers", "Trailers")
 <!--Trailer-->
-
-
 <!-- pop-up-box -->
 
 <script>

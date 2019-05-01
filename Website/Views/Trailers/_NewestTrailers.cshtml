@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Website.ViewModel.TrailerViewModel>
+@using Website.ViewModel
+@{
+    Layout = null;
+
+    var newestMovies = ViewBag.NewestMovies as IEnumerable<Website.ViewModel.MoviesViewModel>;
+}
+
+<!-- Latest-tv-series -->
+<div class="Latest-tv-series">
+    <h4 class="latest-text w3_latest_text w3_home_popular">Trailer mới nhất</h4>
+    <div class="container">
+        <section class="slider">
+            <div class="flexslider">
+                <ul class="slides">
+                    @foreach (var item in Model)
+                    {
+                        <li style="height: 312.61px">
+                            <div class="agile_tv_series_grid">
+                                <div class="col-md-6 agile_tv_series_grid_left">
+                                    <div class="w3ls_market_video_grid1">
+                                        <img src="@item.Thumbnail" alt=" " class="img-responsive" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6 agile_tv_series_grid_right">
+                                    <p class="fexi_header">@item.TrailerName</p>
+                                    <p class="fexi_header_para"><span>Ngày phát hành<label>:</label></span>
+                                       @item.MoviesViewModel.DatePublish.ToString(string.Format("dd/MM/yyyy"))
+                                    </p>
+                                    <p class="fexi_header_para">
+                                        <span>Độ dài<label>:</label> </span>
+                                        <a href="#">@item.MoviesViewModel.LengthTime <b>phút</b></a>
+                                    </p>
+                                    <p class="fexi_header_para fexi_header_para1">
+                                        <span>Star Rating<label>:</label></span>
+                                        @Html.Partial("_PartialStar", (double)item.MoviesViewModel.Rating)
+                                    </p>
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </section>
+        <!-- flexSlider -->
+        <link rel="stylesheet" href="~/Content/css/flexslider.css" type="text/css" media="screen" property="" />
+        <script defer src="~/Scripts/ScriptWebsite/jquery.flexslider.js"></script>
+        <script type="text/javascript">
+			$(window).load(function(){
+				$('.flexslider').flexslider({
+				animation: "slide",
+				start: function(slider){
+					$('body').removeClass('loading');
+				}
+				});
+			});
+        </script>
+        <!-- //flexSlider -->
+    </div>
+</div>
+<!-- //Latest-tv-series -->

@@ -220,8 +220,8 @@ ul.w3l-ratings li,.w3l-ratings a{
     display: inline-block!important;
     list-style: none;
 }
-ul.w3l-ratings li i ,.w3l-ratings a i{
-    color: #ff8d1b;
+ul.w3l-ratings li i, .w3l-ratings a i {
+    color: #f1c40f;
 }
 /*---browse-grid-----*/
 .w3l-movie-gride-agile {
