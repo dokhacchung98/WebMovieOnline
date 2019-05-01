@@ -17,12 +17,17 @@ namespace ApplicationCore.Repositories
 
         public ICollection<Movie> GetAllFeatureMovies()
         {
-            return _dbContext.Movies.Where(t => t.IsSeriesMovie == false).ToList();
+            return _dbContext.Movies.Where(t => t.IsSeriesMovie == false).OrderBy(t => t.CreatedDate).ToList();
+        }
+
+        public ICollection<Movie> GetAllMovieHot()
+        {
+            return _dbContext.Movies.Where(t => t.IsHot == true).OrderBy(t => t.CreatedDate).ToList();
         }
 
         public ICollection<Movie> GetAllSeriesTV()
         {
-            return _dbContext.Movies.Where(t => t.IsSeriesMovie == true).ToList();
+            return _dbContext.Movies.Where(t => t.IsSeriesMovie == true).OrderBy(t => t.CreatedDate).ToList();
         }
 
         public ICollection<Movie> GetMovieHotByNumber(int countMovie)
@@ -51,19 +56,26 @@ namespace ApplicationCore.Repositories
             return _dbContext.Movies.Where(t => t.IsSeriesMovie == true).OrderBy(t => t.CreatedDate).Take(countMovie).ToList();
         }
 
+        public ICollection<Movie> GetMoviesByCategoryId(Guid id)
+        {
+            var listCategoryMovie = _dbContext.GetCategoryMovies.
+                                        Where(t => t.CategoryId == id).Select(t => t.MovieId).ToList();
+            return _dbContext.Movies.Where(t => listCategoryMovie.Contains(t.Id)).OrderBy(t => t.CreatedDate).ToList();
+        }
+
         public ICollection<Movie> GetNewestMovies(int countMovie)
         {
-            return _dbContext.Movies.OrderBy(t => t.CreatedDate).Take(countMovie).ToList();
+            return _dbContext.Movies.OrderBy(t => t.CreatedDate).Take(countMovie).OrderBy(t => t.CreatedDate).ToList();
         }
 
         public ICollection<Movie> SearchMovieByName(string name)
         {
-            return _dbContext.Movies.Where(t => t.Name.Contains(name)).ToList();
+            return _dbContext.Movies.Where(t => t.Name.Contains(name)).OrderBy(t => t.CreatedDate).ToList();
         }
 
         public ICollection<Movie> SearchMovieByNameAndType(string name, bool isSeriesTV)
         {
-            return _dbContext.Movies.Where(t => t.Name.Contains(name) && t.IsSeriesMovie == isSeriesTV).ToList();
+            return _dbContext.Movies.Where(t => t.Name.Contains(name) && t.IsSeriesMovie == isSeriesTV).OrderBy(t => t.CreatedDate).ToList();
         }
 
         public ICollection<Movie> SearchMoviesByKeyWord(string keyword)
@@ -79,6 +91,7 @@ namespace ApplicationCore.Repositories
             {
                 listMovie = listMovie.Union(_dbContext.Movies.Where(t => t.Name.Contains(item)))
                     .Union(_dbContext.Movies.Where(t => t.NameEn.Contains(item)))
+                    .OrderBy(t => t.CreatedDate)
                     .ToList();
             }
 

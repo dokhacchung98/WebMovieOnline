@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Website.ViewModel.CategorysViewModel>
+@{
+    Layout = null;
+}
+
+<div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+    <nav>
+        <ul class="nav navbar-nav">
+            <li @(HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString().ToLower().Equals("home") ? "class=active" : "")><a href="/Home">Trang Chủ</a></li>
+            <li @(HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString().ToLower().Equals("listmovie") ? "class=active" : "") class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Thể Loại <b class="caret"></b></a>
+                <ul class="dropdown-menu multi-column columns-3">
+                    <li>
+
+                        @foreach (var item in Model)
+                        {
+                            <div class="col-sm-4">
+                                <ul class="multi-column-dropdown">
+                                    <li><a href="/ListMovie?id=@item.Id">@item.NameCategory</a></li>
+                                </ul>
+                            </div>
+                        }
+                        <div class="clearfix"></div>
+                    </li>
+                </ul>
+            </li>
+            <li @(HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString().ToLower().Equals("seriestv") ? "class=active" : "")><a href="/seriestv">Phim Bộ</a></li>
+            <li @(HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString().ToLower().Equals("featurefilm") ? "class=active" : "")><a href="/featurefilm">Phim Lẻ</a></li>
+            <li @(HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString().ToLower().Equals("moviehot") ? "class=active" : "")><a href="/moviehot">Phim Hot</a></li>
+            <li @(HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString().ToLower().Equals("news") ? "class=active" : "")><a href="/News">Tin Tức</a></li>
+            <li><a href="list.html">Trailer</a></li>
+        </ul>
+    </nav>
+</div>

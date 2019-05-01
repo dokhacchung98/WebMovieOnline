@@ -1,0 +1,46 @@
+﻿@model Website.ViewModel.NewsViewModel
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="general">
+    <div class="container">
+        <!--Breacrumb-->
+        <div class="agileits-news-top">
+            <ol class="breadcrumb">
+                <li><a href="/Home">Trang chủ</a></li>
+                <li><a href="/News">Tin tức</a></li>
+                <li class="active">@Model.Title</li>
+            </ol>
+        </div>
+        <!--//Breacrumb-->
+
+        <div class="agileinfo-news-top-grids">
+            <!--Detail News-->
+            <div class="col-md-8 wthree-top-news-left">
+
+                <div class="wthree-news-left">
+                    <div class="wthree-news-left-img">
+                        <img src="@Model.Thumbnail" alt="">
+                        <h4>@Model.Title</h4>
+                        <div class="s-author">
+                            <p> <i class="fa fa-calendar" aria-hidden="true"></i> @Model.CreatedDate &nbsp;&nbsp; </p>
+                        </div>
+                        <div id="fb-root"></div>
+                        <div class="w3-agile-news-text">
+                            @Html.Raw(Model.Description)
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--//Detail News-->
+            <!--Slide News-->
+            @Html.Action("ViewNews", "Base")
+            <!--//Slide News-->
+        </div>
+    </div>
+</div>
+

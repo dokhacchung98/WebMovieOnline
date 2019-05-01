@@ -11,6 +11,7 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using Website.ViewModel;
+using Infrastructure.Identity;
 
 namespace Website.Controllers
 {
@@ -30,6 +31,8 @@ namespace Website.Controllers
 
         private readonly IRatingService _ratingService;
 
+        private readonly IFavoriteMovieService _favoriteMovieService;
+
         private readonly IApplicationUserService _applicationUserService;
 
         public MoviesController(IMoviesService moviesService,
@@ -39,7 +42,8 @@ namespace Website.Controllers
                                 IDirectorMovieService directorMovieService,
                                 IFilmService filmService,
                                 IRatingService ratingService,
-                                IApplicationUserService applicationUserService)
+                                IApplicationUserService applicationUserService,
+                                IFavoriteMovieService favoriteMovieService)
         {
             _moviesService = moviesService;
             _actorMovieService = actorMovieService;
@@ -49,6 +53,7 @@ namespace Website.Controllers
             _filmService = filmService;
             _ratingService = ratingService;
             _applicationUserService = applicationUserService;
+            _favoriteMovieService = favoriteMovieService;
         }
 
         public ActionResult Details(Guid id)
@@ -234,5 +239,36 @@ namespace Website.Controllers
             return PartialView("_PartialViewRating");
         }
 
+        public JsonResult AddFavoriteMovie(string idMovie, string userName)
+        {
+            ApplicationUser currentUser = _applicationUserService.GetUserFromUserName(userName);
+            bool exist = _favoriteMovieService.ExistObject(new Guid(idMovie), currentUser.Id);
+
+            if (exist == false)
+            {
+                FavoriteMovie favoriteMovie = new FavoriteMovie
+                {
+                    MovieId = new Guid(idMovie),
+                    UserId = currentUser.Id,
+                    User = currentUser
+                };
+
+                _favoriteMovieService.Create(favoriteMovie);
+
+                return Json(new
+                {
+                    status = 200,
+                    message = "Success"
+                });
+            }
+            else
+            {
+                return Json(new
+                {
+                    status = 500,
+                    message = "Fail"
+                });
+            }
+        }
     }
 }

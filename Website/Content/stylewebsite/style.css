@@ -1535,3 +1535,20 @@ h3.head {
 		font-size: 1.8em;
 	}
 }
+
+form#logoutForm {
+    margin-left: 65px;
+    color: black;
+}
+
+i.fa.fa-sign-out-alt {
+    padding-left: 12px;
+}
+
+form > a {
+    color: black;
+}
+a.fullname {
+    font-size: 1rem;
+    color: black;
+}

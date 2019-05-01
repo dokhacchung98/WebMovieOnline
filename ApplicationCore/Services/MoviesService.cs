@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ApplicationCore.Repositories;
 using Common.Service;
 using Infrastructure.Entities;
@@ -17,6 +18,11 @@ namespace ApplicationCore.Services
         public ICollection<Movie> GetAllFeatureMovie()
         {
             return _repository.GetAllFeatureMovies();
+        }
+
+        public ICollection<Movie> GetAllMovieHot()
+        {
+            return _repository.GetAllMovieHot();
         }
 
         public ICollection<Movie> GetAllSeriesTV()
@@ -46,6 +52,11 @@ namespace ApplicationCore.Services
         public ICollection<Movie> GetCountSeriesMovies(int countMovie)
         {
             return _repository.GetCountSeriesMovies(countMovie);
+        }
+
+        public ICollection<Movie> GetMoviesByCategoryId(Guid id)
+        {
+            return _repository.GetMoviesByCategoryId(id);
         }
 
         public ICollection<Movie> GetNewestMovies(int countMovie)

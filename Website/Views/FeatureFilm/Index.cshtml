@@ -1,0 +1,23 @@
+﻿@model Website.ViewModel.CategorysViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="general">
+    <div class="container">
+        <!--Breacrumb-->
+        <div class="agileits-news-top">
+            <ol class="breadcrumb">
+                <li><a href="/Home">Trang chủ</a></li>
+                <li class="active">Phim lẻ</li>
+            </ol>
+        </div>
+        <!--//Breacrumb-->
+        <div class="container">
+            <div id="customer_area">
+                @{Html.RenderAction("GetPage", "FeatureFilm", new { page = 1 });}
+            </div>
+        </div>
+    </div>
+</div>

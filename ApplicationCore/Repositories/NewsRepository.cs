@@ -15,6 +15,11 @@ namespace ApplicationCore.Repositories
         {
         }
 
+        public IEnumerable<News> GetCountNews(int count)
+        {
+            return _dbContext.News.ToList().OrderBy(t => t.CreatedDate).Take(count);
+        }
+
         public IEnumerable<News> GetListNews(int number)
         {
             return _dbContext.News.ToList().OrderBy(t => t.CreatedBy).Take(number);

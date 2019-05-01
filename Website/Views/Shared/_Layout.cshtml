@@ -10,9 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="One Movies" />
-    <script type="application/x-javascript">
-        addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-               function hideURLbar(){ window.scrollTo(0,1); } </script>
     <!-- //for-mobile-apps -->
     <link href="~/Content/stylewebsite/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
     <link href="~/Content/stylewebsite/style.css" rel="stylesheet" type="text/css" media="all" />
@@ -20,6 +17,8 @@
     <link rel="stylesheet" href="~/Content/stylewebsite/faqstyle.css" type="text/css" media="all" />
     <link href="~/Content/stylewebsite/single.css" rel='stylesheet' type='text/css' />
     <link href="~/Content/stylewebsite/medile.css" rel='stylesheet' type='text/css' />
+    <link href="~/Content/stylewebsite/news.css" rel="stylesheet" />
+    <link href="~/Content/stylewebsite/list.css" rel="stylesheet" />
     <!-- banner-slider -->
     <link href="~/Content/stylewebsite/jquery.slidey.min.css" rel="stylesheet">
     <!-- //banner-slider -->
@@ -80,7 +79,7 @@
     <div class="header">
         <div class="container">
             <div class="w3layouts_logo">
-                <a href="index.html"><h1>One<span>Movies</span></h1></a>
+                <a href="/Home"><h1>One<span>Movies</span></h1></a>
             </div>
             <div class="w3_search">
                 <input type="text" id="key-search" name="Search" placeholder="Tên phim..." required="">
@@ -90,11 +89,22 @@
                 @if (Request.IsAuthenticated)
                 {
                     @Html.Action("ViewProfile", "Base", new { userName = User.Identity.Name });
+
+                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post,
+                        new { id = "logoutForm" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <a href="javascript:document.getElementById('logoutForm').submit()">
+                            Đăng Xuất<i class="fa fa-sign-out-alt" aria-hidden="true"></i>
+                        </a>
+
+                    }
                 }
                 else
                 {
                     <ul>
-                        <li><a href="#" data-toggle="modal" data-target="#myModal">Login</a></li>
+                        <li><a href="@Url.Action("Login", "Account")" data-toggle="modal">Đăng Nhập</a></li>
                     </ul>
                 }
             </div>
@@ -102,62 +112,6 @@
         </div>
     </div>
     <!-- //header -->
-    <!-- bootstrap-pop-up -->
-    <div class="modal video-modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    Sign In & Sign Up
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                </div>
-                <section>
-                    <div class="modal-body">
-                        <div class="w3_login_module">
-                            <div class="module form-module">
-                                <div class="toggle">
-                                    <i class="fa fa-times fa-pencil"></i>
-                                    <div class="tooltip">Click Me</div>
-                                </div>
-                                <div class="form">
-                                    <h3>Login to your account</h3>
-                                    <form action="#" method="post">
-                                        <input type="text" name="Username" placeholder="Username" required="">
-                                        <input type="password" name="Password" placeholder="Password" required="">
-                                        <input type="submit" value="Login">
-                                    </form>
-                                </div>
-                                <div class="form">
-                                    <h3>Create an account</h3>
-                                    <form action="#" method="post">
-                                        <input type="text" name="Username" placeholder="Username" required="">
-                                        <input type="password" name="Password" placeholder="Password" required="">
-                                        <input type="email" name="Email" placeholder="Email Address" required="">
-                                        <input type="text" name="Phone" placeholder="Phone Number" required="">
-                                        <input type="submit" value="Register">
-                                    </form>
-                                </div>
-                                <div class="cta"><a href="#">Forgot your password?</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-        </div>
-    </div>
-    <script>
-        $('.toggle').click(function () {
-            // Switches the Icon
-            $(this).children('i').toggleClass('fa-pencil');
-            // Switches the forms
-            $('.form').animate({
-                height: "toggle",
-                'padding-top': 'toggle',
-                'padding-bottom': 'toggle',
-                opacity: "toggle"
-            }, "slow");
-        });
-    </script>
-    <!-- //bootstrap-pop-up -->
     <!-- nav -->
     <div class="movies_nav">
         <div class="container">
@@ -171,56 +125,7 @@
                     </button>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
-                    <nav>
-                        <ul class="nav navbar-nav">
-                            <li class="active"><a href="index.html">Trang Chủ</a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Thể Loại <b class="caret"></b></a>
-                                <ul class="dropdown-menu multi-column columns-3">
-                                    <li>
-                                        <div class="col-sm-4">
-                                            <ul class="multi-column-dropdown">
-                                                <li><a href="genres.html">Phim hành động</a></li>
-                                                <li><a href="genres.html">Phim viễn tưởng</a></li>
-                                                <li><a href="genres.html">Phim chiến tranh</a></li>
-                                                <li><a href="genres.html">Phim hình sự</a></li>
-                                                <li><a href="horror.html">Phim phiêu lưu</a></li>
-                                                <li><a href="genres.html">Phim hài hước</a></li>
-                                                <li><a href="genres.html">Phim võ thuật</a></li>
-                                                <li><a href="genres.html">Phim kinh dị</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <ul class="multi-column-dropdown">
-                                                <li><a href="genres.html">Phim hồi hộp-Gây cấn</a></li>
-                                                <li><a href="comedy.html">Phim Bí ẩn-Siêu nhiên</a></li>
-                                                <li><a href="genres.html">Phim cổ trang</a></li>
-                                                <li><a href="genres.html">Phim thần thoại</a></li>
-                                                <li><a href="genres.html">Phim tâm lý</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <ul class="multi-column-dropdown">
-                                                <li><a href="genres.html">Phim tài liệu</a></li>
-                                                <li><a href="genres.html">Phim tình cảm-Lãng mạn</a></li>
-                                                <li><a href="genres.html">Phim chính kịch - Drama</a></li>
-                                                <li><a href="genres.html">Phim Thể thao-Âm nhạc</a></li>
-                                                <li><a href="genres.html">Phim gia đình</a></li>
-                                                <li><a href="genres.html">Phim hoạt hình</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a href="series.html">Phim Bộ</a></li>
-                            <li><a href="news.html">Phim Lẻ</a></li>
-                            <li><a href="short-codes.html">Tin Tức</a></li>
-                            <li><a href="list.html">Trailer</a></li>
-                        </ul>
-                    </nav>
-                </div>
+                @Html.Action("ViewMenu", "Base")
             </nav>
         </div>
     </div>
@@ -298,7 +203,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 w3ls_footer_grid_right">
-                    <a href="index.html"><h2>One<span>Movies</span></h2></a>
+                    <a href="?home"><h2>One<span>Movies</span></h2></a>
                 </div>
                 <div class="clearfix"> </div>
             </div>

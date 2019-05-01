@@ -1,5 +1,6 @@
 ﻿using Common.Service;
 using Infrastructure.Entities;
+using System;
 using System.Collections.Generic;
 
 namespace ApplicationCore.Services
@@ -20,6 +21,8 @@ namespace ApplicationCore.Services
 
         ICollection<Movie> GetCountMovieHot(int countMovie);
 
+        ICollection<Movie> GetAllMovieHot();
+
         ICollection<Movie> GetCountFeatureFilm(int countMovie);
 
         ICollection<Movie> GetCountSeriesMovies(int countMovie);
@@ -27,5 +30,7 @@ namespace ApplicationCore.Services
         ICollection<Movie> GetNewestMovies(int countMovie);
 
         ICollection<Movie> SearchMoviesByKeyWord(string keyword);
+
+        ICollection<Movie> GetMoviesByCategoryId(Guid id);
     }
 }

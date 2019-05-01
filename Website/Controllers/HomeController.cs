@@ -1,8 +1,8 @@
 ﻿using ApplicationCore.Services;
-using System;
+using Infrastructure.Entities;
+using Infrastructure.Identity;
+using Microsoft.AspNet.Identity;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Website.ViewModel;
 
@@ -18,6 +18,12 @@ namespace Website.Controllers
         {
             _trailersService = trailersService;
             _moviesService = moviesService; 
+        private readonly IFavoriteMovieService _favoriteMovieService;
+
+        public HomeController(IMoviesService moviesService, IFavoriteMovieService favoriteMovieService)
+        {
+            _moviesService = moviesService;
+            _favoriteMovieService = favoriteMovieService;
         }
 
         public ActionResult Index()
@@ -37,9 +43,28 @@ namespace Website.Controllers
 
             ViewBag.ListFeatureFilm = listFeatureFilmViewModel;
             ViewBag.ListSeriesMovie = listSeriesMovieViewModel;
+            // lấy ra phim vừa xem
             ViewBag.MoviesSeen = (ICollection<MoviesViewModel>)Session["MoviesSeen"];
 
             return View(listMovieViewModel);
+            // lấy ra phim đã thích
+            var userId = System.Web.HttpContext.Current.User.Identity.GetUserId();
+
+            ICollection<FavoriteMovie> favoriteMovies = _favoriteMovieService.GetFavoriteMoviesByUserId(userId);
+
+            ICollection<Movie> movies = new List<Movie>();
+
+            foreach (var favoriteMovie in favoriteMovies)
+            {
+                var movie = _moviesService.Find(favoriteMovie.MovieId);
+                movies.Add(movie);
+            }
+
+            var favoriteMovieViewModels = AutoMapper.Mapper.Map<IEnumerable<MoviesViewModel>>(movies);
+
+            ViewBag.FavoriteMovies = favoriteMovieViewModels;
+
+            return View();
         }
 
     }
