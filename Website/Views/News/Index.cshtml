@@ -37,7 +37,7 @@
                                             <a href="/News/Detail?idMovie=@item1.NewsViewModel.Id"><img src="@item1.NewsViewModel.Thumbnail" alt=""></a>
                                         </div>
                                         <div class="col-sm-7 wthree-news-info">
-                                            <h5><a href="news-single.html">@item1.NewsViewModel.Title</a></h5>
+                                            <h5><a href="/News/Detail?idMovie=@item1.NewsViewModel.Id">@item1.NewsViewModel.Title</a></h5>
                                             <p>@item1.NewsViewModel.ShortDescription</p>
                                             <ul>
                                                 <li><i class="far fa-clock" aria-hidden="true"></i> @item1.NewsViewModel.CreatedDate.Value.ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture)</li>
@@ -53,7 +53,7 @@
                                                 <a href="/News/Detail?idMovie=@item2.NewsViewModel.Id"><img src="@item2.NewsViewModel.Thumbnail" alt=""></a>
                                             </div>
                                             <div class="col-sm-7 wthree-news-info">
-                                                <h5><a href="news-single.html"> @item2.NewsViewModel.Title</a></h5>
+                                                <h5><a href="/News/Detail?idMovie=@item2.NewsViewModel.Id"> @item2.NewsViewModel.Title</a></h5>
                                                 <p>@item2.NewsViewModel.ShortDescription</p>
                                                 <ul>
                                                     <li><i class="far fa-clock" aria-hidden="true"></i> @item2.NewsViewModel.CreatedDate.Value.ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture)</li>
