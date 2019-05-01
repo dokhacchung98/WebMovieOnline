@@ -235,6 +235,7 @@
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\SearchMovieController.cs" />
     <Compile Include="Controllers\SeriesTVController.cs" />
+    <Compile Include="Controllers\TrailerController.cs" />
     <Compile Include="Controllers\TrailersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -262,6 +263,7 @@
     <Compile Include="ViewModel\ProfileUserViewModel.cs" />
     <Compile Include="ViewModel\ResolutionViewModel.cs" />
     <Compile Include="ViewModel\TagViewModel.cs" />
+    <Compile Include="ViewModel\TrailerMovieViewModel.cs" />
     <Compile Include="ViewModel\TrailerViewModel.cs" />
     <Compile Include="ViewModel\UseRatingViewModel.cs" />
   </ItemGroup>
@@ -1528,6 +1530,9 @@
     <Content Include="Views\FeatureFilm\_PartialViewMovie.cshtml" />
     <Content Include="Views\MovieHot\Index.cshtml" />
     <Content Include="Views\MovieHot\_PartialViewMovie.cshtml" />
+    <Content Include="Views\Trailer\Index.cshtml" />
+    <Content Include="Views\Trailer\_PartialViewTrailer.cshtml" />
+    <Content Include="Views\Trailer\Detail.cshtml" />
     <Content Include="Views\Trailers\_NewestTrailers.cshtml" />
   </ItemGroup>
   <ItemGroup>
