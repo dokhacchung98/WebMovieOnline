@@ -266,6 +266,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\FontText.css" />
+    <Content Include="Images\producer\1.jpg" />
+    <Content Include="Images\producer\10.jpg" />
+    <Content Include="Images\producer\2.jpg" />
+    <Content Include="Images\producer\3.jpg" />
+    <Content Include="Images\producer\4.jpg" />
+    <Content Include="Images\producer\5.jpg" />
+    <Content Include="Images\producer\6.jpg" />
+    <Content Include="Images\producer\7.jpg" />
+    <Content Include="Images\producer\8.jpg" />
+    <Content Include="Images\producer\9.jpg" />
     <Content Include="Scripts\ScriptWebsite\bootstrap-notify.min.js" />
     <Content Include="Content\stylewebsite\list.css" />
     <Content Include="Scripts\ScriptWebsite\bootstrap-rating.js" />

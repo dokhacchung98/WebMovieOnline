@@ -75,10 +75,10 @@ namespace Website.Controllers
             }
         }
 
-        //
-        // GET: /Manage/Index
-        public ActionResult Index(string id)
+        public ActionResult Index()
         {
+            var id = User.Identity.GetUserId();
+
             var currentUser = _userService.Find(id);
 
             var currentUserView = Mapper.Map<UpdateUserViewModel>(currentUser);
@@ -90,11 +90,13 @@ namespace Website.Controllers
         {
             var user = Mapper.Map<ApplicationUser>(viewUser);
             _userService.UpdateUser(user, user.Id);
-            return RedirectToAction("Index", new { user.Id });
+            return RedirectToAction("Index");
         }
         
-        public ActionResult ChangePassword(string id)
+        public ActionResult ChangePassword()
         {
+            var id = User.Identity.GetUserId();
+
             var currentUser = _userService.Find(id);
             var changePasswordModel = new ChangePasswordViewModel
             {
@@ -115,10 +117,10 @@ namespace Website.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
-                return RedirectToAction("Index", new { user.Id });
+                return RedirectToAction("Index");
             }
             AddErrors(result);
-            return RedirectToAction("Index", new { model.Id });
+            return RedirectToAction("Index");
         }
         
         public ActionResult SetPassword()
@@ -126,8 +128,10 @@ namespace Website.Controllers
             return View();
         }
 
-        public ActionResult InformationUser(string id)
+        public ActionResult InformationUser()
         {
+            var id = User.Identity.GetUserId();
+
             var currentUser = _userService.Find(id);
 
             var currentUserView = Mapper.Map<UpdateUserViewModel>(currentUser);
@@ -151,12 +155,14 @@ namespace Website.Controllers
                 _userService.Update(currentUser, model.Id);
             }
 
-            return RedirectToAction("Index", new { @id = model.Id});
+            return RedirectToAction("Index");
             
         }
 
-        public ActionResult FavoriteMovie(string id)
+        public ActionResult FavoriteMovie()
         {
+            var id = User.Identity.GetUserId();
+
             var favoriteMovies = _favoriteMovieService.GetFavoriteMoviesByUserId(id);
 
             ICollection<Movie> movies = new List<Movie>();
@@ -167,7 +173,7 @@ namespace Website.Controllers
                 movies.Add(movie);
             }
 
-            var favoriteMovieViewModels = AutoMapper.Mapper.Map<IEnumerable<MoviesViewModel>>(movies);
+            var favoriteMovieViewModels = Mapper.Map<IEnumerable<MoviesViewModel>>(movies);
             return PartialView("_FavoriteMoviePage", favoriteMovieViewModels);
         }
 

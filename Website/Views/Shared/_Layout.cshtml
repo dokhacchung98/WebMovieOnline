@@ -88,7 +88,7 @@
             <div class="w3l_sign_in_register">
                 @if (Request.IsAuthenticated)
                 {
-                    @Html.Action("ViewProfile", "Base", new { userName = User.Identity.Name });
+                    @Html.Action("ViewProfile", "Base");
 
                     using (Html.BeginForm("LogOff", "Account", FormMethod.Post,
                         new { id = "logoutForm" }))
@@ -203,7 +203,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 w3ls_footer_grid_right">
-                    <a href="?home"><h2>One<span>Movies</span></h2></a>
+                    <a href="/home"><h2>One<span>Movies</span></h2></a>
                 </div>
                 <div class="clearfix"> </div>
             </div>
@@ -214,6 +214,7 @@
         </div>
     </div>
     <!-- //footer -->
+
     <!-- Bootstrap Core JavaScript -->
     <script src="~/Scripts/ScriptWebsite/bootstrap.min.js"></script>
     <script>
@@ -231,18 +232,11 @@
         });
     </script>
     <!-- //Bootstrap Core JavaScript -->
+
     <!-- here stars scrolling icon -->
     <script type="text/javascript">
         $(document).ready(function () {
-            /*
-                var defaults = {
-                containerID: 'toTop', // fading element id
-                containerHoverID: 'toTopHover', // fading element hover id
-                scrollSpeed: 1200,
-                easingType: 'linear'
-                };
-            */
-
+            
             $().UItoTop({ easingType: 'easeOutQuart' });
 
         });
