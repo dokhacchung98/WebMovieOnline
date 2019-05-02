@@ -25,6 +25,8 @@
 
             AddUserAdmin(context);
 
+            AddNguoiDung(context);
+
             AddResolution(context);
 
             AddProducer(context);
@@ -393,6 +395,28 @@
 
                 manager.Create(user, "123456");
                 manager.AddToRole(user.Id, "Admin");
+                manager.AddToRole(user.Id, "User");
+
+                context.SaveChanges();
+            }
+        }
+
+        private void AddNguoiDung(MovieDbContext context)
+        {
+            if (!context.Users.Any(t => t.UserName == "NguoiDung"))
+            {
+                var store = new UserStore<ApplicationUser>(context);
+                var manager = new UserManager<ApplicationUser>(store);
+                var user = new ApplicationUser
+                {
+                    UserName = "nguoidung@gmail.com",
+                    Email = "nguoidung@gmail.com",
+                    FullName = "Người dùng",
+                    CreatedDate = DateTime.Now,
+                    PhoneNumber = "19001001"
+                };
+
+                manager.Create(user, "123456");
                 manager.AddToRole(user.Id, "User");
 
                 context.SaveChanges();
