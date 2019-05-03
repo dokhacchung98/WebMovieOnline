@@ -5,7 +5,7 @@
 }
 
 <head>
-    <link href="~/Content/account/viewprofile.css" type="text/css" rel="stylesheet"/>
+    <link href="~/Content/account/viewprofile.css" type="text/css" rel="stylesheet" />
 </head>
 <!-- Nav Item - User Information -->
 <div class="nav-item dropdown no-arrow">
@@ -19,6 +19,6 @@
             <img class="img-profile rounded-circle" src="~/Images/default-avatar.png">
         }
         <a class="mr-2 d-none d-lg-inline text-gray-600 small fullname"
-           href="@Url.Action("Index","Manage", new { @Id = @Model.Id})">@Model.FullName</a>
+           href="@Url.Action("Index","Manage")">@Model.FullName</a>
     </div>
 </div>

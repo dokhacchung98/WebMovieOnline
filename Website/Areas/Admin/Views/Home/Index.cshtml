@@ -1,7 +1,237 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
+    var countUser = ViewBag.CountUser;
+    var countMovie = ViewBag.CountMovie;
+    var countFilm = ViewBag.CountFilm;
+    var countCategoty = ViewBag.CountCategory;
 }
+<style>
+    a:hover {
+        text-decoration: none !important;
+    }
+</style>
+<h2>Danh Mục</h2>
 
-<h2>Index</h2>
+<div class="row">
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Thành viên</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@countUser</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Bộ phim</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@countMovie</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tập phim</div>
+                        <div class="row no-gutters align-items-center">
+                            <div class="col-auto">
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">@countFilm</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Thể loại</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@countCategoty</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-comments fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- User-->
+<div class="card position-relative">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Người dùng</h6>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-6">
+                <a href="~/Admin/ManagerUsers">
+                    <div class="card mb-4 py-3 border-left-primary">
+                        <div class="card-body">
+                            Người Dùng
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-6">
+                <a href="~/Admin/ManagerRoles">
+                    <div class="card mb-4 py-3 border-left-success">
+                        <div class="card-body">
+                            Quyền Người Dùng
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<br />
+<!--Movie-->
+<div class="card position-relative">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Phim</h6>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-6">
+                <a href="~/Admin/ManagerFeatureFilm">
+                    <div class="card mb-4 py-3 border-left-primary">
+                        <div class="card-body">
+                            Phim Lẻ
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-6">
+                <a href="~/Admin/ManagerSeriesTV">
+                    <div class="card mb-4 py-3 border-left-success">
+                        <div class="card-body">
+                            Phim Bộ
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-6">
+                <a href="~/Admin/ManagerTrailers">
+                    <div class="card mb-4 py-3 border-left-info">
+                        <div class="card-body">
+                            Trailer
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-6">
+                <a href="~/Admin/ManagerNews">
+                    <div class="card mb-4 py-3 border-left-warning">
+                        <div class="card-body">
+                            Tin Tức
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<br />
+<!-- Object-->
+<div class="card position-relative">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Đối Tượng</h6>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-6">
+                <a href="~/Admin/ManagerActors">
+                    <div class="card mb-4 py-3 border-left-primary">
+                        <div class="card-body">
+                            Diễn Viên
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-6">
+                <a href="~/Admin/ManagerDirectors">
+                    <div class="card mb-4 py-3 border-left-success">
+                        <div class="card-body">
+                            Đạo Diễn
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-6">
+                <a href="~/Admin/ManagerCategorys">
+                    <div class="card mb-4 py-3 border-left-info">
+                        <div class="card-body">
+                            Thể Loại
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-6">
+                <a href="~/Admin/ManagerProducer">
+                    <div class="card mb-4 py-3 border-left-warning">
+                        <div class="card-body">
+                            Nhà Sản Xuất
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-6">
+                <a href="~/Admin/ManagerResolutions">
+                    <div class="card mb-4 py-3 border-left-danger">
+                        <div class="card-body">
+                            Chất Lượng
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-6">
+                <a href="~/Admin/ManagerTag">
+                    <div class="card mb-4 py-3 border-left-primary">
+                        <div class="card-body">
+                            Thẻ
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>

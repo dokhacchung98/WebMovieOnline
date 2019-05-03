@@ -235,6 +235,8 @@
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\SearchMovieController.cs" />
     <Compile Include="Controllers\SeriesTVController.cs" />
+    <Compile Include="Controllers\TrailerController.cs" />
+    <Compile Include="Controllers\TrailersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -261,11 +263,22 @@
     <Compile Include="ViewModel\ProfileUserViewModel.cs" />
     <Compile Include="ViewModel\ResolutionViewModel.cs" />
     <Compile Include="ViewModel\TagViewModel.cs" />
+    <Compile Include="ViewModel\TrailerMovieViewModel.cs" />
     <Compile Include="ViewModel\TrailerViewModel.cs" />
     <Compile Include="ViewModel\UseRatingViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\FontText.css" />
+    <Content Include="Images\producer\1.jpg" />
+    <Content Include="Images\producer\10.jpg" />
+    <Content Include="Images\producer\2.jpg" />
+    <Content Include="Images\producer\3.jpg" />
+    <Content Include="Images\producer\4.jpg" />
+    <Content Include="Images\producer\5.jpg" />
+    <Content Include="Images\producer\6.jpg" />
+    <Content Include="Images\producer\7.jpg" />
+    <Content Include="Images\producer\8.jpg" />
+    <Content Include="Images\producer\9.jpg" />
     <Content Include="Scripts\ScriptWebsite\bootstrap-notify.min.js" />
     <Content Include="Content\stylewebsite\list.css" />
     <Content Include="Scripts\ScriptWebsite\bootstrap-rating.js" />
@@ -1517,6 +1530,10 @@
     <Content Include="Views\FeatureFilm\_PartialViewMovie.cshtml" />
     <Content Include="Views\MovieHot\Index.cshtml" />
     <Content Include="Views\MovieHot\_PartialViewMovie.cshtml" />
+    <Content Include="Views\Trailer\Index.cshtml" />
+    <Content Include="Views\Trailer\_PartialViewTrailer.cshtml" />
+    <Content Include="Views\Trailer\Detail.cshtml" />
+    <Content Include="Views\Trailers\_NewestTrailers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

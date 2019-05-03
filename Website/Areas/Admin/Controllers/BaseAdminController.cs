@@ -32,8 +32,9 @@ namespace Website.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult ViewProfile(string userName)
+        public ActionResult ViewProfile()
         {
+            var userName = User.Identity.Name;
             var user = _userService.GetUserFromUserName(userName);
             var userProfile = Mapper.Map<ProfileUserViewModel>(user);
 

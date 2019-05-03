@@ -27,6 +27,11 @@ namespace ApplicationCore.Repositories
             return false;
         }
 
+        public FavoriteMovie Find(Guid idMovie, string idUser)
+        {
+            return _dbContext.FavoriteMovies.Where(t => t.MovieId == idMovie && t.UserId == idUser).FirstOrDefault();
+        }
+
         public ICollection<FavoriteMovie> GetFavoriteMoviesByUserId(string idUser)
         {
             return _dbContext.FavoriteMovies.Where(t => t.UserId.Equals(idUser)).ToList();

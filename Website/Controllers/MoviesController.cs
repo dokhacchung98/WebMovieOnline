@@ -12,6 +12,7 @@ using System.Net;
 using System.Web.Mvc;
 using Website.ViewModel;
 using Infrastructure.Identity;
+using Microsoft.AspNet.Identity;
 
 namespace Website.Controllers
 {
@@ -269,6 +270,26 @@ namespace Website.Controllers
                     message = "Fail"
                 });
             }
+        }
+
+        public ActionResult RemoveFavoriteMovie(Guid? idMovie)
+        {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            var idUser = User.Identity.GetUserId();
+            if (idMovie == null)
+            {
+                return RedirectToAction("Index", "Manage");
+            }
+            var model = _favoriteMovieService.Find(idMovie.Value, idUser);
+            if (model == null)
+            {
+                return RedirectToAction("Index", "Manage");
+            }
+            _favoriteMovieService.Delete(model);
+            return RedirectToAction("Index", "Manage");
         }
     }
 }

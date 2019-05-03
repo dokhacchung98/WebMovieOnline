@@ -1,6 +1,8 @@
 ﻿@model Website.ViewModel.MoviesViewModel
 
 @{
+    /**/
+
     Layout = null;
 }
 <head>
@@ -12,32 +14,46 @@
         a.heart {
             float: right;
         }
+
         .mid-2.agile_mid_2_home {
             margin-top: 10px;
+        }
+
+        .w3l-movie-gride-agile .favorite {
+            font-size: 32px;
+            position: absolute;
+            left: 5% !important;
+            top: 20% !important;
+            opacity: 0;
+            transition: 0.2s;
+            padding: 0px 4px;
+            background: rgba(195, 195, 195, 0.46);
+            height: 40px;
+            border-radius: 2px;
+        }
+
+        .w3l-movie-gride-agile:hover .favorite {
+            opacity: 1;
+            transition: 0.2s;
         }
     </style>
 </head>
 <div class="col-md-2 w3l-movie-gride-agile">
     <a href="@Url.Action("Details", "Movies", new { id = Model.Id })" class="hvr-shutter-out-horizontal">
-        <img src="@Model.Thumbnail" title="album-name" class="img-responsive" alt="@Model.Name" />
+        <img src="@Model.Thumbnail" title="@Model.Name" class="img-responsive" alt="@Model.Name" />
         <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
     </a>
     <div class="mid-1 agileits_w3layouts_mid_1_home">
         <div class="w3l-movie-text">
             <h6>
-                <a href="@Url.Action("Details", "Movies", new { id = Model.Id })" class="movie-name">@Model.Name - @Model.CreatedDate.Value.Year</a>
-                @if (Request.IsAuthenticated)
-                {
-                    <a id="add-favorite" class="heart" title="Yêu thích" onclick="addFavoriteMovie('@Model.Id', '@User.Identity.Name')">
-                        <i class="fa fa-heart" style="color: red; cursor: pointer"></i>
-                    </a>
-                }
+                <a href="@Url.Action("Details", "Movies", new { id = Model.Id })" class="movie-name">@Model.Name</a>
             </h6>
         </div>
         <div class="clearfix"></div>
         <div class="mid-2 agile_mid_2_home">
+            <p>@Model.CreatedDate.Value.Year</p>
             <div class="block-stars">
-                @Html.Partial("_PartialStar", (double) Model.Rating)
+                @Html.Partial("_PartialStar", (double)Model.Rating)
             </div>
             <div class="clearfix"></div>
         </div>
@@ -46,6 +62,15 @@
     @if (Model.IsHot)
     {<div class="ribben">
             <p>HOT</p>
+        </div>
+    }
+
+    @if (Request.IsAuthenticated)
+    {
+        <div class="favorite">
+            <a id="add-favorite" class="heart" title="Yêu thích" onclick="addFavoriteMovie('@Model.Id', '@User.Identity.Name')">
+                <i class="fa fa-heart" style=" color: red; cursor: pointer"></i>
+            </a>
         </div>
     }
 </div>

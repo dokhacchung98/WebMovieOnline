@@ -36,8 +36,10 @@ namespace Website.Controllers
             return View(items);
         }
 
-        public ActionResult ViewProfile(string userName)
+        public ActionResult ViewProfile()
         {
+            string userName = User.Identity.Name;
+
             var user = _userService.GetUserFromUserName(userName);
             var userProfile = Mapper.Map<ProfileUserViewModel>(user);
 

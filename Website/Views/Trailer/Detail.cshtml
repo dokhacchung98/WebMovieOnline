@@ -1,0 +1,63 @@
+﻿@model Website.ViewModel.TrailerMovieViewModel
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/ScriptWebsite/simplePlayer.js"></script>
+<script>
+    $("document").ready(function () {
+        $("#video").simplePlayer();
+    });
+</script>
+
+<div class="general">
+    <div class="container">
+        <!--Breacrumb-->
+        <div class="agileits-news-top">
+            <ol class="breadcrumb">
+                <li><a href="/Home">Trang chủ</a></li>
+                <li><a href="/Trailer">Trailer</a></li>
+                <li class="active">@Model.MoviesViewModel.Name</li>
+            </ol>
+        </div>
+        <!--//Breacrumb-->
+
+        <div class="agileinfo-news-top-grids">
+            <!--Detail News-->
+            <div class="col-md-8 wthree-top-news-left">
+
+                <div class="wthree-news-left">
+                    <div class="wthree-news-left-img">
+
+                        <div class="video-grid-single-page-agileits">
+                            <div class="video-grid-single-page-agileits">
+                                <div data-video="@Model.TrailerViewModel.Link" id="video" style=" width:100%;">
+                                    <img src="@Model.TrailerViewModel.Thumbnail" style="width: 250px; margin: auto;" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="/Movies/Details/@Model.MoviesViewModel.Id" title="@Model.MoviesViewModel.Name">
+                            <h4>@Model.MoviesViewModel.Name</h4>
+                            <h6>@Model.MoviesViewModel.NameEn</h6>
+                        </a>
+                        <div class="s-author">
+                            <p> <i class="fa fa-calendar" aria-hidden="true"></i> @Model.TrailerViewModel.CreatedDate &nbsp;&nbsp; </p>
+                        </div>
+                        <div id="fb-root"></div>
+                        <div class="w3-agile-news-text">
+                            @Html.Raw(Model.TrailerViewModel.Description)
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--//Detail News-->
+            <!--Slide News-->
+            @Html.Action("ViewNews", "Base")
+            <!--//Slide News-->
+        </div>
+    </div>
+</div>
+

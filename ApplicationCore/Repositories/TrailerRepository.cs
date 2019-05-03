@@ -19,5 +19,10 @@ namespace ApplicationCore.Repositories
         {
             return _dbContext.Trailers.Where(t => t.TrailerName.Contains(name)).ToList();
         }
+
+        public ICollection<Trailer> GetNewTrailerByNumber(int countTrailer)
+        {
+            return _dbContext.Trailers.OrderBy(t => t.CreatedDate).Take(countTrailer).ToList();
+        }
     }
 }

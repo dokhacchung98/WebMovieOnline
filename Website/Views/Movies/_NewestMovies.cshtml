@@ -8,7 +8,7 @@
 {
 <div class="single-right-grids">
     <div class="col-md-4 single-right-grid-left">
-        <a href="single.html"><img src="@item.Thumbnail" alt=""></a>
+        <a href="@Url.Action("Details","Movies", new { id = item.Id })"><img src="@item.Thumbnail" alt=""></a>
     </div>
     <div class="col-md-8 single-right-grid-right">
         <a href="@Url.Action("Details","Movies", new { id = item.Id })" class="title"> @item.Name</a>
